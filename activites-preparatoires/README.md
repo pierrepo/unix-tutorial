@@ -11,4 +11,8 @@ DataCamp est un site internet qui propose des cours interactifs pour R, Python�
 	Faites ces chapitres à votre rythme. Prenez le temps de comprendre et d’expérimenter les différentes commandes abordées. Préparez vos questions ou commentaires pour le mois prochain. J'y répondrais avec grand plaisir.
 
 
+### Évaluation de l'activité préparatoire
+
+Merci de répondre à ce [QCM](https://goo.gl/forms/he2YpJ2oAUx2BXvq2) qui nous servira à évaluer ce que vous avez retenu des activités préparatoires.
+
 
