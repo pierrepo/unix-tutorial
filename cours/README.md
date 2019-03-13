@@ -18,17 +18,21 @@ ou
 ```
 pierre@orange $
 ```
+ou bien encore
+```
+ppoulain@candihub:~$
+```
 
-Par convention, l'invite de commande sera remplacée dans la suite par le caractère dollar «`$`» en tout début de ligne :
+Par convention, l'invite de commande sera représenté dans la suite de ce document par le caractère dollar «`$`» en tout début de ligne :
 ```
 $
 ```
-Il ne faudra pas taper ce caractère (lorsqu'il est en début de ligne).
+Pour reproduire les commandes présentées, il ne faut pas taper ce caractère en début de ligne.
 
 
 ## Exploration de répertoires et fichiers.
 
-Pour reproduire les exemples suivants, voici les commandes à lancer pour récupérer et préparer les données utilisées :
+Pour reproduire les exemples suivants, voici les commandes à lancer pour préparer les données utilisées :
 ```
 $ cd
 $ wget https://github.com/omics-school/unix/raw/master/demo/unix.tgz
@@ -36,7 +40,7 @@ $ tar zxvf unix.tgz
 $ cd unix
 ```
 
-Ces commandes seront expliquées ci-dessous.
+Ces commandes seront expliquées plus loin.
 
 
 ### Savoir où on se trouve : `pwd`
@@ -52,14 +56,16 @@ Cela signifie qu'on se trouve actuellement dans le répertoire `/home/pierre/uni
 
 Sous Unix, les répertoires et les fichiers sont organisés sous forme d'une structure en arbre. On parle d'arborescence.
 
-Le répertoire dont dépendent tous les autres est le `/` qu'on appelle la « racine » (*root* en anglais), les différents sous-répertoires sont séparés les uns des autres par le caractère `/`. Dans le cas de `/home/pierre/unix` :
+Le répertoire dont dépendent tous les autres est le `/` qu'on appelle la « racine » (*root* en anglais), les différents sous-répertoires sont séparés les uns des autres par le caractère `/` (le même caractère que la racine).
+
+Dans le cas de `/home/pierre/unix` :
 
 - on se trouve dans le répertoire `unix`,
-- qui est lui-même est un sous-répertoire du répertoire `pierre`,
-- qui est lui-même est un sous-répertoire du répertoire `home`,
+- qui est lui-même un sous-répertoire du répertoire `pierre`,
+- qui est lui-même un sous-répertoire du répertoire `home`,
 - qui est lui-même un sous-répertoire du répertoire `/` (la racine).
 
-`/home/pierre/unix` est aussi appelé un « chemin » car il indique la succession des répertoires à suivre pour arriver jusqu'à `unix`.
+`/home/pierre/unix` est aussi appelé un « chemin » car il indique la succession des répertoires à suivre pour arriver jusqu'à `unix`. D'abord la racine, puis `home`, puis `pierre` et enfin `unix`.
 
 ⚠️ **Attention** ⚠️ Ne confondez pas `/` qui tout au début d'un chemin signifie la racine de `/` qui sépare deux répertoires successifs.
 
@@ -74,7 +80,7 @@ $ ls
 genomes  paper.pdf  shopping.txt  transferrin.csv  transferrin.tsv
 ```
 
-On peut modifier le comportement par défaut d'une commande avec une ou plusieurs option. Cette option est séparée de la commande par un ou plusieurs espaces.
+On peut modifier le comportement par défaut d'une commande avec une ou plusieurs options. Cette option est séparée de la commande par un ou plusieurs espaces.
 
 Par exemple avec `-F` :
 ```

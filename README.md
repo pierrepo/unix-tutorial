@@ -3,7 +3,7 @@
 [Activités préparatoires](activites-preparatoires/)
 
 
-## Cours et tutoriel
+## Tutoriels
 
 ### Activité 1
 
@@ -21,7 +21,7 @@ Rappel : le `$` désigne l'invite de commande de votre *shell*. Il ne faut pas l
 
 ### Activité 2
 
-[Le cours de Software Carpentry](http://swcarpentry.github.io/shell-novice/). Parties 1, 2, 3, 4 et 7.
+[Le cours de Software Carpentry](http://swcarpentry.github.io/shell-novice/) : parties 1, 2, 3, 4 et 7.
 Le [mémo](http://swcarpentry.github.io/shell-novice/reference/) des notions abordées.
 
 Pour faire les exercices de Software Carpentry, préparez les données nécessaires avec les commandes suivantes :
