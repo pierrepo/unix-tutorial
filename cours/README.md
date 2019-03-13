@@ -59,7 +59,7 @@ Le répertoire dont dépendent tous les autres est le `/` qu'on appelle la « ra
 - qui est lui-même est un sous-répertoire du répertoire `home`,
 - qui est lui-même un sous-répertoire du répertoire `/` (la racine).
 
-Attention, ne confondez pas `/` qui tout au début signifie la racine de `/` qui sépare deux répertoires.
+⚠️ **Attention** ⚠️ Ne confondez pas `/` qui tout au début signifie la racine de `/` qui sépare deux répertoires.
 
 `/home/pierre/unix` est aussi appelé un « chemin » car il indique la succession des répertoires à suivre pour arriver jusqu'à `unix`.
 
@@ -378,7 +378,7 @@ orange 4
 
 Bien sûr, afficher le contenu d'un fichier n'a de sens ici que pour un fichier texte.
 
-Afficher le contenu d'un fichier binaire produit une suite de caractères pas toujours compréhensibles :
+Afficher le contenu d'un fichier binaire produit une suite de caractères incompréhensibles :
 ```
 $ cat paper.pdf
 �{����e˿\�><?�S�;gg��>��ݻ���7��h�G�.�}{�������W[��5��͓����d�=8��f.���屌J�Y��b�ꂭ貾l���/ٙ�
@@ -402,7 +402,9 @@ startxref
 %%EOF
 ```
 
-La commande `cat` n'a de sens que si le contenu du fichier est assez court. Si ce n'est pas le cas, le contenu du fichier va défiler d'un seul coup à l'écran, sans qu'on puisse en voir le début. Par exemple :
+⚠️ **Attention** ⚠️ Dans suite, nous n'explorerons que le contenu de **fichiers textes**.
+
+La commande `cat` n'a de sens que si le fichier est assez court. Si ce n'est pas le cas, le contenu du fichier va défiler d'un seul coup à l'écran, sans qu'on puisse en voir le début. Par exemple :
 ```
 $ cat transferrin.csv
 1TFD,Oryctolagus cuniculus,304
@@ -468,18 +470,126 @@ $ tail -n 2 transferrin.csv
 
 ## Créer ou éditer un fichier texte
 
-nano
+Nano est un éditeur de texte qui fonctionne dans un *shell*, donc sans interface graphique, sans menu, sans icône.
 
+Pour le lancer, on utilise la commande `nano` :
+
+```
+$ nano
+```
+
+Et on obtient quelque chose du type :
+
+![](img/nano.png)
+
+Selon la version de votre système Unix, il se peut que l'interface soit en anglais mais les raccourcis clavier seront les mêmes.
+
+On peut tout de suite commencer à taper du texte.
+
+Lorsqu'on veut sauvegarder le fichier ainsi créé, on utilise la combinaison de touches <kbd>Ctrl</kbd>+<kbd>O</kbd> (c'est-à-dire qu'on presse en même temps les touches <kbd>Ctrl</kbd> et <kbd>O</kbd>). On entre ensuite le nom qu'on souhaite donner au fichier (par exemple `test.txt`) puis on valide par la touche  <kbd>Entrée</kbd>.
+
+On peut continuer à éditer le fichier puis l'enregistrer, et ainsi de suite.
+
+Pour quitter nano, on utilise la combinaison de touches <kbd>Ctrl</kbd>+<kbd>X</kbd>.
+
+On se retrouve alors dans le *shell* et on peut vérifier que le fichier (ici `test.txt` a bien été créé dans le répertoire courant.
+
+```
+$ ls
+genomes/  paper.pdf  shopping_list.txt  test.txt  transferrin.csv  transferrin.tsv
+```
+
+On peut aussi ouvrir un fichier texte existant en indiquant en argument le nom du fichier à ouvrir :
+
+```
+$ nano shopping_list.txt
+```
 
 ## Manipuler des données
 
-wc
+### Compter : `wc`
 
-grep
+La commande `wc` (pour *word count*) compte le nombre de caractères, de mots et de lignes d'un fichier.
+```
+$ wc shopping_list.txt
+ 5 10 45 shopping_list.txt
+```
+On apprend ainsi que le fichier `shopping_list.txt` contient 5 lignes, 10 mots et 45 caractères.
 
-sort
+L'option `-l` indique à la commande `wc` de ne compter que le nombre de lignes. Et réciproquement pour `-w` et le nombre de mots, et `-c` et le nombre de caractères.
 
-uniq
+Lorsque plusieurs fichiers sont fournis en argument à `wc`, le total est aussi renvoyé :
+```
+$ wc -l transferrin.*
+  41 transferrin.csv
+  41 transferrin.tsv
+  82 total
+```
+Les fichiers `transferrin.csv` et `transferrin.tsv` contiennent chacun 41 lignes, soit un total de 82 lignes.
+
+
+### Trier : `sort`
+
+La commande `sort` trie le contenu d'un fichier.
+
+```
+$ cat shopping_list.txt
+banana 6
+pineaple 1
+pear 3
+apple 10
+orange 4
+$ sort shopping_list.txt
+apple 10
+banana 6
+orange 4
+pear 3
+pineaple 1
+```
+
+Les lignes ont été triées par ordre alphabétique.
+
+La commande `sort` a également la notion de colonne ou de champs. Par défaut, le séparateur de champs est un caractère blanc (espace, tabulation). Dans le fichier `shopping_list.txt`, `sort` trouve une première colonne avec le nom des fruits et une seconde avec les quantités.
+
+On peut trier le fichier `shopping_list.txt` suivant le nombre de fruits en indiquant à `sort` d'utiliser la 2e colonne avec l'option `-k` :
+```
+$ sort -k 2 shopping_list.txt
+pineaple 1
+apple 10
+pear 3
+orange 4
+banana 6
+```
+Les lignes sont alors triées suivant la seconde colonne, mais par ordre alphabétique, ce qui explique que `10` soit avant `3`. Pour trier explicitement sur des valeurs numériques, on utilise l'option `-n` :
+```
+$ sort -k 2 -n shopping_list.txt
+pineaple 1
+pear 3
+orange 4
+banana 6
+apple 10
+```
+L'ordre numérique est ainsi respecté.
+
+Enfin l'option `-r` inverse le tri initial :
+```
+$ sort -r shopping_list.txt
+pineaple 1
+pear 3
+orange 4
+banana 6
+apple 10
+pierre@jeera:unix$ sort -k 2 -n -r shopping_list.txt
+apple 10
+banana 6
+orange 4
+pear 3
+pineaple 1
+```
+
+### Trouver les éléments uniques : `uniq`
+
+### Gérer les flux : emboîtement et redirection
 
 
 ## Chercher
