@@ -6,18 +6,9 @@ section {
     width: 800px;
 }
 
-.js-toc ul li ol {
-    width: 0px;
+header li ol ul, .js-toc ul li ol {
+    width: initial;
     float: none;
-    height: 0px;
+    height: initial;
     border: 0px;
-}
-
-
-h1::before, h2::before, h3::before, h4::before, h5::before, h6::before {
-    display: block;
-    content: " ";
-    height: 60px;
-    margin-top: -60px;
-    visibility: hidden;
 }
