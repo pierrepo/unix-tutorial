@@ -6,11 +6,11 @@ section {
     width: 800px;
 }
 
-header li {
+header ol * {
     all: initial;
 }
 
-.js-toc ul li ol {
+.js-toc ul,li,ol {
     width: initial;
     float: none;
     height: initial;
