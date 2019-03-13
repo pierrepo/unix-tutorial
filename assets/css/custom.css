@@ -6,6 +6,6 @@ section {
     width: 800px;
 }
 
-#tox * {
+.js-toc * {
     all: initial;
 }
