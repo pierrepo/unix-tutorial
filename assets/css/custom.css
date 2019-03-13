@@ -5,3 +5,7 @@
 section {
     width: 800px;
 }
+
+#tox * {
+    all: initial;
+}
