@@ -8,6 +8,7 @@ section {
 
 header li {
     display: block;
+    float: none;
     width: auto;
     height: auto;
     border: none;
