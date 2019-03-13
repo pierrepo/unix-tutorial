@@ -605,7 +605,7 @@ apple 10
 ```
 
 ```
-pierre@jeera:unix$ sort -k 2 -n -r shopping_list.txt
+$ sort -k 2 -n -r shopping_list.txt
 apple 10
 banana 6
 orange 4
@@ -615,11 +615,177 @@ pineaple 1
 
 ### Trouver les éléments uniques : `uniq`
 
-### Gérer les flux : emboîtement et redirection
+La commande `uniq` affiche les éléments uniques. Par exemple avec le contenu du fichier `proteins.txt` :
+```
+$ cat proteins.txt
+insulin
+insulin
+insulin
+insulin
+insulin
+insulin
+integrin
+integrin
+rhodopsin
+rhodopsin
+rhodopsin
+transferrin
+transferrin
+transferrin
+transferrin
+```
 
+```
+$ uniq proteins.txt
+insulin
+integrin
+rhodopsin
+transferrin
+```
+
+L'option `-c` compte le nombre de fois qu'un élément et présent :
+```
+$ uniq -c proteins.txt
+      6 insulin
+      2 integrin
+      3 rhodopsin
+      4 transferrin
+```
+
+*Remarque* La commande `uniq` ne fonctionne que sur un fichier trié, c'est-à-dire pour lequel les lignes sont déjà triées par ordre alphabétique.
+
+
+### Extraire un colonne : `cut`
+
+La commande `cut` extrait une colonne particulière d'un fichier.
+
+Par exemple avec le fichier `transferrin.csv` qui contient les identifiants PDB de structures de transferrines, avec l'organisme d'origine et le nombre d'acides aminés de la structure :
+
+```
+$ head -n 5 transferrin.csv
+1A8E,Homo sapiens,329
+1A8F,Homo sapiens,329
+1AIV,Gallus gallus,686
+1AOV,Anas platyrhynchos,686
+1B3E,Homo sapiens,330
+```
+
+On souhaite extraire la 2e colonne qui contient des noms d'organismes :
+```
+$ cut -d "," -f 2 transferrin.csv
+Homo sapiens
+Homo sapiens
+Gallus gallus
+Anas platyrhynchos
+Homo sapiens
+Homo sapiens
+...
+```
+
+L'option `-d` spécifie le délimiteur, c'est-à-dire le caractère utilisé pour séparer les différents champs (les colonnes). Par défaut, `cut` utilise la tabulation.
+
+L'option `-f` précise le numéro du champ qu'on souhaite extraire.
+
+
+### Gérer les flux : redirection et emboîtement
+
+On souhaite extraire du fichier `transferrin.csv` la liste des différents organismes d'où proviennent les transferrines. On a besoin pour cela de 3 étapes :
+
+1. Extraire la liste des organismes (avec `cut`).
+2. Trier par ordre alphabétique ces organismes (avec `sort`).
+3. Trouver les différents organismes (avec `uniq`). L'étape 2 est justifiée par le fait que `uniq` ne fonctionne que sur des données triées.
+
+Pour stocker l'information, d'une étape à l'autre, on peut renvoyer le résultat dans un fichier avec la redirection «`>`».
+
+#### Étape 1
+```
+$ cut -d "," -f 2 transferrin.csv > organism.txt
+```
+Le résultat de la commande ne s'affiche pas à l'écran mais redirigé dans le fichier `organism.txt`.
+
+On peut jeter un oeil au contenu de `organism.txt` avec les commandes `cat`, `less`, `head` ou `tail` :
+```
+$ head organism.txt
+Homo sapiens
+Homo sapiens
+Gallus gallus
+Anas platyrhynchos
+Homo sapiens
+Homo sapiens
+Homo sapiens
+Anas platyrhynchos
+Homo sapiens
+Homo sapiens
+```
+
+#### Étape 2
+```
+$ sort organism.txt > organism_sorted.txt
+```
+
+Ici encore, rien ne s'affiche à l'écran mais on peut contrôler le résultat :
+```
+$ head organism_sorted.txt
+Anas platyrhynchos
+Anas platyrhynchos
+Gallus gallus
+Gallus gallus
+Gallus gallus
+Gallus gallus
+Gallus gallus
+Gallus gallus
+Gallus gallus
+```
+
+#### Étape 2
+```
+$ uniq organism_sorted.txt
+Anas platyrhynchos
+Gallus gallus
+Homo sapiens
+Oryctolagus cuniculus
+Sus scrofa
+```
+
+Les structures de transferrines du fichier `transferrin.csv` proviennent de 5 organismes différents.
+
+Pour cette analyse, nous avons du créer deux fichiers intermédiaires : `organism.txt` et `organism_sorted.txt`.
+
+Pour éviter la création de ces fichiers intermédiaires et réaliser cette analyse en une seule fois, on emboîte les différentes étapes. La sortie produite par une étape devient l'entrée de l'étape suivante. On utilise pour cela  «`|`» :
+
+```
+$ cut -d "," -f 2 transferrin.csv | sort | uniq
+Anas platyrhynchos
+Gallus gallus
+Homo sapiens
+Oryctolagus cuniculus
+Sus scrofa
+```
+
+On obtient le même résultat que précédemment mais en une seule étape.
+
+Si on souhaite obtenir le nombre de structures par organisme, on peut très rapidement modifier la commande précédente :
+```
+$ cut -d "," -f 2 transferrin.csv | sort | uniq -c
+      2 Anas platyrhynchos
+     10 Gallus gallus
+     26 Homo sapiens
+      2 Oryctolagus cuniculus
+      1 Sus scrofa
+```
+
+Et si on préfère travailler avec le fichier `transferrin.tsv` dont les colonnes sont séparées par des tabulations :
+```
+$ cut -f 2 transferrin.tsv | sort | uniq -c
+      2 Anas platyrhynchos
+     10 Gallus gallus
+     26 Homo sapiens
+      2 Oryctolagus cuniculus
+      1 Sus scrofa
+```
 
 ## Chercher
 
-grep
+### Chercher dans des fichiers : `grep`
 
-find
+### Chercher des fichiers : `find`
