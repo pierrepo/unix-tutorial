@@ -8,7 +8,6 @@
     <!-- modif BL -->
     <link rel="stylesheet" type="text/css" href="{{ '/assets/css/bootstrap.css' | relative_url }}" />
     <link rel="stylesheet" type="text/css" href="{{ '/assets/css/bootstrap-theme.css' | relative_url }}" />
-    <link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css" />
     <!-- modif BL - END -->
 
 {% seo %}
@@ -26,9 +25,8 @@
     </style>
 
   </head>
-  <body data-spy="scroll" data-target="#toc">
+  <body>
     <div class="wrapper">
-      <nav id="toc" data-toggle="toc"></nav>
       <header>
         <h1><a href="{{ "/" | absolute_url }}">{{ site.title | default: site.github.repository_name }}</a></h1>
 
@@ -84,8 +82,5 @@
     <script src="{{ '/assets/js/bootstrap.min.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/tutorial.js' | relative_url }}"></script>
     <!-- modif BL - END -->
-    <!-- modif PP -->
-    <script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
-    <!-- modif PP - END -->
   </body>
 </html>
