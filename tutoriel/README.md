@@ -1,6 +1,6 @@
 # Un rapide tour du shell Unix
 
-Un *shell* est un programme qui attend un ordre de la part de l'utilisateur, exécute cet ordre, affiche le résultat puis attend à nouveau un ordre. En anglais on parle de *REPL* pour *Read Execute Print Loop*. Il existe plusieurs *shell* : *Bash*, *csh*, *zsh*... Ici on ne parlera que du *shell* *Bash qui est le plus utilisé.
+Un *shell* est un programme qui attend un ordre de la part de l'utilisateur, exécute cet ordre, affiche le résultat puis attend à nouveau un ordre. En anglais on parle de *REPL* pour *Read Execute Print Loop*. Il existe plusieurs *shells* : *Bash*, *csh*, *zsh*... Ici on ne parlera que du *shell* *Bash qui est le plus utilisé.
 
 Le *shell* fonctionne sur un ordinateur, qui n'a aucune capacité d'abstraction ni d'intuition. Pour que les ordres donnés au *shell* soient compris et exécutés, il faut respecter des règles bien précises.
 
@@ -27,7 +27,11 @@ Par convention, l'invite de commande sera représenté dans la suite de ce docum
 ```
 $
 ```
-Pour reproduire les commandes présentées, il ne faut pas taper ce caractère en début de ligne.
+Pour reproduire les commandes présentées, il ne faut pas taper ce caractère en début de ligne. Ainsi,
+```
+$ pwd
+```
+signifiera : tapez `pwd` dans le *shell* (sans le `$`) puis validez en pressant la touche <kbd>Entrée</kbd>.
 
 
 ## Exploration de répertoires et fichiers.
@@ -40,7 +44,7 @@ $ tar zxvf unix.tgz
 $ cd unix
 ```
 
-Ces commandes seront expliquées plus loin.
+Ces commandes seront en partie expliquées plus loin.
 
 
 ### Savoir où on se trouve : `pwd`
@@ -54,7 +58,7 @@ $ pwd
 ```
 Cela signifie qu'on se trouve actuellement dans le répertoire `/home/pierre/unix`.
 
-Sous Unix, les répertoires et les fichiers sont organisés sous forme d'une structure en arbre. On parle d'arborescence.
+Sous Unix, les répertoires et les fichiers sont organisés sous forme d'une structure en arbre. On parle d'arborescence (voir l'[illustration](http://swcarpentry.github.io/shell-novice/02-filedir/index.html) de Software Carpentry).
 
 Le répertoire dont dépendent tous les autres est le `/` qu'on appelle la « racine » (*root* en anglais), les différents sous-répertoires sont séparés les uns des autres par le caractère `/` (le même caractère que la racine).
 
@@ -65,11 +69,11 @@ Dans le cas de `/home/pierre/unix` :
 - qui est lui-même un sous-répertoire du répertoire `home`,
 - qui est lui-même un sous-répertoire du répertoire `/` (la racine).
 
-`/home/pierre/unix` est aussi appelé un « chemin » car il indique la succession des répertoires à suivre pour arriver jusqu'à `unix`. D'abord la racine, puis `home`, puis `pierre` et enfin `unix`.
+`/home/pierre/unix` est aussi appelé un « chemin » car il indique la succession des répertoires à suivre pour arriver jusqu'à `unix`. D'abord la racine `/`, puis `home`, puis `pierre` et enfin `unix`.
 
 ⚠️ **Attention** ⚠️ Ne confondez pas `/` qui tout au début d'un chemin signifie la racine de `/` qui sépare deux répertoires successifs.
 
-Lorsqu'un chemin débute par `/` (la racine), on parle de **chemin absolu**. Il existe aussi des **chemins relatifs** (donc qui ne débutent pas par `/`) que nous verrons plus tard.
+Lorsqu'un chemin débute par `/` (la racine), on parle de **chemin absolu**. Il existe aussi des **chemins relatifs** (donc qui ne débutent pas par `/`) que l'on verra plus tard.
 
 
 ### Afficher le contenu d'un répertoire : `ls`
@@ -77,15 +81,15 @@ Lorsqu'un chemin débute par `/` (la racine), on parle de **chemin absolu**. Il 
 La commande `ls` (pour *list*) affiche le contenu d'un répertoire :
 ```
 $ ls
-genomes  paper.pdf  shopping.txt  transferrin.csv  transferrin.tsv
+genomes  paper.pdf  protein.txt  shopping.txt  transferrin.csv	transferrin.tsv
 ```
 
-On peut modifier le comportement par défaut d'une commande avec une ou plusieurs options. Cette option est séparée de la commande par un ou plusieurs espaces.
+On peut modifier le comportement par défaut d'une commande avec une option (ou plusieurs). Cette option est séparée de la commande par un ou plusieurs espaces.
 
 Par exemple avec `-F` :
 ```
 $ ls -F
-genomes/  paper.pdf  shopping.txt  transferrin.csv  transferrin.tsv
+genomes/  paper.pdf  protein.txt  shopping.txt	transferrin.csv  transferrin.tsv
 ```
 
 Le caractère `/` a été ajouté à la fin de `genomes` pour indiquer qu'il s'agit d'un répertoire.
@@ -93,12 +97,12 @@ Le caractère `/` a été ajouté à la fin de `genomes` pour indiquer qu'il s'a
 Remarquez que les commandes suivantes donneraient aussi le même résultats :
 ```
 $ ls  -F
-genomes/  paper.pdf  shopping.txt  transferrin.csv  transferrin.tsv
+genomes/  paper.pdf  protein.txt  shopping.txt	transferrin.csv  transferrin.tsv
 ```
 et pourquoi pas :
 ```
 $ ls                                            -F
-genomes/  paper.pdf  shopping.txt  transferrin.csv  transferrin.tsv
+genomes/  paper.pdf  protein.txt  shopping.txt	transferrin.csv  transferrin.tsv
 ```
 
 Il faut au moins un espace entre la commande et une option.
@@ -106,53 +110,57 @@ Il faut au moins un espace entre la commande et une option.
 Une autre option sympa est l'option `-l` qui affiche des informations complémentaires sur le contenu du répertoire :
 ```
 $ ls -l
-total 152
-drwxr-xr-x 2 pierre pierre 12288 mars  12 23:47 genomes/
--rw-r--r-- 1 pierre pierre 97830 mars  12 23:47 paper.pdf
--rw-r--r-- 1 pierre pierre    57 mars  13 00:36 shopping.txt
--rw-r--r-- 1 pierre pierre   940 mars  12 23:47 transferrin.csv
--rw-r--r-- 1 pierre pierre   940 mars  12 23:47 transferrin.tsv
+total 116
+drwxr-xr-x 2 ppoulain omicsschool  4096 Mar 13 08:58 genomes
+-rw-r--r-- 1 ppoulain omicsschool 97830 Mar 13 14:34 paper.pdf
+-rw-r--r-- 1 ppoulain omicsschool   144 Mar 13 15:00 protein.txt
+-rw-r--r-- 1 ppoulain omicsschool    45 Mar 13 09:39 shopping.txt
+-rw-r--r-- 1 ppoulain omicsschool   940 Mar 13 14:19 transferrin.csv
+-rw-r--r-- 1 ppoulain omicsschool   940 Mar 12 23:47 transferrin.tsv
 ```
 
 L'option `-l` peut être associée à l'option `-h` pour afficher des tailles en octets, kilo, mega et giga octets.
 ```
 $ ls -l -h
-total 152K
-drwxr-xr-x 2 pierre pierre 12K mars  12 23:47 genomes/
--rw-r--r-- 1 pierre pierre 96K mars  12 23:47 paper.pdf
--rw-r--r-- 1 pierre pierre  57 mars  13 00:36 shopping.txt
--rw-r--r-- 1 pierre pierre 940 mars  12 23:47 transferrin.csv
--rw-r--r-- 1 pierre pierre 940 mars  12 23:47 transferrin.tsv
+total 116K
+drwxr-xr-x 2 ppoulain omicsschool 4.0K Mar 13 08:58 genomes
+-rw-r--r-- 1 ppoulain omicsschool  96K Mar 13 14:34 paper.pdf
+-rw-r--r-- 1 ppoulain omicsschool  144 Mar 13 15:00 protein.txt
+-rw-r--r-- 1 ppoulain omicsschool   45 Mar 13 09:39 shopping.txt
+-rw-r--r-- 1 ppoulain omicsschool  940 Mar 13 14:19 transferrin.csv
+-rw-r--r-- 1 ppoulain omicsschool  940 Mar 12 23:47 transferrin.tsv
 ```
 Le fichier `paper.pdf` a une taille de 96 kilo octets.
 
 Les options peuvent aussi être combinées :
 ```
 $ ls -lh
-total 152K
-drwxr-xr-x 2 pierre pierre 12K mars  12 23:47 genomes/
--rw-r--r-- 1 pierre pierre 96K mars  12 23:47 paper.pdf
--rw-r--r-- 1 pierre pierre  57 mars  13 00:36 shopping.txt
--rw-r--r-- 1 pierre pierre 940 mars  12 23:47 transferrin.csv
--rw-r--r-- 1 pierre pierre 940 mars  12 23:47 transferrin.tsv
+total 116K
+drwxr-xr-x 2 ppoulain omicsschool 4.0K Mar 13 08:58 genomes
+-rw-r--r-- 1 ppoulain omicsschool  96K Mar 13 14:34 paper.pdf
+-rw-r--r-- 1 ppoulain omicsschool  144 Mar 13 15:00 protein.txt
+-rw-r--r-- 1 ppoulain omicsschool   45 Mar 13 09:39 shopping.txt
+-rw-r--r-- 1 ppoulain omicsschool  940 Mar 13 14:19 transferrin.csv
+-rw-r--r-- 1 ppoulain omicsschool  940 Mar 12 23:47 transferrin.tsv
 ```
 
 Une combinaison d'options intéressantes est `-lhrt` qui affiche en dernier le fichier modifié le plus récemment :
 ```
 $ ls -lhrt
-total 152K
--rw-r--r-- 1 pierre pierre 940 mars  12 23:47 transferrin.csv
-drwxr-xr-x 2 pierre pierre 12K mars  12 23:47 genomes/
--rw-r--r-- 1 pierre pierre 940 mars  12 23:47 transferrin.tsv
--rw-r--r-- 1 pierre pierre 96K mars  12 23:47 paper.pdf
--rw-r--r-- 1 pierre pierre  57 mars  13 00:36 shopping.txt
+total 116K
+-rw-r--r-- 1 ppoulain omicsschool  940 Mar 12 23:47 transferrin.tsv
+drwxr-xr-x 2 ppoulain omicsschool 4.0K Mar 13 08:58 genomes
+-rw-r--r-- 1 ppoulain omicsschool   45 Mar 13 09:39 shopping.txt
+-rw-r--r-- 1 ppoulain omicsschool  940 Mar 13 14:19 transferrin.csv
+-rw-r--r-- 1 ppoulain omicsschool  96K Mar 13 14:34 paper.pdf
+-rw-r--r-- 1 ppoulain omicsschool  144 Mar 13 15:00 protein.txt
 ```
-L'option `-t` affiche les fichiers du plus récent au plus ancien et l'option `-r` inverse cet ordre.
+L'option `-t` affiche les fichiers du plus récent au plus ancien et l'option `-r` inverse cet ordre. Ici, le dernier fichier modifié est `protein.txt`.
 
 L'option `-a` affiche tout le contenu du répertoire courant, notamment les fichiers et répertoires cachés qui commencent (sous Unix) par le caractère `.` :
 ```
 $ ls -a
-.  ..  genomes/  paper.pdf  shopping.txt  transferrin.csv  transferrin.tsv
+.  ..  genomes	paper.pdf  protein.txt	shopping.txt  transferrin.csv  transferrin.tsv
 ```
 
 Par défaut, il y a deux répertoires cachés qui sont toujours présents : `.` et `..`
@@ -161,7 +169,7 @@ Le répertoire `.` désigne le répertoire courant.
 
 Le répertoire `..` désigne le répertoire parent. Par exemple, si on est dans le répertoire `/home/pierre/unix`, alors `..` désigne le répertoire `/home/pierre`.
 
-Enfin, la commande `ls` permet de lister un répertoire passé en argument :
+Enfin, la commande `ls` peut aussi afficher le contenu d'un répertoire passé en argument :
 ```
 $ ls genomes
 NC_000907_head.gbk  NC_004459_head.gbk  NC_007168_head.gbk  NC_011333_head.gbk
@@ -176,11 +184,11 @@ Comme pour les options, il faut au moins un espace entre une commande et son ou 
 On peut même d'obtenir des informations détaillées sur un fichier en particulier :
 ```
 $ ls -lh paper.pdf
--rw-r--r-- 1 pierre pierre 96K mars  12 23:47 paper.pdf
+-rw-r--r-- 1 pierre pierre 96K mars  13 14:34 paper.pdf
 ```
 
 
-### En savoir plus : `man`
+### Se documenter : `man` et `--help`
 
 La commande `man` (pour *manuel*) affiche l'aide associée à une commande. Par exemple pour la commande `ls` :
 ```
@@ -188,12 +196,29 @@ $ man ls
 ```
 Utilisez les flèches <kbd>↓</kbd> et <kbd>↑</kbd> pour naviguer dans cette aide. La touche <kbd>Espace</kbd> saute une page à la fois. La touche <kbd>Q</kbd> quitte l'aide et revient au *shell*.
 
+Par ailleurs, de nombreuses commandes Unix disposent de l'option `--help` qui affiche un aide succinct :
+```
+$ ls --help
+Usage: ls [OPTION]... [FILE]...
+List information about the FILEs (the current directory by default).
+Sort entries alphabetically if none of -cftuvSUX nor --sort is specified.
+
+Mandatory arguments to long options are mandatory for short options too.
+  -a, --all                  do not ignore entries starting with .
+  -A, --almost-all           do not list implied . and ..
+      --author               with -l, print the author of each file
+  -b, --escape               print C-style escapes for nongraphic characters
+      --block-size=SIZE      scale sizes by SIZE before printing them; e.g.,
+
+...
+```
+
 
 ### Prêter attention aux noms de fichiers et répertoires
 
 Sous Unix, les noms de fichiers et de répertoires sont sensibles à la casse, c'est-à-dire aux majuscules et aux minuscules. Par conséquent, le *shell* fait la différence entre le fichier `test.txt` et le fichier `Test.txt`.
 
-Par ailleurs, l'extension de fichier est facultative et purement indicative. Le *shell* ne l'utilise pas. Elle sert simple à l'utilisateur pour mieux organiser ses fichiers. Un nom de fichier du type `test` ou `test.my_extension` est parfaitement valide. On peut même nommer un répertoire `directory.txt` (mais cela n'est pas très malin).
+Par ailleurs, l'extension de fichier est facultative et purement indicative. Le *shell* ne l'utilise pas. Elle sert simplement à l'utilisateur pour mieux organiser ses fichiers. Un nom de fichier du type `test` ou `test.my_extension` est parfaitement valide. On peut même nommer un répertoire `directory.txt` (mais cela n'est pas très malin).
 
 Enfin, pour nommer un fichier ou un répertoire, on peut utiliser :
 
@@ -206,7 +231,7 @@ Enfin, pour nommer un fichier ou un répertoire, on peut utiliser :
 
 On vous déconseille fortement l'utilisation des autres caractères (`+()[]éèàùç`). Certains caractères sont même interdits (`<>|;&`).
 
-Enfin, n'utilisez **jamais** un espace dans un nom de fichier ou de répertoire. **J-A-M-A-I-S**. Unix l'autorise mais c'est très très pénible par la suite car l'espace est utilisé pour séparer les options et les arguments d'une commande.
+Enfin, ne mettez **jamais** un espace dans un nom de fichier ou de répertoire. **J-A-M-A-I-S**. Unix l'autorise mais c'est très très pénible par la suite car l'espace est utilisé pour séparer les options et les arguments d'une commande.
 
 Pour le reste, laisser faire votre imagination et utilisez des noms de fichiers et de répertoires expressifs.
 
@@ -222,7 +247,7 @@ $ pwd
 ```
 Partant du répertoire `/home/pierre/unix`, on s'est déplacé dans le répertoire `/home/pierre/unix/genomes`.
 
-Dans la commande `cd genomes`, le répertoire `genomes` est un argument de la commande Unix `cd`.
+Dans la commande `cd genomes`, le répertoire `genomes` est un argument de la commande `cd`.
 
 Dans la commande `cd genomes`, le répertoire `genomes` est un chemin relatif (car il ne débute pas par `/`). C'est-à-dire qu'on a entré le nom de ce répertoire (`genomes`) par rapport au répertoire dans lequel nous étions (`/home/pierre/unix`). Bien sûr, la commande `cd` fonctionne très bien avec un chemin absolu. La commande
 ```
@@ -248,18 +273,18 @@ $ pwd
 /home/pierre
 ```
 
-*Remarque* : simplement taper la commande `cd` ramène l'utilisateur dans son répertoire personnel.
+*Remarque* : simplement taper la commande `cd` (sans argument) ramène aussi l'utilisateur dans son répertoire personnel.
 
 
 ### Créer un répertoire : `mkdir`
 
-La commande `mkdir` (pour `make directory`) crée un répertoire :
+La commande `mkdir` (pour *make directory*) crée un répertoire :
 ```
 $ ls
-genomes/  paper.pdf  shopping.txt  transferrin.csv  transferrin.tsv
+genomes  paper.pdf  protein.txt  shopping.txt  transferrin.csv	transferrin.tsv
 $ mkdir test
 $ ls
-genomes/  paper.pdf  shopping.txt  test/  transferrin.csv  transferrin.tsv
+genomes  paper.pdf  protein.txt  shopping.txt  test  transferrin.csv  transferrin.tsv
 ```
 
 ### Copier : `cp`
@@ -267,10 +292,10 @@ genomes/  paper.pdf  shopping.txt  test/  transferrin.csv  transferrin.tsv
 La commande `cp` (pour *copy*) copie un fichier vers un nouveau fichier :
 ```
 $ ls
-genomes/  paper.pdf  shopping.txt  transferrin.csv  transferrin.tsv
+genomes  paper.pdf  protein.txt  shopping.txt  test  transferrin.csv  transferrin.tsv
 $ cp paper.pdf article.pdf
 $ ls
-article.pdf  genomes/  paper.pdf  shopping.txt  transferrin.csv  transferrin.tsv
+article.pdf  genomes  paper.pdf  protein.txt  shopping.txt  test  transferrin.csv  transferrin.tsv
 ```
 
 `cp` peut copier plusieurs fichiers dans un répertoire :
@@ -284,7 +309,7 @@ article.pdf  paper.pdf
 ```
 $ cp -r genomes test
 $ ls test
-article.pdf  genomes/  paper.pdf
+article.pdf  genomes  paper.pdf
 ```
 
 
@@ -293,36 +318,38 @@ article.pdf  genomes/  paper.pdf
 La commande `mv` (pour *move*) renommer des fichiers ou des répertoires :
 ```
 $ ls
-article.pdf  genomes/  paper.pdf  shopping.txt  test/  transferrin.csv  transferrin.tsv
+article.pdf  genomes  paper.pdf  protein.txt  shopping.txt  test  transferrin.csv  transferrin.tsv
 $ mv article.pdf article2.pdf
 $ ls
-article2.pdf  genomes/  paper.pdf  shopping.txt  test/  transferrin.csv  transferrin.tsv
+article2.pdf  genomes  paper.pdf  protein.txt  shopping.txt  test  transferrin.csv  transferrin.tsv
 $ mv test test2
 $ ls
-article2.pdf  genomes/  paper.pdf  shopping.txt  test2/  transferrin.csv  transferrin.tsv
+article2.pdf  genomes  paper.pdf  protein.txt  shopping.txt  test2  transferrin.csv  transferrin.tsv
 ```
 
 `mv` déplace aussi des fichiers ou des répertoires dans un autre répertoire :
 ```
 $ ls
-article2.pdf  genomes/  paper.pdf  shopping.txt  test2/  transferrin.csv  transferrin.tsv
+article2.pdf  genomes  paper.pdf  protein.txt  shopping.txt  test2  transferrin.csv  transferrin.tsv
 $ mkdir test3
 $ mv article2.pdf test2 test3
 $ ls test3
-article2.pdf  test2/
+article2.pdf  test2
+$ ls
+genomes  paper.pdf  protein.txt  shopping.txt  test3  transferrin.csv  transferrin.tsv
 ```
 
 
 ### Supprimer : `rm`
 
-La commande `rm` (pour `remove`) supprime des fichiers ou des répertoires :
+La commande `rm` (pour *remove*) supprime des fichiers ou des répertoires :
 ```
 $ cd test3
 $ ls
-article2.pdf  test2/
+article2.pdf  test2
 $ rm article2.pdf
 $ ls
-test2/
+test2
 $ rm -r test2
 $ ls
 ```
@@ -344,8 +371,8 @@ Les caractères `*` et `?` peuvent remplacer n'importe quels caractères dans le
 
 Par exemple :
 ```
-$ ls transferrin.*
-transferrin.csv  transferrin.tsv
+$ $ ls *txt
+protein.txt  shopping.txt
 $ ls transferrin.?sv
 transferrin.csv  transferrin.tsv
 ```
@@ -363,7 +390,7 @@ La commande `cp transferrin.* test4` est un raccourci pour
 cp transferrin.csv  transferrin.tsv test4
 ```
 
-Cela fonctionne avec deux fichiers mais aussi avec autant de fichiers que vous le souhaitez.
+Cela fonctionne avec autant de fichiers qu'on le souhaite.
 
 
 ## Trucs et astuces
@@ -391,21 +418,19 @@ Pour copier / coller quelque chose dans le *shell*, utilisez les combinaisons de
 
 ## Explorer le contenu de fichiers
 
-Jusqu'à présent, nous nous sommes contentés d'afficher le contenu de répertoires et de déplacer ou copier des fichiers, sans connaître leur contenu.
+Jusqu'à présent, on s'est contenté d'afficher le contenu de répertoires et de déplacer ou copier des fichiers, sans connaître leur contenu.
 
 Pour afficher le contenu d'un fichier, on utilise la commande `cat` (pour *concatenate*) :
 ```
 $ cat shopping.txt
 banana 6
-pineaple  1
+pineaple 1
 pear 3
-apple 6
+apple 10
 orange 4
 ```
 
-Bien sûr, afficher le contenu d'un fichier n'a de sens ici que pour un fichier texte.
-
-Afficher le contenu d'un fichier binaire produit une suite de caractères incompréhensibles :
+Bien sûr, afficher le contenu d'un fichier n'a de sens ici que pour un fichier texte. En effet, afficher le contenu d'un fichier binaire produit une suite de caractères incompréhensibles :
 ```
 $ cat paper.pdf
 �{����e˿\�><?�S�;gg��>��ݻ���7��h�G�.�}{�������W[��5��͓����d�=8��f.���屌J�Y��b�ꂭ貾l���/ٙ�
@@ -446,6 +471,7 @@ $ cat transferrin.csv
 5WTD,Homo sapiens,679
 5X5P,Homo sapiens,679
 6CTC,Homo sapiens,679
+...
 ```
 
 La commande `less` affiche *progressivement* le contenu d'un fichier :
@@ -477,7 +503,7 @@ $ head -n 2 transferrin.csv
 1A8F,Homo sapiens,329
 ```
 
-Réciproquement, la commande `tail` affiche les dernière lignes d'un fichier texte. L'option `-n` est également disponible :
+Réciproquement, la commande `tail` affiche les dernières lignes d'un fichier texte. L'option `-n` est également disponible :
 ```
 $ tail transferrin.csv
 2O84,Homo sapiens,337
@@ -515,7 +541,7 @@ Selon la version de votre système Unix, il se peut que l'interface soit en angl
 
 On peut tout de suite commencer à taper du texte.
 
-Pour sauvegarder le fichier ainsi créé, on utilise la combinaison de touches <kbd>Ctrl</kbd>+<kbd>O</kbd> (c'est-à-dire qu'on presse en même temps les touches <kbd>Ctrl</kbd> et <kbd>O</kbd>). On entre ensuite le nom qu'on souhaite donner au fichier (par exemple `test.txt`) puis on valide par la touche  <kbd>Entrée</kbd>.
+Pour sauvegarder le fichier ainsi créé, on utilise la combinaison de touches <kbd>Ctrl</kbd>+<kbd>O</kbd> (c'est-à-dire qu'on presse en même temps les touches <kbd>Ctrl</kbd> et <kbd>O</kbd>). On entre ensuite le nom qu'on souhaite donner au fichier (par exemple `test.txt`) puis on valide par la touche  <kbd>Entrée</kbd>. Les différentes combinaisons de touches sont rappelées en bas de l'écran. Le `^` désigne la touche <kbd>Ctrl</kbd>.
 
 On peut continuer à éditer le fichier puis l'enregistrer, et ainsi de suite.
 
@@ -525,7 +551,7 @@ On se retrouve alors dans le *shell* et on peut vérifier que le fichier (ici `t
 
 ```
 $ ls
-genomes/  paper.pdf  shopping.txt  test.txt  transferrin.csv  transferrin.tsv
+genomes  paper.pdf  protein.txt  shopping.txt  test.txt  transferrin.csv  transferrin.tsv
 ```
 
 On peut aussi ouvrir un fichier texte existant en indiquant en argument le nom du fichier à ouvrir :
@@ -568,6 +594,9 @@ pineaple 1
 pear 3
 apple 10
 orange 4
+```
+
+```
 $ sort shopping.txt
 apple 10
 banana 6
@@ -578,7 +607,7 @@ pineaple 1
 
 Les lignes ont été triées par ordre alphabétique.
 
-La commande `sort` a également la notion de colonne ou de champs. Par défaut, le séparateur de champs est un caractère blanc (espace, tabulation). Dans le fichier `shopping.txt`, `sort` trouve une première colonne avec le nom des fruits et une seconde avec les quantités.
+La commande `sort` a également la notion de colonnes (ou de champs). Par défaut, le séparateur de champs est un caractère blanc (espace, tabulation). Dans le fichier `shopping.txt`, `sort` trouve une première colonne avec le nom des fruits et une seconde avec les quantités.
 
 On peut trier le fichier `shopping.txt` suivant le nombre de fruits en indiquant à `sort` d'utiliser la 2e colonne avec l'option `-k` :
 ```
@@ -621,7 +650,9 @@ pineaple 1
 
 ### Trouver les éléments uniques : `uniq`
 
-La commande `uniq` affiche les éléments uniques. Par exemple avec le contenu du fichier `protein.txt` :
+La commande `uniq` affiche les éléments uniques.
+
+Par exemple avec le contenu du fichier `protein.txt` :
 ```
 $ cat protein.txt
 insulin
@@ -649,7 +680,7 @@ rhodopsin
 transferrin
 ```
 
-L'option `-c` compte le nombre de fois qu'un élément et présent :
+L'option `-c` compte le nombre de fois qu'un élément est présent :
 ```
 $ uniq -c protein.txt
       6 insulin
@@ -658,7 +689,7 @@ $ uniq -c protein.txt
       4 transferrin
 ```
 
-*Remarque* La commande `uniq` ne fonctionne que sur un fichier trié, c'est-à-dire pour lequel les lignes sont déjà triées par ordre alphabétique.
+*Remarque* : La commande `uniq` ne fonctionne que sur un fichier trié, c'est-à-dire pour lequel les lignes sont déjà triées par ordre alphabétique.
 
 
 ### Extraire un colonne : `cut`
@@ -695,7 +726,7 @@ L'option `-f` précise le numéro du champ qu'on souhaite extraire.
 
 ### Gérer les flux : redirection et emboîtement
 
-On souhaite extraire du fichier `transferrin.csv` la liste des différents organismes d'où proviennent les transferrines. On a besoin pour cela de 3 étapes :
+On souhaite extraire du fichier `transferrin.csv` la liste des différents organismes d'où proviennent les structures de transferrines. On a besoin pour cela de réaliser 3 étapes :
 
 1. Extraire la liste des organismes (avec `cut`).
 2. Trier par ordre alphabétique ces organismes (avec `sort`).
@@ -707,7 +738,7 @@ Pour stocker l'information, d'une étape à l'autre, on peut renvoyer le résult
 ```
 $ cut -d "," -f 2 transferrin.csv > organism.txt
 ```
-Le résultat de la commande ne s'affiche pas à l'écran mais redirigé dans le fichier `organism.txt`.
+Le résultat de la commande ne s'affiche pas à l'écran mais est redirigé dans le fichier `organism.txt`.
 
 On peut jeter un oeil au contenu de `organism.txt` avec les commandes `cat`, `less`, `head` ou `tail` :
 ```
@@ -755,9 +786,9 @@ Sus scrofa
 
 Les structures de transferrines du fichier `transferrin.csv` proviennent de 5 organismes différents.
 
-Pour cette analyse, nous avons du créer deux fichiers intermédiaires : `organism.txt` et `organism_sorted.txt`.
+Pour cette analyse, nous avons dû créer deux fichiers intermédiaires : `organism.txt` et `organism_sorted.txt`.
 
-Pour éviter la création de ces fichiers intermédiaires et réaliser cette analyse en une seule fois, on emboîte (chaîne) les différentes étapes. La sortie produite par une étape devient l'entrée de l'étape suivante. On utilise pour cela  «`|`» :
+Pour éviter la création de ces fichiers et réaliser cette analyse en une seule fois, on emboîte (chaîne) les différentes étapes. La sortie produite par une étape devient l'entrée de l'étape suivante (voir l'[illustration](http://swcarpentry.github.io/shell-novice/04-pipefilter/index.html) de Software Carpentry). On utilise pour cela  «`|`» :
 
 ```
 $ cut -d "," -f 2 transferrin.csv | sort | uniq
@@ -834,7 +865,7 @@ genomes/NC_013893_head.gbk:DEFINITION  Staphylococcus lugdunensis HKU09-01 chrom
 genomes/NC_014205_head.gbk:DEFINITION  Staphylothermus hellenicus DSM 12710 chromosome, complete genome.
 ```
 
-On peut bien sur emboîter / chaîner les commandes `grep` si on cherche plusieurs motifs :
+On peut bien sûr emboîter / chaîner les commandes `grep` si on cherche plusieurs motifs :
 ```
 $ grep "DEFI" genomes/*.gbk | grep "Staphyloco"
 genomes/NC_002976_head.gbk:DEFINITION  Staphylococcus epidermidis RP62A, complete genome.
@@ -845,11 +876,67 @@ genomes/NC_009477_head.gbk:DEFINITION  Staphylococcus aureus subsp. aureus JH9 p
 genomes/NC_013893_head.gbk:DEFINITION  Staphylococcus lugdunensis HKU09-01 chromosome, complete genome.
 ```
 
-Et si on veut savoir combien de génomes de staphylocoques on a :
+L'option `-c` de `grep` indique combien de génomes de staphylocoques on a trouvé :
 ```
-$ grep "DEFI" genomes/*.gbk | grep "Staphyloco" | wc -l
+$ grep "DEFI" genomes/*.gbk | grep -c "Staphyloco"
 6
 ```
 
 
 ### Chercher des fichiers : `find`
+
+La commande `find` recherche des fichiers ou des répertoires.
+
+On revient tout d'abord dans le répertoire parent :
+```
+$ pwd
+/home/pierre/unix
+$ cd ..
+$ pwd
+/home/pierre
+```
+
+On cherche maintenant les fichiers avec l'extension `.csv` :
+```
+$ find ./ -name "*.csv"
+./unix/transferrin.csv
+```
+
+La commande `find` prend comme argument l'endroit à partir duquel on cherche (ici le répertoire courant `./`) puis on indique le critère de recherche avec l'option `-name`.
+
+
+## Se souvenir
+
+La commande `history` affiche toutes les commandes que vous avez entrées, de la plus ancienne à la plus récente.
+
+Ainsi, la commande
+```
+$ history
+```
+produit :
+```
+...
+
+  582  grep "apple" shopping.txt
+  583  grep -n "apple" shopping.txt
+  584  grep "DEFI" genomes/*.gbk
+  585  grep "DEFI" genomes/*.gbk | grep "Staphyloco"
+  586  grep "DEFI" genomes/*.gbk | grep -c "Staphyloco"
+  587  pwd
+  588  cd ..
+  589  pwd
+  590  find ./ -name "*.csv"
+  591  history
+```
+
+Le numéro à côté de chaque commande est le numéro de la commande dans l'ordre où elle a été lancée dans le *shell*. On peut très simplement rappeler une commande à partir de son numéro précédé de «`!`» :
+```
+$ !590
+find ./ -name "*.csv"
+./unix/transferrin.csv
+```
+
+Enfin, lorsqu'on a travaillé un moment dans le *shell*, il peut être utile de sauvegarder l'historique des commandes qu'on a lancées avec :
+```
+$ history > 2019-03-14_history.txt
+```
