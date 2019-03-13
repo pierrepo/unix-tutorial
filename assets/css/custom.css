@@ -6,6 +6,6 @@ section {
     width: 800px;
 }
 
-#toc_in table ul li a th td {
+#toc_in * {
   all: initial;
 }
