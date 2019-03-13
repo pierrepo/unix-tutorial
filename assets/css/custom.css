@@ -6,8 +6,9 @@ section {
     width: 800px;
 }
 
-header ol * {
+header li {
     all: initial;
+    display: block;
 }
 
 .js-toc ul,li,ol {
