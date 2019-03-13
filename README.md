@@ -13,7 +13,7 @@
 
 ## Tutoriel *maison*
 
-[Un aperçu rapide du *shell* Unix](cours/).
+[Un aperçu rapide du *shell* Unix](tutoriel/).
 
 Pour reproduire les exemples présentés, lancez les commandes suivantes au préalable :
 ```
