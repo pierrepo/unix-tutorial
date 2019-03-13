@@ -1,11 +1,17 @@
 # Unix
 
-[Activités préparatoires](activites-preparatoires/)
+
+## Activités préparatoires
+
+[Activités DataCamp](activites-preparatoires/)
 
 
-## Tutoriels
+## Introduction
 
-### Activité 1
+[Diapo](diapo/)
+
+
+## Tutoriel *maison*
 
 [Un aperçu rapide du *shell* Unix](cours/).
 
@@ -19,7 +25,7 @@ $ cd unix
 Rappel : le `$` désigne l'invite de commande de votre *shell*. Il ne faut pas le taper.
 
 
-### Activité 2
+## Tutoriel Software Carpentry
 
 [Le cours de Software Carpentry](http://swcarpentry.github.io/shell-novice/) : parties 1, 2, 3, 4 et 7.
 Le [mémo](http://swcarpentry.github.io/shell-novice/reference/) des notions abordées.
@@ -30,7 +36,6 @@ $ cd
 $ wget http://swcarpentry.github.io/shell-novice/data/data-shell.zip
 $ unzip data-shell.zip
 ```
-
 
 ## Licence
 
