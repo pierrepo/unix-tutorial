@@ -120,7 +120,7 @@ drwxr-xr-x 2 pierre pierre 12K mars  12 23:47 genomes/
 ```
 Le fichier `paper.pdf` a une taille de 96 kilo octets.
 
-Les options peuvent souvent être combinées :
+Les options peuvent aussi être combinées :
 ```
 $ ls -lh
 total 152K
@@ -131,7 +131,7 @@ drwxr-xr-x 2 pierre pierre 12K mars  12 23:47 genomes/
 -rw-r--r-- 1 pierre pierre 940 mars  12 23:47 transferrin.tsv
 ```
 
-Une combinaison intéressante est `-lhrt` qui affiche en dernier le fichier modifié le plus récemment :
+Une combinaison d'options intéressantes est `-lhrt` qui affiche en dernier le fichier modifié le plus récemment :
 ```
 $ ls -lhrt
 total 152K
@@ -182,6 +182,27 @@ $ man ls
 ```
 Utilisez les flèches <kbd>↓</kbd> et <kbd>↑</kbd> pour naviguer dans cette aide. La touche <kbd>Espace</kbd> saute une page à la fois. La touche <kbd>Q</kbd> quitte l'aide et revient au *shell*.
 
+
+### Prêter attention aux noms de fichiers et répertoires
+
+Sous Unix, les noms de fichiers et de répertoires sont sensibles à la casse, c'est-à-dire aux majuscules et aux minuscules. Par conséquent, le *shell* fait la différence entre le fichier `test.txt` et le fichier `Test.txt`.
+
+Par ailleurs, l'extension de fichier est facultative et purement indicative. Le *shell* ne l'utilise pas. Elle sert simple à l'utilisateur pour mieux organiser ses fichiers. Un nom de fichier du type `test` ou `test.my_extension` est parfaitement valide. On peut même nommer un répertoire `directory.txt` (mais cela n'est pas très malin).
+
+Enfin, pour nommer un fichier ou un répertoire, on peut utiliser :
+
+- les lettres minuscules,
+- les lettres majuscules,
+- les chiffres,
+- le tiret du milieu «`-`» (mais pas comme premier caractère du nom),
+- le tiret du bas «`_`»,
+- le point «`.`».
+
+On vous déconseille fortement l'utilisation des autres caractères (`+()[]éèàùç`). Certains caractères sont même interdits (`<>|;&`).
+
+Enfin, n'utilisez **jamais** un espace dans un nom de fichier ou de répertoire. **J-A-M-A-I-S**. Unix l'autorise mais c'est très très pénible par la suite car l'espace est utilisé pour séparer les options et les arguments d'une commande.
+
+Pour le reste, laisser faire votre imagination et utilisez des noms de fichiers et de répertoires expressifs.
 
 ### Se déplacer : `cd`
 
