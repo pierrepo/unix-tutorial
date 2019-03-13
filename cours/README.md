@@ -71,7 +71,7 @@ Lorsqu'un chemin débute par `/` (la racine), on parle de **chemin absolu**. Il 
 La commande `ls` (pour *list*) affiche le contenu d'un répertoire :
 ```
 $ ls
-genomes  paper.pdf  shopping_list.txt  transferrin.csv  transferrin.tsv
+genomes  paper.pdf  shopping.txt  transferrin.csv  transferrin.tsv
 ```
 
 On peut modifier le comportement par défaut d'une commande avec une ou plusieurs option. Cette option est séparée de la commande par un ou plusieurs espaces.
@@ -79,7 +79,7 @@ On peut modifier le comportement par défaut d'une commande avec une ou plusieur
 Par exemple avec `-F` :
 ```
 $ ls -F
-genomes/  paper.pdf  shopping_list.txt  transferrin.csv  transferrin.tsv
+genomes/  paper.pdf  shopping.txt  transferrin.csv  transferrin.tsv
 ```
 
 Le caractère `/` a été ajouté à la fin de `genomes` pour indiquer qu'il s'agit d'un répertoire.
@@ -87,12 +87,12 @@ Le caractère `/` a été ajouté à la fin de `genomes` pour indiquer qu'il s'a
 Remarquez que les commandes suivantes donneraient aussi le même résultats :
 ```
 $ ls  -F
-genomes/  paper.pdf  shopping_list.txt  transferrin.csv  transferrin.tsv
+genomes/  paper.pdf  shopping.txt  transferrin.csv  transferrin.tsv
 ```
 et pourquoi pas :
 ```
 $ ls                                            -F
-genomes/  paper.pdf  shopping_list.txt  transferrin.csv  transferrin.tsv
+genomes/  paper.pdf  shopping.txt  transferrin.csv  transferrin.tsv
 ```
 
 Il faut au moins un espace entre la commande et une option.
@@ -103,7 +103,7 @@ $ ls -l
 total 152
 drwxr-xr-x 2 pierre pierre 12288 mars  12 23:47 genomes/
 -rw-r--r-- 1 pierre pierre 97830 mars  12 23:47 paper.pdf
--rw-r--r-- 1 pierre pierre    57 mars  13 00:36 shopping_list.txt
+-rw-r--r-- 1 pierre pierre    57 mars  13 00:36 shopping.txt
 -rw-r--r-- 1 pierre pierre   940 mars  12 23:47 transferrin.csv
 -rw-r--r-- 1 pierre pierre   940 mars  12 23:47 transferrin.tsv
 ```
@@ -114,7 +114,7 @@ $ ls -l -h
 total 152K
 drwxr-xr-x 2 pierre pierre 12K mars  12 23:47 genomes/
 -rw-r--r-- 1 pierre pierre 96K mars  12 23:47 paper.pdf
--rw-r--r-- 1 pierre pierre  57 mars  13 00:36 shopping_list.txt
+-rw-r--r-- 1 pierre pierre  57 mars  13 00:36 shopping.txt
 -rw-r--r-- 1 pierre pierre 940 mars  12 23:47 transferrin.csv
 -rw-r--r-- 1 pierre pierre 940 mars  12 23:47 transferrin.tsv
 ```
@@ -126,7 +126,7 @@ $ ls -lh
 total 152K
 drwxr-xr-x 2 pierre pierre 12K mars  12 23:47 genomes/
 -rw-r--r-- 1 pierre pierre 96K mars  12 23:47 paper.pdf
--rw-r--r-- 1 pierre pierre  57 mars  13 00:36 shopping_list.txt
+-rw-r--r-- 1 pierre pierre  57 mars  13 00:36 shopping.txt
 -rw-r--r-- 1 pierre pierre 940 mars  12 23:47 transferrin.csv
 -rw-r--r-- 1 pierre pierre 940 mars  12 23:47 transferrin.tsv
 ```
@@ -139,14 +139,14 @@ total 152K
 drwxr-xr-x 2 pierre pierre 12K mars  12 23:47 genomes/
 -rw-r--r-- 1 pierre pierre 940 mars  12 23:47 transferrin.tsv
 -rw-r--r-- 1 pierre pierre 96K mars  12 23:47 paper.pdf
--rw-r--r-- 1 pierre pierre  57 mars  13 00:36 shopping_list.txt
+-rw-r--r-- 1 pierre pierre  57 mars  13 00:36 shopping.txt
 ```
 L'option `-t` affiche les fichiers du plus récent au plus ancien et l'option `-r` inverse cet ordre.
 
 L'option `-a` affiche tout le contenu du répertoire courant, notamment les fichiers et répertoires cachés qui commencent (sous Unix) par le caractère `.` :
 ```
 $ ls -a
-.  ..  genomes/  paper.pdf  shopping_list.txt  transferrin.csv  transferrin.tsv
+.  ..  genomes/  paper.pdf  shopping.txt  transferrin.csv  transferrin.tsv
 ```
 
 Par défaut, il y a deux répertoires cachés qui sont toujours présents : `.` et `..`
@@ -250,10 +250,10 @@ $ pwd
 La commande `mkdir` (pour `make directory`) crée un répertoire :
 ```
 $ ls
-genomes/  paper.pdf  shopping_list.txt  transferrin.csv  transferrin.tsv
+genomes/  paper.pdf  shopping.txt  transferrin.csv  transferrin.tsv
 $ mkdir test
 $ ls
-genomes/  paper.pdf  shopping_list.txt  test/  transferrin.csv  transferrin.tsv
+genomes/  paper.pdf  shopping.txt  test/  transferrin.csv  transferrin.tsv
 ```
 
 ### Copier : `cp`
@@ -261,10 +261,10 @@ genomes/  paper.pdf  shopping_list.txt  test/  transferrin.csv  transferrin.tsv
 La commande `cp` (pour *copy*) copie un fichier vers un nouveau fichier :
 ```
 $ ls
-genomes/  paper.pdf  shopping_list.txt  transferrin.csv  transferrin.tsv
+genomes/  paper.pdf  shopping.txt  transferrin.csv  transferrin.tsv
 $ cp paper.pdf article.pdf
 $ ls
-article.pdf  genomes/  paper.pdf  shopping_list.txt  transferrin.csv  transferrin.tsv
+article.pdf  genomes/  paper.pdf  shopping.txt  transferrin.csv  transferrin.tsv
 ```
 
 `cp` peut copier plusieurs fichiers dans un répertoire :
@@ -287,19 +287,19 @@ article.pdf  genomes/  paper.pdf
 La commande `mv` (pour *move*) renommer des fichiers ou des répertoires :
 ```
 $ ls
-article.pdf  genomes/  paper.pdf  shopping_list.txt  test/  transferrin.csv  transferrin.tsv
+article.pdf  genomes/  paper.pdf  shopping.txt  test/  transferrin.csv  transferrin.tsv
 $ mv article.pdf article2.pdf
 $ ls
-article2.pdf  genomes/  paper.pdf  shopping_list.txt  test/  transferrin.csv  transferrin.tsv
+article2.pdf  genomes/  paper.pdf  shopping.txt  test/  transferrin.csv  transferrin.tsv
 $ mv test test2
 $ ls
-article2.pdf  genomes/  paper.pdf  shopping_list.txt  test2/  transferrin.csv  transferrin.tsv
+article2.pdf  genomes/  paper.pdf  shopping.txt  test2/  transferrin.csv  transferrin.tsv
 ```
 
 `mv` déplace aussi des fichiers ou des répertoires dans un autre répertoire :
 ```
 $ ls
-article2.pdf  genomes/  paper.pdf  shopping_list.txt  test2/  transferrin.csv  transferrin.tsv
+article2.pdf  genomes/  paper.pdf  shopping.txt  test2/  transferrin.csv  transferrin.tsv
 $ mkdir test3
 $ mv article2.pdf test2 test3
 $ ls test3
@@ -389,7 +389,7 @@ Jusqu'à présent, nous nous sommes contentés d'afficher le contenu de réperto
 
 Pour afficher le contenu d'un fichier, on utilise la commande `cat` (pour *concatenate*) :
 ```
-$ cat shopping_list.txt
+$ cat shopping.txt
 banana 6
 pineaple  1
 pear 3
@@ -519,13 +519,13 @@ On se retrouve alors dans le *shell* et on peut vérifier que le fichier (ici `t
 
 ```
 $ ls
-genomes/  paper.pdf  shopping_list.txt  test.txt  transferrin.csv  transferrin.tsv
+genomes/  paper.pdf  shopping.txt  test.txt  transferrin.csv  transferrin.tsv
 ```
 
 On peut aussi ouvrir un fichier texte existant en indiquant en argument le nom du fichier à ouvrir :
 
 ```
-$ nano shopping_list.txt
+$ nano shopping.txt
 ```
 
 ## Manipuler des données
@@ -534,10 +534,10 @@ $ nano shopping_list.txt
 
 La commande `wc` (pour *word count*) compte le nombre de caractères, de mots et de lignes d'un fichier.
 ```
-$ wc shopping_list.txt
- 5 10 45 shopping_list.txt
+$ wc shopping.txt
+ 5 10 45 shopping.txt
 ```
-On apprend ainsi que le fichier `shopping_list.txt` contient 5 lignes, 10 mots et 45 caractères.
+On apprend ainsi que le fichier `shopping.txt` contient 5 lignes, 10 mots et 45 caractères.
 
 L'option `-l` indique à la commande `wc` de ne compter que le nombre de lignes. Et réciproquement pour `-w` et le nombre de mots, et `-c` et le nombre de caractères.
 
@@ -556,13 +556,13 @@ Les fichiers `transferrin.csv` et `transferrin.tsv` contiennent chacun 41 lignes
 La commande `sort` trie le contenu d'un fichier.
 
 ```
-$ cat shopping_list.txt
+$ cat shopping.txt
 banana 6
 pineaple 1
 pear 3
 apple 10
 orange 4
-$ sort shopping_list.txt
+$ sort shopping.txt
 apple 10
 banana 6
 orange 4
@@ -572,11 +572,11 @@ pineaple 1
 
 Les lignes ont été triées par ordre alphabétique.
 
-La commande `sort` a également la notion de colonne ou de champs. Par défaut, le séparateur de champs est un caractère blanc (espace, tabulation). Dans le fichier `shopping_list.txt`, `sort` trouve une première colonne avec le nom des fruits et une seconde avec les quantités.
+La commande `sort` a également la notion de colonne ou de champs. Par défaut, le séparateur de champs est un caractère blanc (espace, tabulation). Dans le fichier `shopping.txt`, `sort` trouve une première colonne avec le nom des fruits et une seconde avec les quantités.
 
-On peut trier le fichier `shopping_list.txt` suivant le nombre de fruits en indiquant à `sort` d'utiliser la 2e colonne avec l'option `-k` :
+On peut trier le fichier `shopping.txt` suivant le nombre de fruits en indiquant à `sort` d'utiliser la 2e colonne avec l'option `-k` :
 ```
-$ sort -k 2 shopping_list.txt
+$ sort -k 2 shopping.txt
 pineaple 1
 apple 10
 pear 3
@@ -585,7 +585,7 @@ banana 6
 ```
 Les lignes sont alors triées suivant la seconde colonne, mais par ordre alphabétique, ce qui explique que `10` soit avant `3`. Pour trier explicitement sur des valeurs numériques, on utilise l'option `-n` :
 ```
-$ sort -k 2 -n shopping_list.txt
+$ sort -k 2 -n shopping.txt
 pineaple 1
 pear 3
 orange 4
@@ -596,7 +596,7 @@ L'ordre numérique est ainsi respecté.
 
 Enfin l'option `-r` inverse le tri initial :
 ```
-$ sort -r shopping_list.txt
+$ sort -r shopping.txt
 pineaple 1
 pear 3
 orange 4
@@ -605,7 +605,7 @@ apple 10
 ```
 
 ```
-$ sort -k 2 -n -r shopping_list.txt
+$ sort -k 2 -n -r shopping.txt
 apple 10
 banana 6
 orange 4
@@ -615,9 +615,9 @@ pineaple 1
 
 ### Trouver les éléments uniques : `uniq`
 
-La commande `uniq` affiche les éléments uniques. Par exemple avec le contenu du fichier `proteins.txt` :
+La commande `uniq` affiche les éléments uniques. Par exemple avec le contenu du fichier `protein.txt` :
 ```
-$ cat proteins.txt
+$ cat protein.txt
 insulin
 insulin
 insulin
@@ -636,7 +636,7 @@ transferrin
 ```
 
 ```
-$ uniq proteins.txt
+$ uniq protein.txt
 insulin
 integrin
 rhodopsin
@@ -645,7 +645,7 @@ transferrin
 
 L'option `-c` compte le nombre de fois qu'un élément et présent :
 ```
-$ uniq -c proteins.txt
+$ uniq -c protein.txt
       6 insulin
       2 integrin
       3 rhodopsin
@@ -792,13 +792,13 @@ $ cut -f 2 transferrin.tsv | sort | uniq -c
 
 La commande `grep` cherche un motif dans un ou plusieurs fichiers.
 ```
-$ grep "apple" shopping_list.txt
+$ grep "apple" shopping.txt
 apple 10
 ```
 
 L'option `-n` affiche le numéro de la ligne dans lequel est trouvé le motif :
 ```
-$ grep -n "apple" shopping_list.txt
+$ grep -n "apple" shopping.txt
 4:apple 10
 ```
 

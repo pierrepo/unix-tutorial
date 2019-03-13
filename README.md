@@ -3,6 +3,29 @@
 [Activités préparatoires](activites-preparatoires/)
 
 
+## Cours et tutoriel
+
+[Un aperçu rapide du *shell* Unix](cours/).
+
+Pour reproduire les exemples présentés, lancez les commandes suivantes au préalable :
+```
+$ cd
+$ wget https://github.com/omics-school/unix/raw/master/demo/unix.tgz
+$ tar zxvf unix.tgz
+$ cd unix
+```
+Rappel : le `$` désigne l'invite de commande de votre *shell*. Il ne faut pas le taper.
+
+[Le cours de Software Carpentry](http://swcarpentry.github.io/shell-novice/). Parties 1, 2, 3, 4 et 7.
+Le [mémo](http://swcarpentry.github.io/shell-novice/reference/) des notions abordées.
+
+Pour faire les exercices de Software Carpentry, préparez les données nécessaires avec les commandes suivantes :
+```
+$ cd
+$ wget http://swcarpentry.github.io/shell-novice/data/data-shell.zip
+$ unzip data-shell.zip
+```
+
 
 ## Licence
 
