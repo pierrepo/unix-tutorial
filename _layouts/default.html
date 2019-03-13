@@ -45,7 +45,8 @@
         <p class="view"><a href="{{ site.github.owner_url }}">View My GitHub Profile</a></p>
         {% endif %}
 
-        $('#main_content').toc();
+        <div id="toc_in">
+        </div>
 
         {% if site.show_downloads %}
         <ul class="downloads">
@@ -87,6 +88,18 @@
     <!-- modif BL - END -->
     <!-- modif PP -->
     <script src="{{ '/assets/js/jquery.toc.js' | relative_url }}"></script>
+    <script type="text/javascript">
+    $(function() {
+      $('section').toc({
+        showAlways:true,
+        renderIn:'#toc_in',
+        contentsText:"Legenda",
+        hideText:'Collapse',
+        showText:'Expand',
+        showCollapsed:true
+      });
+    });
+    </script>
     <!-- modif PP - END -->
   </body>
 </html>
