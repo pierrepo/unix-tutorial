@@ -52,7 +52,7 @@ Cela signifie qu'on se trouve actuellement dans le répertoire `/home/pierre/uni
 
 Sous Unix, les répertoires et les fichiers sont organisés sous forme d'une structure en arbre. On parle d'arborescence.
 
-Le répertoire dont dépendent tous les autres est le `/` qu'on appelle la « racine » (*root* en anglais), les différents sous-répertoire sont séparés les uns des autres par le caractère `/`. Dans le cas de `/home/pierre/unix` :
+Le répertoire dont dépendent tous les autres est le `/` qu'on appelle la « racine » (*root* en anglais), les différents sous-répertoires sont séparés les uns des autres par le caractère `/`. Dans le cas de `/home/pierre/unix` :
 
 - on se trouve dans le répertoire `unix`,
 - qui est lui-même est un sous-répertoire du répertoire `pierre`,
@@ -95,7 +95,7 @@ $ ls                                            -F
 genomes/  paper.pdf  shopping_list.txt  transferrin.csv  transferrin.tsv
 ```
 
-Il faut au moins un espace entre la commande et son option.
+Il faut au moins un espace entre la commande et une option.
 
 Une autre option sympa est l'option `-l` qui affiche des informations complémentaires sur le contenu du répertoire :
 ```
@@ -300,7 +300,7 @@ La flèche du haut <kbd>↑</kbd> rappelle les commandes précédentes (depuis l
 
 La touche tabulation <kbd>Tab</kbd> est utile pour compléter une commande, un nom de répertoire ou de fichier. Appuyez deux fois sur <kbd>Tab</kbd> en cas d’ambiguïté.
 
-Par exemple, vous tapez `/h` puis la touche <kbd>Tab</kbd> et le *shell* va compléter automatiquement à `/home`.
+Par exemple, si vous tapez `/h` puis la touche <kbd>Tab</kbd> et le *shell* va compléter automatiquement à `/home`.
 
 ### Arrêter une commande en cours
 
