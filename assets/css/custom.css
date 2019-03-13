@@ -5,12 +5,3 @@
 section {
     width: 800px;
 }
-
-#toc table,ul,li,a {
-    margin: 0px 0px;
-    border: 0px;
-    height: 0px;
-    float: none;
-    background: initial;
-    display: inline-block;
-}
