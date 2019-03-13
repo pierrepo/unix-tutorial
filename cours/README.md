@@ -1,8 +1,8 @@
 # Un rapide tour du shell Unix
 
-Le *shell* Unix est un programme qui attend un ordre de la part de l'utilisateur, exécute cet ordre, affiche le résultat puis attend à nouveau un ordre. En anglais on parle de *REPL* pour *Read Execute Printe Loop*.
+Un *shell* est un programme qui attend un ordre de la part de l'utilisateur, exécute cet ordre, affiche le résultat puis attend à nouveau un ordre. En anglais on parle de *REPL* pour *Read Execute Printe Loop*. Il existe plusieurs *shell* : *Bash*, *csh*, *zsh*... Ici on ne parlera que du *shell* *Bash qui est le plus utilisé.
 
-Le *shell* fonctionne sur un ordinateur, qui n'a aucune capacité d'abstraction ni d'intuition. Pour que ces ordres puissent être compris et exécutés, il faut qu'ils respectent des règles bien précises.
+Le *shell* fonctionne sur un ordinateur, qui n'a aucune capacité d'abstraction ni d'intuition. Pour que les ordres donnés au *shell* soient compris et exécutés, il faut respecter des règles bien précises.
 
 Un terminal ou une console est un logiciel graphique qui lance un *shell*.
 
@@ -19,16 +19,16 @@ ou
 pierre@orange $
 ```
 
-Par convention, l'invite de commande sera désignée dans la suite par le caractère dollar `$` en tout début de ligne :
+Par convention, l'invite de commande sera remplacée dans la suite par le caractère dollar «`$`» en tout début de ligne :
 ```
 $
 ```
-Il ne faudra pas taper ce caractère (lorsqu'il est en début de ligne)
+Il ne faudra pas taper ce caractère (lorsqu'il est en début de ligne).
 
 
 ## Exploration de répertoires et fichiers.
 
-Pour reproduire ces exemples, voici les commandes à lancer pour récupérer et préparer les données utilisées :
+Pour reproduire les exemples suivants, voici les commandes à lancer pour récupérer et préparer les données utilisées :
 ```
 $ cd
 $ wget https://github.com/omics-school/unix/raw/master/demo/unix.tgz
@@ -59,11 +59,11 @@ Le répertoire dont dépendent tous les autres est le `/` qu'on appelle la « ra
 - qui est lui-même est un sous-répertoire du répertoire `home`,
 - qui est lui-même un sous-répertoire du répertoire `/` (la racine).
 
-⚠️ **Attention** ⚠️ Ne confondez pas `/` qui tout au début signifie la racine de `/` qui sépare deux répertoires.
-
 `/home/pierre/unix` est aussi appelé un « chemin » car il indique la succession des répertoires à suivre pour arriver jusqu'à `unix`.
 
-Lorsqu'un chemin débute par `/` (la racine), on parle de **chemin absolu**. Il existe aussi des **chemins relatifs**, donc qui ne débutent pas par `/`, que nous verrons plus tard.
+⚠️ **Attention** ⚠️ Ne confondez pas `/` qui tout au début d'un chemin signifie la racine de `/` qui sépare deux répertoires successifs.
+
+Lorsqu'un chemin débute par `/` (la racine), on parle de **chemin absolu**. Il existe aussi des **chemins relatifs** (donc qui ne débutent pas par `/`) que nous verrons plus tard.
 
 
 ### Afficher le contenu d'un répertoire : `ls`
@@ -737,7 +737,7 @@ Gallus gallus
 Gallus gallus
 ```
 
-#### Étape 2
+#### Étape 3
 ```
 $ uniq organism_sorted.txt
 Anas platyrhynchos
@@ -751,7 +751,7 @@ Les structures de transferrines du fichier `transferrin.csv` proviennent de 5 or
 
 Pour cette analyse, nous avons du créer deux fichiers intermédiaires : `organism.txt` et `organism_sorted.txt`.
 
-Pour éviter la création de ces fichiers intermédiaires et réaliser cette analyse en une seule fois, on emboîte les différentes étapes. La sortie produite par une étape devient l'entrée de l'étape suivante. On utilise pour cela  «`|`» :
+Pour éviter la création de ces fichiers intermédiaires et réaliser cette analyse en une seule fois, on emboîte (chaîne) les différentes étapes. La sortie produite par une étape devient l'entrée de l'étape suivante. On utilise pour cela  «`|`» :
 
 ```
 $ cut -d "," -f 2 transferrin.csv | sort | uniq
@@ -784,7 +784,9 @@ $ cut -f 2 transferrin.tsv | sort | uniq -c
       1 Sus scrofa
 ```
 
+
 ## Chercher
+
 
 ### Chercher dans des fichiers : `grep`
 
@@ -828,21 +830,19 @@ genomes/NC_014205_head.gbk:DEFINITION  Staphylothermus hellenicus DSM 12710 chro
 
 On peut bien sur emboîter / chaîner les commandes `grep` si on cherche plusieurs motifs :
 ```
-$ grep "DEFI" genomes/*.gbk | grep "Staphylo"
+$ grep "DEFI" genomes/*.gbk | grep "Staphyloco"
 genomes/NC_002976_head.gbk:DEFINITION  Staphylococcus epidermidis RP62A, complete genome.
 genomes/NC_004461_head.gbk:DEFINITION  Staphylococcus epidermidis ATCC 12228, complete genome.
 genomes/NC_007168_head.gbk:DEFINITION  Staphylococcus haemolyticus JCSC1435, complete genome.
 genomes/NC_007350_head.gbk:DEFINITION  Staphylococcus saprophyticus subsp. saprophyticus ATCC 15305,
-genomes/NC_009033_head.gbk:DEFINITION  Staphylothermus marinus F1 chromosome, complete genome.
 genomes/NC_009477_head.gbk:DEFINITION  Staphylococcus aureus subsp. aureus JH9 plasmid pSJH901, complete
 genomes/NC_013893_head.gbk:DEFINITION  Staphylococcus lugdunensis HKU09-01 chromosome, complete genome.
-genomes/NC_014205_head.gbk:DEFINITION  Staphylothermus hellenicus DSM 12710 chromosome, complete genome.
 ```
 
 Et si on veut savoir combien de génomes de staphylocoques on a :
 ```
-$ grep "DEFI" genomes/*.gbk | grep "Staphylo" | wc -l
-8
+$ grep "DEFI" genomes/*.gbk | grep "Staphyloco" | wc -l
+6
 ```
 
 
