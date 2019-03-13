@@ -7,8 +7,10 @@ section {
 }
 
 header li {
-    all: initial;
     display: block;
+    width: auto;
+    height: auto;
+    border: none;
 }
 
 .js-toc ul,li,ol {
