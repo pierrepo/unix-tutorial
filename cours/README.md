@@ -143,7 +143,7 @@ drwxr-xr-x 2 pierre pierre 12K mars  12 23:47 genomes/
 ```
 L'option `-t` affiche les fichiers du plus récent au plus ancien et l'option `-r` inverse cet ordre.
 
-Enfin, l'option `-a` affiche tout le contenu du répertoire courant, notamment les fichiers et répertoires cachés qui commencent (sous Unix) par le caractère `.` :
+L'option `-a` affiche tout le contenu du répertoire courant, notamment les fichiers et répertoires cachés qui commencent (sous Unix) par le caractère `.` :
 ```
 $ ls -a
 .  ..  genomes/  paper.pdf  shopping_list.txt  transferrin.csv  transferrin.tsv
@@ -154,6 +154,24 @@ Par défaut, il y a deux répertoires cachés qui sont toujours présents : `.` 
 Le répertoire `.` désigne le répertoire courant.
 
 Le répertoire `..` désigne le répertoire parent. Par exemple, si on est dans le répertoire `/home/pierre/unix`, alors `..` désigne le répertoire `/home/pierre`.
+
+Enfin, la commande `ls` permet de lister un répertoire passé en argument :
+```
+$ ls genomes
+NC_000907_head.gbk  NC_004459_head.gbk  NC_007168_head.gbk  NC_011333_head.gbk
+NC_000964_head.gbk  NC_004461_head.gbk  NC_007350_head.gbk  NC_011852_head.gbk
+NC_002505_head.gbk  NC_004917_head.gbk  NC_009033_head.gbk  NC_012655_head.gbk
+NC_002570_head.gbk  NC_006298_head.gbk  NC_009477_head.gbk  NC_013893_head.gbk
+NC_002976_head.gbk  NC_006840_head.gbk  NC_011184_head.gbk  NC_014205_head.gbk
+```
+
+Comme pour les options, il faut au moins un espace entre une commande et son ou ses arguments.
+
+On peut même d'obtenir des informations détaillées sur un fichier en particulier :
+```
+$ ls -lh paper.pdf
+-rw-r--r-- 1 pierre pierre 96K mars  12 23:47 paper.pdf
+```
 
 
 ### En savoir plus : `man`
@@ -177,7 +195,7 @@ $ pwd
 ```
 Partant du répertoire `/home/pierre/unix`, on s'est déplacé dans le répertoire `/home/pierre/unix/genomes`.
 
-Dans la commande `cd genomes`, le répertoire `genomes` est un argument de la commande Unix `cd`. Comme pour les options, il faut au moins un espace entre la commande et son ou ses arguments.
+Dans la commande `cd genomes`, le répertoire `genomes` est un argument de la commande Unix `cd`.
 
 Dans la commande `cd genomes`, le répertoire `genomes` est un chemin relatif (car il ne débute pas par `/`). C'est-à-dire qu'on a entré le nom de ce répertoire (`genomes`) par rapport au répertoire dans lequel nous étions (`/home/pierre/unix`). Bien sûr, la commande `cd` fonctionne très bien avec un chemin absolu. La commande
 ```
@@ -287,6 +305,39 @@ Pour supprimer un répertoire, il faut utiliser l'option supplémentaire `-r`.
 Suivant la configuration de votre *shell*, il faudra peut être ajouter l'option `-f` pour que la suppression fonctionne.
 
 ⚠️ **Attention** ⚠️ Il n'y a pas de corbeille dans le *shell* Unix, c'est-à-dire aucune possibilité de récupérer un fichier ou un répertoire effacé par erreur.
+
+
+### Automatiser (un peu)
+
+Les caractères `*` et `?` peuvent remplacer n'importe quels caractères dans les noms de fichiers ou de répertoires.
+
+`*` remplace 0, 1 ou plus caractères.
+
+`?` remplace exactement 1 caractère.
+
+Par exemple :
+```
+$ ls transferrin.*
+transferrin.csv  transferrin.tsv
+$ ls transferrin.?sv
+transferrin.csv  transferrin.tsv
+```
+
+Ces caractères sont très utiles quand il s'agit d'effectuer une opération sur plusieurs fichiers en même temps :
+```
+$ mkdir test4
+$ cp transferrin.* test4
+$ ls test4
+transferrin.csv  transferrin.tsv
+```
+
+La commande `cp transferrin.* test4` est un raccourci pour
+```
+cp transferrin.csv  transferrin.tsv test4
+```
+
+Cela fonctionne avec deux fichiers mais aussi avec autant de fichiers que vous le souhaitez.
+
 
 ## Trucs et astuces
 
