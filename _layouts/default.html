@@ -18,6 +18,7 @@
 
     <!-- modif PP -->
     <link rel="stylesheet" type="text/css" href="{{ '/assets/css/custom.css' | relative_url }}" />
+    <link rel="stylesheet" type="text/css" href="{{ '/assets/css/toc.css' | relative_url }}" />
     <!-- modif PP - END -->
 
     <style>
@@ -43,6 +44,8 @@
         {% if site.github.is_user_page %}
         <p class="view"><a href="{{ site.github.owner_url }}">View My GitHub Profile</a></p>
         {% endif %}
+
+        $('#main_content').toc();
 
         {% if site.show_downloads %}
         <ul class="downloads">
@@ -82,5 +85,8 @@
     <script src="{{ '/assets/js/bootstrap.min.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/tutorial.js' | relative_url }}"></script>
     <!-- modif BL - END -->
+    <!-- modif PP -->
+    <script src="{{ '/assets/js/jquery.toc.js' | relative_url }}"></script>
+    <!-- modif PP - END -->
   </body>
 </html>
