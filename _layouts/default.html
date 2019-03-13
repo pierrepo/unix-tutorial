@@ -18,7 +18,6 @@
 
     <!-- modif PP -->
     <link rel="stylesheet" type="text/css" href="{{ '/assets/css/custom.css' | relative_url }}" />
-    <link rel="stylesheet" type="text/css" href="{{ '/assets/css/toc.css' | relative_url }}" />
     <!-- modif PP - END -->
 
     <style>
@@ -44,9 +43,6 @@
         {% if site.github.is_user_page %}
         <p class="view"><a href="{{ site.github.owner_url }}">View My GitHub Profile</a></p>
         {% endif %}
-
-        <div id="toc_in">
-        </div>
 
         {% if site.show_downloads %}
         <ul class="downloads">
@@ -87,20 +83,6 @@
     <script src="{{ '/assets/js/tutorial.js' | relative_url }}"></script>
     <!-- modif BL - END -->
     <!-- modif PP -->
-    <script src="{{ '/assets/js/jquery.toc.js' | relative_url }}"></script>
-    <script type="text/javascript">
-    $(function() {
-      $('section').toc({
-        showAlways:true,
-        renderIn:'#toc_in',
-        contentsText:"Content",
-        hideText:'Collapse',
-        showText:'Expand',
-        minItemsToShowToc:3,
-        showCollapsed:true
-      });
-    });
-    </script>
     <!-- modif PP - END -->
   </body>
 </html>
