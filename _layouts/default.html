@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="{{ '/assets/css/bootstrap-theme.css' | relative_url }}" />
     <!-- modif BL - END -->
     <!-- modif PP -->
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
     <!-- modif PP - END -->
 
 {% seo %}
@@ -47,7 +47,7 @@
         <p class="view"><a href="{{ site.github.owner_url }}">View My GitHub Profile</a></p>
         {% endif %}
 
-        <div id="toc"></div>
+        <div class="js-toc"></div>
 
         {% if site.show_downloads %}
         <ul class="downloads">
@@ -57,7 +57,7 @@
         </ul>
         {% endif %}
       </header>
-      <section>
+      <section class="js-toc-content">
 
       {{ content }}
 
@@ -88,8 +88,16 @@
     <script src="{{ '/assets/js/tutorial.js' | relative_url }}"></script>
     <!-- modif BL - END -->
     <!-- modif PP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
     <script>
-
+    tocbot.init({
+      // Where to render the table of contents.
+      tocSelector: '.js-toc',
+      // Where to grab the headings to build the table of contents.
+      contentSelector: '.js-toc-content',
+      // Which headings to grab inside of the contentSelector element.
+      headingSelector: 'h1, h2, h3',
+    });
     </script>
     <!-- modif PP - END -->
   </body>
