@@ -5,3 +5,7 @@
 section {
     width: 800px;
 }
+
+#toc_in table ul li a {
+  all: initial;
+}
