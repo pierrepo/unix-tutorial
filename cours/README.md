@@ -402,7 +402,7 @@ startxref
 %%EOF
 ```
 
-⚠️ **Attention** ⚠️ Dans suite, nous n'explorerons que le contenu de **fichiers textes**.
+⚠️ **Attention** ⚠️ Dans la suite, nous n'explorerons que le contenu de **fichiers textes**.
 
 La commande `cat` n'a de sens que si le fichier est assez court. Si ce n'est pas le cas, le contenu du fichier va défiler d'un seul coup à l'écran, sans qu'on puisse en voir le début. Par exemple :
 ```
@@ -428,7 +428,7 @@ $ less transferrin.csv
 
 Comme avec la commande `man`, les flèches <kbd>↓</kbd> et <kbd>↑</kbd> permettent de naviguer dans le contenu du fichier. La touche <kbd>Espace</kbd> saute une page à la fois. La touche <kbd>Q</kbd> quitte `less` et revient au *shell*.
 
-La commande `head` affiche les première lignes d'un fichier :
+La commande `head` affiche les premières lignes d'un fichier :
 ```
 $ head transferrin.csv
 1A8E,Homo sapiens,329
@@ -443,7 +443,7 @@ $ head transferrin.csv
 1FQE,Homo sapiens,331
 ```
 
-Par défaut, `head` affiche les 10 premières lignes du fichier. L'option `-n` permet de préciser le nombre de lignes à afficher. Par exemple :
+Par défaut, `head` affiche les 10 premières lignes du fichier. L'option `-n` précise le nombre de lignes à afficher. Par exemple :
 ```
 $ head -n 2 transferrin.csv
 1A8E,Homo sapiens,329
@@ -463,6 +463,8 @@ $ tail transferrin.csv
 5WTD,Homo sapiens,679
 5X5P,Homo sapiens,679
 6CTC,Homo sapiens,679
+```
+```
 $ tail -n 2 transferrin.csv
 5X5P,Homo sapiens,679
 6CTC,Homo sapiens,679
@@ -470,7 +472,7 @@ $ tail -n 2 transferrin.csv
 
 ## Créer ou éditer un fichier texte
 
-Nano est un éditeur de texte qui fonctionne dans un *shell*, donc sans interface graphique, sans menu, sans icône.
+Nano est un éditeur de texte qui fonctionne dans un *shell*, donc sans interface graphique, sans menu, sans icône...
 
 Pour le lancer, on utilise la commande `nano` :
 
@@ -486,13 +488,13 @@ Selon la version de votre système Unix, il se peut que l'interface soit en angl
 
 On peut tout de suite commencer à taper du texte.
 
-Lorsqu'on veut sauvegarder le fichier ainsi créé, on utilise la combinaison de touches <kbd>Ctrl</kbd>+<kbd>O</kbd> (c'est-à-dire qu'on presse en même temps les touches <kbd>Ctrl</kbd> et <kbd>O</kbd>). On entre ensuite le nom qu'on souhaite donner au fichier (par exemple `test.txt`) puis on valide par la touche  <kbd>Entrée</kbd>.
+Pour sauvegarder le fichier ainsi créé, on utilise la combinaison de touches <kbd>Ctrl</kbd>+<kbd>O</kbd> (c'est-à-dire qu'on presse en même temps les touches <kbd>Ctrl</kbd> et <kbd>O</kbd>). On entre ensuite le nom qu'on souhaite donner au fichier (par exemple `test.txt`) puis on valide par la touche  <kbd>Entrée</kbd>.
 
 On peut continuer à éditer le fichier puis l'enregistrer, et ainsi de suite.
 
 Pour quitter nano, on utilise la combinaison de touches <kbd>Ctrl</kbd>+<kbd>X</kbd>.
 
-On se retrouve alors dans le *shell* et on peut vérifier que le fichier (ici `test.txt` a bien été créé dans le répertoire courant.
+On se retrouve alors dans le *shell* et on peut vérifier que le fichier (ici `test.txt`) a bien été créé dans le répertoire courant.
 
 ```
 $ ls
@@ -579,6 +581,9 @@ pear 3
 orange 4
 banana 6
 apple 10
+```
+
+```
 pierre@jeera:unix$ sort -k 2 -n -r shopping_list.txt
 apple 10
 banana 6
