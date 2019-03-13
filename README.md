@@ -5,6 +5,8 @@
 
 ## Cours et tutoriel
 
+### Activité 1
+
 [Un aperçu rapide du *shell* Unix](cours/).
 
 Pour reproduire les exemples présentés, lancez les commandes suivantes au préalable :
@@ -15,6 +17,9 @@ $ tar zxvf unix.tgz
 $ cd unix
 ```
 Rappel : le `$` désigne l'invite de commande de votre *shell*. Il ne faut pas le taper.
+
+
+### Activité 2
 
 [Le cours de Software Carpentry](http://swcarpentry.github.io/shell-novice/). Parties 1, 2, 3, 4 et 7.
 Le [mémo](http://swcarpentry.github.io/shell-novice/reference/) des notions abordées.
