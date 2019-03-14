@@ -34,7 +34,7 @@ $ pwd
 signifiera : tapez `pwd` dans le *shell* (sans le `$`) puis validez en pressant la touche <kbd>Entrée</kbd>.
 
 
-## Exploration de répertoires et fichiers.
+## Exploration de répertoires et de fichiers
 
 Pour reproduire les exemples suivants, voici les commandes à lancer pour préparer les données utilisées :
 ```
@@ -788,7 +788,7 @@ Les structures de transferrines du fichier `transferrin.csv` proviennent de 5 or
 
 Pour cette analyse, nous avons dû créer deux fichiers intermédiaires : `organism.txt` et `organism_sorted.txt`.
 
-Pour éviter la création de ces fichiers et réaliser cette analyse en une seule fois, on emboîte (chaîne) les différentes étapes. La sortie produite par une étape devient l'entrée de l'étape suivante (voir l'[illustration](http://swcarpentry.github.io/shell-novice/04-pipefilter/index.html) de Software Carpentry). On utilise pour cela  «`|`» :
+Pour éviter la création de ces fichiers et réaliser cette analyse en une seule fois, on emboîte (« chaîne ») les différentes étapes. La sortie produite par une étape devient l'entrée de l'étape suivante (voir l'[illustration](http://swcarpentry.github.io/shell-novice/04-pipefilter/index.html) de Software Carpentry). On utilise pour cela  «`|`» :
 
 ```
 $ cut -d "," -f 2 transferrin.csv | sort | uniq
