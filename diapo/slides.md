@@ -70,8 +70,6 @@ DU Omiques 2019
 
 ---
 
-template: content
-
 ##  Une **interface** de commandes
 
 --
@@ -89,8 +87,6 @@ template: content
 
 ---
 
-template: content
-
 ##  Une **interface** de commandes
 
 <img height="250px" src="img/shell6.png">
@@ -99,8 +95,6 @@ template: content
 
 
 ---
-
-template: content
 
 ##  Une interface de **commandes**
 
@@ -114,4 +108,23 @@ Activité préparatoire sur [DataCamp](https://www.datacamp.com/courses/introduc
 
 .right[
 ## 🎉 Activité [WooClap](https://www.wooclap.com/DUO)
+]
+
+---
+template: contentleft
+
+background-color: #cccccc
+
+# C'est parti ! 🚀
+
+## 💻 [Tutoriel maison](https://omics-school.github.io/unix/tutoriel/)
+
+## 💻 [Tutoriel Software Carpentry](http://swcarpentry.github.io/shell-novice/)
+
+--
+
+## 💻 Entrer dans la matrice ?
+
+.center[
+![](img/matrix.gif)
 ]
