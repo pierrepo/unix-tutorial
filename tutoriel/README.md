@@ -1,4 +1,4 @@
-# Un rapide tour du shell Unix
+# Un aperçu rapide du shell Unix
 
 Un *shell* est un programme qui attend un ordre de la part de l'utilisateur, exécute cet ordre, affiche le résultat puis attend à nouveau un ordre. En anglais on parle de *REPL* pour *Read Execute Print Loop*. Il existe plusieurs *shells* : *Bash*, *csh*, *zsh*... Ici on ne parlera que du *shell* *Bash qui est le plus utilisé.
 
