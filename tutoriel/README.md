@@ -1,6 +1,6 @@
 # Un aperçu rapide du shell Unix
 
-Un *shell* est un programme qui attend un ordre de la part de l'utilisateur, exécute cet ordre, affiche le résultat puis attend à nouveau un ordre. En anglais on parle de *REPL* pour *Read Execute Print Loop*. Il existe plusieurs *shells* : *Bash*, *csh*, *zsh*... Ici on ne parlera que du *shell* *Bash qui est le plus utilisé.
+Un *shell* est un programme qui attend un ordre de la part de l'utilisateur, exécute cet ordre, affiche le résultat puis attend à nouveau un ordre. En anglais on parle de *REPL* pour *Read Execute Print Loop*. Il existe plusieurs *shells* : *Bash*, *csh*, *zsh*... Ici on ne parlera que du *shell* *Bash* qui est le plus utilisé. Cela dit, toutes les commandes présentées ici sont communes à tous les *shell* Unix.
 
 Le *shell* fonctionne sur un ordinateur, qui n'a aucune capacité d'abstraction ni d'intuition. Pour que les ordres donnés au *shell* soient compris et exécutés, il faut respecter des règles bien précises.
 
@@ -31,7 +31,7 @@ Pour reproduire les commandes présentées, il ne faut pas taper ce caractère e
 ```
 $ pwd
 ```
-signifiera : tapez `pwd` dans le *shell* (sans le `$`) puis validez en pressant la touche <kbd>Entrée</kbd>.
+signifiera : tapez `pwd` dans le *shell* (sans le `$`) puis validez cette commande en pressant la touche <kbd>Entrée</kbd>.
 
 
 ## Exploration de répertoires et de fichiers
@@ -71,7 +71,7 @@ Dans le cas de `/home/pierre/unix` :
 
 `/home/pierre/unix` est aussi appelé un « chemin » car il indique la succession des répertoires à suivre pour arriver jusqu'à `unix`. D'abord la racine `/`, puis `home`, puis `pierre` et enfin `unix`.
 
-⚠️ **Attention** ⚠️ Ne confondez pas `/` qui tout au début d'un chemin signifie la racine de `/` qui sépare deux répertoires successifs.
+⚠️ **Attention** ⚠️ Ne confondez pas « `/` » qui tout au début d'un chemin signifie la racine de « `/` » qui sépare deux répertoires successifs.
 
 Lorsqu'un chemin débute par `/` (la racine), on parle de **chemin absolu**. Il existe aussi des **chemins relatifs** (donc qui ne débutent pas par `/`) que l'on verra plus tard.
 
@@ -107,7 +107,7 @@ genomes/  paper.pdf  protein.txt  shopping.txt	transferrin.csv  transferrin.tsv
 
 Il faut au moins un espace entre la commande et une option.
 
-Une autre option sympa est l'option `-l` qui affiche des informations complémentaires sur le contenu du répertoire :
+Une autre option sympa est l'option `-l` (lettre *l* minuscule) qui affiche des informations complémentaires sur le contenu du répertoire :
 ```
 $ ls -l
 total 116
@@ -144,7 +144,7 @@ drwxr-xr-x 2 ppoulain omicsschool 4.0K Mar 13 08:58 genomes
 -rw-r--r-- 1 ppoulain omicsschool  940 Mar 12 23:47 transferrin.tsv
 ```
 
-Une combinaison d'options intéressantes est `-lhrt` qui affiche en dernier le fichier modifié le plus récemment :
+Une combinaison d'options intéressantes est `-lhrt` qui affiche en dernier (en bas de la liste) le fichier modifié le plus récemment :
 ```
 $ ls -lhrt
 total 116K
@@ -218,7 +218,7 @@ Mandatory arguments to long options are mandatory for short options too.
 
 Sous Unix, les noms de fichiers et de répertoires sont sensibles à la casse, c'est-à-dire aux majuscules et aux minuscules. Par conséquent, le *shell* fait la différence entre le fichier `test.txt` et le fichier `Test.txt`.
 
-Par ailleurs, l'extension de fichier est facultative et purement indicative. Le *shell* ne l'utilise pas. Elle sert simplement à l'utilisateur pour mieux organiser ses fichiers. Un nom de fichier du type `test` ou `test.my_extension` est parfaitement valide. On peut même nommer un répertoire `directory.txt` (mais cela n'est pas très malin).
+Par ailleurs, l'extension de fichier est facultative et purement indicative. Le *shell* ne l'utilise pas. Elle sert simplement à l'utilisateur pour mieux organiser ses fichiers. Un nom de fichier du type `test` ou `test.my_extension` est parfaitement valide. On peut même nommer un répertoire `directory.txt` (mais ça n'est pas très malin).
 
 Enfin, pour nommer un fichier ou un répertoire, on peut utiliser :
 
@@ -234,6 +234,7 @@ On vous déconseille fortement l'utilisation des autres caractères (`+()[]éè�
 Enfin, ne mettez **jamais** un espace dans un nom de fichier ou de répertoire. **J-A-M-A-I-S**. Unix l'autorise mais c'est très très pénible par la suite car l'espace est utilisé pour séparer les options et les arguments d'une commande.
 
 Pour le reste, laisser faire votre imagination et utilisez des noms de fichiers et de répertoires expressifs.
+
 
 ### Se déplacer : `cd`
 
@@ -358,7 +359,7 @@ Pour supprimer un répertoire, il faut utiliser l'option supplémentaire `-r`.
 
 Suivant la configuration de votre *shell*, il faudra peut être ajouter l'option `-f` pour que la suppression fonctionne.
 
-⚠️ **Attention** ⚠️ Il n'y a pas de corbeille dans le *shell* Unix, c'est-à-dire aucune possibilité de récupérer un fichier ou un répertoire effacé par erreur.
+⚠️ **Attention** ⚠️ Il n'y a pas de corbeille dans le *shell* Unix, c'est-à-dire aucune possibilité de récupérer un fichier ou un répertoire effacé par erreur. Pensez à sauvegarder régulièrement vos fichiers.
 
 
 ### Automatiser (un peu)
@@ -454,6 +455,8 @@ startxref
 %%EOF
 ```
 
+*Remarque* : Évitez de lancer la commande précédente. Vous risquez de perdre la main dans votre *shell* et devoir le relancer (en fermant la fenêtre puis en ouvrant une nouvelle).
+
 ⚠️ **Attention** ⚠️ Dans la suite, nous n'explorerons que le contenu de **fichiers textes**.
 
 La commande `cat` n'a de sens que si le fichier est assez court. Si ce n'est pas le cas, le contenu du fichier va défiler d'un seul coup à l'écran, sans qu'on puisse en voir le début. Par exemple :
@@ -525,7 +528,7 @@ $ tail -n 2 transferrin.csv
 
 ## Créer ou éditer un fichier texte
 
-Nano est un éditeur de texte qui fonctionne dans un *shell*, donc sans interface graphique, sans menu, sans icône...
+Nano est un éditeur de texte qui fonctionne dans un *shell*, donc sans interface graphique, sans menu, sans icône, contrairement à des éditeurs de texte comme gedit ou geany.
 
 Pour le lancer, on utilise la commande `nano` :
 
@@ -541,7 +544,9 @@ Selon la version de votre système Unix, il se peut que l'interface soit en angl
 
 On peut tout de suite commencer à taper du texte.
 
-Pour sauvegarder le fichier ainsi créé, on utilise la combinaison de touches <kbd>Ctrl</kbd>+<kbd>O</kbd> (c'est-à-dire qu'on presse en même temps les touches <kbd>Ctrl</kbd> et <kbd>O</kbd>). On entre ensuite le nom qu'on souhaite donner au fichier (par exemple `test.txt`) puis on valide par la touche  <kbd>Entrée</kbd>. Les différentes combinaisons de touches sont rappelées en bas de l'écran. Le `^` désigne la touche <kbd>Ctrl</kbd>.
+Pour sauvegarder le texte ainsi entré dans nano, on utilise la combinaison de touches <kbd>Ctrl</kbd>+<kbd>O</kbd> (c'est-à-dire qu'on presse en même temps les touches <kbd>Ctrl</kbd> et <kbd>O</kbd>). On entre ensuite le nom qu'on souhaite donner au fichier (par exemple `test.txt`) puis on valide par la touche  <kbd>Entrée</kbd>.
+
+Les différentes combinaisons de touches sont rappelées en bas de l'écran. Le caractère « `^` » désigne la touche <kbd>Ctrl</kbd>.
 
 On peut continuer à éditer le fichier puis l'enregistrer, et ainsi de suite.
 
@@ -559,6 +564,7 @@ On peut aussi ouvrir un fichier texte existant en indiquant en argument le nom d
 ```
 $ nano shopping.txt
 ```
+
 
 ## Manipuler des données
 
@@ -734,7 +740,7 @@ On souhaite extraire du fichier `transferrin.csv` la liste des différents organ
 
 Pour stocker l'information, d'une étape à l'autre, on peut renvoyer le résultat dans un fichier avec la redirection «`>`».
 
-#### Étape 1
+#### Étape 1 (`cut`)
 ```
 $ cut -d "," -f 2 transferrin.csv > organism.txt
 ```
@@ -755,7 +761,7 @@ Homo sapiens
 Homo sapiens
 ```
 
-#### Étape 2
+#### Étape 2 (`sort`)
 ```
 $ sort organism.txt > organism_sorted.txt
 ```
@@ -774,7 +780,7 @@ Gallus gallus
 Gallus gallus
 ```
 
-#### Étape 3
+#### Étape 3 (`uniq`)
 ```
 $ uniq organism_sorted.txt
 Anas platyrhynchos
@@ -833,6 +839,8 @@ $ grep "apple" shopping.txt
 apple 10
 ```
 
+Le motif à rechercher est indiqué entre guillemets.
+
 L'option `-n` affiche le numéro de la ligne dans lequel est trouvé le motif :
 ```
 $ grep -n "apple" shopping.txt
@@ -876,7 +884,7 @@ genomes/NC_009477_head.gbk:DEFINITION  Staphylococcus aureus subsp. aureus JH9 p
 genomes/NC_013893_head.gbk:DEFINITION  Staphylococcus lugdunensis HKU09-01 chromosome, complete genome.
 ```
 
-L'option `-c` de `grep` indique combien de génomes de staphylocoques on a trouvé :
+L'option `-c` de `grep` indique combien de génomes de staphylocoques ont été trouvés :
 ```
 $ grep "DEFI" genomes/*.gbk | grep -c "Staphyloco"
 6
@@ -902,7 +910,7 @@ $ find ./ -name "*.csv"
 ./unix/transferrin.csv
 ```
 
-La commande `find` prend comme argument l'endroit à partir duquel on cherche (ici le répertoire courant `./`) puis on indique le critère de recherche avec l'option `-name`.
+La commande `find` prend comme argument l'endroit à partir duquel on cherche, ici le répertoire courant désigné par `./` (on aurait aussi pu simplement indiquer « `.` »). Puis on indique le critère de recherche avec l'option `-name`.
 
 
 ## Se souvenir
@@ -913,7 +921,7 @@ Ainsi, la commande
 ```
 $ history
 ```
-produit :
+produit une sortie du type :
 ```
 ...
 
@@ -929,7 +937,9 @@ produit :
   591  history
 ```
 
-Le numéro à côté de chaque commande est le numéro de la commande dans l'ordre où elle a été lancée dans le *shell*. On peut très simplement rappeler une commande à partir de son numéro précédé de «`!`» :
+Le numéro à côté de chaque commande est le numéro de la commande dans l'ordre où elle a été lancée dans le *shell*. Vous aurez bien sûr des numéros et des commandes différentes.
+
+On peut très simplement rappeler une commande à partir de son numéro précédé de «`!`». Par exemple :
 ```
 $ !590
 find ./ -name "*.csv"
@@ -940,3 +950,5 @@ Enfin, lorsqu'on a travaillé un moment dans le *shell*, il peut être utile de 
 ```
 $ history > 2019-03-14_history.txt
 ```
+
+Ici, `2019-03-14` représente la date au format [ISO 8601](https://fr.wikipedia.org/wiki/ISO_8601) `AAAA-MM-JJ` (*année-mois-jour*).
