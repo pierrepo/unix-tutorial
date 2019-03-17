@@ -54,8 +54,11 @@ Si vous travaillez avec Windows 10 :
     + <https://www.howtogeek.com/265900/everything-you-can-do-with-windows-10s-new-bash-shell/>
 
 - Depuis un *shell* Linux, votre répertoire utilisateur de Windows est accessible via le chemin
+
     ```
-    /mnt/c/Users/<login-windows>```
+    /mnt/c/Users/<login-windows>
+    ```
+
     où `<login-windows>` est votre *login* sous Windows. Nous vous conseillons de travailler depuis ce répertoire afin que vos fichiers puissent également être visibles depuis Windows.
 
 Si vous souhaitez simplement un logiciel sous Windows pour vous connecter au serveur du DU en SSH. Nous vous conseillons [MobaXterm](https://mobaxterm.mobatek.net/). La version [*Free*](https://mobaxterm.mobatek.net/download.html) est suffisante. Vous trouverez quelques vidéos de démo [ici](https://mobaxterm.mobatek.net/demo.html).
