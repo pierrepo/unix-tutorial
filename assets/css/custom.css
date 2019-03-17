@@ -22,5 +22,5 @@ header li {
 }
 
 a.toc-link {
-    height: 2rem !veryimportant;
+    height: 2rem !important;
 }
