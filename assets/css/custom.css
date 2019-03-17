@@ -20,3 +20,7 @@ header li {
     height: initial;
     border: 0px;
 }
+
+a.toc-link {
+    height: 2rem;
+}
