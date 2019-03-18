@@ -15,15 +15,6 @@
 
 [Un aperçu rapide du *shell* Unix](tutoriel/README).
 
-Pour reproduire les exemples présentés, lancez les commandes suivantes au préalable :
-```
-$ cd
-$ wget https://github.com/omics-school/unix/raw/master/demo/unix.tgz
-$ tar zxvf unix.tgz
-$ cd unix
-```
-Rappel : le `$` désigne l'invite de commande de votre *shell*. Il ne faut pas le taper.
-
 
 ## Tutoriel Software Carpentry
 
@@ -71,9 +62,9 @@ Pour copier / coller entre Windows et le *shell* Linux :
 
 ## De l'aide
 
-Si vous avez besoin d'aide, n'hésitez pas à interroger votre moteur de recherche favori. Une bonne partie des réponses qui vous seront proposées proviendront du site [stackoverflow](https://stackoverflow.com/) qui est le forum de discussion en informatique.
+Si vous avez besoin d'aide, n'hésitez pas à interroger votre moteur de recherche favori. Une bonne partie des réponses qui vous seront proposées proviendront du site [stackoverflow](https://stackoverflow.com/) qui est *le* forum de discussion en informatique.
 
-Les deux tutoriels ci-dessus vous invitent à consulter le manuel (commande `man`) quand vous avez un doute sur le fonctionnement d'une commande. La documentation du manuel est quasi-exhaustive mais peu conviviale. Le site [TLDR pages](https://tldr.sh/) propose un aide concis sur les commandes Unix et leurs principales options. Par exemple, pour la commande [ls](https://tldr.ostera.io/ls).
+Les deux tutoriels ci-dessus vous invitent à consulter le manuel (commande `man`) quand vous avez un doute sur le fonctionnement d'une commande. La documentation du manuel est quasi-exhaustive mais peu conviviale. Le site [TLDR pages](https://tldr.sh/) propose une aide concise sur les commandes Unix et leurs principales options. Par exemple, pour la commande [ls](https://tldr.ostera.io/ls).
 
 Enfin, le site [explainshell](https://explainshell.com/) explique le rôle des différentes options utilisées dans une commande. Par exemple pour décompresser une archive avec la commande [tar](https://explainshell.com/explain?cmd=tar%20xzvf%20archive.tar.gz).
 
