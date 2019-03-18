@@ -13,7 +13,7 @@
 
 ## Tutoriel *maison*
 
-[Un aperçu rapide du *shell* Unix](tutoriel/).
+[Un aperçu rapide du *shell* Unix](tutoriel/README).
 
 Pour reproduire les exemples présentés, lancez les commandes suivantes au préalable :
 ```
@@ -67,6 +67,15 @@ Pour copier / coller entre Windows et le *shell* Linux :
 
 - Pour copier depuis Windows (<kbd>Ctrl</kbd>+<kbd>C</kbd>) puis coller dans le *shell* : clic droit de la souris.
 - Pour copier depuis le *shell* (<kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>C</kbd>) puis coller dans Windows (<kbd>Ctrl</kbd>+<kbd>V</kbd>)
+
+
+## De l'aide
+
+Si vous avez besoin d'aide, n'hésitez pas à interroger votre moteur de recherche favori. Une bonne partie des réponses qui vous seront proposées proviendront du site [stackoverflow](https://stackoverflow.com/) qui est le forum de discussion en informatique.
+
+Les deux tutoriels ci-dessus vous invitent à consulter le manuel (commande `man`) quand vous avez un doute sur le fonctionnement d'une commande. La documentation du manuel est quasi-exhaustive mais peu conviviale. Le site [TLDR pages](https://tldr.sh/) propose un aide concis sur les commandes Unix et leurs principales options. Par exemple, pour la commande [ls](https://tldr.ostera.io/ls).
+
+Enfin, le site [explainshell](https://explainshell.com/) explique le rôle des différentes options utilisées dans une commande. Par exemple pour décompresser une archive avec la commande [tar](https://explainshell.com/explain?cmd=tar%20xzvf%20archive.tar.gz).
 
 
 ## Bibliographie / webographie
