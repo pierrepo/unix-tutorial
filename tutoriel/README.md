@@ -2,7 +2,7 @@
 title: Un aperçu rapide du shell Unix
 author:
     - Pierre Poulain
-license: "Creative Commons Attribution - Partage dans les Mêmes Conditions 4.0"
+license: "Creative Commons Attribution - Partage dans les Mêmes Conditions 4.0 International (CC BY-SA 4.0)"
 ---
 
 
@@ -10,9 +10,14 @@ license: "Creative Commons Attribution - Partage dans les Mêmes Conditions 4.0"
 
 Un *shell* est un programme qui attend un ordre de la part de l'utilisateur, exécute cet ordre, affiche le résultat puis attend à nouveau un ordre. En anglais on parle de *REPL* pour *Read Execute Print Loop*. Il existe plusieurs *shells* : *Bash*, *csh*, *zsh*... Ici on ne parlera que du *shell* *Bash* qui est le plus utilisé. Cela dit, toutes les commandes présentées ici sont communes à tous les *shell* Unix.
 
-Le *shell* fonctionne sur un ordinateur, qui n'a aucune capacité d'abstraction ni d'intuition. Pour que les ordres donnés au *shell* soient compris et exécutés, il faut respecter des règles bien précises.
+Lorsqu'on donne des ordres à un *shell*, on utilise ni menu, ni bouton, ni case à cocher. Tous les ordres sont **écrits** au *shell*.
 
-Un terminal ou une console est un logiciel graphique qui lance un *shell*.
+Le *shell* fonctionne sur un ordinateur, qui n'a aucune capacité d'abstraction ni d'intuition. Pour que les ordres donnés au *shell* soient compris et exécutés, il faut respecter des règles bien précises :
+
+1. Respecter la casse, c'est-à-dire l'utilisation des majuscules et des minuscules. Par exemple la commande `ls` existe mais pas `LS` ou `Ls`.
+2. Comprendre que l'espace est utilisé pour séparer l'instruction des options et des arguments et que par conséquent ce caractère ne doit plus être utilisé dans les noms de fichiers ou de répertoires. 
+
+Enfin, un terminal (ou une console) est un logiciel graphique qui lance un *shell*.
 
 
 ## Invite de commande
@@ -30,8 +35,12 @@ ou bien encore
 ```
 ppoulain@candihub:~$
 ```
+voire
+```
+toto $
+```
 
-Par convention, l'invite de commande sera représenté dans la suite de ce document par le caractère dollar «`$`» en tout début de ligne :
+Par convention, l'invite de commande sera représentée dans la suite de ce document par le caractère dollar «`$`» en tout début de ligne :
 ```
 $
 ```
@@ -41,18 +50,49 @@ $ pwd
 ```
 signifiera : tapez `pwd` dans le *shell* (sans le `$`) puis validez cette commande en pressant la touche <kbd>Entrée</kbd>.
 
+## Lancement du *shell* Ubuntu sous Windows 10
+
+Un *shell* Unix appelé « Ubuntu 20.04 » a déjà été installé sur votre session Windows. Vous trouverez plus de détails [ici](https://github.com/pierrepo/intro-wsl).
+
+Pour obtenir un *shell* :
+
+- Cliquez sur la petite loupe en bas à gauche dans la barre de menu.
+- Tapez « Ubuntu »
+- Puis cliquez sur la proposition « Ubuntu 20.04 » qui vous est faite.
+
+La démonstration en image est [ici](img/lancement_shell_ubuntu.png).
+
+Une fois votre terminal lancé, vous devriez obtenir ceci ou quelque chose d'équivalent :
+
+![](img/terminal_ubuntu.png)
+
+## Positionnement dans votre répertoire utilisateur sous Windows
+
+Votre répertoire utilisateur sous le *shell* Ubuntu n'est pas au même endroit que sous Windows.
+
+Pour vous rendre dans votre répertoire Windows où vous avez déjà vos fichiers, lancez la commande suivante :
+```
+$ cd /mnt/c/Users/omics
+```
+
+⚠️ Ne tapez pas le `$` en début de ligne et faites attention aux majuscules et au minuscules !
+
 
 ## Exploration de répertoires et de fichiers
 
 Pour reproduire les exemples suivants, voici les commandes à lancer pour préparer les données utilisées :
 ```
-$ cd
 $ wget https://github.com/omics-school/unix/raw/master/demo/unix.tgz
 $ tar zxvf unix.tgz
 $ cd unix
 ```
 
 Ces commandes seront en partie expliquées plus loin.
+
+Pour copier / coller entre Windows et le *shell* Linux :
+
+- Pour copier depuis Windows (<kbd>Ctrl</kbd>+<kbd>C</kbd>) puis coller dans le *shell* : clic droit de la souris.
+- Pour copier depuis le *shell* (<kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>C</kbd>) puis coller dans Windows (<kbd>Ctrl</kbd>+<kbd>V</kbd>)
 
 
 ### Savoir où on se trouve : `pwd`
@@ -62,22 +102,24 @@ La première commande à connaître est la commande `pwd` qui signifie *print wo
 Par exemple :
 ```
 $ pwd
-/home/pierre/unix
+/mnt/c/Users/omics/unix
 ```
-Cela signifie qu'on se trouve actuellement dans le répertoire `/home/pierre/unix`.
+Cela signifie qu'on se trouve actuellement dans le répertoire `/mnt/c/Users/omics/unix.
 
 Sous Unix, les répertoires et les fichiers sont organisés sous forme d'une structure en arbre. On parle d'arborescence (voir l'[illustration](http://swcarpentry.github.io/shell-novice/02-filedir/index.html) de Software Carpentry).
 
 Le répertoire dont dépendent tous les autres est le `/` qu'on appelle la « racine » (*root* en anglais), les différents sous-répertoires sont séparés les uns des autres par le caractère `/` (le même caractère que la racine).
 
-Dans le cas de `/home/pierre/unix` :
+Dans le cas de `/mnt/c/Users/omics/unix` :
 
 - on se trouve dans le répertoire `unix`,
-- qui est lui-même un sous-répertoire du répertoire `pierre`,
-- qui est lui-même un sous-répertoire du répertoire `home`,
+- qui est lui-même un sous-répertoire du répertoire `omics`,
+- qui est lui-même un sous-répertoire du répertoire `Users`,
+- qui est lui-même un sous-répertoire du répertoire `c`,
+- qui est lui-même un sous-répertoire du répertoire `mnt`,
 - qui est lui-même un sous-répertoire du répertoire `/` (la racine).
 
-`/home/pierre/unix` est aussi appelé un « chemin » car il indique la succession des répertoires à suivre pour arriver jusqu'à `unix`. D'abord la racine `/`, puis `home`, puis `pierre` et enfin `unix`.
+`/mnt/c/Users/omics/unix` est aussi appelé un « chemin » car il indique la succession des répertoires à suivre pour arriver jusqu'à `unix`. D'abord la racine `/`, puis `mnt`, puis `c`, puis `Users`, puis `omics` et enfin `unix`.
 
 ⚠️ **Attention** ⚠️ Ne confondez pas « `/` » qui tout au début d'un chemin signifie la racine de « `/` » qui sépare deux répertoires successifs.
 
@@ -175,7 +217,7 @@ Par défaut, il y a deux répertoires cachés qui sont toujours présents : `.` 
 
 Le répertoire `.` désigne le répertoire courant.
 
-Le répertoire `..` désigne le répertoire parent. Par exemple, si on est dans le répertoire `/home/pierre/unix`, alors `..` désigne le répertoire `/home/pierre`.
+Le répertoire `..` désigne le répertoire parent. Par exemple, si on est dans le répertoire `/mnt/c/Users/omics/unix`, alors `..` désigne le répertoire `/mnt/c/Users/omics`.
 
 Enfin, la commande `ls` peut aussi afficher le contenu d'un répertoire passé en argument :
 ```
@@ -249,40 +291,43 @@ Pour le reste, laisser faire votre imagination et utilisez des noms de fichiers 
 La commande `cd` (pour *change directory*) permet de se déplacer d'un répertoire à l'autre. Par exemple :
 ```
 $ pwd
-/home/pierre/unix
+/mnt/c/Users/omics/unix
 $ cd genomes
 $ pwd
-/home/pierre/unix/genomes
+/mnt/c/Users/omics/unix/genomes
 ```
-Partant du répertoire `/home/pierre/unix`, on s'est déplacé dans le répertoire `/home/pierre/unix/genomes`.
+Partant du répertoire `/mnt/c/Users/omics/unix`, on s'est déplacé dans le répertoire `/mnt/c/Users/omics/unix/genomes`.
 
 Dans la commande `cd genomes`, le répertoire `genomes` est un argument de la commande `cd`.
 
-Dans la commande `cd genomes`, le répertoire `genomes` est un chemin relatif (car il ne débute pas par `/`). C'est-à-dire qu'on a entré le nom de ce répertoire (`genomes`) par rapport au répertoire dans lequel nous étions (`/home/pierre/unix`). Bien sûr, la commande `cd` fonctionne très bien avec un chemin absolu. La commande
+Dans la commande `cd genomes`, le répertoire `genomes` est un chemin relatif (car il ne débute pas par `/`). C'est-à-dire qu'on a entré le nom de ce répertoire (`genomes`) par rapport au répertoire dans lequel nous étions (`/mnt/c/Users/omics/unix`). Bien sûr, la commande `cd` fonctionne très bien avec un chemin absolu. La commande
 ```
-$ cd /home/pierre/unix/genomes
+$ cd /mnt/c/Users/omics/unix/genomes
 ```
 conduirait au même résultat.
 
 Un moyen simple de revenir dans le répertoire parent est d'utiliser le raccourci `..` :
 ```
 $ pwd
-/home/pierre/unix/genomes
+/mnt/c/Users/omics/unix/genomes
 $ cd ..
 $ pwd
-/home/pierre/unix
+/mnt/c/Users/omics/unix
 ```
 
 Un autre raccourci pratique pour revenir dans le répertoire utilisateur (répertoire par défaut dans lequel se trouve l'utilisateur lorsqu'il lance un *shell*) est `~` :
 ```
 $ pwd
-/home/pierre/unix
+/mnt/c/Users/omics/unix
 $ cd ~
 $ pwd
-/home/pierre
+/home/duo
 ```
 
-*Remarque* : simplement taper la commande `cd` (sans argument) ramène aussi l'utilisateur dans son répertoire personnel.
+*Remarque* : 
+
+- Simplement taper la commande `cd` (sans argument) ramène aussi l'utilisateur dans son répertoire personnel.
+- Dans votre situation ce n'est pas très pratique car votre répertoire utilisateur dans le *shell* Ubuntu est différent de celui sous Windows et dans ce dernier que vous souhaitez travailler.
 
 
 ### Créer un répertoire : `mkdir`
@@ -536,7 +581,7 @@ $ tail -n 2 transferrin.csv
 
 ## Créer ou éditer un fichier texte
 
-Nano est un éditeur de texte qui fonctionne dans un *shell*, donc sans interface graphique, sans menu, sans icône, contrairement à des éditeurs de texte comme gedit ou geany.
+Nano est un éditeur de texte qui fonctionne dans un *shell*, donc sans interface graphique, sans menu, sans icône, contrairement à des éditeurs de texte comme Notepad++.
 
 Pour le lancer, on utilise la commande `nano` :
 
@@ -906,10 +951,10 @@ La commande `find` recherche des fichiers ou des répertoires.
 On revient tout d'abord dans le répertoire parent :
 ```
 $ pwd
-/home/pierre/unix
+/mnt/c/Users/omics/unix
 $ cd ..
 $ pwd
-/home/pierre
+/mnt/c/Users/omics
 ```
 
 On cherche maintenant les fichiers avec l'extension `.csv` :
