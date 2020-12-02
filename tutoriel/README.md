@@ -20,7 +20,7 @@ Le *shell* fonctionne sur un ordinateur, qui n'a aucune capacité d'abstraction 
 Enfin, un terminal (ou une console) est un logiciel graphique qui lance un *shell*.
 
 
-## Invite de commande
+## 1. Invite de commande
 
 Lorsque vous lancez un *shell*, l'invite de commande, c'est-à-dire la zone à gauche du curseur, ressemble à quelque chose du type :
 
@@ -50,7 +50,7 @@ $ pwd
 ```
 signifie : tapez `pwd` dans le *shell* (sans le `$`) puis validez cette commande en pressant la touche <kbd>Entrée</kbd>.
 
-## Lancer un *shell* Ubuntu sous Windows 10
+### Lancer un *shell* Ubuntu sous Windows 10
 
 Un *shell* Unix appelé « Ubuntu 20.04 » a déjà été installé sur votre session Windows. Vous trouverez plus de détails [ici](https://github.com/pierrepo/intro-wsl).
 
@@ -66,7 +66,7 @@ Une fois votre terminal lancé, vous devriez obtenir ceci ou quelque chose d'éq
 
 ![](img/terminal_ubuntu.png)
 
-## Retrouver le répertoire utilisateur Windows
+### Retrouver le répertoire utilisateur Windows
 
 Votre répertoire utilisateur sous le *shell* Ubuntu n'est pas au même endroit que sous Windows.
 
@@ -78,7 +78,7 @@ $ cd /mnt/c/Users/omics
 🔔 Rappel : Ne tapez pas le `$` en début de ligne et faites attention aux majuscules et au minuscules (surtout pour `Users`) !
 
 
-## Parcourir les répertoires et les fichiers
+## 2. Parcourir les répertoires et les fichiers
 
 ### Préparer les données
 
@@ -447,7 +447,7 @@ cp transferrin.csv  transferrin.tsv test4
 Cela fonctionne avec autant de fichiers qu'on le souhaite.
 
 
-## Trucs et astuces
+## 3. Trucs et astuces
 
 Écrire des commandes dans un *shell* peut sembler rébarbatif mais on gagne rapidement en efficacité avec les astuces suivantes.
 
@@ -470,7 +470,7 @@ Pressez la touche <kbd>Ctrl</kbd> et la touche <kbd>C</kbd> en même temps pour 
 Pour copier / coller quelque chose dans le *shell*, utilisez les combinaisons de touches <kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>C</kbd> et <kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>V</kbd>.
 
 
-## Explorer le contenu de fichiers
+## 4. Explorer le contenu de fichiers
 
 Jusqu'à présent, on s'est contenté d'afficher le contenu de répertoires et de déplacer ou copier des fichiers, sans connaître leur contenu.
 
@@ -579,7 +579,7 @@ $ tail -n 2 transferrin.csv
 6CTC,Homo sapiens,679
 ```
 
-## Créer ou éditer un fichier texte
+## 5. Créer ou éditer un fichier texte
 
 Nano est un éditeur de texte qui fonctionne dans un *shell*, donc sans interface graphique, sans menu, sans icône, contrairement à des éditeurs de texte comme Notepad++.
 
@@ -619,7 +619,7 @@ $ nano shopping.txt
 ```
 
 
-## Manipuler des données
+## 6. Manipuler des données
 
 ### Compter : `wc`
 
@@ -881,7 +881,7 @@ $ cut -f 2 transferrin.tsv | sort | uniq -c
 ```
 
 
-## Chercher
+## 7. Chercher
 
 
 ### Chercher dans des fichiers : `grep`
@@ -966,7 +966,7 @@ $ find ./ -name "*.csv"
 La commande `find` prend comme argument l'endroit à partir duquel on cherche, ici le répertoire courant désigné par `./` (on aurait aussi pu simplement indiquer « `.` »). Puis on indique le critère de recherche avec l'option `-name`.
 
 
-## Se souvenir
+## 8. Se souvenir
 
 La commande `history` affiche toutes les commandes que vous avez entrées, de la plus ancienne à la plus récente.
 
