@@ -6,11 +6,6 @@
 [Instructions](activites-preparatoires/)
 
 
-## Introduction
-
-[Diapo](diapo/)
-
-
 ## Tutoriel *maison*
 
 [Un aperçu rapide du *shell* Unix](tutoriel/README).
