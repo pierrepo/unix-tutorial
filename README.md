@@ -14,7 +14,6 @@
 ## Tutoriel Software Carpentry
 
 [Le cours de Software Carpentry](http://swcarpentry.github.io/shell-novice/) : parties 1, 2, 3, 4 et 7.
-Le [mémo](http://swcarpentry.github.io/shell-novice/reference/) des notions abordées.
 
 Pour faire les exercices de Software Carpentry, préparez les données nécessaires avec les commandes suivantes :
 ```
@@ -23,8 +22,28 @@ $ wget http://swcarpentry.github.io/shell-novice/data/data-shell.zip
 $ unzip data-shell.zip
 ```
 
+## Trucs et astuces
 
-## Installer un *shell* Linux sur sa machine
+### Copier / coller
+
+Pour copier / coller entre Windows et le *shell* Linux :
+
+- Pour copier depuis Windows (<kbd>Ctrl</kbd>+<kbd>C</kbd>) puis coller dans le *shell* : clic droit de la souris.
+- Pour copier depuis le *shell* (<kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>C</kbd>) puis coller dans Windows (<kbd>Ctrl</kbd>+<kbd>V</kbd>)
+
+### Répertoire utilisateur Windows et Unix
+
+
+Depuis un shell Linux, votre répertoire utilisateur de Windows est accessible via le chemin
+```
+/mnt/c/Users/omics
+```
+`omics` désigne ici votre login Windows sur les machines du DU.
+
+Nous vous conseillons de **travailler depuis ce répertoire** afin que vos fichiers puissent également être visibles depuis Windows.
+
+
+## Installer un *shell* Linux sur sa propre machine
 
 ### Linux et Mac OS X
 
@@ -32,32 +51,17 @@ Si vous travaillez avec les systèmes d'exploitations Linux (Ubuntu, Mint, Debia
 
 ### Windows
 
-Si vous travaillez avec Windows 10 :
+Si vous travaillez avec Windows 10, suivez cette documentation :
 
-- Vous pouvez installer très rapidement un *shell* Linux. Voici quelques liens pour y arriver :
-    + <https://www.windowscentral.com/how-install-bash-shell-command-line-windows-10>
-    + <https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/>
-    + <https://www.howtogeek.com/265900/everything-you-can-do-with-windows-10s-new-bash-shell/>
-
-- Depuis un *shell* Linux, votre répertoire utilisateur de Windows est accessible via le chemin
-
-    ```
-    /mnt/c/Users/<login-windows>
-    ```
-
-    où `<login-windows>` est votre *login* sous Windows. Nous vous conseillons de travailler depuis ce répertoire afin que vos fichiers puissent également être visibles depuis Windows.
-
-Si vous souhaitez simplement un logiciel sous Windows pour vous connecter au serveur du DU en SSH. Nous vous conseillons [MobaXterm](https://mobaxterm.mobatek.net/). La version [*Free*](https://mobaxterm.mobatek.net/download.html) est suffisante. Vous trouverez quelques vidéos de démo [ici](https://mobaxterm.mobatek.net/demo.html).
-
-Pour copier / coller entre Windows et le *shell* Linux :
-
-- Pour copier depuis Windows (<kbd>Ctrl</kbd>+<kbd>C</kbd>) puis coller dans le *shell* : clic droit de la souris.
-- Pour copier depuis le *shell* (<kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>C</kbd>) puis coller dans Windows (<kbd>Ctrl</kbd>+<kbd>V</kbd>)
+<https://github.com/pierrepo/intro-wsl>
 
 
-## De l'aide
 
-Si vous avez besoin d'aide, n'hésitez pas à interroger votre moteur de recherche favori. Une bonne partie des réponses qui vous seront proposées proviendront du site [stackoverflow](https://stackoverflow.com/) qui est *le* forum de discussion en informatique.
+
+
+## De l'aide 🆘
+
+Si vous avez besoin d'aide, interrogez votre moteur de recherche favori. Une bonne partie des réponses qui vous seront proposées proviendront du site [stackoverflow](https://stackoverflow.com/) qui est *le* forum de discussion en informatique.
 
 Les deux tutoriels ci-dessus vous invitent à consulter le manuel (commande `man`) quand vous avez un doute sur le fonctionnement d'une commande. La documentation du manuel est quasi-exhaustive mais peu conviviale. Le site [TLDR pages](https://tldr.sh/) propose une aide concise sur les commandes Unix et leurs principales options. Par exemple, pour la commande [ls](https://tldr.ostera.io/ls).
 
