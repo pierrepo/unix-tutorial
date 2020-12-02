@@ -2,7 +2,7 @@ class: center, middle
 
 # Le shell Unix
 
-## DU Omiques 2019
+### DU Omiques
 
 Pierre Poulain / @pierrepo
 
@@ -13,13 +13,13 @@ Pierre Poulain / @pierrepo
 	 height="100px" style="vertical-align:midle;">
  </img>
 <div style="display: inline-block; width:100px;"></div>
-<img src="img/logo_UPD_USPC.png"
- 	 height="120px" style="vertical-align:midle;">
+<img src="img/Universite_Paris_logo_horizontal_2000px_black.png"
+ 	 height="100px" style="vertical-align:midle;">
  </img>
 </div>
 
 .footer[
-Ce contenu est mis à disposition selon les termes de la licence Creative Commons BY-SA 4.0
+Sauf mention contraire, ce contenu est mise à disposition selon les termes de la Licence Creative Commons Attribution 4.0 International (CC BY 4.0).
 ]
 
 ---
@@ -28,7 +28,7 @@ layout: true
 name: title
 class: center, middle
 .footer[
-DU Omiques 2019
+P. Poulain, CC BY-SA
 ]
 
 ---
@@ -37,7 +37,7 @@ layout: true
 name: contentleft
 class: top, left
 .footer[
-DU Omiques 2019
+P. Poulain, CC BY-SA
 ]
 
 ---
@@ -46,7 +46,7 @@ layout: true
 name: contentcenter
 class: top, center
 .footer[
-DU Omiques 2019
+P. Poulain, CC BY-SA
 ]
 
 ---

@@ -1,9 +1,9 @@
-# Unix
+# Le Shell Unix
 
 
 ## Activités préparatoires
 
-[Activités DataCamp](activites-preparatoires/)
+[Instructions](activites-preparatoires/)
 
 
 ## Introduction
