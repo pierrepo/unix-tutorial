@@ -15,7 +15,7 @@ Lorsqu'on donne des ordres à un *shell*, on utilise ni menu, ni bouton, ni case
 Le *shell* fonctionne sur un ordinateur, qui n'a aucune capacité d'abstraction ni d'intuition. Pour que les ordres donnés au *shell* soient compris et exécutés, il faut respecter des règles bien précises :
 
 1. Respecter la casse, c'est-à-dire l'utilisation des majuscules et des minuscules. Par exemple la commande `ls` existe mais pas `LS` ou `Ls`.
-2. Comprendre que l'espace est utilisé pour séparer l'instruction des options et des arguments et que par conséquent ce caractère ne doit plus être utilisé dans les noms de fichiers ou de répertoires. 
+2. Comprendre que le caractère espace est utilisé pour séparer l'instruction des options et des arguments et que par conséquent ce caractère ne doit plus être utilisé dans les noms de fichiers ou de répertoires. 
 
 Enfin, un terminal (ou une console) est un logiciel graphique qui lance un *shell*.
 
@@ -33,7 +33,7 @@ pierre@orange $
 ```
 ou bien encore
 ```
-ppoulain@candihub:~$
+duo@DU_OMICS: $
 ```
 voire
 ```
@@ -48,17 +48,17 @@ Pour reproduire les commandes présentées, il ne faut pas taper ce caractère e
 ```
 $ pwd
 ```
-signifiera : tapez `pwd` dans le *shell* (sans le `$`) puis validez cette commande en pressant la touche <kbd>Entrée</kbd>.
+signifie : tapez `pwd` dans le *shell* (sans le `$`) puis validez cette commande en pressant la touche <kbd>Entrée</kbd>.
 
-## Lancement du *shell* Ubuntu sous Windows 10
+## Lancer un *shell* Ubuntu sous Windows 10
 
 Un *shell* Unix appelé « Ubuntu 20.04 » a déjà été installé sur votre session Windows. Vous trouverez plus de détails [ici](https://github.com/pierrepo/intro-wsl).
 
 Pour obtenir un *shell* :
 
-- Cliquez sur la petite loupe en bas à gauche dans la barre de menu.
-- Tapez « Ubuntu »
-- Puis cliquez sur la proposition « Ubuntu 20.04 » qui vous est faite.
+1. Cliquez sur la petite loupe en bas à gauche dans la barre de menu.
+2. Tapez « Ubuntu »
+3. Puis cliquez sur la proposition « Ubuntu 20.04 LTS » qui vous est faite.
 
 La démonstration en image est [ici](img/lancement_shell_ubuntu.png).
 
@@ -66,19 +66,21 @@ Une fois votre terminal lancé, vous devriez obtenir ceci ou quelque chose d'éq
 
 ![](img/terminal_ubuntu.png)
 
-## Positionnement dans votre répertoire utilisateur sous Windows
+## Retrouver le répertoire utilisateur Windows
 
 Votre répertoire utilisateur sous le *shell* Ubuntu n'est pas au même endroit que sous Windows.
 
-Pour vous rendre dans votre répertoire Windows où vous avez déjà vos fichiers, lancez la commande suivante :
+Pour vous rendre dans votre répertoire utilisateur Windows où vous avez déjà vos fichiers, lancez la commande suivante :
 ```
 $ cd /mnt/c/Users/omics
 ```
 
-⚠️ Ne tapez pas le `$` en début de ligne et faites attention aux majuscules et au minuscules !
+🔔 Rappel : Ne tapez pas le `$` en début de ligne et faites attention aux majuscules et au minuscules (surtout pour `Users`) !
 
 
-## Exploration de répertoires et de fichiers
+## Parcourir les répertoires et les fichiers
+
+### Préparer les données
 
 Pour reproduire les exemples suivants, voici les commandes à lancer pour préparer les données utilisées :
 ```
@@ -87,9 +89,7 @@ $ tar zxvf unix.tgz
 $ cd unix
 ```
 
-Ces commandes seront en partie expliquées plus loin.
-
-Pour copier / coller entre Windows et le *shell* Linux :
+Ces commandes seront en partie expliquées plus loin. Pour ne pas réécrire complètement ces commandes, voici comment copier / coller entre Windows et le *shell* Linux :
 
 - Pour copier depuis Windows (<kbd>Ctrl</kbd>+<kbd>C</kbd>) puis coller dans le *shell* : clic droit de la souris.
 - Pour copier depuis le *shell* (<kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>C</kbd>) puis coller dans Windows (<kbd>Ctrl</kbd>+<kbd>V</kbd>)
@@ -134,7 +134,7 @@ $ ls
 genomes  paper.pdf  protein.txt  shopping.txt  transferrin.csv	transferrin.tsv
 ```
 
-On peut modifier le comportement par défaut d'une commande avec une option (ou plusieurs). Cette option est séparée de la commande par un ou plusieurs espaces.
+On peut modifier le comportement par défaut d'une commande avec une (ou plusieurs) option(s). Cette option est séparée de la commande par un ou plusieurs espaces.
 
 Par exemple avec `-F` :
 ```
@@ -324,10 +324,10 @@ $ pwd
 /home/duo
 ```
 
-*Remarque* : 
+Remarque : 
 
 - Simplement taper la commande `cd` (sans argument) ramène aussi l'utilisateur dans son répertoire personnel.
-- Dans votre situation ce n'est pas très pratique car votre répertoire utilisateur dans le *shell* Ubuntu est différent de celui sous Windows et dans ce dernier que vous souhaitez travailler.
+- Dans votre situation ce n'est pas très pratique car votre répertoire utilisateur dans le *shell* Ubuntu (`/home/duo`) est différent de celui sous Windows (`/mnt/c/Users/omics/`) et c'est dans ce dernier que vous souhaitez travailler.
 
 
 ### Créer un répertoire : `mkdir`
