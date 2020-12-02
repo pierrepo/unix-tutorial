@@ -1,18 +1,31 @@
 # Activités préparatoires
 
+## AP 1. Découverte des commandes Unix sur Datacamp (45’)
 
-DataCamp est un site internet qui propose des cours interactifs pour R, Python… et Unix qui va vous intéresser ici. 
+1.1. Créez-vous un compte sur le site DataCamp https://www.datacamp.com/ 
 
-- Tout d’abord, créez-vous un compte sur le site de [DataCamp](https://www.datacamp.com/).
-- Connectez-vous ensuite au cours [Introduction to Shell for Data Science](https://www.datacamp.com/courses/introduction-to-shell-for-data-science).
-- Réalisez les chapitres : 
-	+ [1 Manipulating files and directories](https://campus.datacamp.com/courses/introduction-to-shell-for-data-science/manipulating-files-and-directories?ex=1) 
-	+ [2 Manipulating data](https://campus.datacamp.com/courses/introduction-to-shell-for-data-science/manipulating-data?ex=1).  
-	Faites ces chapitres à votre rythme. Prenez le temps de comprendre et d’expérimenter les différentes commandes abordées. Préparez vos questions ou commentaires pour le mois prochain. J'y répondrais avec grand plaisir.
+1.2  Réalisez le premier chapitre « Manipulating files and directories » du cours « Introduction to Shell » https://campus.datacamp.com/courses/introduction-to-shell/  
+N’allez pas plus loin car les autres chapitres sont payants.
 
+## AP 2. Différence entre shell et terminal (15’)
 
-### Évaluation de l'activité préparatoire
+2.1 Visionnez la vidéo « Le terminal, à quoi ça sert ?! » https://www.youtube.com/watch?v=U2b-MYcSCLc 
 
-Merci de répondre à ce [QCM](https://goo.gl/forms/he2YpJ2oAUx2BXvq2) qui nous servira à évaluer ce que vous avez retenu des activités préparatoires.
+2.2 Répondez pour vous-même aux questions suivantes :
 
+- Qu’est-ce que le terminal ?
+- Qu’est-ce que le shell ?
+- Donnez deux exemples de shell.
+- Pourquoi utiliser un terminal ?
 
+## AP 3. Récapitulatif de quelques commandes shell (30’)
+
+3.1 Visionnez la vidéo « Le terminal : 10 commandes indispensables » https://www.youtube.com/watch?v=NgK-FaWJyqQ 
+
+Mes commentaires de cette vidéo : 
+- N’utilisez pas `vim` comme éditeur de texte, préférez `nano`. Nous en reparlerons en cours.
+- Évitez d’utiliser la commande `open` dont le comportement dépend très (trop) fortement de l’environnement informatique dans lequel vous travaillez.
+
+3.2. Répondez pour vous-même aux questions suivantes :
+- Quelle commande vous semble la plus utile ?
+- Quelle commande vous semble compliquée ou difficile à utiliser ?
