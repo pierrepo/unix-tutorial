@@ -425,7 +425,7 @@ Les caractères `*` et `?` peuvent remplacer n'importe quels caractères dans le
 
 Par exemple :
 ```
-$ $ ls *txt
+$ ls *txt
 protein.txt  shopping.txt
 $ ls transferrin.?sv
 transferrin.csv  transferrin.tsv
