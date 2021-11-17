@@ -13,20 +13,8 @@
 
 ## Tutoriel Software Carpentry
 
-[Le cours de Software Carpentry](http://swcarpentry.github.io/shell-novice/) : parties 1, 2, 3, 4 et 7.
+[Un autre tutoriel](software_carpentry) pour poursuivre votre découverte d'Unix.
 
-Pour faire les exercices de Software Carpentry, installez d'abord le logiciel `unzip` avec la commande suivante :
-```
-$ sudo apt install unzip
-```
-Le mot de passe demandé est : `duo`
-
-Puis préparez ensuite les données nécessaires :
-```
-$ cd /mnt/c/Users/omics
-$ wget http://swcarpentry.github.io/shell-novice/data/data-shell.zip
-$ unzip data-shell.zip
-```
 
 ## Trucs et astuces
 
@@ -37,7 +25,7 @@ Pour copier / coller entre Windows et le *shell* Linux :
 - Pour copier depuis Windows (<kbd>Ctrl</kbd>+<kbd>C</kbd>) puis coller dans le *shell* : clic droit de la souris.
 - Pour copier depuis le *shell* (<kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>C</kbd>) puis coller dans Windows (<kbd>Ctrl</kbd>+<kbd>V</kbd>)
 
-### Répertoire utilisateur Windows et Unix
+### Répertoire utilisateur Windows et Unix (dans WSL)
 
 
 Depuis un shell Linux, votre répertoire utilisateur de Windows est accessible via le chemin
@@ -46,7 +34,7 @@ Depuis un shell Linux, votre répertoire utilisateur de Windows est accessible v
 ```
 `omics` désigne ici votre login Windows sur les machines du DU.
 
-Nous vous conseillons de **travailler depuis ce répertoire** afin que vos fichiers puissent également être visibles depuis Windows.
+Nous vous demandons de **travailler depuis ce répertoire** afin que vos fichiers puissent également être visibles depuis Windows.
 
 
 ## Installer un *shell* Linux sur sa propre machine
