@@ -82,7 +82,7 @@ $ cd /mnt/c/Users/omics
 
 ### Préparer les données
 
-Pour reproduire les exemples suivants, voici les commandes à lancer pour préparer les données utilisées :
+Pour reproduire les exemples suivants, voici les commandes à lancer pour préparer les données que vous allez utiliser :
 ```
 $ wget https://github.com/omics-school/unix/raw/master/demo/unix.tgz
 $ tar zxvf unix.tgz
@@ -155,9 +155,9 @@ $ ls                                            -F
 genomes/  paper.pdf  protein.txt  shopping.txt	transferrin.csv  transferrin.tsv
 ```
 
-Il faut au moins un espace entre la commande et une option.
+Retenez qu'il faut au moins un espace entre une commande et son option.
 
-Une autre option sympa est l'option `-l` (lettre *l* minuscule) qui affiche des informations complémentaires sur le contenu du répertoire :
+Une autre option sympa est l'option `-l` (lettre *l* en minuscule) qui affiche des informations complémentaires sur le contenu du répertoire :
 ```
 $ ls -l
 total 116
@@ -268,7 +268,7 @@ Mandatory arguments to long options are mandatory for short options too.
 
 Sous Unix, les noms de fichiers et de répertoires sont sensibles à la casse, c'est-à-dire aux majuscules et aux minuscules. Par conséquent, le *shell* fait la différence entre le fichier `test.txt` et le fichier `Test.txt`.
 
-Par ailleurs, l'extension de fichier est facultative et purement indicative. Le *shell* ne l'utilise pas. Elle sert simplement à l'utilisateur pour mieux organiser ses fichiers. Un nom de fichier du type `test` ou `test.my_extension` est parfaitement valide. On peut même nommer un répertoire `directory.txt` (mais ça n'est pas très malin).
+Par ailleurs, l'extension de fichier est facultative et purement indicative. Le *shell* ne l'utilise pas. Elle sert simplement à l'utilisateur pour mieux organiser ses fichiers. Un nom de fichier du type `test` ou `test.my_extension` est parfaitement valide. On peut même nommer un répertoire `directory.txt` (mais ça n'est pas très malin 🙄).
 
 Enfin, pour nommer un fichier ou un répertoire, on peut utiliser :
 
@@ -530,7 +530,7 @@ $ cat transferrin.csv
 ...
 ```
 
-La commande `less` affiche *progressivement* le contenu d'un fichier :
+Pour les gros fichiers, on préfère utiliser la commande `less` qui affiche *progressivement* le contenu d'un fichier :
 ```
 $ less transferrin.csv
 ```
@@ -677,9 +677,9 @@ pear 3
 orange 4
 banana 6
 ```
-Les lignes sont alors triées suivant la seconde colonne, mais par ordre alphabétique, ce qui explique que `10` soit avant `3`. Pour trier explicitement sur des valeurs numériques, on utilise l'option `-n` :
+Les lignes sont alors triées suivant la seconde colonne, mais par ordre alphabétique, ce qui explique que `10` soit avant `3`. Pour trier explicitement sur des valeurs numériques, on utilise l'option `-g` :
 ```
-$ sort -k 2 -n shopping.txt
+$ sort -k 2 -g shopping.txt
 pineaple 1
 pear 3
 orange 4
@@ -699,7 +699,7 @@ apple 10
 ```
 
 ```
-$ sort -k 2 -n -r shopping.txt
+$ sort -k 2 -g -r shopping.txt
 apple 10
 banana 6
 orange 4
@@ -886,7 +886,7 @@ $ cut -f 2 transferrin.tsv | sort | uniq -c
 
 ### Chercher dans des fichiers : `grep`
 
-La commande `grep` cherche un motif dans un ou plusieurs fichiers.
+La commande `grep` cherche un motif dans un ou plusieurs fichiers et renvoie les lignes correspondantes :
 ```
 $ grep "apple" shopping.txt
 apple 10
@@ -963,7 +963,7 @@ $ find ./ -name "*.csv"
 ./unix/transferrin.csv
 ```
 
-La commande `find` prend comme argument l'endroit à partir duquel on cherche, ici le répertoire courant désigné par `./` (on aurait aussi pu simplement indiquer « `.` »). Puis on indique le critère de recherche avec l'option `-name`.
+La commande `find` prend comme argument l'endroit à partir duquel on cherche, ici le répertoire courant désigné par `./` (on aurait aussi pu simplement indiquer « `.` »). Puis on indique le critère de recherche avec l'option `-name`, ici tous les fichiers qui se terminent par `.csv`.
 
 
 ## 8. Se souvenir
