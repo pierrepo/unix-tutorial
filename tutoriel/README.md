@@ -8,16 +8,16 @@ license: "Creative Commons Attribution - Partage dans les Mêmes Conditions 4.0 
 
 # Un aperçu rapide du shell Unix
 
-Un *shell* est un programme qui attend un ordre de la part de l'utilisateur, exécute cet ordre, affiche le résultat puis attend à nouveau un ordre. En anglais on parle de *REPL* pour *Read Execute Print Loop*. Il existe plusieurs *shells* : *Bash*, *csh*, *zsh*... Ici on ne parlera que du *shell* *Bash* qui est le plus utilisé. Cela dit, toutes les commandes présentées ici sont communes à tous les *shell* Unix.
+Un *shell* est un programme qui attend un ordre de la part de l'utilisateur, exécute cet ordre, affiche le résultat puis attend à nouveau un ordre. En anglais on parle de *REPL* pour *Read Execute Print Loop*. Il existe plusieurs *shells* : *Bash*, *csh*, *zsh*... Ici on ne parlera que du *shell* *Bash* qui est le plus utilisé. Cela dit, toutes les commandes présentées ici sont communes à tous les *shells* Unix.
 
 Lorsqu'on donne des ordres à un *shell*, on utilise ni menu, ni bouton, ni case à cocher. Tous les ordres sont **écrits** au *shell*.
 
 Le *shell* fonctionne sur un ordinateur, qui n'a aucune capacité d'abstraction ni d'intuition. Pour que les ordres donnés au *shell* soient compris et exécutés, il faut respecter des règles bien précises :
 
 1. Respecter la casse, c'est-à-dire l'utilisation des majuscules et des minuscules. Par exemple la commande `ls` existe mais pas `LS` ou `Ls`.
-2. Comprendre que le caractère espace est utilisé pour séparer l'instruction des options et des arguments et que par conséquent ce caractère ne doit plus être utilisé dans les noms de fichiers ou de répertoires. 
+2. Comprendre que le caractère espace est utilisé pour séparer l'instruction des options et des arguments et que par conséquent **ce caractère ne doit plus être utilisé** dans les noms de fichiers ou de répertoires. 
 
-Enfin, un terminal (ou une console) est un logiciel graphique qui lance un *shell*.
+Enfin, un terminal (ou une console) est un logiciel graphique qui lance un *shell*. C'est ce dernier (le *shell*) qui va exécuter vos ordres.
 
 
 ## 1. Invite de commande
@@ -48,7 +48,7 @@ Pour reproduire les commandes présentées, il ne faut pas taper ce caractère e
 ```
 $ pwd
 ```
-signifie : tapez `pwd` dans le *shell* (sans le `$`) puis validez cette commande en pressant la touche <kbd>Entrée</kbd>.
+signifie : tapez l'instruction `pwd` dans le *shell* (sans le `$`), puis validez cette commande en pressant la touche <kbd>Entrée</kbd>.
 
 ### Lancer un *shell* Ubuntu sous Windows 10
 
@@ -75,7 +75,7 @@ Pour vous rendre dans votre répertoire utilisateur Windows où vous avez déjà
 $ cd /mnt/c/Users/omics
 ```
 
-🔔 Rappel : Ne tapez pas le `$` en début de ligne et faites attention aux majuscules et au minuscules (surtout pour `Users`) !
+🔔 Rappel : Ne tapez pas le `$` en début de ligne et faites attention aux majuscules et au minuscules (surtout pour `Users` qui débute par un *U* majuscule) !
 
 
 ## 2. Parcourir les répertoires et les fichiers
