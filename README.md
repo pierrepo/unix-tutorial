@@ -10,6 +10,7 @@
 
 [Un aperçu rapide du *shell* Unix](tutoriel/README).
 
+C'est par ce tutoriel que vous devez débuter.
 
 ## Tutoriel Software Carpentry
 
