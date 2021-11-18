@@ -943,6 +943,14 @@ $ grep "DEFI" genomes/*.gbk | grep -c "Staphyloco"
 6
 ```
 
+### Petit défi
+
+Construisez l'enchaînement de commandes Unix qui :
+- cherche le motif `DEFINITION` dans tous les fichiers GenBank du répertoire `genomes` ;
+- cherche les génomes de staphylocoques (`Staphylococcus`) ;
+- supprime les noms des fichiers des résultats ;
+- renvoie le tout dans le fichier `all_staphylo.txt`.
+
 
 ### Chercher des fichiers : `find`
 
