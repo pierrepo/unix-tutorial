@@ -369,7 +369,7 @@ article.pdf  genomes  paper.pdf
 
 ### Renommer et déplacer : `mv`
 
-La commande `mv` (pour *move*) renommer des fichiers ou des répertoires :
+La commande `mv` (pour *move*) renomme des fichiers ou des répertoires :
 ```
 $ ls
 article.pdf  genomes  paper.pdf  protein.txt  shopping.txt  test  transferrin.csv  transferrin.tsv
