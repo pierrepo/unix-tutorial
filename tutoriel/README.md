@@ -246,7 +246,7 @@ $ man ls
 ```
 Utilisez les flèches <kbd>↓</kbd> et <kbd>↑</kbd> pour naviguer dans cette aide. La touche <kbd>Espace</kbd> saute une page à la fois. La touche <kbd>Q</kbd> quitte l'aide et revient au *shell*.
 
-Par ailleurs, de nombreuses commandes Unix disposent de l'option `--help` qui affiche un aide succinct :
+Par ailleurs, de nombreuses commandes Unix disposent de l'option `--help` qui affiche une aide succincte :
 ```
 $ ls --help
 Usage: ls [OPTION]... [FILE]...
