@@ -11,6 +11,6 @@ Le mot de passe demandé est : `duo`
 Puis préparez ensuite les données nécessaires :
 ```
 $ cd /mnt/c/Users/omics
-$ wget http://swcarpentry.github.io/shell-novice/data/data-shell.zip
-$ unzip data-shell.zip
+$ wget https://swcarpentry.github.io/shell-novice/data/shell-lesson-data.zip
+$ unzip shell-lesson-data.zip
 ```
