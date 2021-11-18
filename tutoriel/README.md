@@ -327,12 +327,21 @@ $ pwd
 Remarque : 
 
 - Simplement taper la commande `cd` (sans argument) ramène aussi l'utilisateur dans son répertoire personnel.
-- Dans votre situation ce n'est pas très pratique car votre répertoire utilisateur dans le *shell* Ubuntu (`/home/duo`) est différent de celui sous Windows (`/mnt/c/Users/omics/`) et c'est dans ce dernier que vous souhaitez travailler.
+- Dans votre situation ce n'est pas très pratique car votre répertoire utilisateur dans le *shell* Ubuntu (`/home/duo`) est différent de celui sous Windows (`/mnt/c/Users/omics`) et c'est dans ce dernier que vous souhaitez travailler.
 
 
 ### Créer un répertoire : `mkdir`
 
-La commande `mkdir` (pour *make directory*) crée un répertoire :
+Revenez au préalable dans le bon répertoire avec la commande :
+
+```
+cd /mnt/c/Users/omics/unix
+```
+
+Rappel : Le répertoire `/mnt/c/Users/omics` est votre répertoire utilisateur sous Windows et `unix` est le répertoire qui contient les fichiers du tutoriel.
+
+
+Donc, la commande `mkdir` (pour *make directory*) crée un répertoire :
 ```
 $ ls
 genomes  paper.pdf  protein.txt  shopping.txt  transferrin.csv	transferrin.tsv
