@@ -484,7 +484,10 @@ apple 10
 orange 4
 ```
 
-Bien sûr, afficher le contenu d'un fichier n'a de sens ici que pour un fichier texte. En effet, afficher le contenu d'un fichier binaire produit une suite de caractères incompréhensibles :
+Bien sûr, afficher le contenu d'un fichier n'a de sens ici que pour un fichier texte. En effet, afficher le contenu d'un fichier binaire produit une suite de caractères incompréhensibles.
+
+*Remarque* : Évitez de lancer la commande suivante. Vous risquez de perdre la main dans votre *shell* et devoir le relancer (en fermant la fenêtre puis en ouvrant une nouvelle).
+
 ```
 $ cat paper.pdf
 �{����e˿\�><?�S�;gg��>��ݻ���7��h�G�.�}{�������W[��5��͓����d�=8��f.���屌J�Y��b�ꂭ貾l���/ٙ�
@@ -508,7 +511,6 @@ startxref
 %%EOF
 ```
 
-*Remarque* : Évitez de lancer la commande précédente. Vous risquez de perdre la main dans votre *shell* et devoir le relancer (en fermant la fenêtre puis en ouvrant une nouvelle).
 
 ⚠️ **Attention** ⚠️ Dans la suite, nous n'explorerons que le contenu de **fichiers textes**.
 
