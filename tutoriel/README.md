@@ -231,7 +231,7 @@ NC_002976_head.gbk  NC_006840_head.gbk  NC_011184_head.gbk  NC_014205_head.gbk
 
 Comme pour les options, il faut au moins un espace entre une commande et son ou ses arguments.
 
-On peut même d'obtenir des informations détaillées sur un fichier en particulier :
+On peut même obtenir des informations détaillées sur un fichier en particulier :
 ```
 $ ls -lh paper.pdf
 -rw-r--r-- 1 pierre pierre 96K mars  13 14:34 paper.pdf
