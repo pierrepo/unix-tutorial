@@ -634,7 +634,7 @@ $ nano shopping.txt
 
 ### Compter : `wc`
 
-La commande `wc` (pour *word count*) compte le nombre de caractères, de mots et de lignes d'un fichier.
+La commande `wc` (pour *word count*) compte le nombre de lignes, de mots et de caractères d'un fichier.
 ```
 $ wc shopping.txt
  5 10 45 shopping.txt
