@@ -352,14 +352,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installer-un-shell-linux-sur-sa-propre-machine">Installer un <em>shell</em> Linux sur sa propre machine</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutoriel-supplementaire">Tutoriel supplémentaire</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installer-un-shell-linux-sur-votre-machine">Installer un <em>shell</em> Linux sur votre machine</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linux-et-mac-os-x">Linux et Mac OS X</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#de-l-aide">De l’aide 🆘</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#obtenir-de-l-aide">Obtenir de l’aide 🆘</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliographie-webographie">Bibliographie / webographie</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#licence">Licence</a></li>
 </ul>
             </nav>
         </div>
@@ -373,23 +373,25 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="ressources-complementaires">
 <h1>Ressources complémentaires<a class="headerlink" href="#ressources-complementaires" title="Permalink to this heading">#</a></h1>
+<section id="tutoriel-supplementaire">
+<h2>Tutoriel supplémentaire<a class="headerlink" href="#tutoriel-supplementaire" title="Permalink to this heading">#</a></h2>
 <p>Pour aller plus loin, vous pouvez tester <a class="reference internal" href="software_carpentry.html"><span class="doc std std-doc">un autre tutoriel</span></a> créé par Software Carpentry.</p>
-<section id="installer-un-shell-linux-sur-sa-propre-machine">
-<h2>Installer un <em>shell</em> Linux sur sa propre machine<a class="headerlink" href="#installer-un-shell-linux-sur-sa-propre-machine" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="installer-un-shell-linux-sur-votre-machine">
+<h2>Installer un <em>shell</em> Linux sur votre machine<a class="headerlink" href="#installer-un-shell-linux-sur-votre-machine" title="Permalink to this heading">#</a></h2>
 <section id="linux-et-mac-os-x">
 <h3>Linux et Mac OS X<a class="headerlink" href="#linux-et-mac-os-x" title="Permalink to this heading">#</a></h3>
 <p>Si vous travaillez avec les systèmes d’exploitations Linux (Ubuntu, Mint, Debian…) ou Mac OS X, vous avez déjà un <em>shell</em> installé sur votre machine.</p>
 </section>
 <section id="windows">
 <h3>Windows<a class="headerlink" href="#windows" title="Permalink to this heading">#</a></h3>
-<p>Si vous travaillez avec Windows 10, suivez cette documentation :</p>
-<p><a class="github reference external" href="https://github.com/pierrepo/intro-wsl">pierrepo/intro-wsl</a></p>
+<p>Si vous travaillez avec Windows 10, nous vous conseillons le <a class="reference external" href="https://github.com/pierrepo/intro-wsl">Windows Subsystem Linux</a> (WSL).</p>
 </section>
 </section>
-<section id="de-l-aide">
-<h2>De l’aide 🆘<a class="headerlink" href="#de-l-aide" title="Permalink to this heading">#</a></h2>
-<p>Si vous avez besoin d’aide, interrogez votre moteur de recherche favori. Une bonne partie des réponses qui vous seront proposées proviendront du site <a class="reference external" href="https://stackoverflow.com/">stackoverflow</a> qui est <em>le</em> forum de discussion en informatique.</p>
-<p>Les deux tutoriels ci-dessus vous invitent à consulter le manuel (commande <code class="docutils literal notranslate"><span class="pre">man</span></code>) quand vous avez un doute sur le fonctionnement d’une commande. La documentation du manuel est quasi-exhaustive mais peu conviviale. Le site <a class="reference external" href="https://tldr.sh/">TLDR pages</a> propose une aide concise sur les commandes Unix et leurs principales options. Par exemple, pour la commande <a class="reference external" href="https://tldr.ostera.io/ls">ls</a>.</p>
+<section id="obtenir-de-l-aide">
+<h2>Obtenir de l’aide 🆘<a class="headerlink" href="#obtenir-de-l-aide" title="Permalink to this heading">#</a></h2>
+<p>Si vous avez besoin d’aide en Unix, pour une commande par exemple, interrogez votre moteur de recherche favori. Une bonne partie des réponses qui vous seront proposées proviendront du site <a class="reference external" href="https://stackoverflow.com/">stackoverflow</a> qui est <em>le</em> forum de discussion en informatique.</p>
+<p>La commande <code class="docutils literal notranslate"><span class="pre">man</span></code> et l’option <code class="docutils literal notranslate"><span class="pre">--help</span></code> fournissent une aide exhaustive, mais peu conviviale. Le site <a class="reference external" href="https://tldr.sh/">TLDR pages</a> propose une aide concise sur les commandes Unix et leurs principales options. Par exemple, pour la commande <a class="reference external" href="https://tldr.inbrowser.app/pages/common/ls">ls</a>.</p>
 <p>Enfin, le site <a class="reference external" href="https://explainshell.com/">explainshell</a> explique le rôle des différentes options utilisées dans une commande. Par exemple pour décompresser une archive avec la commande <a class="reference external" href="https://explainshell.com/explain?cmd=tar%20xzvf%20archive.tar.gz">tar</a>.</p>
 </section>
 <section id="bibliographie-webographie">
@@ -403,12 +405,6 @@ document.write(`
 <li><p><a class="reference external" href="http://swcarpentry.github.io/shell-novice/">The UNIX Shell</a>, cours en ligne de <em>Software Carpentry</em>.</p></li>
 <li><p><a class="reference external" href="https://edu.sib.swiss/pluginfile.php/2878/mod_resource/content/4/couselab-html/content.html">Unix Fondamentals</a>, du <em>Swiss Institute of Bioinformatics</em>.</p></li>
 </ul>
-</section>
-<section id="licence">
-<h2>Licence<a class="headerlink" href="#licence" title="Permalink to this heading">#</a></h2>
-<p><img alt="" src="img/CC-BY-SA.png" /></p>
-<p>Ce contenu est mis à disposition selon les termes de la licence <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr">Creative Commons Attribution - Partage dans les Mêmes Conditions 4.0 International</a> (CC BY-SA 4.0). Consultez le fichier <a class="reference download internal" download="" href="_downloads/9879d6db96fd29134fc802214163b95a/LICENSE"><span class="xref download myst">LICENSE</span></a> pour plus de détails.</p>
-<p>This content is released under the <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">Creative Commons Attribution-ShareAlike 4.0 </a> (CC BY-SA 4.0) license. See the bundled <a class="reference download internal" download="" href="_downloads/9879d6db96fd29134fc802214163b95a/LICENSE"><span class="xref download myst">LICENSE</span></a> file for details.</p>
 </section>
 </section>
 
@@ -464,14 +460,14 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installer-un-shell-linux-sur-sa-propre-machine">Installer un <em>shell</em> Linux sur sa propre machine</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutoriel-supplementaire">Tutoriel supplémentaire</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installer-un-shell-linux-sur-votre-machine">Installer un <em>shell</em> Linux sur votre machine</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linux-et-mac-os-x">Linux et Mac OS X</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#de-l-aide">De l’aide 🆘</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#obtenir-de-l-aide">Obtenir de l’aide 🆘</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliographie-webographie">Bibliographie / webographie</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#licence">Licence</a></li>
 </ul>
   </nav></div>
 

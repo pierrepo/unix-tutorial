@@ -422,23 +422,23 @@ document.write(`
 <section id="invite-de-commande">
 <h2>1. Invite de commande<a class="headerlink" href="#invite-de-commande" title="Permalink to this heading">#</a></h2>
 <p>Lorsque vous lancez un <em>shell</em>, l’invite de commande, c’est-à-dire la zone à gauche du curseur, ressemble à quelque chose du type :</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>pierre@jeera:~$
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pierre@jeera:~$
 </pre></div>
 </div>
 <p>ou bien encore</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[ppoulain@cpu-node-16 ~]$
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>ppoulain@cpu-node-16<span class="w"> </span>~<span class="o">]</span>$
 </pre></div>
 </div>
 <p>voire</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>toto $
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>toto<span class="w"> </span>$
 </pre></div>
 </div>
 <p>Par convention, l’invite de commande sera représentée dans la suite de ce document par le caractère dollar «<code class="docutils literal notranslate"><span class="pre">$</span></code>» en tout début de ligne :</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$
 </pre></div>
 </div>
 <p>Pour reproduire les commandes présentées, il ne faut pas taper ce caractère en début de ligne. Ainsi,</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pwd
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">pwd</span>
 </pre></div>
 </div>
 <p>signifie : tapez l’instruction <code class="docutils literal notranslate"><span class="pre">pwd</span></code> dans le <em>shell</em> (sans le <code class="docutils literal notranslate"><span class="pre">$</span></code>), puis validez cette commande en pressant la touche <kbd>Entrée</kbd>.</p>
@@ -467,7 +467,7 @@ $<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>unix
 <h3>Savoir où on se trouve : <code class="docutils literal notranslate"><span class="pre">pwd</span></code><a class="headerlink" href="#savoir-ou-on-se-trouve-pwd" title="Permalink to this heading">#</a></h3>
 <p>La première commande à connaître est la commande <code class="docutils literal notranslate"><span class="pre">pwd</span></code> qui signifie <em>print working directory</em> et qui affiche le nom du répertoire courant.</p>
 <p>Par exemple :</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pwd
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">pwd</span>
 /shared/home/ppoulain/unix
 </pre></div>
 </div>
@@ -741,39 +741,39 @@ test/
 <section id="renommer-et-deplacer-mv">
 <h3>Renommer et déplacer : <code class="docutils literal notranslate"><span class="pre">mv</span></code><a class="headerlink" href="#renommer-et-deplacer-mv" title="Permalink to this heading">#</a></h3>
 <p>La commande <code class="docutils literal notranslate"><span class="pre">mv</span></code> (pour <em>move</em>) renomme des fichiers ou des répertoires :</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls
-article.pdf  genomes  paper.pdf  protein.txt  shopping.txt  test  transferrin.csv  transferrin.tsv
-$ mv article.pdf article2.pdf
-$ ls
-article2.pdf  genomes  paper.pdf  protein.txt  shopping.txt  test  transferrin.csv  transferrin.tsv
-$ mv test test2
-$ ls
-article2.pdf  genomes  paper.pdf  protein.txt  shopping.txt  test2  transferrin.csv  transferrin.tsv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ls
+article.pdf<span class="w">  </span>genomes<span class="w">  </span>paper.pdf<span class="w">  </span>protein.txt<span class="w">  </span>shopping.txt<span class="w">  </span><span class="nb">test</span><span class="w">  </span>transferrin.csv<span class="w">  </span>transferrin.tsv
+$<span class="w"> </span>mv<span class="w"> </span>article.pdf<span class="w"> </span>article2.pdf
+$<span class="w"> </span>ls
+article2.pdf<span class="w">  </span>genomes<span class="w">  </span>paper.pdf<span class="w">  </span>protein.txt<span class="w">  </span>shopping.txt<span class="w">  </span><span class="nb">test</span><span class="w">  </span>transferrin.csv<span class="w">  </span>transferrin.tsv
+$<span class="w"> </span>mv<span class="w"> </span><span class="nb">test</span><span class="w"> </span>test2
+$<span class="w"> </span>ls
+article2.pdf<span class="w">  </span>genomes<span class="w">  </span>paper.pdf<span class="w">  </span>protein.txt<span class="w">  </span>shopping.txt<span class="w">  </span>test2<span class="w">  </span>transferrin.csv<span class="w">  </span>transferrin.tsv
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">mv</span></code> déplace aussi des fichiers ou des répertoires dans un autre répertoire :</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls
-article2.pdf  genomes  paper.pdf  protein.txt  shopping.txt  test2  transferrin.csv  transferrin.tsv
-$ mkdir test3
-$ mv article2.pdf test2 test3
-$ ls test3
-article2.pdf  test2
-$ ls
-genomes  paper.pdf  protein.txt  shopping.txt  test3  transferrin.csv  transferrin.tsv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ls
+article2.pdf<span class="w">  </span>genomes<span class="w">  </span>paper.pdf<span class="w">  </span>protein.txt<span class="w">  </span>shopping.txt<span class="w">  </span>test2<span class="w">  </span>transferrin.csv<span class="w">  </span>transferrin.tsv
+$<span class="w"> </span>mkdir<span class="w"> </span>test3
+$<span class="w"> </span>mv<span class="w"> </span>article2.pdf<span class="w"> </span>test2<span class="w"> </span>test3
+$<span class="w"> </span>ls<span class="w"> </span>test3
+article2.pdf<span class="w">  </span>test2
+$<span class="w"> </span>ls
+genomes<span class="w">  </span>paper.pdf<span class="w">  </span>protein.txt<span class="w">  </span>shopping.txt<span class="w">  </span>test3<span class="w">  </span>transferrin.csv<span class="w">  </span>transferrin.tsv
 </pre></div>
 </div>
 </section>
 <section id="supprimer-rm">
 <h3>Supprimer : <code class="docutils literal notranslate"><span class="pre">rm</span></code><a class="headerlink" href="#supprimer-rm" title="Permalink to this heading">#</a></h3>
 <p>La commande <code class="docutils literal notranslate"><span class="pre">rm</span></code> (pour <em>remove</em>) supprime des fichiers ou des répertoires :</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd test3
-$ ls
-article2.pdf  test2
-$ rm article2.pdf
-$ ls
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>test3
+$<span class="w"> </span>ls
+article2.pdf<span class="w">  </span>test2
+$<span class="w"> </span>rm<span class="w"> </span>article2.pdf
+$<span class="w"> </span>ls
 test2
-$ rm -r test2
-$ ls
+$<span class="w"> </span>rm<span class="w"> </span>-r<span class="w"> </span>test2
+$<span class="w"> </span>ls
 </pre></div>
 </div>
 <p>Pour supprimer un répertoire, il faut utiliser l’option supplémentaire <code class="docutils literal notranslate"><span class="pre">-r</span></code>.</p>
@@ -785,9 +785,11 @@ $ ls
 </section>
 <section id="automatiser-un-peu">
 <h3>Automatiser (un peu)<a class="headerlink" href="#automatiser-un-peu" title="Permalink to this heading">#</a></h3>
-<p>Les caractères <code class="docutils literal notranslate"><span class="pre">*</span></code> et <code class="docutils literal notranslate"><span class="pre">?</span></code> peuvent remplacer n’importe quels caractères dans les noms de fichiers ou de répertoires.</p>
-<p><code class="docutils literal notranslate"><span class="pre">*</span></code> remplace 0, 1 ou plus caractères.</p>
-<p><code class="docutils literal notranslate"><span class="pre">?</span></code> remplace exactement 1 caractère.</p>
+<p>Les caractères <code class="docutils literal notranslate"><span class="pre">*</span></code> et <code class="docutils literal notranslate"><span class="pre">?</span></code> peuvent remplacer n’importe quels caractères dans les noms de fichiers ou de répertoires :</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">*</span></code> remplace 0, 1 ou plus caractères.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">?</span></code> remplace exactement 1 caractère.</p></li>
+</ul>
 <p>Par exemple :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ls<span class="w"> </span>*txt
 protein.txt<span class="w">  </span>shopping.txt
@@ -935,7 +937,7 @@ startxref
 <h2>6. Créer ou éditer un fichier texte<a class="headerlink" href="#creer-ou-editer-un-fichier-texte" title="Permalink to this heading">#</a></h2>
 <p>Nano est un éditeur de texte qui fonctionne dans un <em>shell</em>, donc sans interface graphique, sans menu, sans icône, contrairement à des éditeurs de texte comme Notepad++.</p>
 <p>Pour le lancer, on utilise la commande <code class="docutils literal notranslate"><span class="pre">nano</span></code> :</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ nano
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>nano
 </pre></div>
 </div>
 <p>Et on obtient quelque chose du type :</p>
@@ -1093,7 +1095,7 @@ Gallus<span class="w"> </span>gallus
 Anas<span class="w"> </span>platyrhynchos
 Homo<span class="w"> </span>sapiens
 Homo<span class="w"> </span>sapiens
-...
+<span class="o">[</span>...<span class="o">]</span>
 </pre></div>
 </div>
 <p>L’option <code class="docutils literal notranslate"><span class="pre">-d</span></code> spécifie le délimiteur, c’est-à-dire le caractère utilisé pour séparer les différents champs (les colonnes). Par défaut, <code class="docutils literal notranslate"><span class="pre">cut</span></code> utilise la tabulation.</p>
@@ -1283,7 +1285,7 @@ $<span class="w"> </span><span class="nb">pwd</span>
 </pre></div>
 </div>
 <p>produit une sortie du type :</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">...</span><span class="p">]</span>
 <span class="mi">582</span>  <span class="n">grep</span> <span class="s2">&quot;apple&quot;</span> <span class="n">shopping</span><span class="o">.</span><span class="n">txt</span>
 <span class="mi">583</span>  <span class="n">grep</span> <span class="o">-</span><span class="n">n</span> <span class="s2">&quot;apple&quot;</span> <span class="n">shopping</span><span class="o">.</span><span class="n">txt</span>
 <span class="mi">584</span>  <span class="n">grep</span> <span class="s2">&quot;DEFI&quot;</span> <span class="n">genomes</span><span class="o">/*.</span><span class="n">gbk</span>

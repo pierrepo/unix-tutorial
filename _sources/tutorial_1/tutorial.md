@@ -16,26 +16,34 @@ Enfin, un terminal (ou une console) est un logiciel graphique qui lance un *shel
 
 Lorsque vous lancez un *shell*, l'invite de commande, c'est-à-dire la zone à gauche du curseur, ressemble à quelque chose du type :
 
-```
+```bash
 pierre@jeera:~$
 ```
+
 ou bien encore
-```
+
+```bash
 [ppoulain@cpu-node-16 ~]$
 ```
+
 voire
-```
+
+```bash
 toto $
 ```
 
 Par convention, l'invite de commande sera représentée dans la suite de ce document par le caractère dollar «`$`» en tout début de ligne :
-```
+
+```bash
 $
 ```
+
 Pour reproduire les commandes présentées, il ne faut pas taper ce caractère en début de ligne. Ainsi,
-```
+
+```bash
 $ pwd
 ```
+
 signifie : tapez l'instruction `pwd` dans le *shell* (sans le `$`), puis validez cette commande en pressant la touche <kbd>Entrée</kbd>.
 
 
@@ -67,10 +75,12 @@ Ces commandes seront en partie expliquées plus loin. Pour ne pas réécrire com
 La première commande à connaître est la commande `pwd` qui signifie *print working directory* et qui affiche le nom du répertoire courant.
 
 Par exemple :
-```
+
+```bash
 $ pwd
 /shared/home/ppoulain/unix
 ```
+
 Cela signifie qu'on se trouve actuellement dans le répertoire `/shared/home/ppoulain/unix`.
 
 Dans votre session, `ppoulain` sera bien sur remplacé par votre nom d'utilisateur sur le cluster IFB.
@@ -403,7 +413,8 @@ test/
 ### Renommer et déplacer : `mv`
 
 La commande `mv` (pour *move*) renomme des fichiers ou des répertoires :
-```
+
+```bash
 $ ls
 article.pdf  genomes  paper.pdf  protein.txt  shopping.txt  test  transferrin.csv  transferrin.tsv
 $ mv article.pdf article2.pdf
@@ -415,7 +426,8 @@ article2.pdf  genomes  paper.pdf  protein.txt  shopping.txt  test2  transferrin.
 ```
 
 `mv` déplace aussi des fichiers ou des répertoires dans un autre répertoire :
-```
+
+```bash
 $ ls
 article2.pdf  genomes  paper.pdf  protein.txt  shopping.txt  test2  transferrin.csv  transferrin.tsv
 $ mkdir test3
@@ -430,7 +442,8 @@ genomes  paper.pdf  protein.txt  shopping.txt  test3  transferrin.csv  transferr
 ### Supprimer : `rm`
 
 La commande `rm` (pour *remove*) supprime des fichiers ou des répertoires :
-```
+
+```bash
 $ cd test3
 $ ls
 article2.pdf  test2
@@ -452,11 +465,10 @@ Il n'y a pas de corbeille dans le *shell* Unix, c'est-à-dire aucune possibilit�
 
 ### Automatiser (un peu)
 
-Les caractères `*` et `?` peuvent remplacer n'importe quels caractères dans les noms de fichiers ou de répertoires.
+Les caractères `*` et `?` peuvent remplacer n'importe quels caractères dans les noms de fichiers ou de répertoires :
 
-`*` remplace 0, 1 ou plus caractères.
-
-`?` remplace exactement 1 caractère.
+- `*` remplace 0, 1 ou plus caractères.
+- `?` remplace exactement 1 caractère.
 
 Par exemple :
 
@@ -631,7 +643,7 @@ Nano est un éditeur de texte qui fonctionne dans un *shell*, donc sans interfac
 
 Pour le lancer, on utilise la commande `nano` :
 
-```
+```bash
 $ nano
 ```
 
@@ -833,7 +845,7 @@ Gallus gallus
 Anas platyrhynchos
 Homo sapiens
 Homo sapiens
-...
+[...]
 ```
 
 L'option `-d` spécifie le délimiteur, c'est-à-dire le caractère utilisé pour séparer les différents champs (les colonnes). Par défaut, `cut` utilise la tabulation.
@@ -1057,7 +1069,7 @@ $ history
 produit une sortie du type :
 
 ```
-...
+[...]
 582  grep "apple" shopping.txt
 583  grep -n "apple" shopping.txt
 584  grep "DEFI" genomes/*.gbk
