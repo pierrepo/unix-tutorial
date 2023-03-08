@@ -71,9 +71,6 @@ $ cd /mnt/c/Users/omics
 Ne tapez pas le `$` en début de ligne et faites attention aux majuscules et au minuscules (surtout pour `Users` qui débute par un *U* majuscule) !
 ```
 
-
-
-
 ## 2. Parcourir les répertoires et les fichiers
 
 ### Préparer les données
