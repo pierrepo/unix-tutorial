@@ -1056,6 +1056,7 @@ $ history
 ```
 produit une sortie du type :
 
+```
 ...
 582  grep "apple" shopping.txt
 583  grep -n "apple" shopping.txt
