@@ -1283,25 +1283,23 @@ $<span class="w"> </span><span class="nb">pwd</span>
 </pre></div>
 </div>
 <p>produit une sortie du type :</p>
-<p>…
-582  grep “apple” shopping.txt
-583  grep -n “apple” shopping.txt
-584  grep “DEFI” genomes/<em>.gbk
-585  grep “DEFI” genomes/</em>.gbk | grep “Staphyloco”
-586  grep “DEFI” genomes/<em>.gbk | grep -c “Staphyloco”
-587  pwd
-588  cd ..
-589  pwd
-590  find ./ -name “</em>.csv”
-591  history</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
-Le numéro à côté de chaque commande est le numéro de la commande dans l&#39;ordre où elle a été lancée dans le *shell*. Vous aurez bien sûr des numéros et des commandes différentes.
-
-On peut très simplement rappeler une commande à partir de son numéro précédé de «`!`». Par exemple :
-
-```bash
-$ !590
-find ./ -name &quot;*.csv&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+<span class="mi">582</span>  <span class="n">grep</span> <span class="s2">&quot;apple&quot;</span> <span class="n">shopping</span><span class="o">.</span><span class="n">txt</span>
+<span class="mi">583</span>  <span class="n">grep</span> <span class="o">-</span><span class="n">n</span> <span class="s2">&quot;apple&quot;</span> <span class="n">shopping</span><span class="o">.</span><span class="n">txt</span>
+<span class="mi">584</span>  <span class="n">grep</span> <span class="s2">&quot;DEFI&quot;</span> <span class="n">genomes</span><span class="o">/*.</span><span class="n">gbk</span>
+<span class="mi">585</span>  <span class="n">grep</span> <span class="s2">&quot;DEFI&quot;</span> <span class="n">genomes</span><span class="o">/*.</span><span class="n">gbk</span> <span class="o">|</span> <span class="n">grep</span> <span class="s2">&quot;Staphyloco&quot;</span>
+<span class="mi">586</span>  <span class="n">grep</span> <span class="s2">&quot;DEFI&quot;</span> <span class="n">genomes</span><span class="o">/*.</span><span class="n">gbk</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;Staphyloco&quot;</span>
+<span class="mi">587</span>  <span class="n">pwd</span>
+<span class="mi">588</span>  <span class="n">cd</span> <span class="o">..</span>
+<span class="mi">589</span>  <span class="n">pwd</span>
+<span class="mi">590</span>  <span class="n">find</span> <span class="o">./</span> <span class="o">-</span><span class="n">name</span> <span class="s2">&quot;*.csv&quot;</span>
+<span class="mi">591</span>  <span class="n">history</span>
+</pre></div>
+</div>
+<p>Le numéro à côté de chaque commande est le numéro de la commande dans l’ordre où elle a été lancée dans le <em>shell</em>. Vous aurez bien sûr des numéros et des commandes différentes.</p>
+<p>On peut très simplement rappeler une commande à partir de son numéro précédé de «<code class="docutils literal notranslate"><span class="pre">!</span></code>». Par exemple :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>!590
+find<span class="w"> </span>./<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.csv&quot;</span>
 ./unix/transferrin.csv
 </pre></div>
 </div>
