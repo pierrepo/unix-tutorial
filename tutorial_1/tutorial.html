@@ -353,11 +353,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#invite-de-commande">1. Invite de commande</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lancer-un-shell-ubuntu-sous-windows-10">Lancer un <em>shell</em> Ubuntu sous Windows 10</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#retrouver-le-repertoire-utilisateur-windows">Retrouver le répertoire utilisateur Windows</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#invite-de-commande">1. Invite de commande</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parcourir-les-repertoires-et-les-fichiers">2. Parcourir les répertoires et les fichiers</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preparer-les-donnees">Préparer les données</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#savoir-ou-on-se-trouve-pwd">Savoir où on se trouve : <code class="docutils literal notranslate"><span class="pre">pwd</span></code></a></li>
@@ -449,41 +445,24 @@ document.write(`
 </pre></div>
 </div>
 <p>signifie : tapez l’instruction <code class="docutils literal notranslate"><span class="pre">pwd</span></code> dans le <em>shell</em> (sans le <code class="docutils literal notranslate"><span class="pre">$</span></code>), puis validez cette commande en pressant la touche <kbd>Entrée</kbd>.</p>
-<section id="lancer-un-shell-ubuntu-sous-windows-10">
-<h3>Lancer un <em>shell</em> Ubuntu sous Windows 10<a class="headerlink" href="#lancer-un-shell-ubuntu-sous-windows-10" title="Permalink to this heading">#</a></h3>
-<p>Un <em>shell</em> Unix appelé « Ubuntu 20.04 » a déjà été installé sur votre session Windows. Vous trouverez plus de détails <a class="reference external" href="https://github.com/pierrepo/intro-wsl">ici</a>.</p>
-<p>Pour obtenir un <em>shell</em> :</p>
-<ol class="arabic simple">
-<li><p>Cliquez sur la petite loupe en bas à gauche dans la barre de menu.</p></li>
-<li><p>Tapez « Ubuntu »</p></li>
-<li><p>Puis cliquez sur la proposition « Ubuntu 20.04 LTS » qui vous est faite.</p></li>
-</ol>
-<p>La démonstration en image est <a class="reference download internal" download="" href="../_downloads/4e47a8e2ef885aad08fc2b3f4c53cf48/lancement_shell_ubuntu.png"><span class="xref download myst">ici</span></a>.</p>
-<p>Une fois votre terminal lancé, vous devriez obtenir ceci ou quelque chose d’équivalent :</p>
-<p><img alt="" src="../_images/terminal_ubuntu.png" /></p>
-</section>
-<section id="retrouver-le-repertoire-utilisateur-windows">
-<h3>Retrouver le répertoire utilisateur Windows<a class="headerlink" href="#retrouver-le-repertoire-utilisateur-windows" title="Permalink to this heading">#</a></h3>
-<p>Votre répertoire utilisateur sous le <em>shell</em> Ubuntu n’est pas au même endroit que sous Windows.</p>
-<p>Pour vous rendre dans votre répertoire utilisateur Windows où vous avez déjà vos fichiers, lancez la commande suivante :</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd /mnt/c/Users/omics
-</pre></div>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Ne tapez pas le <code class="docutils literal notranslate"><span class="pre">$</span></code> en début de ligne et faites attention aux majuscules et au minuscules (surtout pour <code class="docutils literal notranslate"><span class="pre">Users</span></code> qui débute par un <em>U</em> majuscule) !</p>
-</div>
-</section>
 </section>
 <section id="parcourir-les-repertoires-et-les-fichiers">
 <h2>2. Parcourir les répertoires et les fichiers<a class="headerlink" href="#parcourir-les-repertoires-et-les-fichiers" title="Permalink to this heading">#</a></h2>
 <section id="preparer-les-donnees">
 <h3>Préparer les données<a class="headerlink" href="#preparer-les-donnees" title="Permalink to this heading">#</a></h3>
-<p>Pour reproduire les exemples suivants, voici les commandes à lancer pour préparer les données que vous allez utiliser :</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ wget https://github.com/omics-school/unix/raw/master/demo/unix.tgz
-$ tar zxvf unix.tgz
-$ cd unix
+<p>Pour reproduire les exemples suivants, vous allez préparer les données que vous allez utiliser. Déplacez vous tout d’abord dans votre répertoire utilisateur avec la commande <code class="docutils literal notranslate"><span class="pre">cd</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span>
 </pre></div>
+</div>
+<p>puis exécutez les commandes suivant :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>wget<span class="w"> </span>https://github.com/pierrepo/unix-tutorial/raw/master/demo/unix.tgz
+$<span class="w"> </span>tar<span class="w"> </span>zxvf<span class="w"> </span>unix.tgz
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>unix
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Ne tapez pas le <code class="docutils literal notranslate"><span class="pre">$</span></code> en début de ligne et faites attention aux majuscules et au minuscules.</p>
 </div>
 <p>Ces commandes seront en partie expliquées plus loin. Pour ne pas réécrire complètement ces commandes, voici comment copier / coller entre Windows et le <em>shell</em> Linux :</p>
 <ul class="simple">
@@ -1359,11 +1338,7 @@ find ./ -name &quot;*.csv&quot;
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#invite-de-commande">1. Invite de commande</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lancer-un-shell-ubuntu-sous-windows-10">Lancer un <em>shell</em> Ubuntu sous Windows 10</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#retrouver-le-repertoire-utilisateur-windows">Retrouver le répertoire utilisateur Windows</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#invite-de-commande">1. Invite de commande</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parcourir-les-repertoires-et-les-fichiers">2. Parcourir les répertoires et les fichiers</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preparer-les-donnees">Préparer les données</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#savoir-ou-on-se-trouve-pwd">Savoir où on se trouve : <code class="docutils literal notranslate"><span class="pre">pwd</span></code></a></li>
