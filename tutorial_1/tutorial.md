@@ -1072,7 +1072,7 @@ produit une sortie du type :
 
 Le numéro à côté de chaque commande est le numéro de la commande dans l'ordre où elle a été lancée dans le *shell*. Vous aurez bien sûr des numéros et des commandes différentes.
 
-On peut très simplement rappeler une commande à partir de son numéro précédé de «`!`». Par exemple :
+On peut très simplement rappeler une commande à partir de son numéro précédé du caractère «`!`». Par exemple :
 
 ```bash
 $ !590
