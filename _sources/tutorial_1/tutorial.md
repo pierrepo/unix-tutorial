@@ -56,7 +56,7 @@ $ cd
 puis exécutez les commandes suivant :
 
 ```bash
-$ wget https://github.com/pierrepo/unix-tutorial/raw/master/demo/unix.tgz
+$ wget https://github.com/pierrepo/unix-tutorial/raw/master/tutorial_1/unix.tgz
 $ tar zxvf unix.tgz
 $ cd unix
 ```
