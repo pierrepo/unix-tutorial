@@ -1,11 +1,5 @@
 # Le Shell Unix
 
-
-## Activités préparatoires
-
-[Instructions](activites-preparatoires/)
-
-
 ## Tutoriel *maison*
 
 [Un aperçu rapide du *shell* Unix](tutoriel/README).
