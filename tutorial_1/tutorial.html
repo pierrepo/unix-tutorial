@@ -383,21 +383,21 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trier-sort">Trier : <code class="docutils literal notranslate"><span class="pre">sort</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trouver-les-elements-uniques-uniq">Trouver les éléments uniques : <code class="docutils literal notranslate"><span class="pre">uniq</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extraire-un-colonne-cut">Extraire un colonne : <code class="docutils literal notranslate"><span class="pre">cut</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gerer-les-flux-redirection-et-emboitement">Gérer les flux : redirection et emboîtement</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#etape-1-cut">Étape 1 (<code class="docutils literal notranslate"><span class="pre">cut</span></code>)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#etape-2-sort">Étape 2 (<code class="docutils literal notranslate"><span class="pre">sort</span></code>)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#etape-3-uniq">Étape 3 (<code class="docutils literal notranslate"><span class="pre">uniq</span></code>)</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gerer-les-flux-redirection-et-emboitement">8. Gérer les flux : redirection et emboîtement</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#etape-1-cut">Étape 1 (<code class="docutils literal notranslate"><span class="pre">cut</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#etape-2-sort">Étape 2 (<code class="docutils literal notranslate"><span class="pre">sort</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#etape-3-uniq">Étape 3 (<code class="docutils literal notranslate"><span class="pre">uniq</span></code>)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chercher">8. Chercher</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chercher">9. Chercher</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chercher-dans-des-fichiers-grep">Chercher dans des fichiers : <code class="docutils literal notranslate"><span class="pre">grep</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#petit-defi">Petit défi</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chercher-des-fichiers-find">Chercher des fichiers : <code class="docutils literal notranslate"><span class="pre">find</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#se-souvenir">9. Se souvenir</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#se-souvenir">10. Se souvenir</a></li>
 </ul>
             </nav>
         </div>
@@ -1099,8 +1099,9 @@ Homo<span class="w"> </span>sapiens
 <p>L’option <code class="docutils literal notranslate"><span class="pre">-d</span></code> spécifie le délimiteur, c’est-à-dire le caractère utilisé pour séparer les différents champs (les colonnes). Par défaut, <code class="docutils literal notranslate"><span class="pre">cut</span></code> utilise la tabulation.</p>
 <p>L’option <code class="docutils literal notranslate"><span class="pre">-f</span></code> précise le numéro du champ qu’on souhaite extraire.</p>
 </section>
+</section>
 <section id="gerer-les-flux-redirection-et-emboitement">
-<h3>Gérer les flux : redirection et emboîtement<a class="headerlink" href="#gerer-les-flux-redirection-et-emboitement" title="Permalink to this heading">#</a></h3>
+<h2>8. Gérer les flux : redirection et emboîtement<a class="headerlink" href="#gerer-les-flux-redirection-et-emboitement" title="Permalink to this heading">#</a></h2>
 <p>On souhaite extraire du fichier <code class="docutils literal notranslate"><span class="pre">transferrin.csv</span></code> la liste des différents organismes d’où proviennent les structures de transferrines. On a besoin pour cela de réaliser 3 étapes :</p>
 <ol class="arabic simple">
 <li><p>Extraire la liste des organismes (avec <code class="docutils literal notranslate"><span class="pre">cut</span></code>).</p></li>
@@ -1109,7 +1110,7 @@ Homo<span class="w"> </span>sapiens
 </ol>
 <p>Pour stocker l’information, d’une étape à l’autre, on peut renvoyer le résultat dans un fichier avec la redirection «<code class="docutils literal notranslate"><span class="pre">&gt;</span></code>».</p>
 <section id="etape-1-cut">
-<h4>Étape 1 (<code class="docutils literal notranslate"><span class="pre">cut</span></code>)<a class="headerlink" href="#etape-1-cut" title="Permalink to this heading">#</a></h4>
+<h3>Étape 1 (<code class="docutils literal notranslate"><span class="pre">cut</span></code>)<a class="headerlink" href="#etape-1-cut" title="Permalink to this heading">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cut<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;,&quot;</span><span class="w"> </span>-f<span class="w"> </span><span class="m">2</span><span class="w"> </span>transferrin.csv<span class="w"> </span>&gt;<span class="w"> </span>organism.txt
 </pre></div>
 </div>
@@ -1130,7 +1131,7 @@ Homo<span class="w"> </span>sapiens
 </div>
 </section>
 <section id="etape-2-sort">
-<h4>Étape 2 (<code class="docutils literal notranslate"><span class="pre">sort</span></code>)<a class="headerlink" href="#etape-2-sort" title="Permalink to this heading">#</a></h4>
+<h3>Étape 2 (<code class="docutils literal notranslate"><span class="pre">sort</span></code>)<a class="headerlink" href="#etape-2-sort" title="Permalink to this heading">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sort<span class="w"> </span>organism.txt<span class="w"> </span>&gt;<span class="w"> </span>organism_sorted.txt
 </pre></div>
 </div>
@@ -1149,7 +1150,7 @@ Gallus<span class="w"> </span>gallus
 </div>
 </section>
 <section id="etape-3-uniq">
-<h4>Étape 3 (<code class="docutils literal notranslate"><span class="pre">uniq</span></code>)<a class="headerlink" href="#etape-3-uniq" title="Permalink to this heading">#</a></h4>
+<h3>Étape 3 (<code class="docutils literal notranslate"><span class="pre">uniq</span></code>)<a class="headerlink" href="#etape-3-uniq" title="Permalink to this heading">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>uniq<span class="w"> </span>organism_sorted.txt
 Anas<span class="w"> </span>platyrhynchos
 Gallus<span class="w"> </span>gallus
@@ -1190,9 +1191,8 @@ Sus<span class="w"> </span>scrofa
 </div>
 </section>
 </section>
-</section>
 <section id="chercher">
-<h2>8. Chercher<a class="headerlink" href="#chercher" title="Permalink to this heading">#</a></h2>
+<h2>9. Chercher<a class="headerlink" href="#chercher" title="Permalink to this heading">#</a></h2>
 <section id="chercher-dans-des-fichiers-grep">
 <h3>Chercher dans des fichiers : <code class="docutils literal notranslate"><span class="pre">grep</span></code><a class="headerlink" href="#chercher-dans-des-fichiers-grep" title="Permalink to this heading">#</a></h3>
 <p>La commande <code class="docutils literal notranslate"><span class="pre">grep</span></code> cherche un motif dans un ou plusieurs fichiers et renvoie les lignes correspondantes :</p>
@@ -1276,35 +1276,37 @@ $<span class="w"> </span><span class="nb">pwd</span>
 </section>
 </section>
 <section id="se-souvenir">
-<h2>9. Se souvenir<a class="headerlink" href="#se-souvenir" title="Permalink to this heading">#</a></h2>
+<h2>10. Se souvenir<a class="headerlink" href="#se-souvenir" title="Permalink to this heading">#</a></h2>
 <p>La commande <code class="docutils literal notranslate"><span class="pre">history</span></code> affiche toutes les commandes que vous avez entrées, de la plus ancienne à la plus récente.</p>
 <p>Ainsi, la commande</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">history</span>
 </pre></div>
 </div>
 <p>produit une sortie du type :</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
-  <span class="mi">582</span>  <span class="n">grep</span> <span class="s2">&quot;apple&quot;</span> <span class="n">shopping</span><span class="o">.</span><span class="n">txt</span>
-  <span class="mi">583</span>  <span class="n">grep</span> <span class="o">-</span><span class="n">n</span> <span class="s2">&quot;apple&quot;</span> <span class="n">shopping</span><span class="o">.</span><span class="n">txt</span>
-  <span class="mi">584</span>  <span class="n">grep</span> <span class="s2">&quot;DEFI&quot;</span> <span class="n">genomes</span><span class="o">/*.</span><span class="n">gbk</span>
-  <span class="mi">585</span>  <span class="n">grep</span> <span class="s2">&quot;DEFI&quot;</span> <span class="n">genomes</span><span class="o">/*.</span><span class="n">gbk</span> <span class="o">|</span> <span class="n">grep</span> <span class="s2">&quot;Staphyloco&quot;</span>
-  <span class="mi">586</span>  <span class="n">grep</span> <span class="s2">&quot;DEFI&quot;</span> <span class="n">genomes</span><span class="o">/*.</span><span class="n">gbk</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;Staphyloco&quot;</span>
-  <span class="mi">587</span>  <span class="n">pwd</span>
-  <span class="mi">588</span>  <span class="n">cd</span> <span class="o">..</span>
-  <span class="mi">589</span>  <span class="n">pwd</span>
-  <span class="mi">590</span>  <span class="n">find</span> <span class="o">./</span> <span class="o">-</span><span class="n">name</span> <span class="s2">&quot;*.csv&quot;</span>
-  <span class="mi">591</span>  <span class="n">history</span>
-</pre></div>
-</div>
-<p>Le numéro à côté de chaque commande est le numéro de la commande dans l’ordre où elle a été lancée dans le <em>shell</em>. Vous aurez bien sûr des numéros et des commandes différentes.</p>
-<p>On peut très simplement rappeler une commande à partir de son numéro précédé de «<code class="docutils literal notranslate"><span class="pre">!</span></code>». Par exemple :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>!590
-find<span class="w"> </span>./<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.csv&quot;</span>
+<p>…
+582  grep “apple” shopping.txt
+583  grep -n “apple” shopping.txt
+584  grep “DEFI” genomes/<em>.gbk
+585  grep “DEFI” genomes/</em>.gbk | grep “Staphyloco”
+586  grep “DEFI” genomes/<em>.gbk | grep -c “Staphyloco”
+587  pwd
+588  cd ..
+589  pwd
+590  find ./ -name “</em>.csv”
+591  history</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+Le numéro à côté de chaque commande est le numéro de la commande dans l&#39;ordre où elle a été lancée dans le *shell*. Vous aurez bien sûr des numéros et des commandes différentes.
+
+On peut très simplement rappeler une commande à partir de son numéro précédé de «`!`». Par exemple :
+
+```bash
+$ !590
+find ./ -name &quot;*.csv&quot;
 ./unix/transferrin.csv
 </pre></div>
 </div>
 <p>Enfin, lorsqu’on a travaillé un moment dans le <em>shell</em>, il peut être utile de sauvegarder l’historique des commandes qu’on a lancées avec :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">history</span><span class="w"> </span>&gt;<span class="w"> </span><span class="m">2019</span>-03-14_history.txt
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ history &gt; 2019-03-14_history.txt
 </pre></div>
 </div>
 <p>Ici, <code class="docutils literal notranslate"><span class="pre">2019-03-14</span></code> représente la date au format <a class="reference external" href="https://fr.wikipedia.org/wiki/ISO_8601">ISO 8601</a> <code class="docutils literal notranslate"><span class="pre">AAAA-MM-JJ</span></code> (<em>année-mois-jour</em>).</p>
@@ -1402,21 +1404,21 @@ find<span class="w"> </span>./<span class="w"> </span>-name<span class="w"> </sp
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trier-sort">Trier : <code class="docutils literal notranslate"><span class="pre">sort</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trouver-les-elements-uniques-uniq">Trouver les éléments uniques : <code class="docutils literal notranslate"><span class="pre">uniq</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extraire-un-colonne-cut">Extraire un colonne : <code class="docutils literal notranslate"><span class="pre">cut</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gerer-les-flux-redirection-et-emboitement">Gérer les flux : redirection et emboîtement</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#etape-1-cut">Étape 1 (<code class="docutils literal notranslate"><span class="pre">cut</span></code>)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#etape-2-sort">Étape 2 (<code class="docutils literal notranslate"><span class="pre">sort</span></code>)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#etape-3-uniq">Étape 3 (<code class="docutils literal notranslate"><span class="pre">uniq</span></code>)</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gerer-les-flux-redirection-et-emboitement">8. Gérer les flux : redirection et emboîtement</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#etape-1-cut">Étape 1 (<code class="docutils literal notranslate"><span class="pre">cut</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#etape-2-sort">Étape 2 (<code class="docutils literal notranslate"><span class="pre">sort</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#etape-3-uniq">Étape 3 (<code class="docutils literal notranslate"><span class="pre">uniq</span></code>)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chercher">8. Chercher</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chercher">9. Chercher</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chercher-dans-des-fichiers-grep">Chercher dans des fichiers : <code class="docutils literal notranslate"><span class="pre">grep</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#petit-defi">Petit défi</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chercher-des-fichiers-find">Chercher des fichiers : <code class="docutils literal notranslate"><span class="pre">find</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#se-souvenir">9. Se souvenir</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#se-souvenir">10. Se souvenir</a></li>
 </ul>
   </nav></div>
 

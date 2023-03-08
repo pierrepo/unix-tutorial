@@ -841,7 +841,7 @@ L'option `-d` spécifie le délimiteur, c'est-à-dire le caractère utilisé pou
 L'option `-f` précise le numéro du champ qu'on souhaite extraire.
 
 
-### Gérer les flux : redirection et emboîtement
+## 8. Gérer les flux : redirection et emboîtement
 
 On souhaite extraire du fichier `transferrin.csv` la liste des différents organismes d'où proviennent les structures de transferrines. On a besoin pour cela de réaliser 3 étapes :
 
@@ -851,7 +851,7 @@ On souhaite extraire du fichier `transferrin.csv` la liste des différents organ
 
 Pour stocker l'information, d'une étape à l'autre, on peut renvoyer le résultat dans un fichier avec la redirection «`>`».
 
-#### Étape 1 (`cut`)
+### Étape 1 (`cut`)
 
 ```bash
 $ cut -d "," -f 2 transferrin.csv > organism.txt
@@ -875,7 +875,7 @@ Homo sapiens
 Homo sapiens
 ```
 
-#### Étape 2 (`sort`)
+### Étape 2 (`sort`)
 
 ```bash
 $ sort organism.txt > organism_sorted.txt
@@ -896,7 +896,7 @@ Gallus gallus
 Gallus gallus
 ```
 
-#### Étape 3 (`uniq`)
+### Étape 3 (`uniq`)
 
 ```bash
 $ uniq organism_sorted.txt
@@ -947,8 +947,7 @@ $ cut -f 2 transferrin.tsv | sort | uniq -c
 ```
 
 
-## 8. Chercher
-
+## 9. Chercher
 
 ### Chercher dans des fichiers : `grep`
 
@@ -1046,7 +1045,7 @@ $ find ./ -name "*.csv"
 La commande `find` prend comme argument l'endroit à partir duquel on cherche, ici le répertoire courant désigné par `./` (on aurait aussi pu simplement indiquer « `.` »). Puis on indique le critère de recherche avec l'option `-name`, ici tous les fichiers qui se terminent par `.csv`.
 
 
-## 9. Se souvenir
+## 10. Se souvenir
 
 La commande `history` affiche toutes les commandes que vous avez entrées, de la plus ancienne à la plus récente.
 
@@ -1056,7 +1055,7 @@ Ainsi, la commande
 $ history
 ```
 produit une sortie du type :
-```
+
 ...
   582  grep "apple" shopping.txt
   583  grep -n "apple" shopping.txt
@@ -1082,7 +1081,7 @@ find ./ -name "*.csv"
 
 Enfin, lorsqu'on a travaillé un moment dans le *shell*, il peut être utile de sauvegarder l'historique des commandes qu'on a lancées avec :
 
-```bash
+```
 $ history > 2019-03-14_history.txt
 ```
 
