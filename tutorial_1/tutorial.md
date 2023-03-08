@@ -67,7 +67,11 @@ Pour vous rendre dans votre répertoire utilisateur Windows où vous avez déjà
 $ cd /mnt/c/Users/omics
 ```
 
-🔔 Rappel : Ne tapez pas le `$` en début de ligne et faites attention aux majuscules et au minuscules (surtout pour `Users` qui débute par un *U* majuscule) !
+```{warning}
+Ne tapez pas le `$` en début de ligne et faites attention aux majuscules et au minuscules (surtout pour `Users` qui débute par un *U* majuscule) !
+```
+
+
 
 
 ## 2. Parcourir les répertoires et les fichiers
