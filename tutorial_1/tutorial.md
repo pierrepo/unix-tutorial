@@ -42,44 +42,27 @@ $ pwd
 ```
 signifie : tapez l'instruction `pwd` dans le *shell* (sans le `$`), puis validez cette commande en pressant la touche <kbd>Entrée</kbd>.
 
-### Lancer un *shell* Ubuntu sous Windows 10
-
-Un *shell* Unix appelé « Ubuntu 20.04 » a déjà été installé sur votre session Windows. Vous trouverez plus de détails [ici](https://github.com/pierrepo/intro-wsl).
-
-Pour obtenir un *shell* :
-
-1. Cliquez sur la petite loupe en bas à gauche dans la barre de menu.
-2. Tapez « Ubuntu »
-3. Puis cliquez sur la proposition « Ubuntu 20.04 LTS » qui vous est faite.
-
-La démonstration en image est [ici](img/lancement_shell_ubuntu.png).
-
-Une fois votre terminal lancé, vous devriez obtenir ceci ou quelque chose d'équivalent :
-
-![](img/terminal_ubuntu.png)
-
-### Retrouver le répertoire utilisateur Windows
-
-Votre répertoire utilisateur sous le *shell* Ubuntu n'est pas au même endroit que sous Windows.
-
-Pour vous rendre dans votre répertoire utilisateur Windows où vous avez déjà vos fichiers, lancez la commande suivante :
-```
-$ cd /mnt/c/Users/omics
-```
-
-```{warning}
-Ne tapez pas le `$` en début de ligne et faites attention aux majuscules et au minuscules (surtout pour `Users` qui débute par un *U* majuscule) !
-```
 
 ## 2. Parcourir les répertoires et les fichiers
 
 ### Préparer les données
 
-Pour reproduire les exemples suivants, voici les commandes à lancer pour préparer les données que vous allez utiliser :
+Pour reproduire les exemples suivants, vous allez préparer les données que vous allez utiliser. Déplacez vous tout d'abord dans votre répertoire utilisateur avec la commande `cd` :
+
+```bash
+$ cd
 ```
-$ wget https://github.com/omics-school/unix/raw/master/demo/unix.tgz
+
+puis exécutez les commandes suivant :
+
+```bash
+$ wget https://github.com/pierrepo/unix-tutorial/raw/master/demo/unix.tgz
 $ tar zxvf unix.tgz
 $ cd unix
+```
+
+```{warning}
+Ne tapez pas le `$` en début de ligne et faites attention aux majuscules et au minuscules.
 ```
 
 Ces commandes seront en partie expliquées plus loin. Pour ne pas réécrire complètement ces commandes, voici comment copier / coller entre Windows et le *shell* Linux :
