@@ -1057,16 +1057,16 @@ $ history
 produit une sortie du type :
 
 ...
-  582  grep "apple" shopping.txt
-  583  grep -n "apple" shopping.txt
-  584  grep "DEFI" genomes/*.gbk
-  585  grep "DEFI" genomes/*.gbk | grep "Staphyloco"
-  586  grep "DEFI" genomes/*.gbk | grep -c "Staphyloco"
-  587  pwd
-  588  cd ..
-  589  pwd
-  590  find ./ -name "*.csv"
-  591  history
+582  grep "apple" shopping.txt
+583  grep -n "apple" shopping.txt
+584  grep "DEFI" genomes/*.gbk
+585  grep "DEFI" genomes/*.gbk | grep "Staphyloco"
+586  grep "DEFI" genomes/*.gbk | grep -c "Staphyloco"
+587  pwd
+588  cd ..
+589  pwd
+590  find ./ -name "*.csv"
+591  history
 ```
 
 Le numéro à côté de chaque commande est le numéro de la commande dans l'ordre où elle a été lancée dans le *shell*. Vous aurez bien sûr des numéros et des commandes différentes.
@@ -1081,7 +1081,7 @@ find ./ -name "*.csv"
 
 Enfin, lorsqu'on a travaillé un moment dans le *shell*, il peut être utile de sauvegarder l'historique des commandes qu'on a lancées avec :
 
-```
+```bash
 $ history > 2019-03-14_history.txt
 ```
 
