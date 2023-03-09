@@ -1029,7 +1029,7 @@ $ grep "DEFI" genomes/*.gbk | grep -c "Staphyloco"
 Construisez l'enchaînement de commandes Unix qui :
 - cherche le motif `DEFINITION` dans tous les fichiers GenBank du répertoire `genomes` ;
 - cherche les génomes de staphylocoques (`Staphylococcus`) ;
-- supprime les noms des fichiers des résultats ;
+- ne conserve que les noms des organismes ;
 - renvoie le tout dans le fichier `all_staphylo.txt`.
 
 
@@ -1041,10 +1041,10 @@ On revient tout d'abord dans le répertoire parent :
 
 ```bash
 $ pwd
-/mnt/c/Users/omics/unix
+/shared/home/ppoulain/unix
 $ cd ..
 $ pwd
-/mnt/c/Users/omics
+/shared/home/ppoulain
 ```
 
 On cherche maintenant les fichiers avec l'extension `.csv` :
@@ -1054,7 +1054,7 @@ $ find ./ -name "*.csv"
 ./unix/transferrin.csv
 ```
 
-La commande `find` prend comme argument l'endroit à partir duquel on cherche, ici le répertoire courant désigné par `./` (on aurait aussi pu simplement indiquer « `.` »). Puis on indique le critère de recherche avec l'option `-name`, ici tous les fichiers qui se terminent par `.csv`.
+La commande `find` prend comme argument l'endroit à partir duquel on cherche, ici le répertoire courant désigné par `./` (on aurait aussi pu simplement indiquer « `.` »). Puis on précise le critère de recherche avec l'option `-name`, ici tous les fichiers qui se terminent par `.csv`.
 
 
 ## 10. Se souvenir
@@ -1099,3 +1099,11 @@ $ history > 2019-03-14_history.txt
 ```
 
 Ici, `2019-03-14` représente la date au format [ISO 8601](https://fr.wikipedia.org/wiki/ISO_8601) `AAAA-MM-JJ` (*année-mois-jour*).
+
+Pour automatiser cette sauvegarde avec la date du jour :
+
+```bash
+$ history > $(date --iso-8601)_history.txt
+```
+
+Nous verrons le fonctionnement de `$(date --iso-8601)` prochainement.
