@@ -1,8 +1,8 @@
 # Bienvenue !
 
-Bienvenue sur ce tutoriel Unix dans lequel vous découvrirez les bases des commandes Unix et du *Shell*.
+Bienvenue sur ce tutoriel Unix dans lequel vous allez découvrir les bases des commandes Unix et du *Shell*.
 
-Pour réaliser ce tutoriel vous utilisez le Jupyter Hub de l'IFB.
+Pour réaliser ce tutoriel vous utilisez le JupyterHub de l'IFB.
 
 
 ```{tableofcontents}
