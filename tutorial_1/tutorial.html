@@ -1254,7 +1254,7 @@ genomes/NC_013893_head.gbk:DEFINITION<span class="w">  </span>Staphylococcus<spa
 <ul class="simple">
 <li><p>cherche le motif <code class="docutils literal notranslate"><span class="pre">DEFINITION</span></code> dans tous les fichiers GenBank du répertoire <code class="docutils literal notranslate"><span class="pre">genomes</span></code> ;</p></li>
 <li><p>cherche les génomes de staphylocoques (<code class="docutils literal notranslate"><span class="pre">Staphylococcus</span></code>) ;</p></li>
-<li><p>supprime les noms des fichiers des résultats ;</p></li>
+<li><p>ne conserve que les noms des organismes ;</p></li>
 <li><p>renvoie le tout dans le fichier <code class="docutils literal notranslate"><span class="pre">all_staphylo.txt</span></code>.</p></li>
 </ul>
 </section>
@@ -1263,10 +1263,10 @@ genomes/NC_013893_head.gbk:DEFINITION<span class="w">  </span>Staphylococcus<spa
 <p>La commande <code class="docutils literal notranslate"><span class="pre">find</span></code> recherche des fichiers ou des répertoires.</p>
 <p>On revient tout d’abord dans le répertoire parent :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">pwd</span>
-/mnt/c/Users/omics/unix
+/shared/home/ppoulain/unix
 $<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>..
 $<span class="w"> </span><span class="nb">pwd</span>
-/mnt/c/Users/omics
+/shared/home/ppoulain
 </pre></div>
 </div>
 <p>On cherche maintenant les fichiers avec l’extension <code class="docutils literal notranslate"><span class="pre">.csv</span></code> :</p>
@@ -1274,7 +1274,7 @@ $<span class="w"> </span><span class="nb">pwd</span>
 ./unix/transferrin.csv
 </pre></div>
 </div>
-<p>La commande <code class="docutils literal notranslate"><span class="pre">find</span></code> prend comme argument l’endroit à partir duquel on cherche, ici le répertoire courant désigné par <code class="docutils literal notranslate"><span class="pre">./</span></code> (on aurait aussi pu simplement indiquer « <code class="docutils literal notranslate"><span class="pre">.</span></code> »). Puis on indique le critère de recherche avec l’option <code class="docutils literal notranslate"><span class="pre">-name</span></code>, ici tous les fichiers qui se terminent par <code class="docutils literal notranslate"><span class="pre">.csv</span></code>.</p>
+<p>La commande <code class="docutils literal notranslate"><span class="pre">find</span></code> prend comme argument l’endroit à partir duquel on cherche, ici le répertoire courant désigné par <code class="docutils literal notranslate"><span class="pre">./</span></code> (on aurait aussi pu simplement indiquer « <code class="docutils literal notranslate"><span class="pre">.</span></code> »). Puis on précise le critère de recherche avec l’option <code class="docutils literal notranslate"><span class="pre">-name</span></code>, ici tous les fichiers qui se terminent par <code class="docutils literal notranslate"><span class="pre">.csv</span></code>.</p>
 </section>
 </section>
 <section id="se-souvenir">
@@ -1310,6 +1310,11 @@ find<span class="w"> </span>./<span class="w"> </span>-name<span class="w"> </sp
 </pre></div>
 </div>
 <p>Ici, <code class="docutils literal notranslate"><span class="pre">2019-03-14</span></code> représente la date au format <a class="reference external" href="https://fr.wikipedia.org/wiki/ISO_8601">ISO 8601</a> <code class="docutils literal notranslate"><span class="pre">AAAA-MM-JJ</span></code> (<em>année-mois-jour</em>).</p>
+<p>Pour automatiser cette sauvegarde avec la date du jour :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">history</span><span class="w"> </span>&gt;<span class="w"> </span><span class="k">$(</span>date<span class="w"> </span>--iso-8601<span class="k">)</span>_history.txt
+</pre></div>
+</div>
+<p>Nous verrons le fonctionnement de <code class="docutils literal notranslate"><span class="pre">$(date</span> <span class="pre">--iso-8601)</span></code> prochainement.</p>
 </section>
 </section>
 
