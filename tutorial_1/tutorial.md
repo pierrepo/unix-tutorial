@@ -49,10 +49,14 @@ signifie : tapez l'instruction `pwd` dans le *shell* (sans le `$`), puis validez
 
 ## 2. Préparer les données
 
-Pour reproduire les exemples suivants, vous allez préparer les données que vous allez utiliser. Déplacez vous tout d'abord dans votre répertoire utilisateur avec la commande `cd` :
+Pour reproduire les exemples suivants, vous allez préparer les données nécessaires. Déplacez-vous tout d'abord dans votre répertoire utilisateur avec la commande `cd` :
 
 ```bash
 $ cd
+```
+
+```{note}
+Ne tapez pas le caractère `$` en début de ligne et faites attention aux majuscules et au minuscules.
 ```
 
 puis exécutez les commandes suivant :
@@ -63,11 +67,9 @@ $ tar zxvf unix.tgz
 $ cd unix
 ```
 
-```{warning}
-Ne tapez pas le `$` en début de ligne et faites attention aux majuscules et au minuscules.
-```
 
-Ces commandes seront en partie expliquées plus loin. Pour ne pas réécrire complètement ces commandes, vous pouvez les copier / coller avec les raccourcis <kbd>Ctrl</kbd>+<kbd>C</kbd> et <kbd>Ctrl</kbd>+<kbd>V</kbd> (ou parfois <kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>C</kbd>).
+
+Ces commandes seront en partie expliquées plus loin. Pour ne pas réécrire complètement ces commandes, vous pouvez les copier / coller avec les raccourcis <kbd>Ctrl</kbd>+<kbd>C</kbd> pour copier et <kbd>Ctrl</kbd>+<kbd>V</kbd> (ou parfois <kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>C</kbd>) pour coller.
 
 ## 3. Parcourir les répertoires et les fichiers
 ### Savoir où on se trouve : `pwd`
@@ -85,7 +87,7 @@ Cela signifie qu'on se trouve actuellement dans le répertoire `/shared/home/ppo
 
 Dans votre session, `ppoulain` sera bien sur remplacé par votre nom d'utilisateur sur le cluster IFB.
 
-Sous Unix, les répertoires et les fichiers sont organisés sous forme d'une structure en arbre. On parle d'arborescence (voir l'[illustration](http://swcarpentry.github.io/shell-novice/02-filedir/index.html) de Software Carpentry).
+Sous Unix, les répertoires et les fichiers sont organisés sous forme d'une structure en arbre. On parle d'arborescence (voir l'[illustration](https://swcarpentry.github.io/shell-novice/fig/home-directories.svg) de [Software Carpentry](http://swcarpentry.github.io/shell-novice/02-filedir/index.html)).
 
 Le répertoire dont dépendent tous les autres est le `/` qu'on appelle la « racine » (*root* en anglais), les différents sous-répertoires sont séparés les uns des autres par le caractère `/` (le même caractère que la racine).
 
@@ -116,7 +118,7 @@ $ ls
 genomes  paper.pdf  protein.txt  shopping.txt  transferrin.csv	transferrin.tsv
 ```
 
-On peut modifier le comportement par défaut d'une commande avec une (ou plusieurs) option(s). Cette option est séparée de la commande par un ou plusieurs espaces.
+On peut modifier le comportement par défaut d'une commande avec une (ou plusieurs) option(s). Cette option est séparée de la commande `ls` par un ou plusieurs espaces.
 
 Par exemple avec `-F` :
 
@@ -137,7 +139,7 @@ genomes/  paper.pdf  protein.txt  shopping.txt	transferrin.csv  transferrin.tsv
 et pourquoi pas :
 
 ```bash
-$ ls                                            -F
+$ ls                           -F
 genomes/  paper.pdf  protein.txt  shopping.txt	transferrin.csv  transferrin.tsv
 ```
 
@@ -156,7 +158,7 @@ drwxr-xr-x 2 ppoulain ppoulain  4096 Mar 13  2019 genomes
 -rw-r--r-- 1 ppoulain ppoulain   940 Mar 12  2019 transferrin.tsv
 ```
 
-L'option `-l` peut être associée à l'option `-h` pour afficher des tailles en octets, kilo, mega et giga octets.
+L'option `-l` peut être associée à l'option `-h` pour afficher des tailles lisibles par des **h**umains, c'est-à-dire en octets, ko, Mo et Go.
 
 ```bash
 $ ls -l -h
@@ -206,7 +208,7 @@ $ ls -a
 .  ..  genomes	paper.pdf  protein.txt	shopping.txt  transferrin.csv  transferrin.tsv
 ```
 
-Par défaut, il y a deux répertoires cachés qui sont toujours présents : `.` et `..`
+Par défaut, il y a deux répertoires cachés qui sont toujours présents et sont créés automatiquement : `.` et `..`
 
 - Le répertoire `.` désigne le répertoire courant.
 - Le répertoire `..` désigne le répertoire parent. Par exemple, si on est dans le répertoire `/shared/home/ppoulain/unix`, alors `..` désigne le répertoire `/shared/home/ppoulain`.
@@ -229,6 +231,15 @@ On peut même obtenir des informations détaillées sur un fichier en particulie
 ```bash
 $ ls -lh paper.pdf
 -rw-r--r-- 1 ppoulain ppoulain 96K Mar 13  2019 paper.pdf
+```
+
+```{note}
+Dans cet exemple, `ls` est la commande Unix, `-lh` sont les options et `paper.pdf` est l'argument.
+
+Cette anatomie d'une instruction Unix est schématisée dans l'illustration suivante :
+![](https://swcarpentry.github.io/shell-novice/fig/shell_command_syntax.svg)
+
+Source : [Software Carpentry](https://swcarpentry.github.io/shell-novice/02-filedir/index.html).
 ```
 
 
@@ -257,7 +268,7 @@ Mandatory arguments to long options are mandatory for short options too.
   -b, --escape               print C-style escapes for nongraphic characters
       --block-size=SIZE      scale sizes by SIZE before printing them; e.g.,
 
-...
+[...]
 ```
 
 
@@ -276,9 +287,9 @@ Enfin, pour nommer un fichier ou un répertoire, on peut utiliser :
 - le tiret du bas «`_`»,
 - le point «`.`».
 
-On vous déconseille fortement l'utilisation des autres caractères (`+()[]éèàùç`). Certains caractères sont même interdits (`<>|;&`).
+On vous déconseille fortement l'utilisation d'autres caractères comme `+()[]éèàùç`. Certains caractères sont même interdits (`<>|;&`).
 
-Enfin, ne mettez **jamais** un espace dans un nom de fichier ou de répertoire. **J-A-M-A-I-S**. Unix l'autorise mais c'est très très pénible par la suite car l'espace est utilisé pour séparer les options et les arguments d'une commande.
+Enfin, ne mettez **jamais** un espace dans un nom de fichier ou de répertoire. **J-A-M-A-I-S**. Unix l'autorise mais c'est très pénible par la suite car l'espace est utilisé pour séparer les options et les arguments d'une commande.
 
 Pour le reste, laisser faire votre imagination et utilisez des noms de fichiers et de répertoires expressifs.
 
@@ -297,7 +308,7 @@ $ pwd
 
 Partant du répertoire `/shared/home/ppoulain/unix`, on s'est déplacé dans le répertoire `/shared/home/ppoulain/unix/genomes`.
 
-Dans l'instruction `cd genomes`, le répertoire `genomes` est un argument de la commande `cd`. Ici, le répertoire `genomes` est un chemin relatif (car il ne débute pas par `/`). C'est-à-dire qu'on a entré le nom de ce répertoire (`genomes`) par rapport au répertoire dans lequel nous étions (`/shared/home/ppoulain/unix`). Bien sûr, la commande `cd` fonctionne très bien avec un chemin absolu. La commande
+Dans l'instruction `cd genomes`, le répertoire `genomes` est un argument de la commande `cd`. Ici, le répertoire `genomes` est un chemin relatif (car il ne débute pas par `/`). C'est-à-dire qu'on a indiqué le nom de ce répertoire (`genomes`) par rapport au répertoire dans lequel nous étions (`/shared/home/ppoulain/unix`). Bien sûr, la commande `cd` fonctionne très bien avec un chemin absolu. La commande
 
 ```bash
 $ cd /shared/home/ppoulain/unix/genomes
@@ -458,7 +469,7 @@ Pour supprimer un répertoire, il faut utiliser l'option supplémentaire `-r`.
 
 Suivant la configuration de votre *shell*, il faudra peut être ajouter l'option `-f` pour que la suppression fonctionne.
 
-```{note}
+```{warning}
 Il n'y a pas de corbeille dans le *shell* Unix, c'est-à-dire aucune possibilité de récupérer un fichier ou un répertoire effacé par erreur. Pensez à sauvegarder régulièrement vos fichiers.
 ```
 
@@ -491,7 +502,7 @@ transferrin.csv  transferrin.tsv
 La commande `cp transferrin.* test4` est un raccourci pour
 
 ```bash
-cp transferrin.csv  transferrin.tsv test4
+cp transferrin.csv transferrin.tsv test4
 ```
 
 Cela fonctionne avec autant de fichiers qu'on le souhaite.
@@ -501,23 +512,23 @@ Cela fonctionne avec autant de fichiers qu'on le souhaite.
 
 Écrire des commandes dans un *shell* peut sembler rébarbatif mais on gagne rapidement en efficacité avec les astuces suivantes.
 
-### Rappel des anciennes commandes
+#### Rappel des anciennes commandes
 
 La flèche du haut <kbd>↑</kbd> rappelle les commandes précédentes (depuis la plus récente jusqu'à la plus ancienne).
 
-### Complétion automatique
+#### Complétion automatique
 
 La touche tabulation <kbd>Tab</kbd> est utile pour compléter une commande, un nom de répertoire ou de fichier. Appuyez deux fois sur <kbd>Tab</kbd> en cas d’ambiguïté.
 
-Par exemple, si vous tapez `/h` puis la touche <kbd>Tab</kbd> et le *shell* va compléter automatiquement à `/home`.
+Par exemple, si vous tapez `/h` puis la touche <kbd>Tab</kbd>, le *shell* va compléter automatiquement à `/home`.
 
-### Arrêter une commande en cours
+#### Arrêter une commande en cours
 
 Pressez la touche <kbd>Ctrl</kbd> et la touche <kbd>C</kbd> en même temps pour arrêter une commande en cours.
 
-### Copier / coller
+#### Copier / coller
 
-Pour copier / coller quelque chose dans le *shell*, utilisez les combinaisons de touches <kbd>Ctrl</kbd>+<kbd>C</kbd> et <kbd>Ctrl</kbd>+<kbd>V</kbd> (ou <kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>V</kbd>).
+Pour copier / coller quelque chose dans le *shell*, sélectionnez du texte puis utilisez les combinaisons de touches <kbd>Ctrl</kbd>+<kbd>C</kbd> pour copier et <kbd>Ctrl</kbd>+<kbd>V</kbd> (ou <kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>V</kbd>) pour coller.
 
 
 ## 5. Explorer le contenu de fichiers
@@ -560,7 +571,7 @@ startxref
 %%EOF
 ```
 
-```{warning}
+```{note}
 Dans la suite, nous n'explorerons que le contenu de **fichiers textes**.
 ```
 
@@ -580,7 +591,7 @@ $ cat transferrin.csv
 5WTD,Homo sapiens,679
 5X5P,Homo sapiens,679
 6CTC,Homo sapiens,679
-...
+[...]
 ```
 
 Pour les gros fichiers, on préfère utiliser la commande `less` qui affiche *progressivement* le contenu d'un fichier :
@@ -637,6 +648,8 @@ $ tail -n 2 transferrin.csv
 6CTC,Homo sapiens,679
 ```
 
+Dans l'exemple ci-dessus, on a affiché les 2 dernières lignes du fichier `transferrin.csv`.
+
 ## 6. Créer ou éditer un fichier texte
 
 Nano est un éditeur de texte qui fonctionne dans un *shell*, donc sans interface graphique, sans menu, sans icône, contrairement à des éditeurs de texte comme Notepad++.
@@ -676,6 +689,9 @@ On peut aussi ouvrir un fichier texte existant en indiquant en argument le nom d
 $ nano shopping.txt
 ```
 
+Modifiez le fichier `shopping.txt` (en respectant le format *un_élement une_quantité*) avec nano, puis enregistrez-le.
+
+
 
 ## 7. Manipuler des données
 
@@ -688,11 +704,11 @@ $ wc shopping.txt
  5 10 45 shopping.txt
 ```
 
-On apprend ainsi que le fichier `shopping.txt` contient 5 lignes, 10 mots et 45 caractères.
+On apprend ainsi que le fichier `shopping.txt` contient 5 lignes, 10 mots et 45 caractères, ou des valeurs équivalentes si vous avez modifé ce fichier.
 
 L'option `-l` indique à la commande `wc` de ne compter que le nombre de lignes. Et réciproquement pour `-w` et le nombre de mots, et `-c` et le nombre de caractères.
 
-Lorsque plusieurs fichiers sont fournis en argument à `wc`, le total est aussi renvoyé :
+Lorsque plusieurs fichiers sont fournis en argument à la commande `wc`, le total est aussi renvoyé :
 
 ```bash
 $ wc -l transferrin.*
@@ -923,7 +939,7 @@ Les structures de transferrines du fichier `transferrin.csv` proviennent de 5 or
 
 Pour cette analyse, nous avons dû créer deux fichiers intermédiaires : `organism.txt` et `organism_sorted.txt`.
 
-Pour éviter la création de ces fichiers et réaliser cette analyse en une seule fois, on emboîte (« chaîne ») les différentes étapes. La sortie produite par une étape devient l'entrée de l'étape suivante (voir l'[illustration](http://swcarpentry.github.io/shell-novice/04-pipefilter/index.html) de Software Carpentry). On utilise pour cela  «`|`» :
+Pour éviter la création de ces fichiers et réaliser cette analyse en une seule fois, on emboîte (« chaîne ») les différentes étapes. La sortie produite par une étape devient l'entrée de l'étape suivante (voir l'[illustration](https://swcarpentry.github.io/shell-novice/fig/redirects-and-pipes.svg) de [Software Carpentry](http://swcarpentry.github.io/shell-novice/04-pipefilter/index.html)). On utilise pour cela le caractère «`|`» :
 
 ```bash
 $ cut -d "," -f 2 transferrin.csv | sort | uniq
@@ -1032,6 +1048,17 @@ Construisez l'enchaînement de commandes Unix qui :
 - ne conserve que les noms des organismes ;
 - renvoie le tout dans le fichier `all_staphylo.txt`.
 
+
+````{admonition} Solution
+:class: tip, dropdown
+
+Voici une solution possible :
+
+```bash
+$ grep "DEFI" genomes/*.gbk | grep "Staphylo" | cut -d " " -f 3- > all_staphylo.txt
+```
+
+````
 
 ### Chercher des fichiers : `find`
 
