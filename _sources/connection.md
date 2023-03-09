@@ -1,4 +1,4 @@
-# Connexion au Jupyter Hub de l'IFB
+# Connexion au JupyterHub de l'IFB
 
 - Cliquez sur le lien suivant <a href="https://jupyterhub.cluster.france-bioinformatique.fr/" target="_blank">https://jupyterhub.cluster.france-bioinformatique.fr/</a> qui va s'ouvrir dans un nouvel onglet de votre navigateur internet.
 - Utilisez vos identifiants du cluster IFB pour vous connecter.
@@ -11,5 +11,5 @@
     - GPU(s): `0` `No GRES`
 
     Cliquez ensuite sur le bouton *Start*
-- Patientez quelques secondes, le temps qu'une nouvelle session soit créées sur le Jupyter Hub de l'IFB.
-- Une fois dans l'interface Jupyter Hub, dans la page *Launcher* qui est en face de vous, cliquez sur l'icône *Terminal* en bas à gauche.
+- Patientez quelques secondes, le temps qu'une nouvelle session soit créée sur le JupyterHub de l'IFB.
+- Une fois dans l'interface JupyterHub, dans la page *Launcher* qui est en face de vous, cliquez sur l'icône *Terminal* en bas à gauche.
