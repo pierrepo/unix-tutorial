@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Le Shell Unix &#8212; Unix tutorial</title>
+    <title>Tutoriel Unix &#8212; Unix tutorial</title>
   
   
   
@@ -328,9 +328,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -341,34 +339,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Le Shell Unix</h1>
+    <h1>Tutoriel Unix</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activites-preparatoires">Activités préparatoires</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutoriel-maison">Tutoriel <em>maison</em></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutoriel-software-carpentry">Tutoriel Software Carpentry</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trucs-et-astuces">Trucs et astuces</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#copier-coller">Copier / coller</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#repertoire-utilisateur-windows-et-unix-dans-wsl">Répertoire utilisateur Windows et Unix (dans WSL)</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installer-un-shell-linux-sur-sa-propre-machine">Installer un <em>shell</em> Linux sur sa propre machine</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linux-et-mac-os-x">Linux et Mac OS X</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#de-l-aide">De l’aide 🆘</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliographie-webographie">Bibliographie / webographie</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#licence">Licence</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -378,77 +353,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="le-shell-unix">
-<h1>Le Shell Unix<a class="headerlink" href="#le-shell-unix" title="Permalink to this heading">#</a></h1>
-<section id="activites-preparatoires">
-<h2>Activités préparatoires<a class="headerlink" href="#activites-preparatoires" title="Permalink to this heading">#</a></h2>
-<p><span class="xref myst">Instructions</span></p>
-</section>
-<section id="tutoriel-maison">
-<h2>Tutoriel <em>maison</em><a class="headerlink" href="#tutoriel-maison" title="Permalink to this heading">#</a></h2>
-<p><span class="xref myst">Un aperçu rapide du <em>shell</em> Unix</span>.</p>
-<p>C’est par ce tutoriel que vous devez débuter.</p>
-</section>
-<section id="tutoriel-software-carpentry">
-<h2>Tutoriel Software Carpentry<a class="headerlink" href="#tutoriel-software-carpentry" title="Permalink to this heading">#</a></h2>
-<p><a class="reference internal" href="software_carpentry.html"><span class="doc std std-doc">Un autre tutoriel</span></a> pour poursuivre votre découverte d’Unix.</p>
-</section>
-<section id="trucs-et-astuces">
-<h2>Trucs et astuces<a class="headerlink" href="#trucs-et-astuces" title="Permalink to this heading">#</a></h2>
-<section id="copier-coller">
-<h3>Copier / coller<a class="headerlink" href="#copier-coller" title="Permalink to this heading">#</a></h3>
-<p>Pour copier / coller entre Windows et le <em>shell</em> Linux :</p>
-<ul class="simple">
-<li><p>Pour copier depuis Windows (<kbd>Ctrl</kbd>+<kbd>C</kbd>) puis coller dans le <em>shell</em> : clic droit de la souris.</p></li>
-<li><p>Pour copier depuis le <em>shell</em> (<kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>C</kbd>) puis coller dans Windows (<kbd>Ctrl</kbd>+<kbd>V</kbd>)</p></li>
-</ul>
-</section>
-<section id="repertoire-utilisateur-windows-et-unix-dans-wsl">
-<h3>Répertoire utilisateur Windows et Unix (dans WSL)<a class="headerlink" href="#repertoire-utilisateur-windows-et-unix-dans-wsl" title="Permalink to this heading">#</a></h3>
-<p>Depuis un shell Linux, votre répertoire utilisateur de Windows est accessible via le chemin</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">omics</span>
-</pre></div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">omics</span></code> désigne ici votre login Windows sur les machines du DU.</p>
-<p>Nous vous demandons de <strong>travailler depuis ce répertoire</strong> afin que vos fichiers puissent également être visibles depuis Windows.</p>
-</section>
-</section>
-<section id="installer-un-shell-linux-sur-sa-propre-machine">
-<h2>Installer un <em>shell</em> Linux sur sa propre machine<a class="headerlink" href="#installer-un-shell-linux-sur-sa-propre-machine" title="Permalink to this heading">#</a></h2>
-<section id="linux-et-mac-os-x">
-<h3>Linux et Mac OS X<a class="headerlink" href="#linux-et-mac-os-x" title="Permalink to this heading">#</a></h3>
-<p>Si vous travaillez avec les systèmes d’exploitations Linux (Ubuntu, Mint, Debian…) ou Mac OS X, vous avez déjà un <em>shell</em> installé sur votre machine.</p>
-</section>
-<section id="windows">
-<h3>Windows<a class="headerlink" href="#windows" title="Permalink to this heading">#</a></h3>
-<p>Si vous travaillez avec Windows 10, suivez cette documentation :</p>
-<p><a class="github reference external" href="https://github.com/pierrepo/intro-wsl">pierrepo/intro-wsl</a></p>
-</section>
-</section>
-<section id="de-l-aide">
-<h2>De l’aide 🆘<a class="headerlink" href="#de-l-aide" title="Permalink to this heading">#</a></h2>
-<p>Si vous avez besoin d’aide, interrogez votre moteur de recherche favori. Une bonne partie des réponses qui vous seront proposées proviendront du site <a class="reference external" href="https://stackoverflow.com/">stackoverflow</a> qui est <em>le</em> forum de discussion en informatique.</p>
-<p>Les deux tutoriels ci-dessus vous invitent à consulter le manuel (commande <code class="docutils literal notranslate"><span class="pre">man</span></code>) quand vous avez un doute sur le fonctionnement d’une commande. La documentation du manuel est quasi-exhaustive mais peu conviviale. Le site <a class="reference external" href="https://tldr.sh/">TLDR pages</a> propose une aide concise sur les commandes Unix et leurs principales options. Par exemple, pour la commande <a class="reference external" href="https://tldr.ostera.io/ls">ls</a>.</p>
-<p>Enfin, le site <a class="reference external" href="https://explainshell.com/">explainshell</a> explique le rôle des différentes options utilisées dans une commande. Par exemple pour décompresser une archive avec la commande <a class="reference external" href="https://explainshell.com/explain?cmd=tar%20xzvf%20archive.tar.gz">tar</a>.</p>
-</section>
-<section id="bibliographie-webographie">
-<h2>Bibliographie / webographie<a class="headerlink" href="#bibliographie-webographie" title="Permalink to this heading">#</a></h2>
-<p>Livre :</p>
-<ul class="simple">
-<li><p><a class="reference external" href="http://shop.oreilly.com/product/0636920030157.do">Bioinformatics Data Skills</a>, Vince Buffalo, O’Reilly Media, 2015.</p></li>
-</ul>
-<p>Sites internet :</p>
-<ul class="simple">
-<li><p><a class="reference external" href="http://swcarpentry.github.io/shell-novice/">The UNIX Shell</a>, cours en ligne de <em>Software Carpentry</em>.</p></li>
-<li><p><a class="reference external" href="https://edu.sib.swiss/pluginfile.php/2878/mod_resource/content/4/couselab-html/content.html">Unix Fondamentals</a>, du <em>Swiss Institute of Bioinformatics</em>.</p></li>
-</ul>
-</section>
-<section id="licence">
-<h2>Licence<a class="headerlink" href="#licence" title="Permalink to this heading">#</a></h2>
-<p><img alt="" src="img/CC-BY-SA.png" /></p>
-<p>Ce contenu est mis à disposition selon les termes de la licence <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr">Creative Commons Attribution - Partage dans les Mêmes Conditions 4.0 International</a> (CC BY-SA 4.0). Consultez le fichier <a class="reference download internal" download="" href="_downloads/9879d6db96fd29134fc802214163b95a/LICENSE"><span class="xref download myst">LICENSE</span></a> pour plus de détails.</p>
-<p>This content is released under the <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">Creative Commons Attribution-ShareAlike 4.0 </a> (CC BY-SA 4.0) license. See the bundled <a class="reference download internal" download="" href="_downloads/9879d6db96fd29134fc802214163b95a/LICENSE"><span class="xref download myst">LICENSE</span></a> file for details.</p>
-</section>
+  <section class="tex2jax_ignore mathjax_ignore" id="tutoriel-unix">
+<h1>Tutoriel Unix<a class="headerlink" href="#tutoriel-unix" title="Permalink to this heading">#</a></h1>
+<p><a class="reference external" href="https://pierrepo.github.io/unix-tutorial/">https://pierrepo.github.io/unix-tutorial/</a></p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -485,35 +392,6 @@ document.write(`
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activites-preparatoires">Activités préparatoires</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutoriel-maison">Tutoriel <em>maison</em></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutoriel-software-carpentry">Tutoriel Software Carpentry</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trucs-et-astuces">Trucs et astuces</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#copier-coller">Copier / coller</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#repertoire-utilisateur-windows-et-unix-dans-wsl">Répertoire utilisateur Windows et Unix (dans WSL)</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installer-un-shell-linux-sur-sa-propre-machine">Installer un <em>shell</em> Linux sur sa propre machine</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linux-et-mac-os-x">Linux et Mac OS X</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#de-l-aide">De l’aide 🆘</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliographie-webographie">Bibliographie / webographie</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#licence">Licence</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>

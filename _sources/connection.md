@@ -12,4 +12,12 @@
 
     Cliquez ensuite sur le bouton *Start*
 - Patientez quelques secondes, le temps qu'une nouvelle session soit créée sur le JupyterHub de l'IFB.
-- Une fois dans l'interface JupyterHub, dans la page *Launcher* qui est en face de vous, cliquez sur l'icône *Terminal* en bas à gauche.
+- Une fois dans l'interface JupyterLab, dans la page *Launcher* qui est en face de vous, cliquez sur l'icône *Terminal* en bas à gauche pour lancer un terminal.
+
+
+```{note}
+Les paramètres de mémoire et de CPU pourront être différents d'une séance à l'autre, suivant le type d'analyse que nous aurons à réaliser.
+```
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/LIUKSxrPBnc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+

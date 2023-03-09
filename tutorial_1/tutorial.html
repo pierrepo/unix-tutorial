@@ -445,9 +445,13 @@ document.write(`
 </section>
 <section id="preparer-les-donnees">
 <h2>2. Préparer les données<a class="headerlink" href="#preparer-les-donnees" title="Permalink to this heading">#</a></h2>
-<p>Pour reproduire les exemples suivants, vous allez préparer les données que vous allez utiliser. Déplacez vous tout d’abord dans votre répertoire utilisateur avec la commande <code class="docutils literal notranslate"><span class="pre">cd</span></code> :</p>
+<p>Pour reproduire les exemples suivants, vous allez préparer les données nécessaires. Déplacez-vous tout d’abord dans votre répertoire utilisateur avec la commande <code class="docutils literal notranslate"><span class="pre">cd</span></code> :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span>
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ne tapez pas le caractère <code class="docutils literal notranslate"><span class="pre">$</span></code> en début de ligne et faites attention aux majuscules et au minuscules.</p>
 </div>
 <p>puis exécutez les commandes suivant :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>wget<span class="w"> </span>https://github.com/pierrepo/unix-tutorial/raw/master/tutorial_1/unix.tgz
@@ -455,11 +459,7 @@ $<span class="w"> </span>tar<span class="w"> </span>zxvf<span class="w"> </span>
 $<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>unix
 </pre></div>
 </div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Ne tapez pas le <code class="docutils literal notranslate"><span class="pre">$</span></code> en début de ligne et faites attention aux majuscules et au minuscules.</p>
-</div>
-<p>Ces commandes seront en partie expliquées plus loin. Pour ne pas réécrire complètement ces commandes, vous pouvez les copier / coller avec les raccourcis <kbd>Ctrl</kbd>+<kbd>C</kbd> et <kbd>Ctrl</kbd>+<kbd>V</kbd> (ou parfois <kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>C</kbd>).</p>
+<p>Ces commandes seront en partie expliquées plus loin. Pour ne pas réécrire complètement ces commandes, vous pouvez les copier / coller avec les raccourcis <kbd>Ctrl</kbd>+<kbd>C</kbd> pour copier et <kbd>Ctrl</kbd>+<kbd>V</kbd> (ou parfois <kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>C</kbd>) pour coller.</p>
 </section>
 <section id="parcourir-les-repertoires-et-les-fichiers">
 <h2>3. Parcourir les répertoires et les fichiers<a class="headerlink" href="#parcourir-les-repertoires-et-les-fichiers" title="Permalink to this heading">#</a></h2>
@@ -473,7 +473,7 @@ $<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>unix
 </div>
 <p>Cela signifie qu’on se trouve actuellement dans le répertoire <code class="docutils literal notranslate"><span class="pre">/shared/home/ppoulain/unix</span></code>.</p>
 <p>Dans votre session, <code class="docutils literal notranslate"><span class="pre">ppoulain</span></code> sera bien sur remplacé par votre nom d’utilisateur sur le cluster IFB.</p>
-<p>Sous Unix, les répertoires et les fichiers sont organisés sous forme d’une structure en arbre. On parle d’arborescence (voir l’<a class="reference external" href="http://swcarpentry.github.io/shell-novice/02-filedir/index.html">illustration</a> de Software Carpentry).</p>
+<p>Sous Unix, les répertoires et les fichiers sont organisés sous forme d’une structure en arbre. On parle d’arborescence (voir l’<a class="reference external" href="https://swcarpentry.github.io/shell-novice/fig/home-directories.svg">illustration</a> de <a class="reference external" href="http://swcarpentry.github.io/shell-novice/02-filedir/index.html">Software Carpentry</a>).</p>
 <p>Le répertoire dont dépendent tous les autres est le <code class="docutils literal notranslate"><span class="pre">/</span></code> qu’on appelle la « racine » (<em>root</em> en anglais), les différents sous-répertoires sont séparés les uns des autres par le caractère <code class="docutils literal notranslate"><span class="pre">/</span></code> (le même caractère que la racine).</p>
 <p>Dans le cas de <code class="docutils literal notranslate"><span class="pre">/shared/home/ppoulain/unix</span></code> :</p>
 <ul class="simple">
@@ -497,7 +497,7 @@ $<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>unix
 genomes<span class="w">  </span>paper.pdf<span class="w">  </span>protein.txt<span class="w">  </span>shopping.txt<span class="w">  </span>transferrin.csv<span class="w">	</span>transferrin.tsv
 </pre></div>
 </div>
-<p>On peut modifier le comportement par défaut d’une commande avec une (ou plusieurs) option(s). Cette option est séparée de la commande par un ou plusieurs espaces.</p>
+<p>On peut modifier le comportement par défaut d’une commande avec une (ou plusieurs) option(s). Cette option est séparée de la commande <code class="docutils literal notranslate"><span class="pre">ls</span></code> par un ou plusieurs espaces.</p>
 <p>Par exemple avec <code class="docutils literal notranslate"><span class="pre">-F</span></code> :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ls<span class="w"> </span>-F
 genomes/<span class="w">  </span>paper.pdf<span class="w">  </span>protein.txt<span class="w">  </span>shopping.txt<span class="w">	</span>transferrin.csv<span class="w">  </span>transferrin.tsv
@@ -510,7 +510,7 @@ genomes/<span class="w">  </span>paper.pdf<span class="w">  </span>protein.txt<s
 </pre></div>
 </div>
 <p>et pourquoi pas :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ls<span class="w">                                            </span>-F
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ls<span class="w">                           </span>-F
 genomes/<span class="w">  </span>paper.pdf<span class="w">  </span>protein.txt<span class="w">  </span>shopping.txt<span class="w">	</span>transferrin.csv<span class="w">  </span>transferrin.tsv
 </pre></div>
 </div>
@@ -526,7 +526,7 @@ drwxr-xr-x<span class="w"> </span><span class="m">2</span><span class="w"> </spa
 -rw-r--r--<span class="w"> </span><span class="m">1</span><span class="w"> </span>ppoulain<span class="w"> </span>ppoulain<span class="w">   </span><span class="m">940</span><span class="w"> </span>Mar<span class="w"> </span><span class="m">12</span><span class="w">  </span><span class="m">2019</span><span class="w"> </span>transferrin.tsv
 </pre></div>
 </div>
-<p>L’option <code class="docutils literal notranslate"><span class="pre">-l</span></code> peut être associée à l’option <code class="docutils literal notranslate"><span class="pre">-h</span></code> pour afficher des tailles en octets, kilo, mega et giga octets.</p>
+<p>L’option <code class="docutils literal notranslate"><span class="pre">-l</span></code> peut être associée à l’option <code class="docutils literal notranslate"><span class="pre">-h</span></code> pour afficher des tailles lisibles par des <strong>h</strong>umains, c’est-à-dire en octets, ko, Mo et Go.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ls<span class="w"> </span>-l<span class="w"> </span>-h
 total<span class="w"> </span>120K
 drwxr-xr-x<span class="w"> </span><span class="m">2</span><span class="w"> </span>ppoulain<span class="w"> </span>ppoulain<span class="w"> </span><span class="m">4</span>.0K<span class="w"> </span>Mar<span class="w"> </span><span class="m">13</span><span class="w">  </span><span class="m">2019</span><span class="w"> </span>genomes
@@ -566,7 +566,7 @@ drwxr-xr-x<span class="w"> </span><span class="m">2</span><span class="w"> </spa
 .<span class="w">  </span>..<span class="w">  </span>genomes<span class="w">	</span>paper.pdf<span class="w">  </span>protein.txt<span class="w">	</span>shopping.txt<span class="w">  </span>transferrin.csv<span class="w">  </span>transferrin.tsv
 </pre></div>
 </div>
-<p>Par défaut, il y a deux répertoires cachés qui sont toujours présents : <code class="docutils literal notranslate"><span class="pre">.</span></code> et <code class="docutils literal notranslate"><span class="pre">..</span></code></p>
+<p>Par défaut, il y a deux répertoires cachés qui sont toujours présents et sont créés automatiquement : <code class="docutils literal notranslate"><span class="pre">.</span></code> et <code class="docutils literal notranslate"><span class="pre">..</span></code></p>
 <ul class="simple">
 <li><p>Le répertoire <code class="docutils literal notranslate"><span class="pre">.</span></code> désigne le répertoire courant.</p></li>
 <li><p>Le répertoire <code class="docutils literal notranslate"><span class="pre">..</span></code> désigne le répertoire parent. Par exemple, si on est dans le répertoire <code class="docutils literal notranslate"><span class="pre">/shared/home/ppoulain/unix</span></code>, alors <code class="docutils literal notranslate"><span class="pre">..</span></code> désigne le répertoire <code class="docutils literal notranslate"><span class="pre">/shared/home/ppoulain</span></code>.</p></li>
@@ -585,6 +585,13 @@ NC_002976_head.gbk<span class="w">  </span>NC_006840_head.gbk<span class="w">  <
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ls<span class="w"> </span>-lh<span class="w"> </span>paper.pdf
 -rw-r--r--<span class="w"> </span><span class="m">1</span><span class="w"> </span>ppoulain<span class="w"> </span>ppoulain<span class="w"> </span>96K<span class="w"> </span>Mar<span class="w"> </span><span class="m">13</span><span class="w">  </span><span class="m">2019</span><span class="w"> </span>paper.pdf
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Dans cet exemple, <code class="docutils literal notranslate"><span class="pre">ls</span></code> est la commande Unix, <code class="docutils literal notranslate"><span class="pre">-lh</span></code> sont les options et <code class="docutils literal notranslate"><span class="pre">paper.pdf</span></code> est l’argument.</p>
+<p>Cette anatomie d’une instruction Unix est schématisée dans l’illustration suivante :
+<img alt="" src="https://swcarpentry.github.io/shell-novice/fig/shell_command_syntax.svg" /></p>
+<p>Source : <a class="reference external" href="https://swcarpentry.github.io/shell-novice/02-filedir/index.html">Software Carpentry</a>.</p>
 </div>
 </section>
 <section id="se-documenter-man-et-help">
@@ -607,7 +614,7 @@ Mandatory<span class="w"> </span>arguments<span class="w"> </span>to<span class=
 <span class="w">  </span>-b,<span class="w"> </span>--escape<span class="w">               </span>print<span class="w"> </span>C-style<span class="w"> </span>escapes<span class="w"> </span><span class="k">for</span><span class="w"> </span>nongraphic<span class="w"> </span>characters
 <span class="w">      </span>--block-size<span class="o">=</span>SIZE<span class="w">      </span>scale<span class="w"> </span>sizes<span class="w"> </span>by<span class="w"> </span>SIZE<span class="w"> </span>before<span class="w"> </span>printing<span class="w"> </span>them<span class="p">;</span><span class="w"> </span>e.g.,
 
-...
+<span class="o">[</span>...<span class="o">]</span>
 </pre></div>
 </div>
 </section>
@@ -624,8 +631,8 @@ Mandatory<span class="w"> </span>arguments<span class="w"> </span>to<span class=
 <li><p>le tiret du bas «<code class="docutils literal notranslate"><span class="pre">_</span></code>»,</p></li>
 <li><p>le point «<code class="docutils literal notranslate"><span class="pre">.</span></code>».</p></li>
 </ul>
-<p>On vous déconseille fortement l’utilisation des autres caractères (<code class="docutils literal notranslate"><span class="pre">+()[]éèàùç</span></code>). Certains caractères sont même interdits (<code class="docutils literal notranslate"><span class="pre">&lt;&gt;|;&amp;</span></code>).</p>
-<p>Enfin, ne mettez <strong>jamais</strong> un espace dans un nom de fichier ou de répertoire. <strong>J-A-M-A-I-S</strong>. Unix l’autorise mais c’est très très pénible par la suite car l’espace est utilisé pour séparer les options et les arguments d’une commande.</p>
+<p>On vous déconseille fortement l’utilisation d’autres caractères comme <code class="docutils literal notranslate"><span class="pre">+()[]éèàùç</span></code>. Certains caractères sont même interdits (<code class="docutils literal notranslate"><span class="pre">&lt;&gt;|;&amp;</span></code>).</p>
+<p>Enfin, ne mettez <strong>jamais</strong> un espace dans un nom de fichier ou de répertoire. <strong>J-A-M-A-I-S</strong>. Unix l’autorise mais c’est très pénible par la suite car l’espace est utilisé pour séparer les options et les arguments d’une commande.</p>
 <p>Pour le reste, laisser faire votre imagination et utilisez des noms de fichiers et de répertoires expressifs.</p>
 </section>
 <section id="se-deplacer-cd">
@@ -639,7 +646,7 @@ $<span class="w"> </span><span class="nb">pwd</span>
 </pre></div>
 </div>
 <p>Partant du répertoire <code class="docutils literal notranslate"><span class="pre">/shared/home/ppoulain/unix</span></code>, on s’est déplacé dans le répertoire <code class="docutils literal notranslate"><span class="pre">/shared/home/ppoulain/unix/genomes</span></code>.</p>
-<p>Dans l’instruction <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">genomes</span></code>, le répertoire <code class="docutils literal notranslate"><span class="pre">genomes</span></code> est un argument de la commande <code class="docutils literal notranslate"><span class="pre">cd</span></code>. Ici, le répertoire <code class="docutils literal notranslate"><span class="pre">genomes</span></code> est un chemin relatif (car il ne débute pas par <code class="docutils literal notranslate"><span class="pre">/</span></code>). C’est-à-dire qu’on a entré le nom de ce répertoire (<code class="docutils literal notranslate"><span class="pre">genomes</span></code>) par rapport au répertoire dans lequel nous étions (<code class="docutils literal notranslate"><span class="pre">/shared/home/ppoulain/unix</span></code>). Bien sûr, la commande <code class="docutils literal notranslate"><span class="pre">cd</span></code> fonctionne très bien avec un chemin absolu. La commande</p>
+<p>Dans l’instruction <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">genomes</span></code>, le répertoire <code class="docutils literal notranslate"><span class="pre">genomes</span></code> est un argument de la commande <code class="docutils literal notranslate"><span class="pre">cd</span></code>. Ici, le répertoire <code class="docutils literal notranslate"><span class="pre">genomes</span></code> est un chemin relatif (car il ne débute pas par <code class="docutils literal notranslate"><span class="pre">/</span></code>). C’est-à-dire qu’on a indiqué le nom de ce répertoire (<code class="docutils literal notranslate"><span class="pre">genomes</span></code>) par rapport au répertoire dans lequel nous étions (<code class="docutils literal notranslate"><span class="pre">/shared/home/ppoulain/unix</span></code>). Bien sûr, la commande <code class="docutils literal notranslate"><span class="pre">cd</span></code> fonctionne très bien avec un chemin absolu. La commande</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/shared/home/ppoulain/unix/genomes
 </pre></div>
 </div>
@@ -778,8 +785,8 @@ $<span class="w"> </span>ls
 </div>
 <p>Pour supprimer un répertoire, il faut utiliser l’option supplémentaire <code class="docutils literal notranslate"><span class="pre">-r</span></code>.</p>
 <p>Suivant la configuration de votre <em>shell</em>, il faudra peut être ajouter l’option <code class="docutils literal notranslate"><span class="pre">-f</span></code> pour que la suppression fonctionne.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
 <p>Il n’y a pas de corbeille dans le <em>shell</em> Unix, c’est-à-dire aucune possibilité de récupérer un fichier ou un répertoire effacé par erreur. Pensez à sauvegarder régulièrement vos fichiers.</p>
 </div>
 </section>
@@ -805,7 +812,7 @@ transferrin.csv<span class="w">  </span>transferrin.tsv
 </pre></div>
 </div>
 <p>La commande <code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">transferrin.*</span> <span class="pre">test4</span></code> est un raccourci pour</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span>transferrin.csv<span class="w">  </span>transferrin.tsv<span class="w"> </span>test4
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span>transferrin.csv<span class="w"> </span>transferrin.tsv<span class="w"> </span>test4
 </pre></div>
 </div>
 <p>Cela fonctionne avec autant de fichiers qu’on le souhaite.</p>
@@ -821,7 +828,7 @@ transferrin.csv<span class="w">  </span>transferrin.tsv
 <section id="completion-automatique">
 <h3>Complétion automatique<a class="headerlink" href="#completion-automatique" title="Permalink to this heading">#</a></h3>
 <p>La touche tabulation <kbd>Tab</kbd> est utile pour compléter une commande, un nom de répertoire ou de fichier. Appuyez deux fois sur <kbd>Tab</kbd> en cas d’ambiguïté.</p>
-<p>Par exemple, si vous tapez <code class="docutils literal notranslate"><span class="pre">/h</span></code> puis la touche <kbd>Tab</kbd> et le <em>shell</em> va compléter automatiquement à <code class="docutils literal notranslate"><span class="pre">/home</span></code>.</p>
+<p>Par exemple, si vous tapez <code class="docutils literal notranslate"><span class="pre">/h</span></code> puis la touche <kbd>Tab</kbd>, le <em>shell</em> va compléter automatiquement à <code class="docutils literal notranslate"><span class="pre">/home</span></code>.</p>
 </section>
 <section id="arreter-une-commande-en-cours">
 <h3>Arrêter une commande en cours<a class="headerlink" href="#arreter-une-commande-en-cours" title="Permalink to this heading">#</a></h3>
@@ -829,7 +836,7 @@ transferrin.csv<span class="w">  </span>transferrin.tsv
 </section>
 <section id="copier-coller">
 <h3>Copier / coller<a class="headerlink" href="#copier-coller" title="Permalink to this heading">#</a></h3>
-<p>Pour copier / coller quelque chose dans le <em>shell</em>, utilisez les combinaisons de touches <kbd>Ctrl</kbd>+<kbd>C</kbd> et <kbd>Ctrl</kbd>+<kbd>V</kbd> (ou <kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>V</kbd>).</p>
+<p>Pour copier / coller quelque chose dans le <em>shell</em>, sélectionnez du texte puis utilisez les combinaisons de touches <kbd>Ctrl</kbd>+<kbd>C</kbd> pour copier et <kbd>Ctrl</kbd>+<kbd>V</kbd> (ou <kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>V</kbd>) pour coller.</p>
 </section>
 </section>
 <section id="explorer-le-contenu-de-fichiers">
@@ -867,8 +874,8 @@ startxref
 %%EOF
 </pre></div>
 </div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Dans la suite, nous n’explorerons que le contenu de <strong>fichiers textes</strong>.</p>
 </div>
 <p>La commande <code class="docutils literal notranslate"><span class="pre">cat</span></code> n’a de sens que si le fichier est assez court. Si ce n’est pas le cas, le contenu du fichier va défiler d’un seul coup à l’écran, sans qu’on puisse en voir le début. Par exemple :</p>
@@ -885,7 +892,7 @@ startxref
 5WTD,Homo<span class="w"> </span>sapiens,679
 5X5P,Homo<span class="w"> </span>sapiens,679
 6CTC,Homo<span class="w"> </span>sapiens,679
-...
+<span class="o">[</span>...<span class="o">]</span>
 </pre></div>
 </div>
 <p>Pour les gros fichiers, on préfère utiliser la commande <code class="docutils literal notranslate"><span class="pre">less</span></code> qui affiche <em>progressivement</em> le contenu d’un fichier :</p>
@@ -932,6 +939,7 @@ startxref
 6CTC,Homo<span class="w"> </span>sapiens,679
 </pre></div>
 </div>
+<p>Dans l’exemple ci-dessus, on a affiché les 2 dernières lignes du fichier <code class="docutils literal notranslate"><span class="pre">transferrin.csv</span></code>.</p>
 </section>
 <section id="creer-ou-editer-un-fichier-texte">
 <h2>6. Créer ou éditer un fichier texte<a class="headerlink" href="#creer-ou-editer-un-fichier-texte" title="Permalink to this heading">#</a></h2>
@@ -957,6 +965,7 @@ genomes<span class="w">  </span>paper.pdf<span class="w">  </span>protein.txt<sp
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>nano<span class="w"> </span>shopping.txt
 </pre></div>
 </div>
+<p>Modifiez le fichier <code class="docutils literal notranslate"><span class="pre">shopping.txt</span></code> (en respectant le format <em>un_élement une_quantité</em>) avec nano, puis enregistrez-le.</p>
 </section>
 <section id="manipuler-des-donnees">
 <h2>7. Manipuler des données<a class="headerlink" href="#manipuler-des-donnees" title="Permalink to this heading">#</a></h2>
@@ -967,9 +976,9 @@ genomes<span class="w">  </span>paper.pdf<span class="w">  </span>protein.txt<sp
 <span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">45</span><span class="w"> </span>shopping.txt
 </pre></div>
 </div>
-<p>On apprend ainsi que le fichier <code class="docutils literal notranslate"><span class="pre">shopping.txt</span></code> contient 5 lignes, 10 mots et 45 caractères.</p>
+<p>On apprend ainsi que le fichier <code class="docutils literal notranslate"><span class="pre">shopping.txt</span></code> contient 5 lignes, 10 mots et 45 caractères, ou des valeurs équivalentes si vous avez modifé ce fichier.</p>
 <p>L’option <code class="docutils literal notranslate"><span class="pre">-l</span></code> indique à la commande <code class="docutils literal notranslate"><span class="pre">wc</span></code> de ne compter que le nombre de lignes. Et réciproquement pour <code class="docutils literal notranslate"><span class="pre">-w</span></code> et le nombre de mots, et <code class="docutils literal notranslate"><span class="pre">-c</span></code> et le nombre de caractères.</p>
-<p>Lorsque plusieurs fichiers sont fournis en argument à <code class="docutils literal notranslate"><span class="pre">wc</span></code>, le total est aussi renvoyé :</p>
+<p>Lorsque plusieurs fichiers sont fournis en argument à la commande <code class="docutils literal notranslate"><span class="pre">wc</span></code>, le total est aussi renvoyé :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>wc<span class="w"> </span>-l<span class="w"> </span>transferrin.*
 <span class="w">  </span><span class="m">41</span><span class="w"> </span>transferrin.csv
 <span class="w">  </span><span class="m">41</span><span class="w"> </span>transferrin.tsv
@@ -1163,7 +1172,7 @@ Sus<span class="w"> </span>scrofa
 </div>
 <p>Les structures de transferrines du fichier <code class="docutils literal notranslate"><span class="pre">transferrin.csv</span></code> proviennent de 5 organismes différents.</p>
 <p>Pour cette analyse, nous avons dû créer deux fichiers intermédiaires : <code class="docutils literal notranslate"><span class="pre">organism.txt</span></code> et <code class="docutils literal notranslate"><span class="pre">organism_sorted.txt</span></code>.</p>
-<p>Pour éviter la création de ces fichiers et réaliser cette analyse en une seule fois, on emboîte (« chaîne ») les différentes étapes. La sortie produite par une étape devient l’entrée de l’étape suivante (voir l’<a class="reference external" href="http://swcarpentry.github.io/shell-novice/04-pipefilter/index.html">illustration</a> de Software Carpentry). On utilise pour cela  «<code class="docutils literal notranslate"><span class="pre">|</span></code>» :</p>
+<p>Pour éviter la création de ces fichiers et réaliser cette analyse en une seule fois, on emboîte (« chaîne ») les différentes étapes. La sortie produite par une étape devient l’entrée de l’étape suivante (voir l’<a class="reference external" href="https://swcarpentry.github.io/shell-novice/fig/redirects-and-pipes.svg">illustration</a> de <a class="reference external" href="http://swcarpentry.github.io/shell-novice/04-pipefilter/index.html">Software Carpentry</a>). On utilise pour cela le caractère «<code class="docutils literal notranslate"><span class="pre">|</span></code>» :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cut<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;,&quot;</span><span class="w"> </span>-f<span class="w"> </span><span class="m">2</span><span class="w"> </span>transferrin.csv<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span>uniq
 Anas<span class="w"> </span>platyrhynchos
 Gallus<span class="w"> </span>gallus
@@ -1257,6 +1266,13 @@ genomes/NC_013893_head.gbk:DEFINITION<span class="w">  </span>Staphylococcus<spa
 <li><p>ne conserve que les noms des organismes ;</p></li>
 <li><p>renvoie le tout dans le fichier <code class="docutils literal notranslate"><span class="pre">all_staphylo.txt</span></code>.</p></li>
 </ul>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>Voici une solution possible :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;DEFI&quot;</span><span class="w"> </span>genomes/*.gbk<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;Staphylo&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot; &quot;</span><span class="w"> </span>-f<span class="w"> </span><span class="m">3</span>-<span class="w"> </span>&gt;<span class="w"> </span>all_staphylo.txt
+</pre></div>
+</div>
+</div>
 </section>
 <section id="chercher-des-fichiers-find">
 <h3>Chercher des fichiers : <code class="docutils literal notranslate"><span class="pre">find</span></code><a class="headerlink" href="#chercher-des-fichiers-find" title="Permalink to this heading">#</a></h3>
