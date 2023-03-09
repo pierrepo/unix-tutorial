@@ -32,5 +32,6 @@ Livre :
 
 Sites internet :
 
+- [Linux - commandes fondamentales](https://juliend.github.io/linux-cheatsheet/), principes commandes Unix avec des exemples et en français.
 - [The UNIX Shell](http://swcarpentry.github.io/shell-novice/), cours en ligne de *Software Carpentry*.
 - [Unix Fondamentals](https://edu.sib.swiss/pluginfile.php/2878/mod_resource/content/4/couselab-html/content.html), du *Swiss Institute of Bioinformatics*.
