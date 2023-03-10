@@ -139,7 +139,7 @@ genomes/  paper.pdf  protein.txt  shopping.txt	transferrin.csv  transferrin.tsv
 et pourquoi pas :
 
 ```bash
-$ ls                           -F
+$ ls     -F
 genomes/  paper.pdf  protein.txt  shopping.txt	transferrin.csv  transferrin.tsv
 ```
 
