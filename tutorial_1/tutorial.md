@@ -379,6 +379,8 @@ $ ls test
 article.pdf  paper.pdf
 ```
 
+C'est toujours le dernier argument de la ligne de commande qui est utilisé comme destination (ici `test`) de la copie.
+
 `cp` peut aussi copier un répertoire dans un autre répertoire avec l'option `-r` :
 
 ```bash
