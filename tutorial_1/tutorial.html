@@ -1018,7 +1018,7 @@ orange<span class="w"> </span><span class="m">4</span>
 banana<span class="w"> </span><span class="m">6</span>
 </pre></div>
 </div>
-<p>Les lignes sont alors triées suivant la seconde colonne, mais par ordre alphabétique, ce qui explique que <code class="docutils literal notranslate"><span class="pre">10</span></code> soit avant <code class="docutils literal notranslate"><span class="pre">3</span></code>. Pour trier explicitement sur des valeurs numériques, on utilise l’option <code class="docutils literal notranslate"><span class="pre">-g</span></code> :</p>
+<p>Les lignes sont alors triées suivant la seconde colonne, mais par ordre alphabétique, ce qui explique que <code class="docutils literal notranslate"><span class="pre">10</span></code> soit avant <code class="docutils literal notranslate"><span class="pre">3</span></code>. Pour trier explicitement des valeurs numériques, on utilise l’option <code class="docutils literal notranslate"><span class="pre">-g</span></code> :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sort<span class="w"> </span>-k<span class="w"> </span><span class="m">2</span><span class="w"> </span>-g<span class="w"> </span>shopping.txt
 pineaple<span class="w"> </span><span class="m">1</span>
 pear<span class="w"> </span><span class="m">3</span>
@@ -1027,7 +1027,7 @@ banana<span class="w"> </span><span class="m">6</span>
 apple<span class="w"> </span><span class="m">10</span>
 </pre></div>
 </div>
-<p>L’ordre numérique est ainsi respecté.</p>
+<p>L’ordre numérique est ainsi respecté puisque 3 est plus petit (donc situé avant) que 10.</p>
 <p>Enfin l’option <code class="docutils literal notranslate"><span class="pre">-r</span></code> inverse le tri initial :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sort<span class="w"> </span>-r<span class="w"> </span>shopping.txt
 pineaple<span class="w"> </span><span class="m">1</span>
@@ -1037,6 +1037,7 @@ banana<span class="w"> </span><span class="m">6</span>
 apple<span class="w"> </span><span class="m">10</span>
 </pre></div>
 </div>
+<p>On peut aussi utiliser l’option <code class="docutils literal notranslate"><span class="pre">-r</span></code> pour trier des valeurs numériques (option <code class="docutils literal notranslate"><span class="pre">-g</span></code>) sur une colonne donnée (option <code class="docutils literal notranslate"><span class="pre">-k</span></code>) :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sort<span class="w"> </span>-k<span class="w"> </span><span class="m">2</span><span class="w"> </span>-g<span class="w"> </span>-r<span class="w"> </span>shopping.txt
 apple<span class="w"> </span><span class="m">10</span>
 banana<span class="w"> </span><span class="m">6</span>
@@ -1068,6 +1069,7 @@ transferrin
 transferrin
 </pre></div>
 </div>
+<p>On obtient alors uniquement les lignes uniques :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>uniq<span class="w"> </span>protein.txt
 insulin
 integrin
@@ -1083,11 +1085,14 @@ transferrin
 <span class="w">      </span><span class="m">4</span><span class="w"> </span>transferrin
 </pre></div>
 </div>
-<p><em>Remarque</em> : La commande <code class="docutils literal notranslate"><span class="pre">uniq</span></code> ne fonctionne que sur un fichier trié, c’est-à-dire pour lequel les lignes sont déjà triées par ordre alphabétique.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>La commande <code class="docutils literal notranslate"><span class="pre">uniq</span></code> ne fonctionne que sur un fichier trié, c’est-à-dire pour lequel les lignes sont déjà triées par ordre alphabétique.</p>
+</div>
 </section>
 <section id="extraire-un-colonne-cut">
 <h3>Extraire un colonne : <code class="docutils literal notranslate"><span class="pre">cut</span></code><a class="headerlink" href="#extraire-un-colonne-cut" title="Permalink to this heading">#</a></h3>
-<p>La commande <code class="docutils literal notranslate"><span class="pre">cut</span></code> extrait une colonne particulière d’un fichier.</p>
+<p>La commande <code class="docutils literal notranslate"><span class="pre">cut</span></code> extrait une ou plusieurs colonnes d’un fichier.</p>
 <p>Par exemple avec le fichier <code class="docutils literal notranslate"><span class="pre">transferrin.csv</span></code> qui contient les identifiants PDB de structures de transferrines, avec l’organisme d’origine et le nombre d’acides aminés de la structure :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">5</span><span class="w"> </span>transferrin.csv
 1A8E,Homo<span class="w"> </span>sapiens,329
@@ -1183,7 +1188,7 @@ Sus<span class="w"> </span>scrofa
 </pre></div>
 </div>
 <p>On obtient le même résultat que précédemment mais en une seule étape et sans fichier intermédiaire.</p>
-<p>Si on souhaite obtenir le nombre de structures par organisme, on peut très rapidement modifier la commande précédente :</p>
+<p>Si on souhaite obtenir le nombre de structures par organisme, on peut très rapidement modifier la commande précédente en utilisant l’option <code class="docutils literal notranslate"><span class="pre">-c</span></code> de <code class="docutils literal notranslate"><span class="pre">uniq</span></code> :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cut<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;,&quot;</span><span class="w"> </span>-f<span class="w"> </span><span class="m">2</span><span class="w"> </span>transferrin.csv<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span>uniq<span class="w"> </span>-c
 <span class="w">      </span><span class="m">2</span><span class="w"> </span>Anas<span class="w"> </span>platyrhynchos
 <span class="w">     </span><span class="m">10</span><span class="w"> </span>Gallus<span class="w"> </span>gallus
@@ -1200,6 +1205,10 @@ Sus<span class="w"> </span>scrofa
 <span class="w">      </span><span class="m">2</span><span class="w"> </span>Oryctolagus<span class="w"> </span>cuniculus
 <span class="w">      </span><span class="m">1</span><span class="w"> </span>Sus<span class="w"> </span>scrofa
 </pre></div>
+</div>
+<div class="admonition-rappel admonition">
+<p class="admonition-title">Rappel</p>
+<p>La tabulation est le caractère par défaut utilisé par <code class="docutils literal notranslate"><span class="pre">cut</span></code> pour séparer les différentes colonnes.</p>
 </div>
 </section>
 </section>

@@ -759,7 +759,7 @@ orange 4
 banana 6
 ```
 
-Les lignes sont alors triées suivant la seconde colonne, mais par ordre alphabétique, ce qui explique que `10` soit avant `3`. Pour trier explicitement sur des valeurs numériques, on utilise l'option `-g` :
+Les lignes sont alors triées suivant la seconde colonne, mais par ordre alphabétique, ce qui explique que `10` soit avant `3`. Pour trier explicitement des valeurs numériques, on utilise l'option `-g` :
 
 ```bash
 $ sort -k 2 -g shopping.txt
@@ -770,7 +770,7 @@ banana 6
 apple 10
 ```
 
-L'ordre numérique est ainsi respecté.
+L'ordre numérique est ainsi respecté puisque 3 est plus petit (donc situé avant) que 10.
 
 Enfin l'option `-r` inverse le tri initial :
 
@@ -782,6 +782,8 @@ orange 4
 banana 6
 apple 10
 ```
+
+On peut aussi utiliser l'option `-r` pour trier des valeurs numériques (option `-g`) sur une colonne donnée (option `-k`) :
 
 ```bash
 $ sort -k 2 -g -r shopping.txt
@@ -817,6 +819,8 @@ transferrin
 transferrin
 ```
 
+On obtient alors uniquement les lignes uniques :
+
 ```bash
 $ uniq protein.txt
 insulin
@@ -835,12 +839,15 @@ $ uniq -c protein.txt
       4 transferrin
 ```
 
-*Remarque* : La commande `uniq` ne fonctionne que sur un fichier trié, c'est-à-dire pour lequel les lignes sont déjà triées par ordre alphabétique.
+
+```{note}
+La commande `uniq` ne fonctionne que sur un fichier trié, c'est-à-dire pour lequel les lignes sont déjà triées par ordre alphabétique.
+```
 
 
 ### Extraire un colonne : `cut`
 
-La commande `cut` extrait une colonne particulière d'un fichier.
+La commande `cut` extrait une ou plusieurs colonnes d'un fichier.
 
 Par exemple avec le fichier `transferrin.csv` qui contient les identifiants PDB de structures de transferrines, avec l'organisme d'origine et le nombre d'acides aminés de la structure :
 
@@ -954,7 +961,7 @@ Sus scrofa
 
 On obtient le même résultat que précédemment mais en une seule étape et sans fichier intermédiaire.
 
-Si on souhaite obtenir le nombre de structures par organisme, on peut très rapidement modifier la commande précédente :
+Si on souhaite obtenir le nombre de structures par organisme, on peut très rapidement modifier la commande précédente en utilisant l'option `-c` de `uniq` :
 
 ```bash
 $ cut -d "," -f 2 transferrin.csv | sort | uniq -c
@@ -974,6 +981,10 @@ $ cut -f 2 transferrin.tsv | sort | uniq -c
      26 Homo sapiens
       2 Oryctolagus cuniculus
       1 Sus scrofa
+```
+
+```{admonition} Rappel
+La tabulation est le caractère par défaut utilisé par `cut` pour séparer les différentes colonnes.
 ```
 
 
