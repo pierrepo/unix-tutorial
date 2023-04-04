@@ -495,8 +495,7 @@ outFilterIntronMotifs<span class="w"> </span>RemoveNoncanonical
 --alignIntronMax<span class="w"> </span><span class="m">3000</span><span class="w"> </span><span class="se">\</span>
 --outFileNamePrefix<span class="w"> </span>reads_map/SRR3405783_<span class="w"> </span><span class="se">\</span>
 --outFilterIntronMotifs<span class="w"> </span>RemoveNoncanonical<span class="w"> </span><span class="se">\</span>
---outSAMtype<span class="w"> </span>BAM<span class="w"> </span>Unsorted<span class="w"> </span><span class="se">\</span>
---outTmpDir<span class="w"> </span>/tmp/star_tmp
+--outSAMtype<span class="w"> </span>BAM<span class="w"> </span>Unsorted
 </pre></div>
 </div>
 <div class="admonition note">
@@ -509,7 +508,6 @@ outFilterIntronMotifs<span class="w"> </span>RemoveNoncanonical
 <p>Ceci explique pourquoi les options <code class="docutils literal notranslate"><span class="pre">--alignIntronMin</span> <span class="pre">10</span></code> et <code class="docutils literal notranslate"><span class="pre">--alignIntronMax</span> <span class="pre">3000</span></code> ont été adaptées pour le génome de la levure <em>S. cerevisiae</em>.</p>
 </li>
 <li><p>L’option <code class="docutils literal notranslate"><span class="pre">--readFilesCommand</span> <span class="pre">zcat</span></code> n’était pas présente dans la commande fournie en <em>Supporting information</em>. Nous l’avons ajoutée car les fichiers contenant les <em>reads</em> (<em>.fastq.gz</em>) sont compressés et il faut demander explicitement à STAR de le prendre en charge. Pensez à toujour consulter la <a class="reference external" href="https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf">documentation</a> de l’outil que vous utilisez (même si c’est un peu pénible) !</p></li>
-<li><p>STAR a besoin d’écrire des fichiers temporaires, habituellement dans le répertoire courant. Mais il faut que ces fichiers soient situés sur une partition Unix. Comme vous lancez l’alignement depuis un répertoire Windows, l’option <code class="docutils literal notranslate"><span class="pre">--outTmpDir</span> <span class="pre">/tmp/star_tmp</span></code> spécifie le répertoire temporaire (Unix) à utiliser.</p></li>
 </ul>
 </div>
 <p>Lancez l’alignement avec STAR et vérifiez que tout se déroule sans problème.
