@@ -6,4 +6,5 @@ root: intro
 chapters:
 - file: connection
 - file: tutorial_1/tutorial
+- file: tutorial_2/0_intro
 - file: more
