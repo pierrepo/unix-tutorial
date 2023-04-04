@@ -154,8 +154,7 @@ STAR --runThreadN 1 \
 --alignIntronMax 3000 \
 --outFileNamePrefix reads_map/SRR3405783_ \
 --outFilterIntronMotifs RemoveNoncanonical \
---outSAMtype BAM Unsorted \
---outTmpDir /tmp/star_tmp
+--outSAMtype BAM Unsorted
 ```
 
 ```{note}
@@ -165,8 +164,6 @@ STAR --runThreadN 1 \
     Ceci explique pourquoi les options `--alignIntronMin 10` et `--alignIntronMax 3000` ont été adaptées pour le génome de la levure *S. cerevisiae*.
 
 - L'option `--readFilesCommand zcat` n'était pas présente dans la commande fournie en *Supporting information*. Nous l'avons ajoutée car les fichiers contenant les *reads* (*.fastq.gz*) sont compressés et il faut demander explicitement à STAR de le prendre en charge. Pensez à toujour consulter la [documentation](https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf) de l'outil que vous utilisez (même si c'est un peu pénible) !
-
-- STAR a besoin d'écrire des fichiers temporaires, habituellement dans le répertoire courant. Mais il faut que ces fichiers soient situés sur une partition Unix. Comme vous lancez l'alignement depuis un répertoire Windows, l'option `--outTmpDir /tmp/star_tmp` spécifie le répertoire temporaire (Unix) à utiliser.
 ```
 
 Lancez l'alignement avec STAR et vérifiez que tout se déroule sans problème.
