@@ -1,0 +1,722 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Analyser les données RNA-seq 💻 &#8212; Unix tutorial</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial_2/3_analyse';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Bienvenue !
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../connection.html">Connexion au JupyterHub de l’IFB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial_1/tutorial.html">Tuto 1 : un  aperçu du shell Unix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0_intro.html">Tuto 2 : analyse des données RNA-seq de <em>S. cerevisiae</em> avec Unix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../more.html">Ressources complémentaires</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/pierrepo/unix-tutorial" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/pierrepo/unix-tutorial/issues/new?title=Issue%20on%20page%20%2Ftutorial_2/3_analyse.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/tutorial_2/3_analyse.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Analyser les données RNA-seq 💻</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparer-l-environnement">Préparer l’environnement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyser-manuellement-un-echantillon">Analyser manuellement un échantillon</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#controler-la-qualite-des-reads">Contrôler la qualité des reads</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexer-le-genome-de-reference">Indexer le génome de référence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aligner-les-reads-sur-le-genome-de-reference">Aligner les <em>reads</em> sur le génome de référence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compter-les-reads-et-les-transcrits">Compter les <em>reads</em> et les transcrits</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyser-automatiquement-3-echantillons">Analyser automatiquement 3 échantillons</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="analyser-les-donnees-rna-seq">
+<h1>Analyser les données RNA-seq 💻<a class="headerlink" href="#analyser-les-donnees-rna-seq" title="Permalink to this heading">#</a></h1>
+<section id="preparer-l-environnement">
+<h2>Préparer l’environnement<a class="headerlink" href="#preparer-l-environnement" title="Permalink to this heading">#</a></h2>
+<p>Si cela n’est pas déjà fait, chargez les outils nécessaires à l’analyse des données RNA-seq :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>module<span class="w"> </span>load<span class="w"> </span>sra-tools<span class="w"> </span>fastqc<span class="w"> </span>star<span class="w"> </span>htseq<span class="w"> </span>cufflinks<span class="w"> </span>samtools
+</pre></div>
+</div>
+<p>Déplacez-vous ensuite dans le répertoire contenant les répertoires <code class="docutils literal notranslate"><span class="pre">/shared/projects/202304_duo/$USER/rnaseq</span></code>.</p>
+<p>Vous devriez obtenir l’arborescence suivante :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>tree
+.
+├──<span class="w"> </span>genome
+│<span class="w">   </span>├──<span class="w"> </span>genes.gtf
+│<span class="w">   </span>└──<span class="w"> </span>genome.fa
+└──<span class="w"> </span>reads
+<span class="w">    </span>├──<span class="w"> </span>SRR3405783.fastq.gz
+<span class="w">    </span>├──<span class="w"> </span>SRR3405784.fastq.gz
+<span class="w">    </span>└──<span class="w"> </span>SRR3405785.fastq.gz
+</pre></div>
+</div>
+</section>
+<section id="analyser-manuellement-un-echantillon">
+<h2>Analyser manuellement un échantillon<a class="headerlink" href="#analyser-manuellement-un-echantillon" title="Permalink to this heading">#</a></h2>
+<p>Choississez un échantillon parmi ceux téléchargés dans le répertoire <code class="docutils literal notranslate"><span class="pre">reads</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>reads
+├──<span class="w"> </span>SRR3405783.fastq.gz
+├──<span class="w"> </span>SRR3405784.fastq.gz
+└──<span class="w"> </span>SRR3405785.fastq.gz
+</pre></div>
+</div>
+<p>Par exemple : <code class="docutils literal notranslate"><span class="pre">SRR3405783.fastq.gz</span></code></p>
+<section id="controler-la-qualite-des-reads">
+<h3>Contrôler la qualité des reads<a class="headerlink" href="#controler-la-qualite-des-reads" title="Permalink to this heading">#</a></h3>
+<p>Créez le répertoire <code class="docutils literal notranslate"><span class="pre">reads_qc</span></code> qui va contenir les fichiers produits par le contrôle qualité des fichiers <em>fastq.gz</em> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>reads_qc
+</pre></div>
+</div>
+<p>Lancez FastQC avec la commande :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fastqc<span class="w"> </span>reads/SRR3405783.fastq.gz<span class="w"> </span>--outdir<span class="w"> </span>reads_qc
+</pre></div>
+</div>
+<p>FastQC va produire deux fichiers (un fichier avec l’extension <code class="docutils literal notranslate"><span class="pre">.html</span></code> et un autre avec l’extension <code class="docutils literal notranslate"><span class="pre">.zip</span></code>) dans le répertoire <code class="docutils literal notranslate"><span class="pre">reads_qc</span></code>. Si par exemple, vous avez analysé le fichier <code class="docutils literal notranslate"><span class="pre">reads/SRR3405783.fastq.gz</span></code>, vous obtiendrez les fichiers <code class="docutils literal notranslate"><span class="pre">reads_qc/SRR3405783_fastqc.html</span></code> et <code class="docutils literal notranslate"><span class="pre">reads_qc/SRR3405783_fastqc.zip</span></code>.</p>
+<p>Depuis l’explorateur de fichiers de JupyterLab, déplacez-vous dans le répertoire <code class="docutils literal notranslate"><span class="pre">reads_qc</span></code>, puis double-cliquez sur le  le fichier <code class="docutils literal notranslate"><span class="pre">.html</span></code> ainsi créé. Le rapport d’analyse créé par FastQC va alors s’ouvrir dans un nouvel onglet de JupyterLab.</p>
+</section>
+<section id="indexer-le-genome-de-reference">
+<h3>Indexer le génome de référence<a class="headerlink" href="#indexer-le-genome-de-reference" title="Permalink to this heading">#</a></h3>
+<p>L’indexation du génome de référence est une étape indispensable pour accélérer l’alignement des reads sur le génome. Elle consiste à créer un annuaire du génome de référence.</p>
+<p>Dans un terminal, créez le répertoire <code class="docutils literal notranslate"><span class="pre">genome_index</span></code> qui contiendra les index du génome de référence :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>genome_index
+</pre></div>
+</div>
+<p>Lancez l’indexation du génome de référence :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>STAR<span class="w"> </span>--runMode<span class="w"> </span>genomeGenerate<span class="w"> </span><span class="se">\</span>
+--genomeDir<span class="w"> </span>genome_index<span class="w"> </span><span class="se">\</span>
+--genomeFastaFiles<span class="w"> </span>genome/genome.fa<span class="w"> </span><span class="se">\</span>
+--sjdbGTFfile<span class="w"> </span>genome/genes.gtf<span class="w"> </span><span class="se">\</span>
+--sjdbOverhang<span class="w"> </span><span class="m">50</span><span class="w"> </span><span class="se">\</span>
+--genomeSAindexNbases<span class="w"> </span><span class="m">10</span>
+</pre></div>
+</div>
+<p>L’aide de STAR pour l’option <code class="docutils literal notranslate"><span class="pre">--sjdbOverhang</span></code> indique :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sjdbOverhang</span>                            <span class="mi">100</span>
+    <span class="nb">int</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span> <span class="n">length</span> <span class="n">of</span> <span class="n">the</span> <span class="n">donor</span><span class="o">/</span><span class="n">acceptor</span> <span class="n">sequence</span> <span class="n">on</span> <span class="n">each</span> <span class="n">side</span> <span class="n">of</span> <span class="n">the</span> <span class="n">junctions</span><span class="p">,</span> <span class="n">ideally</span> <span class="o">=</span> <span class="p">(</span><span class="n">mate_length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Cela signifie que cette option doit être égale à la longueur maximale des <em>reads</em> - 1. Le fichier <em>S1 Supporting Information Methods</em> mentionne :</p>
+<blockquote>
+<div><p>S. cerevisiae total mRNA was prepared in libraries of stranded 50 base-pair single-end reads and multiplexed at 10 time point samples per sequencing lane.</p>
+</div></blockquote>
+<p>Les <em>reads</em> obtenus devraient donc a priori être constitué de 50 bases. On peut le vérifier en affichant les premières lignes d’un fichier <em>.fastq.gz</em>, par exemple <code class="docutils literal notranslate"><span class="pre">reads/SRR3405783.fastq.gz</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>zcat<span class="w"> </span>reads/SRR3405783.fastq.gz<span class="w"> </span><span class="p">|</span><span class="w"> </span>head
+@SRR3405783.1<span class="w"> </span>3NH4HQ1:254:C5A48ACXX:1:1101:1135:2105/1
+GGTTGAANGGCGTCGCGTCGTAACCCAGCTTGGTAAGTTGGATTAAGCACT
++
+?8?D<span class="p">;</span>DD#2&lt;C?CFE6CGGIFFFIE@DFF&lt;<span class="nv">FFB</span><span class="o">===</span><span class="nv">C7</span><span class="o">=</span>F37@C<span class="o">)=</span>DE&gt;EA
+@SRR3405783.2<span class="w"> </span>3NH4HQ1:254:C5A48ACXX:1:1101:1210:2111/1
+GTTTCTGTACTTACCCTTACCGGCTCTCAATTTCTTGGACTTCAAGACCTT
++
+<span class="p">;</span>?@DDD&gt;BFF?F&gt;GE:CFFFFBFFIFFFIIIEIFFI9BFDCFFC&lt;FFF&gt;FF
+@SRR3405783.3<span class="w"> </span>3NH4HQ1:254:C5A48ACXX:1:1101:1408:2208/1
+CTGCAGACAAGGCATCTCCTCTCAAGGCCAAATGACGTTGGTCCAACAGTA
+</pre></div>
+</div>
+<p>En réalité, les <em>reads</em> ont une longueur de 51 bases et non pas 50 comme supposé.</p>
+<p>Le paramètre <code class="docutils literal notranslate"><span class="pre">--sjdbOverhang</span></code> vaut donc 50 (51 - 1).</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>La commande <code class="docutils literal notranslate"><span class="pre">zcat</span></code> est particulière car elle affiche le contenu d’un fichier compressé (ici un fichier .gz) en le décompressant à la volée. La commande <code class="docutils literal notranslate"><span class="pre">cat</span></code> (sans le <code class="docutils literal notranslate"><span class="pre">z</span></code>) n’aurait pas permis une telle manipulation.</p>
+</div>
+<p>Vérifiez également que la longueur des <em>reads</em> est bien 51 en consultant les résultats du contrôle qualité fournis par FastQC (première page, <em>Basic Statistics</em>).</p>
+<p>Enfin, le paramètre <code class="docutils literal notranslate"><span class="pre">--genomeSAindexNbases</span> <span class="pre">10</span></code> est conseillé par STAR. Si on utilise STAR sans ce paramètre, on obtient le message :</p>
+<blockquote>
+<div><p>!!!!! WARNING: –genomeSAindexNbases 14 is too large for the genome size=12157105, which may cause seg-fault at the mapping step. Re-run genome generation with recommended –genomeSAindexNbases 10</p>
+</div></blockquote>
+<p>Nous vous rappelons que l’indexation du génome n’est à faire qu’une seule fois pour chaque génome et chaque logiciel d’alignement.</p>
+</section>
+<section id="aligner-les-reads-sur-le-genome-de-reference">
+<h3>Aligner les <em>reads</em> sur le génome de référence<a class="headerlink" href="#aligner-les-reads-sur-le-genome-de-reference" title="Permalink to this heading">#</a></h3>
+<p>Le fichier <em>S1 Supporting Information Methods</em> précise la commande utilisée pour l’alignement :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>STAR<span class="w"> </span>--runThreadN<span class="w"> </span><span class="m">1</span><span class="w"> </span>--runMode<span class="w"> </span>alignReads<span class="w"> </span>--genomeDir
+path_to_yeast_genome_build<span class="w"> </span>--sjdbGTFfile<span class="w"> </span>path_to_yeast_transcriptome_gtf
+--readFilesIn<span class="w"> </span>sample.fastq<span class="w"> </span>--outFilterType<span class="w"> </span>BySJout<span class="w"> </span>--alignIntronMin<span class="w"> </span><span class="m">10</span><span class="w"> </span>--
+alignIntronMax<span class="w"> </span><span class="m">3000</span><span class="w"> </span>--outFileNamePrefix<span class="w"> </span>./STAR_out/<span class="w"> </span>--
+outFilterIntronMotifs<span class="w"> </span>RemoveNoncanonical
+</pre></div>
+</div>
+<p>Les alignements des <em>reads</em> seront stockés dans le répertoire <code class="docutils literal notranslate"><span class="pre">reads_map</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>reads_map
+</pre></div>
+</div>
+<p>Avec nos chemins de fichiers et quelques adaptations, la commande d’alignement devient :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>STAR<span class="w"> </span>--runThreadN<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+--runMode<span class="w"> </span>alignReads<span class="w"> </span><span class="se">\</span>
+--genomeDir<span class="w"> </span>genome_index<span class="w"> </span><span class="se">\</span>
+--sjdbGTFfile<span class="w"> </span>genome/genes.gtf<span class="w"> </span><span class="se">\</span>
+--readFilesCommand<span class="w"> </span>zcat<span class="w"> </span><span class="se">\</span>
+--readFilesIn<span class="w"> </span>reads/SRR3405783.fastq.gz<span class="w"> </span><span class="se">\</span>
+--outFilterType<span class="w"> </span>BySJout<span class="w"> </span><span class="se">\</span>
+--alignIntronMin<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="se">\</span>
+--alignIntronMax<span class="w"> </span><span class="m">3000</span><span class="w"> </span><span class="se">\</span>
+--outFileNamePrefix<span class="w"> </span>reads_map/SRR3405783_<span class="w"> </span><span class="se">\</span>
+--outFilterIntronMotifs<span class="w"> </span>RemoveNoncanonical<span class="w"> </span><span class="se">\</span>
+--outSAMtype<span class="w"> </span>BAM<span class="w"> </span>Unsorted<span class="w"> </span><span class="se">\</span>
+--outTmpDir<span class="w"> </span>/tmp/star_tmp
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul>
+<li><p>L’article orginal du logiciel d’alignement STAR « <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3530905/">STAR: ultrafast universal RNA-seq aligner</a> » (<em>Bioinformatics</em>, 2013) précise que :</p>
+<blockquote>
+<div><p>STAR’s default parameters are optimized for mammalian genomes. Other species may require significant modifications of some alignment parameters; in particular, the maximum and minimum intron sizes have to be reduced for organisms with smaller introns.</p>
+</div></blockquote>
+<p>Ceci explique pourquoi les options <code class="docutils literal notranslate"><span class="pre">--alignIntronMin</span> <span class="pre">10</span></code> et <code class="docutils literal notranslate"><span class="pre">--alignIntronMax</span> <span class="pre">3000</span></code> ont été adaptées pour le génome de la levure <em>S. cerevisiae</em>.</p>
+</li>
+<li><p>L’option <code class="docutils literal notranslate"><span class="pre">--readFilesCommand</span> <span class="pre">zcat</span></code> n’était pas présente dans la commande fournie en <em>Supporting information</em>. Nous l’avons ajoutée car les fichiers contenant les <em>reads</em> (<em>.fastq.gz</em>) sont compressés et il faut demander explicitement à STAR de le prendre en charge. Pensez à toujour consulter la <a class="reference external" href="https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf">documentation</a> de l’outil que vous utilisez (même si c’est un peu pénible) !</p></li>
+<li><p>STAR a besoin d’écrire des fichiers temporaires, habituellement dans le répertoire courant. Mais il faut que ces fichiers soient situés sur une partition Unix. Comme vous lancez l’alignement depuis un répertoire Windows, l’option <code class="docutils literal notranslate"><span class="pre">--outTmpDir</span> <span class="pre">/tmp/star_tmp</span></code> spécifie le répertoire temporaire (Unix) à utiliser.</p></li>
+</ul>
+</div>
+<p>Lancez l’alignement avec STAR et vérifiez que tout se déroule sans problème.
+L’alignement devrait prendre quelques minutes.</p>
+</section>
+<section id="compter-les-reads-et-les-transcrits">
+<h3>Compter les <em>reads</em> et les transcrits<a class="headerlink" href="#compter-les-reads-et-les-transcrits" title="Permalink to this heading">#</a></h3>
+<p>Le fichier <em>S1 Supporting Information Methods</em> précise les commandes utilisées pour le comptage des <em>reads</em> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>htseq-count<span class="w"> </span>--order<span class="o">=</span>pos<span class="w"> </span>--stranded<span class="o">=</span>reverse<span class="w"> </span>--mode<span class="o">=</span>intersection-nonempty
+sample.aligned.sorted.sam<span class="w"> </span>path_to_yeast_transcriptome_gtf<span class="w"> </span>&gt;<span class="w"> </span>sample.txt
+</pre></div>
+</div>
+<p>et celui des transcrits :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cuffquant<span class="w"> </span>--library-type<span class="o">=</span>fr-firststrand<span class="w"> </span>path_to_yeast_transcriptome_gtf
+sample.aligned.sorted.sam
+</pre></div>
+</div>
+<p>Enfin, la normalisation des comptages des transcrits :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cuffnorm<span class="w"> </span>--library-type<span class="o">=</span>fr-firststrand<span class="w"> </span>path_to_yeast_transcriptome_gtf
+*.cxb
+</pre></div>
+</div>
+<p>Nous stockons les fichiers de comptage dans le répertoire <code class="docutils literal notranslate"><span class="pre">counts/SRR3405783</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>counts/SRR3405783
+</pre></div>
+</div>
+<p>Les étapes de tri et d’indexation des <em>reads</em> alignés ne sont pas explicitement mentionnées dans les <em>Supporting Informations</em> mais elles sont cependant nécessaires pour <code class="docutils literal notranslate"><span class="pre">HTSeq</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>samtools<span class="w"> </span>sort<span class="w"> </span>reads_map/SRR3405783_Aligned.out.bam<span class="w"> </span>-o<span class="w"> </span>reads_map/SRR3405783_Aligned.sorted.out.bam
+samtools<span class="w"> </span>index<span class="w"> </span>reads_map/SRR3405783_Aligned.sorted.out.bam
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Le tri des <em>reads</em> peut, a priori, se faire directement avec STAR en utilisant l’option <code class="docutils literal notranslate"><span class="pre">--outSAMtype</span> <span class="pre">BAM</span> <span class="pre">SortedByCoordinate</span></code>. Cependant, les tests réalisés sur le cluster ont montré qu’il y avait parfois des soucis avec cette option. Nous préférons donc utiliser explicitement <code class="docutils literal notranslate"><span class="pre">samtools</span></code> pour le tri des <em>reads</em>.</p>
+</div>
+<p>La commande pour compter les <em>reads</em> devient alors :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>htseq-count<span class="w"> </span>--order<span class="o">=</span>pos<span class="w"> </span>--stranded<span class="o">=</span>reverse<span class="w"> </span><span class="se">\</span>
+--mode<span class="o">=</span>intersection-nonempty<span class="w"> </span><span class="se">\</span>
+reads_map/SRR3405783_Aligned.sorted.out.bam<span class="w"> </span>genome/genes.gtf<span class="w"> </span>&gt;<span class="w"> </span>counts/SRR3405783/count_SRR3405783.txt
+</pre></div>
+</div>
+<p>Puis celle pour compter les transcrits :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cuffquant<span class="w"> </span>--library-type<span class="o">=</span>fr-firststrand<span class="w"> </span>genome/genes.gtf<span class="w"> </span><span class="se">\</span>
+reads_map/SRR3405783_Aligned.sorted.out.bam<span class="w"> </span><span class="se">\</span>
+--output-dir<span class="w"> </span>counts/SRR3405783
+</pre></div>
+</div>
+<p>Remarque :</p>
+<ul class="simple">
+<li><p>Par défaut, <code class="docutils literal notranslate"><span class="pre">cuffquant</span></code> écrit un fichier <code class="docutils literal notranslate"><span class="pre">abundances.cxb</span></code>.</p></li>
+<li><p>Nous ajoutons l’option <code class="docutils literal notranslate"><span class="pre">--output-dir</span> <span class="pre">counts/SRR3405783</span></code> pour indiquer où stocker les résultats produits par <code class="docutils literal notranslate"><span class="pre">cuffquant</span></code> (voir <a class="reference external" href="http://cole-trapnell-lab.github.io/cufflinks/cuffquant/">documentation</a>). Cela nous permet de distinguer les résultats obtenus à partir de différents fichiers <em>.fastq.gz</em>.</p></li>
+</ul>
+<p>Enfin, on normalise les comptages des transcrits :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cuffnorm<span class="w"> </span>--library-type<span class="o">=</span>fr-firststrand<span class="w"> </span>genome/genes.gtf<span class="w"> </span><span class="se">\</span>
+counts/*/*.cxb<span class="w"> </span>--output-dir<span class="w"> </span>counts
+</pre></div>
+</div>
+<p>Remarques :</p>
+<ul class="simple">
+<li><p>Dans le cas présent, cette normalisation va échouer car nous n’avons aligné et quantifié qu’un seul fichier <em>.fastq.gz</em>. Cette étape sera par contre pertinente lorsque plusieurs fichiers <em>.fastq.gz</em> seront traités.</p></li>
+<li><p>L’option <code class="docutils literal notranslate"><span class="pre">--output-dir</span> <span class="pre">counts</span></code> indique où stocker les fichiers produits par <code class="docutils literal notranslate"><span class="pre">cuffnorm</span></code> (voir <a class="reference external" href="http://cole-trapnell-lab.github.io/cufflinks/cuffnorm/">documentation</a>).</p></li>
+</ul>
+</section>
+</section>
+<section id="analyser-automatiquement-3-echantillons">
+<h2>Analyser automatiquement 3 échantillons<a class="headerlink" href="#analyser-automatiquement-3-echantillons" title="Permalink to this heading">#</a></h2>
+<p>Vérifiez que vous êtes bien dans le répertoire <code class="docutils literal notranslate"><span class="pre">/mnt/c/Users/omics/rnaseq_scere</span></code>. Assurez-vous également que vous avez préparé les données correctement, notamment les répertoires <code class="docutils literal notranslate"><span class="pre">reads</span></code> et <code class="docutils literal notranslate"><span class="pre">genome</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>tree
+.
+├──<span class="w"> </span>genome
+│<span class="w">   </span>├──<span class="w"> </span>genes.gtf
+│<span class="w">   </span>└──<span class="w"> </span>genome.fa
+└──<span class="w"> </span>reads
+<span class="w">    </span>├──<span class="w"> </span>SRR3405783.fastq.gz
+<span class="w">    </span>├──<span class="w"> </span>SRR3405784.fastq.gz
+<span class="w">    </span>├──<span class="w"> </span>SRR3405788.fastq.gz
+<span class="w">    </span>├──<span class="w"> </span>SRR3405789.fastq.gz
+<span class="w">    </span>└──<span class="w"> </span>SRR3405791.fastq.gz
+</pre></div>
+</div>
+<p>Téléchargez le script <code class="docutils literal notranslate"><span class="pre">analyse_locale.sh</span></code> qui analyse 3 échantillons :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/omics-school/analyse-rna-seq-scere/master/analyse_locale.sh
+</pre></div>
+</div>
+<p>Vérifiez dans le script que la ligne</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">samples</span><span class="o">=</span><span class="s2">&quot;SRR3405783 SRR3405784 SRR3405788&quot;</span>
+</pre></div>
+</div>
+<p>corresponde à VOS échantillons. Modifiez-la le cas échéant.</p>
+<p>Lancez ensuite le script d’analyse :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>analyse_locale.sh
+</pre></div>
+</div>
+<p>L’analyse devrait prendre plusieurs dizaines de minutes.</p>
+<p>Vérifiez régulièrement votre terminal qu’aucune erreur n’apparaît.</p>
+<p>Le fichier qui contient le comptage normalisé des transcrits est <code class="docutils literal notranslate"><span class="pre">counts/genes.count_table</span></code>.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./tutorial_2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparer-l-environnement">Préparer l’environnement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyser-manuellement-un-echantillon">Analyser manuellement un échantillon</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#controler-la-qualite-des-reads">Contrôler la qualité des reads</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexer-le-genome-de-reference">Indexer le génome de référence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aligner-les-reads-sur-le-genome-de-reference">Aligner les <em>reads</em> sur le génome de référence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compter-les-reads-et-les-transcrits">Compter les <em>reads</em> et les transcrits</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyser-automatiquement-3-echantillons">Analyser automatiquement 3 échantillons</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Pierre Poulain
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+Ce contenu est mis à disposition selon les termes de la licence <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr" target="_blank">Creative Commons Attribution - Partage dans les Mêmes Conditions 4.0 International</a> (CC BY-SA 4.0).
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
