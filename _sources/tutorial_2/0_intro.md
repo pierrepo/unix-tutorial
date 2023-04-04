@@ -8,11 +8,12 @@ L'objectif de ce tutoriel est de reproduire les résultats de l'article [*Invest
 
 Dans la rubique [*Supporting Information*](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1006453#sec011) de l'article, le fichier [*S1 Supporting Information Methods*](https://doi.org/10.1371/journal.pgen.1006453.s001) contient les informations sur les outils et les méthodes utilisés pour l'analyse RNA-seq.
 
+Partant de ces informations, nous allons essayer de reproduire les différentes étapes de l'analyse RNA-seq.
 
 ### Prérequis
 
 - Avoir un compte sur le cluster de calcul de l'IFB.
-- Avoir suivi le tutoriel [Introduction à Unix](https://omics-school.github.io/unix-tutorial/).
+- Avoir suivi le tutoriel [Introduction à Unix](../tutorial_1/tutorial.md).
 
 ### Analyse de données RNA-seq
 

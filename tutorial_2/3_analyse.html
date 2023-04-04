@@ -360,7 +360,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compter-les-reads-et-les-transcrits">Compter les <em>reads</em> et les transcrits</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyser-automatiquement-3-echantillons">Analyser automatiquement 3 échantillons</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automatiser-l-analyse-d-un-echantillon">Automatiser l’analyse d’un échantillon</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automatiser-l-analyse-de-3-echantillons">Automatiser l’analyse de 3 échantillons</a></li>
 </ul>
             </nav>
         </div>
@@ -511,7 +512,7 @@ outFilterIntronMotifs<span class="w"> </span>RemoveNoncanonical
 </ul>
 </div>
 <p>Lancez l’alignement avec STAR et vérifiez que tout se déroule sans problème.
-L’alignement devrait prendre quelques minutes.</p>
+L’alignement devrait prendre environ entre 5 et 10 minutes.</p>
 </section>
 <section id="compter-les-reads-et-les-transcrits">
 <h3>Compter les <em>reads</em> et les transcrits<a class="headerlink" href="#compter-les-reads-et-les-transcrits" title="Permalink to this heading">#</a></h3>
@@ -530,7 +531,8 @@ sample.aligned.sorted.sam
 *.cxb
 </pre></div>
 </div>
-<p>Nous stockons les fichiers de comptage dans le répertoire <code class="docutils literal notranslate"><span class="pre">counts/SRR3405783</span></code> :</p>
+<p>Nous allons réaliser nous-mêmes ces étapes avec quelques adaptations.</p>
+<p>Créez tout d’abord le répertoire <code class="docutils literal notranslate"><span class="pre">counts/SRR3405783</span></code> dans lequel seront stockés les fichiers de comptage :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>counts/SRR3405783
 </pre></div>
 </div>
@@ -555,26 +557,33 @@ reads_map/SRR3405783_Aligned.sorted.out.bam<span class="w"> </span><span class="
 --output-dir<span class="w"> </span>counts/SRR3405783
 </pre></div>
 </div>
-<p>Remarque :</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <ul class="simple">
 <li><p>Par défaut, <code class="docutils literal notranslate"><span class="pre">cuffquant</span></code> écrit un fichier <code class="docutils literal notranslate"><span class="pre">abundances.cxb</span></code>.</p></li>
-<li><p>Nous ajoutons l’option <code class="docutils literal notranslate"><span class="pre">--output-dir</span> <span class="pre">counts/SRR3405783</span></code> pour indiquer où stocker les résultats produits par <code class="docutils literal notranslate"><span class="pre">cuffquant</span></code> (voir <a class="reference external" href="http://cole-trapnell-lab.github.io/cufflinks/cuffquant/">documentation</a>). Cela nous permet de distinguer les résultats obtenus à partir de différents fichiers <em>.fastq.gz</em>.</p></li>
+<li><p>Nous ajoutons l’option <code class="docutils literal notranslate"><span class="pre">--output-dir</span> <span class="pre">counts/SRR3405783</span></code> pour indiquer où stocker les résultats produits par <code class="docutils literal notranslate"><span class="pre">cuffquant</span></code> (voir la <a class="reference external" href="http://cole-trapnell-lab.github.io/cufflinks/cuffquant/">documentation</a> à ce propos). Cela nous permet de distinguer les résultats obtenus à partir de différents fichiers <em>.fastq.gz</em>.</p></li>
 </ul>
+</div>
 <p>Enfin, on normalise les comptages des transcrits :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cuffnorm<span class="w"> </span>--library-type<span class="o">=</span>fr-firststrand<span class="w"> </span>genome/genes.gtf<span class="w"> </span><span class="se">\</span>
 counts/*/*.cxb<span class="w"> </span>--output-dir<span class="w"> </span>counts
 </pre></div>
 </div>
-<p>Remarques :</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <ul class="simple">
 <li><p>Dans le cas présent, cette normalisation va échouer car nous n’avons aligné et quantifié qu’un seul fichier <em>.fastq.gz</em>. Cette étape sera par contre pertinente lorsque plusieurs fichiers <em>.fastq.gz</em> seront traités.</p></li>
-<li><p>L’option <code class="docutils literal notranslate"><span class="pre">--output-dir</span> <span class="pre">counts</span></code> indique où stocker les fichiers produits par <code class="docutils literal notranslate"><span class="pre">cuffnorm</span></code> (voir <a class="reference external" href="http://cole-trapnell-lab.github.io/cufflinks/cuffnorm/">documentation</a>).</p></li>
+<li><p>L’option <code class="docutils literal notranslate"><span class="pre">--output-dir</span> <span class="pre">counts</span></code> indique où stocker les fichiers produits par <code class="docutils literal notranslate"><span class="pre">cuffnorm</span></code> (voir la <a class="reference external" href="http://cole-trapnell-lab.github.io/cufflinks/cuffnorm/">documentation</a> à ce propos).</p></li>
 </ul>
+</div>
 </section>
 </section>
-<section id="analyser-automatiquement-3-echantillons">
-<h2>Analyser automatiquement 3 échantillons<a class="headerlink" href="#analyser-automatiquement-3-echantillons" title="Permalink to this heading">#</a></h2>
-<p>Vérifiez que vous êtes bien dans le répertoire <code class="docutils literal notranslate"><span class="pre">/mnt/c/Users/omics/rnaseq_scere</span></code>. Assurez-vous également que vous avez préparé les données correctement, notamment les répertoires <code class="docutils literal notranslate"><span class="pre">reads</span></code> et <code class="docutils literal notranslate"><span class="pre">genome</span></code> :</p>
+<section id="automatiser-l-analyse-d-un-echantillon">
+<h2>Automatiser l’analyse d’un échantillon<a class="headerlink" href="#automatiser-l-analyse-d-un-echantillon" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="automatiser-l-analyse-de-3-echantillons">
+<h2>Automatiser l’analyse de 3 échantillons<a class="headerlink" href="#automatiser-l-analyse-de-3-echantillons" title="Permalink to this heading">#</a></h2>
+<p>Vérifiez que vous êtes bien dans le répertoire <code class="docutils literal notranslate"><span class="pre">/shared/projects/202304_duo/$USER/rnaseq</span></code>. Assurez-vous également que vous avez préparé les données correctement, notamment les répertoires <code class="docutils literal notranslate"><span class="pre">reads</span></code> et <code class="docutils literal notranslate"><span class="pre">genome</span></code> :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>tree
 .
 ├──<span class="w"> </span>genome
@@ -583,9 +592,7 @@ counts/*/*.cxb<span class="w"> </span>--output-dir<span class="w"> </span>counts
 └──<span class="w"> </span>reads
 <span class="w">    </span>├──<span class="w"> </span>SRR3405783.fastq.gz
 <span class="w">    </span>├──<span class="w"> </span>SRR3405784.fastq.gz
-<span class="w">    </span>├──<span class="w"> </span>SRR3405788.fastq.gz
-<span class="w">    </span>├──<span class="w"> </span>SRR3405789.fastq.gz
-<span class="w">    </span>└──<span class="w"> </span>SRR3405791.fastq.gz
+<span class="w">    </span>└──<span class="w"> </span>SRR3405785.fastq.gz
 </pre></div>
 </div>
 <p>Téléchargez le script <code class="docutils literal notranslate"><span class="pre">analyse_locale.sh</span></code> qui analyse 3 échantillons :</p>
@@ -664,7 +671,8 @@ counts/*/*.cxb<span class="w"> </span>--output-dir<span class="w"> </span>counts
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compter-les-reads-et-les-transcrits">Compter les <em>reads</em> et les transcrits</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyser-automatiquement-3-echantillons">Analyser automatiquement 3 échantillons</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automatiser-l-analyse-d-un-echantillon">Automatiser l’analyse d’un échantillon</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automatiser-l-analyse-de-3-echantillons">Automatiser l’analyse de 3 échantillons</a></li>
 </ul>
   </nav></div>
 

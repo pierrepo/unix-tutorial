@@ -167,7 +167,7 @@ STAR --runThreadN 1 \
 ```
 
 Lancez l'alignement avec STAR et vérifiez que tout se déroule sans problème.
-L'alignement devrait prendre quelques minutes.
+L'alignement devrait prendre environ entre 5 et 10 minutes.
 
 
 ### Compter les *reads* et les transcrits
@@ -193,7 +193,9 @@ cuffnorm --library-type=fr-firststrand path_to_yeast_transcriptome_gtf
 *.cxb
 ```
 
-Nous stockons les fichiers de comptage dans le répertoire `counts/SRR3405783` :
+Nous allons réaliser nous-mêmes ces étapes avec quelques adaptations.
+
+Créez tout d'abord le répertoire `counts/SRR3405783` dans lequel seront stockés les fichiers de comptage :
 
 ```bash
 mkdir -p counts/SRR3405783
@@ -226,11 +228,10 @@ reads_map/SRR3405783_Aligned.sorted.out.bam \
 --output-dir counts/SRR3405783
 ```
 
-Remarque :
-
+```{note}
 - Par défaut, `cuffquant` écrit un fichier `abundances.cxb`.
-- Nous ajoutons l'option `--output-dir counts/SRR3405783` pour indiquer où stocker les résultats produits par `cuffquant` (voir [documentation](http://cole-trapnell-lab.github.io/cufflinks/cuffquant/)). Cela nous permet de distinguer les résultats obtenus à partir de différents fichiers *.fastq.gz*.
-
+- Nous ajoutons l'option `--output-dir counts/SRR3405783` pour indiquer où stocker les résultats produits par `cuffquant` (voir la [documentation](http://cole-trapnell-lab.github.io/cufflinks/cuffquant/) à ce propos). Cela nous permet de distinguer les résultats obtenus à partir de différents fichiers *.fastq.gz*.
+```
 
 Enfin, on normalise les comptages des transcrits :
 
@@ -239,15 +240,18 @@ cuffnorm --library-type=fr-firststrand genome/genes.gtf \
 counts/*/*.cxb --output-dir counts
 ```
 
-Remarques : 
-
+```{note}
 - Dans le cas présent, cette normalisation va échouer car nous n'avons aligné et quantifié qu'un seul fichier *.fastq.gz*. Cette étape sera par contre pertinente lorsque plusieurs fichiers *.fastq.gz* seront traités.
-- L'option `--output-dir counts` indique où stocker les fichiers produits par `cuffnorm` (voir [documentation](http://cole-trapnell-lab.github.io/cufflinks/cuffnorm/)).
+- L'option `--output-dir counts` indique où stocker les fichiers produits par `cuffnorm` (voir la [documentation](http://cole-trapnell-lab.github.io/cufflinks/cuffnorm/) à ce propos).
+```
 
 
-## Analyser automatiquement 3 échantillons
+## Automatiser l'analyse d'un échantillon
 
-Vérifiez que vous êtes bien dans le répertoire `/mnt/c/Users/omics/rnaseq_scere`. Assurez-vous également que vous avez préparé les données correctement, notamment les répertoires `reads` et `genome` :
+
+## Automatiser l'analyse de 3 échantillons
+
+Vérifiez que vous êtes bien dans le répertoire `/shared/projects/202304_duo/$USER/rnaseq`. Assurez-vous également que vous avez préparé les données correctement, notamment les répertoires `reads` et `genome` :
 
 ```bash
 $ tree
@@ -258,9 +262,7 @@ $ tree
 └── reads
     ├── SRR3405783.fastq.gz
     ├── SRR3405784.fastq.gz
-    ├── SRR3405788.fastq.gz
-    ├── SRR3405789.fastq.gz
-    └── SRR3405791.fastq.gz
+    └── SRR3405785.fastq.gz
 ```
 
 Téléchargez le script `analyse_locale.sh` qui analyse 3 échantillons :
