@@ -231,7 +231,7 @@ $ du -csh reads/*
 
 ## Télécharger le génome de référence et ses annotations
 
-On trouve dans le fichier *S1 Supporting Information Methods* la desciption du génome de *S. cerevisiae* utilisé :
+On trouve dans le fichier *S1 Supporting Information Methods* la desciption du génome de *S. cerevisiae* utilisé par Kelliher *et al.* :
 
 > The S. cerevisiae S288C genome (Ensembl build R64-1-1) was downloaded from Illumina iGenomes on March 2, 2016 (https://support.illumina.com/sequencing/sequencing_software/igenome.html).
 
