@@ -1,5 +1,8 @@
 # Analyser les données RNA-seq 💻
 
+```{contents}
+```
+
 Dans cette partie, nous allons analyser manuellement, c'est-à-dire étape par étape, les données RNA-seq de *S. cerevisiae*.
 ## Vérifier l'environnement logiciel
 
@@ -9,7 +12,7 @@ Si cela n'est pas déjà fait, chargez les outils nécessaires à l'analyse des 
 $ module load sra-tools fastqc star htseq cufflinks samtools
 ```
 
-## vérifier les données
+## Vérifier les données
 
 Déplacez-vous ensuite dans le répertoire contenant les répertoires `/shared/projects/202304_duo/$USER/rnaseq`. 
 

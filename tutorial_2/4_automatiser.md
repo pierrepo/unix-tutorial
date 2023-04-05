@@ -1,5 +1,8 @@
 # Automatiser l'analyse RNA-seq ⚙️
 
+```{contents}
+```
+
 Dans la section précédente, vous avez analysé les données RNA-seq d'un seul échantillon en exécutant, une à une, chaque étape de l'analyse (contrôle qualité, alignement des *reads*...).
 
 Nous allons maintenant automatiser l'analyse d'un échantillon en une seule fois en utilisant un script. Puis nous automatiserons l'analyse de plusieurs échantillons.
@@ -294,6 +297,8 @@ La ligne `set -euo pipefail` tout au début du script va arrêter celui-ci :
 
 C'est une mesure de sécurité importante pour votre script. Si vous le souhaitez, vous pouvez lire l'article de Aaron Maxwell à ce sujet : [Use the Unofficial Bash Strict Mode (Unless You Looove Debugging)](http://redsymbol.net/articles/unofficial-bash-strict-mode/)
 
+Remarquez également la structure de la boucle et la toute dernière étape qui normalise les comptages des transcrits sur tous les échantillons.
+
 Si vous pensez en avoir le temps, lancez le script `script_local_3.sh`. Comme ce script va automatiser toute l'analyse, il va fonctionner environ 45 minutes.
 
 ```bash
@@ -307,7 +312,6 @@ Vérifiez régulièrement votre terminal qu'aucune erreur n'apparaît.
 Le fichier qui contient le comptage normalisé des transcrits est `counts/genes.count_table`.
 
 
-
 ## Comparer les versions des logiciels utilisés dans Galaxy (si vous avez du temps)
 
 Connectez-vous maintenant à votre compte sur Galaxy. Essayez de retrouver les versions des logiciels que vous avez utilisés (FastQC, STAR, samtools, HTSeq, Cuffquant).
@@ -317,3 +321,4 @@ Pour ce faire, dans votre *History*, cliquez sur le nom d'un résultat d'analyse
 Comparez les versions des logiciels disponibles dans Galaxy avec celles que vous avez utilisés sur le cluster.
 
 Comment utilisez-vous la version particulière d'un outil dans Galaxy ?
+

@@ -8,7 +8,7 @@ L'objectif de ce tutoriel est de reproduire les résultats de l'article [*Invest
 
 Dans la rubrique [*Supporting Information*](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1006453#sec011) de l'article, le fichier [*S1 Supporting Information Methods*](https://doi.org/10.1371/journal.pgen.1006453.s001) contient les informations sur les outils et les méthodes utilisés pour l'analyse RNA-seq.
 
-Partant de ces informations, nous allons essayer de reproduire les différentes étapes de l'analyse RNA-seq.
+Partant de ces informations, nous allons essayer de reproduire les différentes étapes de l'analyse RNA-seq. Nous verrons quelles sont les principales limitations et comment les contourner.
 
 ### Prérequis
 
@@ -34,4 +34,5 @@ Dans la page *Server Options*, choisissez les paramètres suivants :
 1. [Préparer l'environnement logiciel](1_preparer_logiciels_module.md)
 1. [Préparer les données](2_preparer_donnees.md)
 1. [Analyser les données RNA-seq](3_analyser.md)
-1. [Automatiser l'analyse](4_automatiser.md)
+1. [Automatiser l'analyse RNA-seq](4_automatiser.md)
+

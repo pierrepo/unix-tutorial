@@ -1,5 +1,8 @@
 # Préparer l'environnement logiciel 🧰
 
+```{contents}
+```
+
 Le cluster de calcul de l'IFB propose de nombreux logiciels pré-installés. Pour utiliser ces logiciels, il suffit de les charger dans l'environnement de travail avec la commande `module load`.
 
 ## Lister les logiciels nécessaires

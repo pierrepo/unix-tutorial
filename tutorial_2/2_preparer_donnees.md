@@ -1,5 +1,8 @@
 # Préparer les données 🗃️
 
+```{contents}
+```
+
 L'article orginal publié en 2016 par [Kelliher *et al.*](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1006453) indique dans la rubrique *Data Availability* :
 
 > RNA-Sequencing gene expression data from this manuscript have been submitted to the NCBI Gene Expression Omnibus (GEO; http://www.ncbi.nlm.nih.gov/geo/) under accession number GSE80474.
