@@ -1,4 +1,4 @@
-# Automatiser l'analyse RNA-seq
+# Automatiser l'analyse RNA-seq ⚙️
 
 Dans la section précédente, vous avez analysé les données RNA-seq d'un seul échantillon en exécutant, une à une, chaque étape de l'analyse (contrôle qualité, alignement des *reads*...).
 
@@ -15,6 +15,7 @@ $ module load sra-tools fastqc star htseq cufflinks samtools
 ```{hint}
 La commande `module list` affiche les modules déjà chargés.
 ```
+
 Vérifiez ensuite que vous êtes bien dans le répertoire `/shared/projects/202304_duo/$USER/rnaseq` avec la commande `pwd` et déplacez-vous dans ce répertoire avec la commande `cd` si ce n'est pas le cas.
 
 Supprimez les répertoires qui contiennet les résultats de l'analyse précédente :
@@ -45,7 +46,7 @@ $ tree
 
 Une variable va contenir de l'information qui sera utilisable autant de fois que nécessaire.
 
-Création de variables :
+Créer des variables :
 
 ```bash
 $ toto=33
@@ -56,7 +57,7 @@ $ t="salut"
 Il faut coller le nom de la variable et son contenu au symbole `=`.
 ```
 
-Affichage de variables :
+Afficher des variables :
 
 ```bash
 $ echo $toto
@@ -65,9 +66,9 @@ $ echo "$t Pierre"
 salut Pierre
 ```
 
-La commande `echo` affiche une chaîne de caractère, une variable, ou les deux.
+La commande `echo` affiche une chaîne de caractères, une variable, ou les deux.
 
-Pour utiliser une variable (et accéder à son contenu), il faut précéder son nom du caractère `$`. Attention, ce symbole n'est pas à confondre avec celui qui désigne l'invite de commande de votre *shell* Linux.
+Pour utiliser une variable (et accéder à son contenu), il faut précéder son nom du caractère `$`. Attention, ne  confondez pas ce symbole avec celui qui désigne l'invite de commande de votre *shell* Linux.
 
 Enfin, une bonne pratique consiste à utiliser une variable avec le symbole `$` et son nom entre accolades :
 
@@ -82,11 +83,15 @@ salut Pierre
 
 Un script est un fichier texte qui contient des instructions Bash. Par convention, il porte l'extension `.sh`. L'objectif premier d'un script Bash est d'**automatiser l'exécution de plusieurs commandes** Bash, la plupart du temps pour manipuler ou analyser des fichiers.
 
-Dans un script Bash, tout ce qui suit le symbole `#` est considéré comme un commentaire et n'est donc pas traité par Bash.
+Dans un script Bash :
+
+- La première ligne commence par `#! /bin/bash` et précise à l'ordinateur que le script est écrit en Bash.
+- Tout ce qui suit le symbole `#` est considéré comme un commentaire et n'est donc pas traité par Bash.
+- Le caractère `\` en fin de ligne permet de continuer une instruction sur la ligne suivante.
 
 ## Automatiser l'analyse d'un échantillon
 
-Téléchargez un premier script Bash avec la commande `wget` :
+Téléchargez un premier script Bash, `script_local_1.sh` ,avec la commande `wget` :
 
 ```bash
 wget xxx
@@ -96,14 +101,15 @@ Ouvrez ce script dans un éditeur de texte :
 - Soit dans un terminal avec l'éditeur de texte nano (`nano script_local_1.sh`).
 - Soit depuis le navigateur de fichiers de JupyterLab, en double-cliquant sur son nom. Cette seconde solution est la plus confortable.
 
-Modifiez la variable `sample`, à la ligne 2 du script avec votre numéro d'échantillon. Vous avez le choix entre `SRR3405783`, `SRR3405784` et `SRR3405785`. Veuillez à bien respecter :
+Modifiez la variable `sample`, à la ligne 4 du script avec votre numéro d'échantillon. Vous avez le choix entre `SRR3405783`, `SRR3405784` et `SRR3405785`. Veillez à bien respecter :
 - la casse (majuscules et minuscules),
 - les guillemets autour du numéro de l'échantillon
 - et l'absence d'espace autour du signe `=`.
 
-Retrouvez également dans ce script les différentes étapes de l'analyse RNA-seq que vous avez réalisées précédemment.
+Retrouvez également dans ce script les différentes étapes de l'analyse RNA-seq que vous avez réalisées précédemment. Y-a-t-il des choses bizarres dont vous souhaiteriez des explications ? Si oui, notez-les, lancez-le script puis nous y reviendrons.
 
 Lancez le script avec la commande :
+
 ```bash
 $ bash script_local_1.sh
 ```
@@ -194,44 +200,120 @@ $ du -csh *
 4.1G    total
 ```
 
+## Optimiser l'analyse d'un échantillon
+
+L'analyse précédente est complètement automatisée par un script Bash qui rassemble toutes les étapes de l'analyse. Par contre, l'analyse d'un seul échantillon prend environ 25 minutes, soit 75 minutes pour 3 échantillons et plus de 20 heures de calcul pour les 50 échantillons de *S. cerevisiae*.
+
+Nous allons essayer d'optimiser l'analyse d'un échantillon pour réduire le temps de calcul. Une première approche consiste à utiliser plusieurs processeurs (coeurs) par les logiciels qui le supporte. C'est le cas pour `star` et `cuffquant`.
+
+- STAR propose l'option `--runThreadN x` pour utiliser `x` coeurs. 
+- Cuffquant propose l'option `--num-threads x` pour utiliser `x` coeurs.
+
+```{note}
+Tous les logiciels ne proposent pas le multi-threading, c'est-à-dire l'utilisation de plusieurs coeurs. `htseq-count` par exemple ne prend pas en charge le multi-threading. Pour chaque logiciel, il faut donc le vérifier et trouver l'option adéquate.
+```
+
+Téléchargez un nouveau script Bash, `script_local_3.sh`, avec la commande `wget` :
+
+```bash
+wget xxx
+```
+
+Ouvrez ce script avec l'éditeur de texte de JupyterLab. Essayer de trouver les différences avec le script précédent.
+
+````{admonition} Solution
+:class: tip, dropdown
+
+Lors de l'utilisation de STAR pour l'indexation du génome de référence et l'alignement des *reads* sur le génome, l'option `--runThreadN 4` est ajoutée pour utiliser 4 coeurs.
+
+Lors de l'utilisation de Cuffquant pour le comptage des transcrits, l'option `--num-threads 4` est ajoutée pour utiliser 4 coeurs.
+````
+
+Supprimez les répertoires qui contiennet les résultats de l'analyse précédente :
+
+```bash
+rm -rf genome_index reads_qc reads_map counts
+```
+
+Puis lancer ce nouveau script :
+
+```bash
+$ bash script_local_2.sh
+```
+
+Vérifiez que le déroulement du script se passe bien. Quelle étape vous semble la plus longue ?
+
+Normalement, le temps de calcul est passé de 25 minutes à environ 10 minutes. C'est mieux, mais cela représente toujours beaucoup d'heures de calcul pour analyser les 50 échantillons. Nous verrons lors de la prochaine sesssion commment utiliser un cluster de calcul pour réduire le temps d'analyse. 🚀
+
+Pour le moment, nous allons automatiser le traitement de plusieurs échantillons dans un même script Bash.
+
+
+## Répéter une action en Bash
+
+Une boucle permet de répéter un ensemble d'instructions.
+
+Voici un exemple en Bash :
+
+```bash
+$ for prenom in gaelle bertrand pierre
+> do
+> echo "Salut ${prenom} !"
+> done
+Salut gaelle !
+Salut bertrand !
+Salut pierre !
+```
+
+En sacrifiant un peu de lisibilité, la même commande peut s'écrire sur une seule ligne :
+
+```bash
+$ for prenom in gaelle bertrand pierre; do echo "Salut ${prenom} !"; done
+Salut gaelle !
+Salut bertrand !
+Salut pierre !
+```
+
+Notez l'utilisation du symbole `;` pour séparer les différents éléments de la boucle.
+
+Une leçon de Software Carpentry aborde la notion de [boucle](https://swcarpentry.github.io/shell-novice/05-loop/index.html). Prenez quelques minutes pour parcourir cette leçon et comprendre de quoi il s'agit.
+
 ## Automatiser l'analyse de 3 échantillons
 
-Vérifiez que vous êtes bien dans le répertoire `/shared/projects/202304_duo/$USER/rnaseq`. Assurez-vous également que vous avez préparé les données correctement, notamment les répertoires `reads` et `genome` :
+Le script `script_local_3.sh` utilise une boucle pour automatiser l'analyse de plusieurs échantillons. Téléchargez-le avec la commande :
 
 ```bash
-$ tree
-.
-├── genome
-│   ├── genes.gtf
-│   └── genome.fa
-└── reads
-    ├── SRR3405783.fastq.gz
-    ├── SRR3405784.fastq.gz
-    └── SRR3405785.fastq.gz
+$ wget ...
 ```
 
-Téléchargez le script `analyse_locale.sh` qui analyse 3 échantillons :
+Ouvrez ce script avec l'éditeur de texte de JupyterLab (ou avec `nano` dans un terminal). Observez la structure du script et essayez de comprendre son fonctionnement.
+
+La ligne `set -euo pipefail` tout au début du script va arrêter celui-ci :
+- à la première erreur ;
+- si une variable n'est pas définie ;
+- si une erreur est rencontrée dans une commande avec un pipe (`|`).
+
+C'est une mesure de sécurité importante pour votre script. Si vous le souhaitez, vous pouvez lire l'article de Aaron Maxwell à ce sujet : [Use the Unofficial Bash Strict Mode (Unless You Looove Debugging)](http://redsymbol.net/articles/unofficial-bash-strict-mode/)
+
+Si vous pensez en avoir le temps, lancez le script `script_local_3.sh`. Comme ce script va automatiser toute l'analyse, il va fonctionner environ 45 minutes.
 
 ```bash
-wget https://raw.githubusercontent.com/omics-school/analyse-rna-seq-scere/master/analyse_locale.sh
+$ bash script_local_3.sh
 ```
 
-Vérifiez dans le script que la ligne
-
-```bash
-samples="SRR3405783 SRR3405784 SRR3405788"
-```
-
-corresponde à VOS échantillons. Modifiez-la le cas échéant.
-
-Lancez ensuite le script d'analyse :
-
-```bash
-bash analyse_locale.sh
-```
-
-L'analyse devrait prendre plusieurs dizaines de minutes.
+L'analyse devrait prendre environ 45 minutes.
 
 Vérifiez régulièrement votre terminal qu'aucune erreur n'apparaît.
 
 Le fichier qui contient le comptage normalisé des transcrits est `counts/genes.count_table`.
+
+
+
+## Comparer les versions des logiciels utilisés dans Galaxy (si vous avez du temps)
+
+Connectez-vous maintenant à votre compte sur Galaxy. Essayez de retrouver les versions des logiciels que vous avez utilisés (FastQC, STAR, samtools, HTSeq, Cuffquant).
+
+Pour ce faire, dans votre *History*, cliquez sur le nom d'un résultat d'analyse, puis cliquez sur le petit i entouré (ℹ️) et lisez les informations de la section *Job Dependencies*.
+
+Comparez les versions des logiciels disponibles dans Galaxy avec celles que vous avez utilisés sur le cluster.
+
+Comment utilisez-vous la version particulière d'un outil dans Galaxy ?

@@ -7,7 +7,7 @@
     - Account: `202304_duo` (ce paramètre est très important, vérifiez qu'il est correct)
     - Partition: `fast`
     - CPU(s): `1`
-    - Memory (in GB): `2GB`
+    - Memory (in GB): `2`
     - GPU(s): `0` `No GRES`
 
     Cliquez ensuite sur le bouton *Start*

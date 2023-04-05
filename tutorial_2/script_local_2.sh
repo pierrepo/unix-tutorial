@@ -11,7 +11,7 @@ echo "=============================================================="
 echo "Indexer le génome de référence"
 echo "=============================================================="
 mkdir -p "genome_index"
-STAR \
+STAR --runThreadN 4 \
 --runMode genomeGenerate \
 --genomeDir "genome_index" \
 --genomeFastaFiles "${genome_file}" \
@@ -29,7 +29,7 @@ echo "=============================================================="
 echo "Aligner les reads sur le génome de référence : échantillon ${sample}"
 echo "=============================================================="
 mkdir -p "reads_map"
-STAR \
+STAR --runThreadN 4 \
 --runMode alignReads \
 --genomeDir genome_index \
 --sjdbGTFfile ${annotation_file} \
@@ -65,7 +65,7 @@ htseq-count --order=pos --stranded=reverse \
 echo "=============================================================="
 echo "Compter les transcrits : échantillon ${sample}"
 echo "=============================================================="
-cuffquant \
+cuffquant --num-threads 4 \
 --library-type=fr-firststrand "${annotation_file}" \
 "reads_map/${sample}_Aligned.sorted.out.bam" \
 --output-dir "counts/${sample}"

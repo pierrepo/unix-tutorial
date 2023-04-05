@@ -15,9 +15,23 @@ Partant de ces informations, nous allons essayer de reproduire les différentes 
 - Avoir un compte sur le cluster de calcul de l'IFB.
 - Avoir suivi le tutoriel [Introduction à Unix](../tutorial_1/tutorial.md).
 
+### Configuration du JupyterHub
+
+Connectez-vous au serveur JupyterHub de l'IFB.
+
+Dans la page *Server Options*, choisissez les paramètres suivants :
+- Reservation: `No reservation` 
+- Account: `202304_duo` (ce paramètre est très important, vérifiez qu'il est correct)
+- Partition: `fast`
+- CPU(s): `4`
+- Memory (in GB): `4`
+- GPU(s): `0` `No GRES`
+
+
+
 ### Analyse de données RNA-seq
 
-1. [Préparer l'environnement logiciel](1_env_logiciel_module.md)
-1. [Préparer les données](2_donnees.md)
-1. [Analyser les données RNA-seq](3_analyse.md)
+1. [Préparer l'environnement logiciel](1_preparer_logiciels_module.md)
+1. [Préparer les données](2_preparer_donnees.md)
+1. [Analyser les données RNA-seq](3_analyser.md)
 1. [Automatiser l'analyse](4_automatiser.md)
