@@ -64,6 +64,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial_2/3_analyse';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Préparer les données 🗃️" href="2_donnees.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -154,11 +155,21 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">JupyterHub du cluster IFB</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../connection.html">Connexion au JupyterHub de l’IFB</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorial_1/tutorial.html">Tuto 1 : un  aperçu du shell Unix</a></li>
-<li class="toctree-l1"><a class="reference internal" href="0_intro.html">Tuto 2 : analyse des données RNA-seq de <em>S. cerevisiae</em> avec Unix</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction à Unix</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tutorial_1/tutorial.html">Découvrir le shell Unix</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../more.html">Ressources complémentaires</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analyse RNA-seq</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="0_intro.html">Introduction et contexte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_env_logiciel_module.html">Préparer l’environnement logiciel 🧰</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_donnees.html">Préparer les données 🗃️</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Analyser les données RNA-seq 💻</a></li>
 </ul>
 
     </div>
@@ -352,16 +363,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparer-l-environnement">Préparer l’environnement</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyser-manuellement-un-echantillon">Analyser manuellement un échantillon</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#controler-la-qualite-des-reads">Contrôler la qualité des reads</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexer-le-genome-de-reference">Indexer le génome de référence</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aligner-les-reads-sur-le-genome-de-reference">Aligner les <em>reads</em> sur le génome de référence</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compter-les-reads-et-les-transcrits">Compter les <em>reads</em> et les transcrits</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automatiser-l-analyse-d-un-echantillon">Automatiser l’analyse d’un échantillon</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automatiser-l-analyse-de-3-echantillons">Automatiser l’analyse de 3 échantillons</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verifier-l-environnement-logiciel">Vérifier l’environnement logiciel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verifier-les-donnees">vérifier les données</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#controler-la-qualite-des-reads">Contrôler la qualité des reads</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexer-le-genome-de-reference">Indexer le génome de référence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aligner-les-reads-sur-le-genome-de-reference">Aligner les <em>reads</em> sur le génome de référence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compter-les-reads-et-les-transcrits">Compter les <em>reads</em> et les transcrits</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 </ul>
             </nav>
         </div>
@@ -373,14 +381,18 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="analyser-les-donnees-rna-seq">
+  <section id="analyser-les-donnees-rna-seq">
 <h1>Analyser les données RNA-seq 💻<a class="headerlink" href="#analyser-les-donnees-rna-seq" title="Permalink to this heading">#</a></h1>
-<section id="preparer-l-environnement">
-<h2>Préparer l’environnement<a class="headerlink" href="#preparer-l-environnement" title="Permalink to this heading">#</a></h2>
+<p>Dans cette partie, nous allons analyser manuellement, c’est-à-dire étape par étape, les données RNA-seq de <em>S. cerevisiae</em>.</p>
+<section id="verifier-l-environnement-logiciel">
+<h2>Vérifier l’environnement logiciel<a class="headerlink" href="#verifier-l-environnement-logiciel" title="Permalink to this heading">#</a></h2>
 <p>Si cela n’est pas déjà fait, chargez les outils nécessaires à l’analyse des données RNA-seq :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>module<span class="w"> </span>load<span class="w"> </span>sra-tools<span class="w"> </span>fastqc<span class="w"> </span>star<span class="w"> </span>htseq<span class="w"> </span>cufflinks<span class="w"> </span>samtools
 </pre></div>
 </div>
+</section>
+<section id="verifier-les-donnees">
+<h2>vérifier les données<a class="headerlink" href="#verifier-les-donnees" title="Permalink to this heading">#</a></h2>
 <p>Déplacez-vous ensuite dans le répertoire contenant les répertoires <code class="docutils literal notranslate"><span class="pre">/shared/projects/202304_duo/$USER/rnaseq</span></code>.</p>
 <p>Vous devriez obtenir l’arborescence suivante :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>tree
@@ -394,9 +406,6 @@ document.write(`
 <span class="w">    </span>└──<span class="w"> </span>SRR3405785.fastq.gz
 </pre></div>
 </div>
-</section>
-<section id="analyser-manuellement-un-echantillon">
-<h2>Analyser manuellement un échantillon<a class="headerlink" href="#analyser-manuellement-un-echantillon" title="Permalink to this heading">#</a></h2>
 <p>Choississez un échantillon parmi ceux téléchargés dans le répertoire <code class="docutils literal notranslate"><span class="pre">reads</span></code> :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>reads
 ├──<span class="w"> </span>SRR3405783.fastq.gz
@@ -404,9 +413,10 @@ document.write(`
 └──<span class="w"> </span>SRR3405785.fastq.gz
 </pre></div>
 </div>
-<p>Par exemple : <code class="docutils literal notranslate"><span class="pre">SRR3405783.fastq.gz</span></code></p>
+<p>Par exemple : <code class="docutils literal notranslate"><span class="pre">SRR3405783.fastq.gz</span></code>, mais vous pouvez choisir un autre fichier. Il faudra modifier le nom de l’échantillon dans les commandes suivantes.</p>
+</section>
 <section id="controler-la-qualite-des-reads">
-<h3>Contrôler la qualité des reads<a class="headerlink" href="#controler-la-qualite-des-reads" title="Permalink to this heading">#</a></h3>
+<h2>Contrôler la qualité des reads<a class="headerlink" href="#controler-la-qualite-des-reads" title="Permalink to this heading">#</a></h2>
 <p>Créez le répertoire <code class="docutils literal notranslate"><span class="pre">reads_qc</span></code> qui va contenir les fichiers produits par le contrôle qualité des fichiers <em>fastq.gz</em> :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>reads_qc
 </pre></div>
@@ -419,7 +429,7 @@ document.write(`
 <p>Depuis l’explorateur de fichiers de JupyterLab, déplacez-vous dans le répertoire <code class="docutils literal notranslate"><span class="pre">reads_qc</span></code>, puis double-cliquez sur le  le fichier <code class="docutils literal notranslate"><span class="pre">.html</span></code> ainsi créé. Le rapport d’analyse créé par FastQC va alors s’ouvrir dans un nouvel onglet de JupyterLab.</p>
 </section>
 <section id="indexer-le-genome-de-reference">
-<h3>Indexer le génome de référence<a class="headerlink" href="#indexer-le-genome-de-reference" title="Permalink to this heading">#</a></h3>
+<h2>Indexer le génome de référence<a class="headerlink" href="#indexer-le-genome-de-reference" title="Permalink to this heading">#</a></h2>
 <p>L’indexation du génome de référence est une étape indispensable pour accélérer l’alignement des reads sur le génome. Elle consiste à créer un annuaire du génome de référence.</p>
 <p>Dans un terminal, créez le répertoire <code class="docutils literal notranslate"><span class="pre">genome_index</span></code> qui contiendra les index du génome de référence :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>genome_index
@@ -471,7 +481,7 @@ CTGCAGACAAGGCATCTCCTCTCAAGGCCAAATGACGTTGGTCCAACAGTA
 <p>Nous vous rappelons que l’indexation du génome n’est à faire qu’une seule fois pour chaque génome et chaque logiciel d’alignement.</p>
 </section>
 <section id="aligner-les-reads-sur-le-genome-de-reference">
-<h3>Aligner les <em>reads</em> sur le génome de référence<a class="headerlink" href="#aligner-les-reads-sur-le-genome-de-reference" title="Permalink to this heading">#</a></h3>
+<h2>Aligner les <em>reads</em> sur le génome de référence<a class="headerlink" href="#aligner-les-reads-sur-le-genome-de-reference" title="Permalink to this heading">#</a></h2>
 <p>Le fichier <em>S1 Supporting Information Methods</em> précise la commande utilisée pour l’alignement :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>STAR<span class="w"> </span>--runThreadN<span class="w"> </span><span class="m">1</span><span class="w"> </span>--runMode<span class="w"> </span>alignReads<span class="w"> </span>--genomeDir
 path_to_yeast_genome_build<span class="w"> </span>--sjdbGTFfile<span class="w"> </span>path_to_yeast_transcriptome_gtf
@@ -515,7 +525,7 @@ outFilterIntronMotifs<span class="w"> </span>RemoveNoncanonical
 L’alignement devrait prendre environ entre 5 et 10 minutes.</p>
 </section>
 <section id="compter-les-reads-et-les-transcrits">
-<h3>Compter les <em>reads</em> et les transcrits<a class="headerlink" href="#compter-les-reads-et-les-transcrits" title="Permalink to this heading">#</a></h3>
+<h2>Compter les <em>reads</em> et les transcrits<a class="headerlink" href="#compter-les-reads-et-les-transcrits" title="Permalink to this heading">#</a></h2>
 <p>Le fichier <em>S1 Supporting Information Methods</em> précise les commandes utilisées pour le comptage des <em>reads</em> :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>htseq-count<span class="w"> </span>--order<span class="o">=</span>pos<span class="w"> </span>--stranded<span class="o">=</span>reverse<span class="w"> </span>--mode<span class="o">=</span>intersection-nonempty
 sample.aligned.sorted.sam<span class="w"> </span>path_to_yeast_transcriptome_gtf<span class="w"> </span>&gt;<span class="w"> </span>sample.txt
@@ -572,45 +582,16 @@ counts/*/*.cxb<span class="w"> </span>--output-dir<span class="w"> </span>counts
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <ul class="simple">
-<li><p>Dans le cas présent, cette normalisation va échouer car nous n’avons aligné et quantifié qu’un seul fichier <em>.fastq.gz</em>. Cette étape sera par contre pertinente lorsque plusieurs fichiers <em>.fastq.gz</em> seront traités.</p></li>
+<li><p>Dans le cas présent, cette normalisation va échouer car nous n’avons aligné et quantifié qu’un seul fichier <em>.fastq.gz</em>. Cette étape sera par contre pertinente lorsque plusieurs fichiers <em>.fastq.gz</em> seront traités. On le verra par la suite.</p></li>
 <li><p>L’option <code class="docutils literal notranslate"><span class="pre">--output-dir</span> <span class="pre">counts</span></code> indique où stocker les fichiers produits par <code class="docutils literal notranslate"><span class="pre">cuffnorm</span></code> (voir la <a class="reference external" href="http://cole-trapnell-lab.github.io/cufflinks/cuffnorm/">documentation</a> à ce propos).</p></li>
 </ul>
 </div>
 </section>
-</section>
-<section id="automatiser-l-analyse-d-un-echantillon">
-<h2>Automatiser l’analyse d’un échantillon<a class="headerlink" href="#automatiser-l-analyse-d-un-echantillon" title="Permalink to this heading">#</a></h2>
-</section>
-<section id="automatiser-l-analyse-de-3-echantillons">
-<h2>Automatiser l’analyse de 3 échantillons<a class="headerlink" href="#automatiser-l-analyse-de-3-echantillons" title="Permalink to this heading">#</a></h2>
-<p>Vérifiez que vous êtes bien dans le répertoire <code class="docutils literal notranslate"><span class="pre">/shared/projects/202304_duo/$USER/rnaseq</span></code>. Assurez-vous également que vous avez préparé les données correctement, notamment les répertoires <code class="docutils literal notranslate"><span class="pre">reads</span></code> et <code class="docutils literal notranslate"><span class="pre">genome</span></code> :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>tree
-.
-├──<span class="w"> </span>genome
-│<span class="w">   </span>├──<span class="w"> </span>genes.gtf
-│<span class="w">   </span>└──<span class="w"> </span>genome.fa
-└──<span class="w"> </span>reads
-<span class="w">    </span>├──<span class="w"> </span>SRR3405783.fastq.gz
-<span class="w">    </span>├──<span class="w"> </span>SRR3405784.fastq.gz
-<span class="w">    </span>└──<span class="w"> </span>SRR3405785.fastq.gz
-</pre></div>
-</div>
-<p>Téléchargez le script <code class="docutils literal notranslate"><span class="pre">analyse_locale.sh</span></code> qui analyse 3 échantillons :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/omics-school/analyse-rna-seq-scere/master/analyse_locale.sh
-</pre></div>
-</div>
-<p>Vérifiez dans le script que la ligne</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">samples</span><span class="o">=</span><span class="s2">&quot;SRR3405783 SRR3405784 SRR3405788&quot;</span>
-</pre></div>
-</div>
-<p>corresponde à VOS échantillons. Modifiez-la le cas échéant.</p>
-<p>Lancez ensuite le script d’analyse :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>analyse_locale.sh
-</pre></div>
-</div>
-<p>L’analyse devrait prendre plusieurs dizaines de minutes.</p>
-<p>Vérifiez régulièrement votre terminal qu’aucune erreur n’apparaît.</p>
-<p>Le fichier qui contient le comptage normalisé des transcrits est <code class="docutils literal notranslate"><span class="pre">counts/genes.count_table</span></code>.</p>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<p>Pour analyser les données RNA-seq de <em>S. cerevisiae</em>, vous avez lancé à la main plus d’une demi-douzaine de commandes dans un terminal Unix.
+C’était fastidieux et ces commandes étaient parfois complexes avec de nombreuses options. Dans ce cas, le copier-coller était votre meilleur ami !</p>
+<p><strong>Mais</strong>, vous avez été capable de reproduire toutes ces étapes en suivant les instructions de ce tutoriel. C’est là la grande force d’Unix et de la ligne commande : la capacité à décrire une analyse complexe en une suite d’instructions <em>écrites</em> et donc <em>facilement</em> répétables.</p>
 </section>
 </section>
 
@@ -645,6 +626,15 @@ counts/*/*.cxb<span class="w"> </span>--output-dir<span class="w"> </span>counts
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="2_donnees.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Préparer les données 🗃️</p>
+      </div>
+    </a>
 </div></div>
   
 </div>
@@ -663,16 +653,13 @@ counts/*/*.cxb<span class="w"> </span>--output-dir<span class="w"> </span>counts
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparer-l-environnement">Préparer l’environnement</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyser-manuellement-un-echantillon">Analyser manuellement un échantillon</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#controler-la-qualite-des-reads">Contrôler la qualité des reads</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexer-le-genome-de-reference">Indexer le génome de référence</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aligner-les-reads-sur-le-genome-de-reference">Aligner les <em>reads</em> sur le génome de référence</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compter-les-reads-et-les-transcrits">Compter les <em>reads</em> et les transcrits</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automatiser-l-analyse-d-un-echantillon">Automatiser l’analyse d’un échantillon</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automatiser-l-analyse-de-3-echantillons">Automatiser l’analyse de 3 échantillons</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verifier-l-environnement-logiciel">Vérifier l’environnement logiciel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verifier-les-donnees">vérifier les données</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#controler-la-qualite-des-reads">Contrôler la qualité des reads</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexer-le-genome-de-reference">Indexer le génome de référence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aligner-les-reads-sur-le-genome-de-reference">Aligner les <em>reads</em> sur le génome de référence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compter-les-reads-et-les-transcrits">Compter les <em>reads</em> et les transcrits</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 </ul>
   </nav></div>
 

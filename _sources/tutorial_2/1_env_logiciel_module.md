@@ -22,13 +22,13 @@ En résumé, nous avons besoin d'installer les outils : `STAR`, `HTSeq-count` et
 
 Nous installerons également [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) pour contrôler la qualité des *reads*, ainsi que `samtools` qui n'est pas explicitement mentionné dans l'article ni dans les *Supporting Information* mais qui est nécessaire pour indexer les *reads* alignés.
 
-Récaputilons les logiciels nécessaires :
+Récapitulons les logiciels nécessaires :
 
 - `sra-tools` : télécharger les données brutes de séquençage.
 - `fastqc` : contrôler la qualité des reads.
 - `star` : aligner les reads sur le génome de référence.
 - `htseq` : quantifier les reads alignés sur les gènes.
-- `cufflinks` : assembler les reads alignés sur les gènes.
+- `cufflinks` : compter les transcrits.
 - `samtools` : indexer les reads alignés.
 
 
@@ -51,9 +51,9 @@ Trois versions de `sra-tools` sont disponibles. Par défaut, la commande
 $ module load sra-tools
 ```
 
-chargera la dernière version disponible, ici `2.11.0`.
+chargera la dernière version disponible, ici la version `2.11.0`.
 
-Complétez le tableau suivant en indiquant, pour chaque logiciel, la version la plus ancienne et la version la plus récente disponible :
+Complétez le tableau suivant en indiquant, pour chaque logiciel, la version la plus ancienne et la version la plus récente disponible sur le cluster de l'IFB :
 
 | Logiciel  | Version la plus ancienne | Version la plus récente |
 |-----------|--------------------------|-------------------------|
@@ -115,3 +115,7 @@ $ samtools --version | head -n 1
 samtools 1.15.1
 ```
 
+```{important}
+Notez toujours la version des logiciels que vous utilisez pour analyser vos données. C'est une information indispensable pour assurer la **reproductibilité de vos analyses**.
+Quand vous publiez vos résultats dans un article, vous devez fournir les versions des logiciels utilisés pour analyser vos données.
+```

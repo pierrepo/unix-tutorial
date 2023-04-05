@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Tuto 2 : analyse des données RNA-seq de S. cerevisiae avec Unix &#8212; Unix tutorial</title>
+    <title>Introduction et contexte &#8212; Unix tutorial</title>
   
   
   
@@ -64,8 +64,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial_2/0_intro';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Ressources complémentaires" href="../more.html" />
-    <link rel="prev" title="Tuto 1 : un aperçu du shell Unix" href="../tutorial_1/tutorial.html" />
+    <link rel="next" title="Préparer l’environnement logiciel 🧰" href="1_env_logiciel_module.html" />
+    <link rel="prev" title="Ressources complémentaires" href="../more.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -156,11 +156,21 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">JupyterHub du cluster IFB</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../connection.html">Connexion au JupyterHub de l’IFB</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorial_1/tutorial.html">Tuto 1 : un  aperçu du shell Unix</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tuto 2 : analyse des données RNA-seq de <em>S. cerevisiae</em> avec Unix</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction à Unix</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tutorial_1/tutorial.html">Découvrir le shell Unix</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../more.html">Ressources complémentaires</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analyse RNA-seq</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction et contexte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_env_logiciel_module.html">Préparer l’environnement logiciel 🧰</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_donnees.html">Préparer les données 🗃️</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_analyse.html">Analyser les données RNA-seq 💻</a></li>
 </ul>
 
     </div>
@@ -344,7 +354,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Tuto 2 : analyse des données RNA-seq de S. cerevisiae avec Unix</h1>
+    <h1>Introduction et contexte</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -367,13 +377,11 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <p><img align="right" width="200px" 
-    src="img/plos_genetics_2016.png"
-    alt="Snapshot of the 2016 PLOS Genetics paper"></p>
-<section class="tex2jax_ignore mathjax_ignore" id="tuto-2-analyse-des-donnees-rna-seq-de-s-cerevisiae-avec-unix">
-<h1>Tuto 2 : analyse des données RNA-seq de <em>S. cerevisiae</em> avec Unix<a class="headerlink" href="#tuto-2-analyse-des-donnees-rna-seq-de-s-cerevisiae-avec-unix" title="Permalink to this heading">#</a></h1>
+  <section id="introduction-et-contexte">
+<h1>Introduction et contexte<a class="headerlink" href="#introduction-et-contexte" title="Permalink to this heading">#</a></h1>
+<p><a class="reference internal" href="../_images/plos_genetics_2016.png"><img alt="Snapshot of the 2016 PLOS Genetics paper" class="align-right" src="../_images/plos_genetics_2016.png" style="width: 250px;" /></a></p>
 <p>L’objectif de ce tutoriel est de reproduire les résultats de l’article <a class="reference external" href="https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1006453"><em>Investigating Conservation of the Cell-Cycle-Regulated Transcriptional Program in the Fungal Pathogen, Cryptococcus neoformans</em></a> (Kelliher <em>et al.</em>, PLOS Genetics, 2016) obtenus pour le cycle cellulaire de <em>Saccharomyces cerevisiae</em>.</p>
-<p>Dans la rubique <a class="reference external" href="https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1006453#sec011"><em>Supporting Information</em></a> de l’article, le fichier <a class="reference external" href="https://doi.org/10.1371/journal.pgen.1006453.s001"><em>S1 Supporting Information Methods</em></a> contient les informations sur les outils et les méthodes utilisés pour l’analyse RNA-seq.</p>
+<p>Dans la rubrique <a class="reference external" href="https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1006453#sec011"><em>Supporting Information</em></a> de l’article, le fichier <a class="reference external" href="https://doi.org/10.1371/journal.pgen.1006453.s001"><em>S1 Supporting Information Methods</em></a> contient les informations sur les outils et les méthodes utilisés pour l’analyse RNA-seq.</p>
 <p>Partant de ces informations, nous allons essayer de reproduire les différentes étapes de l’analyse RNA-seq.</p>
 <section id="prerequis">
 <h2>Prérequis<a class="headerlink" href="#prerequis" title="Permalink to this heading">#</a></h2>
@@ -388,6 +396,7 @@ document.write(`
 <li><p><a class="reference internal" href="1_env_logiciel_module.html"><span class="doc std std-doc">Préparer l’environnement logiciel</span></a></p></li>
 <li><p><a class="reference internal" href="2_donnees.html"><span class="doc std std-doc">Préparer les données</span></a></p></li>
 <li><p><a class="reference internal" href="3_analyse.html"><span class="doc std std-doc">Analyser les données RNA-seq</span></a></p></li>
+<li><p><a class="reference internal" href="4_automatiser.html"><span class="doc std std-doc">Automatiser l’analyse</span></a></p></li>
 </ol>
 </section>
 </section>
@@ -424,20 +433,20 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../tutorial_1/tutorial.html"
+       href="../more.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Tuto 1 : un  aperçu du shell Unix</p>
+        <p class="prev-next-title">Ressources complémentaires</p>
       </div>
     </a>
     <a class="right-next"
-       href="../more.html"
+       href="1_env_logiciel_module.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Ressources complémentaires</p>
+        <p class="prev-next-title">Préparer l’environnement logiciel 🧰</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

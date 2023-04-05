@@ -64,6 +64,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial_2/2_donnees';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Analyser les données RNA-seq 💻" href="3_analyse.html" />
+    <link rel="prev" title="Préparer l’environnement logiciel 🧰" href="1_env_logiciel_module.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -154,11 +156,21 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">JupyterHub du cluster IFB</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../connection.html">Connexion au JupyterHub de l’IFB</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorial_1/tutorial.html">Tuto 1 : un  aperçu du shell Unix</a></li>
-<li class="toctree-l1"><a class="reference internal" href="0_intro.html">Tuto 2 : analyse des données RNA-seq de <em>S. cerevisiae</em> avec Unix</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction à Unix</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tutorial_1/tutorial.html">Découvrir le shell Unix</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../more.html">Ressources complémentaires</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analyse RNA-seq</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="0_intro.html">Introduction et contexte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_env_logiciel_module.html">Préparer l’environnement logiciel 🧰</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Préparer les données 🗃️</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_analyse.html">Analyser les données RNA-seq 💻</a></li>
 </ul>
 
     </div>
@@ -370,11 +382,11 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="preparer-les-donnees">
+  <section id="preparer-les-donnees">
 <h1>Préparer les données 🗃️<a class="headerlink" href="#preparer-les-donnees" title="Permalink to this heading">#</a></h1>
 <p>L’article orginal publié en 2016 par <a class="reference external" href="https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1006453">Kelliher <em>et al.</em></a> indique dans la rubrique <em>Data Availability</em> :</p>
 <blockquote>
-<div><p>RNA-Sequencing gene expression data from this manuscript have been submitted to the NCBI Gene Expression Omnibus (GEO; <a class="reference external" href="http://www.ncbi.nlm.nih.gov/geo/">http://www.ncbi.nlm.nih.gov/geo/</a>) under accession number GSE80474.</p>
+<div><p>RNA-Sequencing gene expression data from this manuscript have been submitted to the NCBI Gene Expression Omnibus (GEO; http://www.ncbi.nlm.nih.gov/geo/) under accession number GSE80474.</p>
 </div></blockquote>
 <p>Le numéro du projet qui nous intéresse est donc : <strong>GSE80474</strong></p>
 <section id="creer-le-repertoire-de-travail">
@@ -546,9 +558,9 @@ Le script télécharge directement les données compressées, ce qui est beaucou
 </section>
 <section id="telecharger-le-genome-de-reference-et-ses-annotations">
 <h2>Télécharger le génome de référence et ses annotations<a class="headerlink" href="#telecharger-le-genome-de-reference-et-ses-annotations" title="Permalink to this heading">#</a></h2>
-<p>On trouve dans le fichier <em>S1 Supporting Information Methods</em> la desciption du génome de <em>S. cerevisiae</em> utilisé :</p>
+<p>On trouve dans le fichier <em>S1 Supporting Information Methods</em> la desciption du génome de <em>S. cerevisiae</em> utilisé par Kelliher <em>et al.</em> :</p>
 <blockquote>
-<div><p>The S. cerevisiae S288C genome (Ensembl build R64-1-1) was downloaded from Illumina iGenomes on March 2, 2016 (<a class="reference external" href="https://support.illumina.com/sequencing/sequencing_software/igenome.html">https://support.illumina.com/sequencing/sequencing_software/igenome.html</a>).</p>
+<div><p>The S. cerevisiae S288C genome (Ensembl build R64-1-1) was downloaded from Illumina iGenomes on March 2, 2016 (https://support.illumina.com/sequencing/sequencing_software/igenome.html).</p>
 </div></blockquote>
 <p>Téléchargez le fichier concerné (<code class="docutils literal notranslate"><span class="pre">Ensembl</span> <span class="pre">build</span> <span class="pre">R64-1-1.tar.gz</span></code>) et décompressez l’archive :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>http://igenomes.illumina.com.s3-website-us-east-1.amazonaws.com/Saccharomyces_cerevisiae/Ensembl/R64-1-1/Saccharomyces_cerevisiae_Ensembl_R64-1-1.tar.gz
@@ -639,6 +651,24 @@ cp<span class="w"> </span>Saccharomyces_cerevisiae/Ensembl/R64-1-1/Sequence/Whol
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="1_env_logiciel_module.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Préparer l’environnement logiciel 🧰</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="3_analyse.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Analyser les données RNA-seq 💻</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div></div>
   
 </div>

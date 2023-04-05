@@ -1,12 +1,15 @@
 # Analyser les données RNA-seq 💻
 
-## Préparer l'environnement
+Dans cette partie, nous allons analyser manuellement, c'est-à-dire étape par étape, les données RNA-seq de *S. cerevisiae*.
+## Vérifier l'environnement logiciel
 
 Si cela n'est pas déjà fait, chargez les outils nécessaires à l'analyse des données RNA-seq :
 
 ```bash
 $ module load sra-tools fastqc star htseq cufflinks samtools
 ```
+
+## vérifier les données
 
 Déplacez-vous ensuite dans le répertoire contenant les répertoires `/shared/projects/202304_duo/$USER/rnaseq`. 
 
@@ -24,8 +27,6 @@ $ tree
     └── SRR3405785.fastq.gz
 ```
 
-## Analyser manuellement un échantillon
-
 Choississez un échantillon parmi ceux téléchargés dans le répertoire `reads` :
 
 ```bash
@@ -35,10 +36,10 @@ reads
 └── SRR3405785.fastq.gz
 ```
 
-Par exemple : `SRR3405783.fastq.gz`
+Par exemple : `SRR3405783.fastq.gz`, mais vous pouvez choisir un autre fichier. Il faudra modifier le nom de l'échantillon dans les commandes suivantes.
 
 
-### Contrôler la qualité des reads
+## Contrôler la qualité des reads
 
 Créez le répertoire `reads_qc` qui va contenir les fichiers produits par le contrôle qualité des fichiers *fastq.gz* :
 
@@ -57,7 +58,7 @@ FastQC va produire deux fichiers (un fichier avec l’extension `.html` et un au
 Depuis l'explorateur de fichiers de JupyterLab, déplacez-vous dans le répertoire `reads_qc`, puis double-cliquez sur le  le fichier `.html` ainsi créé. Le rapport d'analyse créé par FastQC va alors s'ouvrir dans un nouvel onglet de JupyterLab.
 
 
-### Indexer le génome de référence
+## Indexer le génome de référence
 
 L’indexation du génome de référence est une étape indispensable pour accélérer l’alignement des reads sur le génome. Elle consiste à créer un annuaire du génome de référence.
 
@@ -122,7 +123,7 @@ Enfin, le paramètre `--genomeSAindexNbases 10` est conseillé par STAR. Si on u
 Nous vous rappelons que l’indexation du génome n’est à faire qu’une seule fois pour chaque génome et chaque logiciel d’alignement.
 
 
-### Aligner les *reads* sur le génome de référence
+## Aligner les *reads* sur le génome de référence
 
 Le fichier *S1 Supporting Information Methods* précise la commande utilisée pour l'alignement :
 
@@ -170,7 +171,7 @@ Lancez l'alignement avec STAR et vérifiez que tout se déroule sans problème.
 L'alignement devrait prendre environ entre 5 et 10 minutes.
 
 
-### Compter les *reads* et les transcrits
+## Compter les *reads* et les transcrits
 
 Le fichier *S1 Supporting Information Methods* précise les commandes utilisées pour le comptage des *reads* :
 
@@ -241,52 +242,13 @@ counts/*/*.cxb --output-dir counts
 ```
 
 ```{note}
-- Dans le cas présent, cette normalisation va échouer car nous n'avons aligné et quantifié qu'un seul fichier *.fastq.gz*. Cette étape sera par contre pertinente lorsque plusieurs fichiers *.fastq.gz* seront traités.
+- Dans le cas présent, cette normalisation va échouer car nous n'avons aligné et quantifié qu'un seul fichier *.fastq.gz*. Cette étape sera par contre pertinente lorsque plusieurs fichiers *.fastq.gz* seront traités. On le verra par la suite.
 - L'option `--output-dir counts` indique où stocker les fichiers produits par `cuffnorm` (voir la [documentation](http://cole-trapnell-lab.github.io/cufflinks/cuffnorm/) à ce propos).
 ```
 
+## Conclusion
 
-## Automatiser l'analyse d'un échantillon
+Pour analyser les données RNA-seq de *S. cerevisiae*, vous avez lancé à la main plus d'une demi-douzaine de commandes dans un terminal Unix.
+C'était fastidieux et ces commandes étaient parfois complexes avec de nombreuses options. Dans ce cas, le copier-coller était votre meilleur ami !
 
-
-## Automatiser l'analyse de 3 échantillons
-
-Vérifiez que vous êtes bien dans le répertoire `/shared/projects/202304_duo/$USER/rnaseq`. Assurez-vous également que vous avez préparé les données correctement, notamment les répertoires `reads` et `genome` :
-
-```bash
-$ tree
-.
-├── genome
-│   ├── genes.gtf
-│   └── genome.fa
-└── reads
-    ├── SRR3405783.fastq.gz
-    ├── SRR3405784.fastq.gz
-    └── SRR3405785.fastq.gz
-```
-
-Téléchargez le script `analyse_locale.sh` qui analyse 3 échantillons :
-
-```bash
-wget https://raw.githubusercontent.com/omics-school/analyse-rna-seq-scere/master/analyse_locale.sh
-```
-
-Vérifiez dans le script que la ligne
-
-```bash
-samples="SRR3405783 SRR3405784 SRR3405788"
-```
-
-corresponde à VOS échantillons. Modifiez-la le cas échéant.
-
-Lancez ensuite le script d'analyse :
-
-```bash
-bash analyse_locale.sh
-```
-
-L'analyse devrait prendre plusieurs dizaines de minutes.
-
-Vérifiez régulièrement votre terminal qu'aucune erreur n'apparaît.
-
-Le fichier qui contient le comptage normalisé des transcrits est `counts/genes.count_table`.
+**Mais**, vous avez été capable de reproduire toutes ces étapes en suivant les instructions de ce tutoriel. C'est là la grande force d'Unix et de la ligne commande : la capacité à décrire une analyse complexe en une suite d'instructions *écrites* et donc *facilement* répétables. 
