@@ -232,6 +232,38 @@ $ du -csh reads/*
 2.5G    total
 ```
 
+## Vérifier l'intégrité des données
+
+Vous avez téléchargé des données, mais vous n'êtes pas certains de leur intégrité. Ces fichiers sont gros et il y a pu avoir un problème lors du téléchargement.
+
+Télécharger le fichier `reads_md5sum.txt` :
+
+```bash
+wget ...
+```
+
+Affichez le contenu de ce fichier avec la commande `cat` :
+
+```bash
+cf46c1fcee2b373b557a9ab5222db5d8  reads/SRR3405783.fastq.gz
+bb92561b5f5e123ffa284d0878b75e92  reads/SRR3405784.fastq.gz
+43818ff76532430250f29f907f7a0621  reads/SRR3405785.fastq.gz
+```
+
+La première colonne contient l'empreinte MD5 du fichier et la seconde colonne contient le nom du fichier (avec son chemin relatif).
+
+Vérifiez maintenant l'intégrié des 3 fichiers que vous avez télécharges :
+
+```bash
+$ md5sum -c reads_md5sum.txt 
+reads/SRR3405783.fastq.gz: OK
+reads/SRR3405784.fastq.gz: OK
+reads/SRR3405785.fastq.gz: OK
+```
+
+Si vous n'obtenez pas `OK` à côté de chaque fichier, cela signifie que le fichier a été corrompu lors du téléchargement. Il faut le supprimer et le télécharger à nouveau.
+
+
 ## Télécharger le génome de référence et ses annotations
 
 On trouve dans le fichier *S1 Supporting Information Methods* la desciption du génome de *S. cerevisiae* utilisé par Kelliher *et al.* :
