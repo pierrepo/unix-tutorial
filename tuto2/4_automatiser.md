@@ -120,9 +120,9 @@ $ bash script_local_1.sh
 
 Vérifiez que le déroulement du script se passe bien. Vous avez le temps de prendre un café, voir plusieurs ☕ 🍪 ☕ 🍪.
 
-Évaluez approximativement le temps nécessaire au script 1 pour s'exécuter. ⏱️ À partir de cette valeur, extrapoler le temps nécessaire qu'il faudrait pour analyser les 3 échantillons.
+Une fois terminé, évaluez approximativement le temps qu'il a fallu au script 1 pour s'exécuter. Reportez dans le carnet de bord le numéro de l'échantillon analysé et le temps d'exécution du script.
 
-D'après vous, quelle est l'étape la plus longue ?
+D'après vous, quelle est l'étape la plus longue ? Combien de temps faudrait-il pour analyser les 3 échantillons ?
 
 Utilisez enfin la commande `tree` pour contempler votre travail (ici avec l'échantillon `SRR3405783`) :
 
