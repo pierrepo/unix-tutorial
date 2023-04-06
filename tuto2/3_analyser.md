@@ -29,10 +29,6 @@ $ tree
     ├── SRR3405784.fastq.gz
     └── SRR3405785.fastq.gz
 ```
-
-Choississez un échantillon parmi ceux téléchargés dans le répertoire `reads`. Par exemple : `SRR3405783.fastq.gz`, mais vous pouvez choisir un autre fichier. Il faudra modifier le nom de l'échantillon dans les commandes suivantes.
-
-
 ## Contrôler la qualité des reads
 
 Créez le répertoire `reads_qc` qui va contenir les fichiers produits par le contrôle qualité des fichiers *fastq.gz* :
@@ -49,12 +45,12 @@ $ fastqc reads/SRR3405783.fastq.gz --outdir reads_qc
 
 FastQC va produire deux fichiers (un fichier avec l’extension `.html` et un autre avec l’extension `.zip`) dans le répertoire `reads_qc`. Si par exemple, vous avez analysé le fichier `reads/SRR3405783.fastq.gz`, vous obtiendrez les fichiers `reads_qc/SRR3405783_fastqc.html` et `reads_qc/SRR3405783_fastqc.zip`.
 
-Depuis l'explorateur de fichiers de JupyterLab, déplacez-vous dans le répertoire `reads_qc`, puis double-cliquez sur le  le fichier `.html` ainsi créé. Le rapport d'analyse créé par FastQC va alors s'ouvrir dans un nouvel onglet de JupyterLab.
+Depuis l'explorateur de fichiers de JupyterLab, déplacez-vous dans le répertoire `reads_qc`, puis double-cliquez sur le fichier `.html` ainsi créé. Le rapport d'analyse créé par FastQC va alors s'ouvrir dans un nouvel onglet de JupyterLab.
 
 
 ## Indexer le génome de référence
 
-L’indexation du génome de référence est une étape indispensable pour accélérer l’alignement des reads sur le génome. Elle consiste à créer un annuaire du génome de référence.
+L’indexation du génome de référence est une étape indispensable pour accélérer l’alignement des reads sur le génome. Elle consiste à créer une sorte d'annuaire du génome de référence.
 
 Dans un terminal, créez le répertoire `genome_index` qui contiendra les index du génome de référence :
 
@@ -71,6 +67,10 @@ $ STAR --runMode genomeGenerate \
 --sjdbGTFfile genome/genes.gtf \
 --sjdbOverhang 50 \
 --genomeSAindexNbases 10
+```
+
+```{hint}
+En Bash, le symbole `\` à la fin d'une ligne permet de poursuivre l'instruction sur la ligne suivante. Cela rend la commande plus lisible.
 ```
 
 L'aide de STAR pour l'option `--sjdbOverhang` indique :
@@ -114,7 +114,7 @@ Enfin, le paramètre `--genomeSAindexNbases 10` est conseillé par STAR. Si on u
 
 > !!!!! WARNING: --genomeSAindexNbases 14 is too large for the genome size=12157105, which may cause seg-fault at the mapping step. Re-run genome generation with recommended --genomeSAindexNbases 10
 
-Nous vous rappelons que l’indexation du génome n’est à faire qu’une seule fois pour chaque génome et chaque logiciel d’alignement.
+Nous vous rappelons que l’indexation du génome n’est à faire qu’**une seule fois** pour chaque génome et chaque logiciel d’alignement.
 
 
 ## Aligner les *reads* sur le génome de référence
@@ -158,11 +158,11 @@ $ STAR --runThreadN 1 \
     
     Ceci explique pourquoi les options `--alignIntronMin 10` et `--alignIntronMax 3000` ont été adaptées pour le génome de la levure *S. cerevisiae*.
 
-- L'option `--readFilesCommand zcat` n'était pas présente dans la commande fournie en *Supporting information*. Nous l'avons ajoutée car les fichiers contenant les *reads* (*.fastq.gz*) sont compressés et il faut demander explicitement à STAR de le prendre en charge. Pensez à toujour consulter la [documentation](https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf) de l'outil que vous utilisez (même si c'est un peu pénible) !
+- L'option `--readFilesCommand zcat` n'était pas présente dans la commande fournie en *Supporting information*. Nous l'avons ajoutée car les fichiers contenant les *reads* (*.fastq.gz*) sont compressés et il faut demander explicitement à STAR de le prendre en charge. Pensez à toujour consulter la [documentation](https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf) de l'outil que vous utilisez (même si c'est parfois pénible) !
 ```
 
 Lancez l'alignement avec STAR et vérifiez que tout se déroule sans problème.
-L'alignement devrait prendre environ entre 5 et 10 minutes.
+L'alignement devrait prendre entre 5 et 10 minutes.
 
 
 ## Compter les *reads* et les transcrits
@@ -190,7 +190,7 @@ $ cuffnorm --library-type=fr-firststrand path_to_yeast_transcriptome_gtf
 
 Nous allons réaliser nous-mêmes ces étapes avec quelques adaptations.
 
-Créez tout d'abord le répertoire `counts/SRR3405783` dans lequel seront stockés les fichiers de comptage. Pensez à adapter le nom du répertoire en fonction du nom de votre échantillon.
+Créez tout d'abord le répertoire `counts/SRR3405783` dans lequel seront stockés les fichiers de comptage.
 
 ```bash
 $ mkdir -p counts/SRR3405783

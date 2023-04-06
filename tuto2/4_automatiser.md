@@ -303,7 +303,7 @@ C'est une mesure de sécurité importante pour votre script. Si vous le souhaite
 
 Remarquez également la structure de la boucle et la toute dernière étape qui normalise les comptages des transcrits sur tous les échantillons.
 
-Si vous pensez en avoir le temps, lancez le script `script_local_3.sh`. Comme ce script va automatiser toute l'analyse, il va fonctionner pendant environ 1 heure.
+Si vous pensez en avoir le temps, lancez le script `script_local_3.sh`. Comme ce script va automatiser toute l'analyse, il va fonctionner pendant plus d'une heure.
 
 ```bash
 $ bash script_local_3.sh
