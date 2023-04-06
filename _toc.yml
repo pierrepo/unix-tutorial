@@ -11,7 +11,7 @@ parts:
   chapters:
   - file: tutorial_1/tutorial
   - file: more
-- caption: Analyse RNA-seq
+- caption: Analyse RNA-seq avec Unix
   chapters:
   - file: tutorial_2/0_intro
   - file: tutorial_2/1_preparer_logiciels_module
