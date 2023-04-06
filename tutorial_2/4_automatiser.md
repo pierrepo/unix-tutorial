@@ -94,7 +94,7 @@ Dans un script Bash :
 
 ## Automatiser l'analyse d'un échantillon
 
-Téléchargez un premier script Bash, `script_local_1.sh` ,avec la commande `wget` :
+Téléchargez un premier script Bash, [`script_local_1.sh`](script_local_1.sh) ,avec la commande `wget` :
 
 ```bash
 wget xxx
@@ -120,6 +120,9 @@ $ bash script_local_1.sh
 Vérifiez que le déroulement du script se passe bien. Vous avez le temps de prendre un café (~ 25 '), voir plusieurs ☕ 🍪 ☕ 🍪.
 
 Évaluez approximativement le temps nécessaire au script 1 pour s'exécuter. ⏱️ À partir de cette valeur, extrapoler le temps nécessaire qu'il faudrait pour analyser les 3 échantillons.
+
+
+D'après vous, quelle est l'étape la plus longue ?
 
 Utilisez enfin la commande `tree` pour contempler votre travail (ici avec l'échantillon `SRR3405783`) :
 
@@ -216,7 +219,7 @@ Nous allons essayer d'optimiser l'analyse d'un échantillon pour réduire le tem
 Tous les logiciels ne proposent pas le multi-threading, c'est-à-dire l'utilisation de plusieurs coeurs. `htseq-count` par exemple ne prend pas en charge le multi-threading. Pour chaque logiciel, il faut donc le vérifier et trouver l'option adéquate.
 ```
 
-Téléchargez un nouveau script Bash, `script_local_3.sh`, avec la commande `wget` :
+Téléchargez un nouveau script Bash, [`script_local_2.sh`](script_local_2.sh), avec la commande `wget` :
 
 ```bash
 wget xxx
@@ -246,7 +249,7 @@ $ bash script_local_2.sh
 
 Vérifiez que le déroulement du script se passe bien. Quelle étape vous semble la plus longue ?
 
-Normalement, le temps de calcul est passé de 25 minutes à environ 10 minutes. C'est mieux, mais cela représente toujours beaucoup d'heures de calcul pour analyser les 50 échantillons. Nous verrons lors de la prochaine sesssion commment utiliser un cluster de calcul pour réduire le temps d'analyse. 🚀
+Normalement, le temps de calcul est passé de 45 minutes à environ 25 minutes. C'est mieux, mais cela représente toujours beaucoup d'heures de calcul pour analyser les 50 échantillons. Nous verrons lors de la prochaine sesssion commment utiliser un cluster de calcul pour réduire le temps d'analyse. 🚀
 
 Pour le moment, nous allons automatiser le traitement de plusieurs échantillons dans un même script Bash.
 
@@ -280,9 +283,10 @@ Notez l'utilisation du symbole `;` pour séparer les différents éléments de l
 
 Une leçon de Software Carpentry aborde la notion de [boucle](https://swcarpentry.github.io/shell-novice/05-loop/index.html). Prenez quelques minutes pour parcourir cette leçon et comprendre de quoi il s'agit.
 
+
 ## Automatiser l'analyse de 3 échantillons
 
-Le script `script_local_3.sh` utilise une boucle pour automatiser l'analyse de plusieurs échantillons. Téléchargez-le avec la commande :
+Le script [`script_local_3.sh`](script_local_3.sh) utilise une boucle pour automatiser l'analyse de plusieurs échantillons. Téléchargez-le avec la commande :
 
 ```bash
 $ wget ...
@@ -322,3 +326,11 @@ Comparez les versions des logiciels disponibles dans Galaxy avec celles que vous
 
 Comment utilisez-vous la version particulière d'un outil dans Galaxy ?
 
+
+## Bilan
+
+Vous avez automatisé votre analyse RNA-seq en regroupant les différentes étapes dans un script Bash. Vous avez également utilisé plusieurs coeurs pour accélérer autant que possible l'analyse.
+
+Ce n'est pas encore complètement satisfaisant. En effet, il vous faudrait 21 heures de calcul pour analyser les 50 échantillons.
+
+Quelles autres pistes pourriez-vous explorer pour réduire le temps de calcul ?
