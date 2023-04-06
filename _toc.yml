@@ -9,7 +9,7 @@ parts:
   - file: connection
 - caption: Introduction à Unix
   chapters:
-  - file: tutorial_1/tutorial
+  - file: tuto1/tutorial
   - file: more
 - caption: Analyse RNA-seq avec Unix
   chapters:
