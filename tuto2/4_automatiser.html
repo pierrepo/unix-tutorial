@@ -480,7 +480,7 @@ salut<span class="w"> </span>Pierre
 <section id="automatiser-l-analyse-d-un-echantillon">
 <h2><a class="toc-backref" href="#id5" role="doc-backlink">Automatiser l’analyse d’un échantillon</a><a class="headerlink" href="#automatiser-l-analyse-d-un-echantillon" title="Permalink to this heading">#</a></h2>
 <p>Téléchargez un premier script Bash, <a class="reference download internal" download="" href="../_downloads/f44c6d83aa8e66a72b4702f79db44b77/script_local_1.sh"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">script_local_1.sh</span></code></span></a> ,avec la commande <code class="docutils literal notranslate"><span class="pre">wget</span></code> :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>wget<span class="w"> </span>xxx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>wget<span class="w"> </span>https://raw.githubusercontent.com/pierrepo/unix-tutorial/master/tuto2/script_local_1.sh
 </pre></div>
 </div>
 <p>Ouvrez ce script dans un éditeur de texte :</p>
@@ -582,7 +582,9 @@ salut<span class="w"> </span>Pierre
 </section>
 <section id="optimiser-l-analyse-d-un-echantillon">
 <h2><a class="toc-backref" href="#id6" role="doc-backlink">Optimiser l’analyse d’un échantillon</a><a class="headerlink" href="#optimiser-l-analyse-d-un-echantillon" title="Permalink to this heading">#</a></h2>
-<p>L’analyse précédente est complètement automatisée par un script Bash qui rassemble toutes les étapes de l’analyse. Par contre, l’analyse d’un seul échantillon prend environ 25 minutes, soit 75 minutes pour 3 échantillons et plus de 20 heures de calcul pour les 50 échantillons de <em>S. cerevisiae</em>.</p>
+<p>L’analyse précédente est complètement automatisée par un script Bash qui rassemble toutes les étapes de l’analyse, mais l’analyse d’un seul échantillon prend environ 25 minutes.</p>
+<p>Combien de temps faudra-t-il pour analyser 3 échatillons ?</p>
+<p>Combien de temps faudra-t-il pour analyser les 50 échantillons de <em>S. cerevisiae</em> ?</p>
 <p>Nous allons essayer d’optimiser l’analyse d’un échantillon pour réduire le temps de calcul. Une première approche consiste à utiliser plusieurs processeurs (coeurs) par les logiciels qui le supporte. C’est le cas pour <code class="docutils literal notranslate"><span class="pre">star</span></code> et <code class="docutils literal notranslate"><span class="pre">cuffquant</span></code>.</p>
 <ul class="simple">
 <li><p>STAR propose l’option <code class="docutils literal notranslate"><span class="pre">--runThreadN</span> <span class="pre">x</span></code> pour utiliser <code class="docutils literal notranslate"><span class="pre">x</span></code> coeurs.</p></li>
@@ -593,7 +595,7 @@ salut<span class="w"> </span>Pierre
 <p>Tous les logiciels ne proposent pas le multi-threading, c’est-à-dire l’utilisation de plusieurs coeurs. <code class="docutils literal notranslate"><span class="pre">htseq-count</span></code> par exemple ne prend pas en charge le multi-threading. Pour chaque logiciel, il faut donc le vérifier et trouver l’option adéquate.</p>
 </div>
 <p>Téléchargez un nouveau script Bash, <a class="reference download internal" download="" href="../_downloads/0990caa9c558ebf43a5c7ce0437965e6/script_local_2.sh"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">script_local_2.sh</span></code></span></a>, avec la commande <code class="docutils literal notranslate"><span class="pre">wget</span></code> :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>wget<span class="w"> </span>xxx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>wget<span class="w"> </span>https://raw.githubusercontent.com/pierrepo/unix-tutorial/master/tuto2/script_local_2.sh
 </pre></div>
 </div>
 <p>Ouvrez ce script avec l’éditeur de texte de JupyterLab. Essayer de trouver les différences avec le script précédent.</p>
@@ -640,7 +642,7 @@ Salut<span class="w"> </span>pierre<span class="w"> </span>!
 <section id="automatiser-l-analyse-de-3-echantillons">
 <h2><a class="toc-backref" href="#id8" role="doc-backlink">Automatiser l’analyse de 3 échantillons</a><a class="headerlink" href="#automatiser-l-analyse-de-3-echantillons" title="Permalink to this heading">#</a></h2>
 <p>Le script <a class="reference download internal" download="" href="../_downloads/e94fb752815f5d9b17b33ffd1b07cdc8/script_local_3.sh"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">script_local_3.sh</span></code></span></a> utilise une boucle pour automatiser l’analyse de plusieurs échantillons. Téléchargez-le avec la commande :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>wget<span class="w"> </span>...
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>wget<span class="w"> </span>https://raw.githubusercontent.com/pierrepo/unix-tutorial/master/tuto2/script_local_3.sh
 </pre></div>
 </div>
 <p>Ouvrez ce script avec l’éditeur de texte de JupyterLab (ou avec <code class="docutils literal notranslate"><span class="pre">less</span></code> dans un terminal). Observez la structure du script et essayez de comprendre son fonctionnement.</p>

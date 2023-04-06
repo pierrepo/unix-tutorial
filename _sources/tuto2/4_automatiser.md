@@ -98,7 +98,7 @@ Dans un script Bash :
 Téléchargez un premier script Bash, [`script_local_1.sh`](script_local_1.sh) ,avec la commande `wget` :
 
 ```bash
-$ wget xxx
+$ wget https://raw.githubusercontent.com/pierrepo/unix-tutorial/master/tuto2/script_local_1.sh
 ```
 
 Ouvrez ce script dans un éditeur de texte :
@@ -208,7 +208,11 @@ $ du -csh *
 
 ## Optimiser l'analyse d'un échantillon
 
-L'analyse précédente est complètement automatisée par un script Bash qui rassemble toutes les étapes de l'analyse. Par contre, l'analyse d'un seul échantillon prend environ 25 minutes, soit 75 minutes pour 3 échantillons et plus de 20 heures de calcul pour les 50 échantillons de *S. cerevisiae*.
+L'analyse précédente est complètement automatisée par un script Bash qui rassemble toutes les étapes de l'analyse, mais l'analyse d'un seul échantillon prend environ 25 minutes.
+
+Combien de temps faudra-t-il pour analyser 3 échatillons ?
+
+Combien de temps faudra-t-il pour analyser les 50 échantillons de *S. cerevisiae* ?
 
 Nous allons essayer d'optimiser l'analyse d'un échantillon pour réduire le temps de calcul. Une première approche consiste à utiliser plusieurs processeurs (coeurs) par les logiciels qui le supporte. C'est le cas pour `star` et `cuffquant`.
 
@@ -222,7 +226,7 @@ Tous les logiciels ne proposent pas le multi-threading, c'est-à-dire l'utilisat
 Téléchargez un nouveau script Bash, [`script_local_2.sh`](script_local_2.sh), avec la commande `wget` :
 
 ```bash
-$ wget xxx
+$ wget https://raw.githubusercontent.com/pierrepo/unix-tutorial/master/tuto2/script_local_2.sh
 ```
 
 Ouvrez ce script avec l'éditeur de texte de JupyterLab. Essayer de trouver les différences avec le script précédent.
@@ -289,7 +293,7 @@ Une leçon de Software Carpentry aborde la notion de [boucle](https://swcarpentr
 Le script [`script_local_3.sh`](script_local_3.sh) utilise une boucle pour automatiser l'analyse de plusieurs échantillons. Téléchargez-le avec la commande :
 
 ```bash
-$ wget ...
+$ wget https://raw.githubusercontent.com/pierrepo/unix-tutorial/master/tuto2/script_local_3.sh
 ```
 
 Ouvrez ce script avec l'éditeur de texte de JupyterLab (ou avec `less` dans un terminal). Observez la structure du script et essayez de comprendre son fonctionnement.
