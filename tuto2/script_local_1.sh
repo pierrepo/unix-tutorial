@@ -29,7 +29,7 @@ echo "=============================================================="
 echo "Aligner les reads sur le génome de référence : échantillon ${sample}"
 echo "=============================================================="
 mkdir -p "reads_map"
-STAR \
+STAR --runThreadN 1 \
 --runMode alignReads \
 --genomeDir genome_index \
 --sjdbGTFfile ${annotation_file} \

@@ -16,7 +16,7 @@ $ echo "${SLURM_CPUS_PER_TASK}"
 Ne tapez pas le caractère `$` en début de ligne et faites bien attention aux majuscules et au minuscules.
 ```
 
-Vous devriez obtenir `4`, ce qui correspond au nombre de `CPU(S)` demandé lors de [configuration](0_intro.md) de votre environnment JupyterHub/JupyterLab. Si ce n'est pas le cas, sollicitez-moi car vous serez bloqué par la suite.
+Vous devriez obtenir `6`, ce qui correspond au nombre de `CPU(S)` demandé lors de [configuration](0_intro.md) de votre environnment JupyterHub/JupyterLab. Si ce n'est pas le cas, sollicitez-moi car vous serez bloqué par la suite.
 
 
 ## Lister les logiciels nécessaires

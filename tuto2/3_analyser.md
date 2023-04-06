@@ -3,7 +3,7 @@
 ```{contents}
 ```
 
-Dans cette partie, nous allons analyser manuellement, c'est-à-dire étape par étape, les données RNA-seq de *S. cerevisiae*.
+Dans cette partie, nous allons analyser manuellement, étape par étape, les données RNA-seq de *S. cerevisiae*.
 ## Vérifier l'environnement logiciel
 
 Si cela n'est pas déjà fait, chargez les outils nécessaires à l'analyse des données RNA-seq :
@@ -14,7 +14,7 @@ $ module load sra-tools fastqc star htseq cufflinks samtools
 
 ## Vérifier les données
 
-Déplacez-vous ensuite dans le répertoire contenant les répertoires `/shared/projects/202304_duo/$USER/rnaseq`. 
+Déplacez-vous ensuite dans le répertoire : `/shared/projects/202304_duo/$USER/rnaseq`. 
 
 Vous devriez obtenir l'arborescence suivante :
 
@@ -30,16 +30,7 @@ $ tree
     └── SRR3405785.fastq.gz
 ```
 
-Choississez un échantillon parmi ceux téléchargés dans le répertoire `reads` :
-
-```bash
-reads
-├── SRR3405783.fastq.gz
-├── SRR3405784.fastq.gz
-└── SRR3405785.fastq.gz
-```
-
-Par exemple : `SRR3405783.fastq.gz`, mais vous pouvez choisir un autre fichier. Il faudra modifier le nom de l'échantillon dans les commandes suivantes.
+Choississez un échantillon parmi ceux téléchargés dans le répertoire `reads`. Par exemple : `SRR3405783.fastq.gz`, mais vous pouvez choisir un autre fichier. Il faudra modifier le nom de l'échantillon dans les commandes suivantes.
 
 
 ## Contrôler la qualité des reads
@@ -47,13 +38,13 @@ Par exemple : `SRR3405783.fastq.gz`, mais vous pouvez choisir un autre fichier. 
 Créez le répertoire `reads_qc` qui va contenir les fichiers produits par le contrôle qualité des fichiers *fastq.gz* :
 
 ```bash
-mkdir -p reads_qc
+$ mkdir -p reads_qc
 ```
 
 Lancez FastQC avec la commande :
 
 ```bash
-fastqc reads/SRR3405783.fastq.gz --outdir reads_qc
+$ fastqc reads/SRR3405783.fastq.gz --outdir reads_qc
 ```
 
 FastQC va produire deux fichiers (un fichier avec l’extension `.html` et un autre avec l’extension `.zip`) dans le répertoire `reads_qc`. Si par exemple, vous avez analysé le fichier `reads/SRR3405783.fastq.gz`, vous obtiendrez les fichiers `reads_qc/SRR3405783_fastqc.html` et `reads_qc/SRR3405783_fastqc.zip`.
@@ -68,13 +59,13 @@ L’indexation du génome de référence est une étape indispensable pour accé
 Dans un terminal, créez le répertoire `genome_index` qui contiendra les index du génome de référence :
 
 ```bash
-mkdir -p genome_index
+$ mkdir -p genome_index
 ```
 
 Lancez l’indexation du génome de référence :
 
 ```bash
-STAR --runMode genomeGenerate \
+$ STAR --runMode genomeGenerate \
 --genomeDir genome_index \
 --genomeFastaFiles genome/genome.fa \
 --sjdbGTFfile genome/genes.gtf \
@@ -131,7 +122,7 @@ Nous vous rappelons que l’indexation du génome n’est à faire qu’une seul
 Le fichier *S1 Supporting Information Methods* précise la commande utilisée pour l'alignement :
 
 ```bash
-STAR --runThreadN 1 --runMode alignReads --genomeDir
+$ STAR --runThreadN 1 --runMode alignReads --genomeDir
 path_to_yeast_genome_build --sjdbGTFfile path_to_yeast_transcriptome_gtf
 --readFilesIn sample.fastq --outFilterType BySJout --alignIntronMin 10 --
 alignIntronMax 3000 --outFileNamePrefix ./STAR_out/ --
@@ -141,13 +132,13 @@ outFilterIntronMotifs RemoveNoncanonical
 Les alignements des *reads* seront stockés dans le répertoire `reads_map` :
 
 ```bash
-mkdir -p reads_map
+$ mkdir -p reads_map
 ```
 
 Avec nos chemins de fichiers et quelques adaptations, la commande d'alignement devient :
 
 ```bash
-STAR --runThreadN 1 \
+$ STAR --runThreadN 1 \
 --runMode alignReads \
 --genomeDir genome_index \
 --sjdbGTFfile genome/genes.gtf \
@@ -179,37 +170,37 @@ L'alignement devrait prendre environ entre 5 et 10 minutes.
 Le fichier *S1 Supporting Information Methods* précise les commandes utilisées pour le comptage des *reads* :
 
 ```bash
-htseq-count --order=pos --stranded=reverse --mode=intersection-nonempty
+$ htseq-count --order=pos --stranded=reverse --mode=intersection-nonempty
 sample.aligned.sorted.sam path_to_yeast_transcriptome_gtf > sample.txt
 ```
 
 et celui des transcrits :
 
 ```bash
-cuffquant --library-type=fr-firststrand path_to_yeast_transcriptome_gtf
+$ cuffquant --library-type=fr-firststrand path_to_yeast_transcriptome_gtf
 sample.aligned.sorted.sam
 ```
 
 Enfin, la normalisation des comptages des transcrits :
 
 ```bash
-cuffnorm --library-type=fr-firststrand path_to_yeast_transcriptome_gtf
+$ cuffnorm --library-type=fr-firststrand path_to_yeast_transcriptome_gtf
 *.cxb
 ```
 
 Nous allons réaliser nous-mêmes ces étapes avec quelques adaptations.
 
-Créez tout d'abord le répertoire `counts/SRR3405783` dans lequel seront stockés les fichiers de comptage :
+Créez tout d'abord le répertoire `counts/SRR3405783` dans lequel seront stockés les fichiers de comptage. Pensez à adapter le nom du répertoire en fonction du nom de votre échantillon.
 
 ```bash
-mkdir -p counts/SRR3405783
+$ mkdir -p counts/SRR3405783
 ```
 
-Les étapes de tri et d'indexation des *reads* alignés ne sont pas explicitement mentionnées dans les *Supporting Informations* mais elles sont cependant nécessaires pour `HTSeq` :
+Les étapes de tri et d'indexation des *reads* alignés ne sont pas explicitement mentionnées dans les *Supporting Informations* mais elles sont cependant nécessaires pour HTSeq et Cufflinks.
 
 ```bash
-samtools sort reads_map/SRR3405783_Aligned.out.bam -o reads_map/SRR3405783_Aligned.sorted.out.bam
-samtools index reads_map/SRR3405783_Aligned.sorted.out.bam
+$ samtools sort reads_map/SRR3405783_Aligned.out.bam -o reads_map/SRR3405783_Aligned.sorted.out.bam
+$ samtools index reads_map/SRR3405783_Aligned.sorted.out.bam
 ```
 
 ```{note}
@@ -219,15 +210,16 @@ Le tri des *reads* peut, a priori, se faire directement avec STAR en utilisant l
 La commande pour compter les *reads* devient alors :
 
 ```bash
-htseq-count --order=pos --stranded=reverse \
+$ htseq-count --order=pos --stranded=reverse \
 --mode=intersection-nonempty \
-reads_map/SRR3405783_Aligned.sorted.out.bam genome/genes.gtf > counts/SRR3405783/count_SRR3405783.txt
+reads_map/SRR3405783_Aligned.sorted.out.bam \
+genome/genes.gtf > counts/SRR3405783/count_SRR3405783.txt
 ```
 
 Puis celle pour compter les transcrits :
 
 ```bash
-cuffquant --library-type=fr-firststrand genome/genes.gtf \
+$ cuffquant --library-type=fr-firststrand genome/genes.gtf \
 reads_map/SRR3405783_Aligned.sorted.out.bam \
 --output-dir counts/SRR3405783
 ```
@@ -240,7 +232,7 @@ reads_map/SRR3405783_Aligned.sorted.out.bam \
 Enfin, on normalise les comptages des transcrits :
 
 ```bash
-cuffnorm --library-type=fr-firststrand genome/genes.gtf \
+$ cuffnorm --library-type=fr-firststrand genome/genes.gtf \
 counts/*/*.cxb --output-dir counts
 ```
 
@@ -251,7 +243,9 @@ counts/*/*.cxb --output-dir counts
 
 ## Conclusion
 
-Pour analyser les données RNA-seq de *S. cerevisiae*, vous avez lancé à la main plus d'une demi-douzaine de commandes dans un terminal Unix.
-C'était fastidieux et ces commandes étaient parfois complexes avec de nombreuses options. Dans ce cas, le copier-coller était votre meilleur ami !
+Pour analyser les données RNA-seq de *S. cerevisiae*, vous avez lancé à la main plus d'une dizaine de commandes dans un terminal Unix.
+C'était fastidieux car ces commandes étaient parfois complexes avec de nombreuses options. Dans ce cas, le copier-coller était votre meilleur ami !
 
-**Mais**, vous avez été capable de reproduire toutes ces étapes en suivant les instructions de ce tutoriel. C'est là la grande force d'Unix et de la ligne commande : la capacité à décrire une analyse complexe en une suite d'instructions *écrites* et donc *facilement* répétables. 
+**Mais**, vous avez été capable de reproduire toutes ces étapes en suivant les instructions de ce tutoriel. C'est là la grande force d'Unix et de la ligne commande : la capacité à décrire une analyse complexe en une suite d'instructions *écrites* et donc *facilement* répétables.
+
+La prochaine étape est maintenant d'automatiser l'analyse en regroupant toutes ces commandes dans un script.

@@ -52,7 +52,7 @@ flowchart TB
 ### Prérequis
 
 - Posséder un compte sur le cluster de calcul de l'IFB.
-- Avoir réalisé le tutoriel [Introduction à Unix](../tutorial_1/tutorial.md).
+- Avoir réalisé le tutoriel [Introduction à Unix](../tuto1/tutorial.md).
 
 ### Configuration du JupyterHub
 
@@ -62,8 +62,8 @@ Dans la page *Server Options*, choisissez les paramètres suivants :
 - Reservation: `No reservation` 
 - Account: `202304_duo`  ⚠️
 - Partition: `fast`
-- CPU(s): `4`  ⚠️
-- Memory (in GB): `4`  ⚠️
+- CPU(s): `6`  ⚠️
+- Memory (in GB): `6`  ⚠️
 - GPU(s): `0` `No GRES`
 
 ```{warning}

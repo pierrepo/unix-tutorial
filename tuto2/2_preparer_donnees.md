@@ -115,7 +115,7 @@ $ du -csh reads/*
 Pour économiser un peu d'espace, compressez les fichiers fastq avec `gzip` :
 
 ```bash
-gzip reads/*
+$ gzip reads/*
 ```
 
 Cette commande va prendre quelques minutes, patientez.
