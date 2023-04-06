@@ -13,9 +13,9 @@ parts:
   - file: more
 - caption: Analyse RNA-seq avec Unix
   chapters:
-  - file: tutorial_2/0_intro
-  - file: tutorial_2/1_preparer_logiciels_module
-  - file: tutorial_2/2_preparer_donnees
-  - file: tutorial_2/3_analyser
-  - file: tutorial_2/4_automatiser
+  - file: tuto2/0_intro
+  - file: tuto2/1_preparer_logiciels_module
+  - file: tuto2/2_preparer_donnees
+  - file: tuto2/3_analyser
+  - file: tuto2/4_automatiser
 
