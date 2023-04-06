@@ -145,5 +145,5 @@ samtools 1.15.1
 
 ```{important}
 Notez toujours la version des logiciels que vous utilisez pour analyser vos données. C'est une information indispensable pour assurer la **reproductibilité de vos analyses**.
-Quand vous publiez vos résultats dans un article, vous devez fournir les versions des logiciels utilisés pour analyser vos données.
+Quand vous publiez vos résultats dans un article, vous devez fournir les versions des logiciels que vous avez utilisés pour analyser vos données.
 ```
