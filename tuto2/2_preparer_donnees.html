@@ -1,0 +1,854 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Préparer les données 🗃️ &#8212; Unix tutorial</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tuto2/2_preparer_donnees';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Analyser les données RNA-seq 💻" href="3_analyser.html" />
+    <link rel="prev" title="Préparer l’environnement logiciel 🧰" href="1_preparer_logiciels_module.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Bienvenue !
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">JupyterHub du cluster IFB</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../connection.html">Connexion au JupyterHub de l’IFB</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction à Unix</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tuto1/tutorial.html">Tuto 1 : un  aperçu du shell Unix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../more.html">Ressources complémentaires</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analyse RNA-seq avec Unix</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="0_intro.html">Introduction et contexte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_preparer_logiciels_module.html">Préparer l’environnement logiciel 🧰</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Préparer les données 🗃️</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_analyser.html">Analyser les données RNA-seq 💻</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_automatiser.html">Automatiser l’analyse RNA-seq ⚙️</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/pierrepo/unix-tutorial" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/pierrepo/unix-tutorial/issues/new?title=Issue%20on%20page%20%2Ftuto2/2_preparer_donnees.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/tuto2/2_preparer_donnees.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Préparer les données 🗃️</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identifier-les-donnees">Identifier les données</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creer-le-repertoire-de-travail">Créer le répertoire de travail</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#telecharger-les-donnees-de-sequencage">Télécharger les données de séquençage</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methode-1-sra-run-selector">Méthode 1 : SRA Run Selector</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methode-2-sra-explorer">Méthode 2 : SRA Explorer</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verifier-l-integrite-des-donnees">Vérifier l’intégrité des données</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compter-les-reads">Compter les <em>reads</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#telecharger-le-genome-de-reference-et-ses-annotations">Télécharger le génome de référence et ses annotations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plan-b">Plan B</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="preparer-les-donnees">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Préparer les données 🗃️</a><a class="headerlink" href="#preparer-les-donnees" title="Permalink to this heading">#</a></h1>
+<nav class="contents" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#preparer-les-donnees" id="id1">Préparer les données 🗃️</a></p>
+<ul>
+<li><p><a class="reference internal" href="#identifier-les-donnees" id="id2">Identifier les données</a></p></li>
+<li><p><a class="reference internal" href="#creer-le-repertoire-de-travail" id="id3">Créer le répertoire de travail</a></p></li>
+<li><p><a class="reference internal" href="#telecharger-les-donnees-de-sequencage" id="id4">Télécharger les données de séquençage</a></p>
+<ul>
+<li><p><a class="reference internal" href="#methode-1-sra-run-selector" id="id5">Méthode 1 : SRA Run Selector</a></p></li>
+<li><p><a class="reference internal" href="#methode-2-sra-explorer" id="id6">Méthode 2 : SRA Explorer</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#verifier-l-integrite-des-donnees" id="id7">Vérifier l’intégrité des données</a></p></li>
+<li><p><a class="reference internal" href="#compter-les-reads" id="id8">Compter les <em>reads</em></a></p></li>
+<li><p><a class="reference internal" href="#telecharger-le-genome-de-reference-et-ses-annotations" id="id9">Télécharger le génome de référence et ses annotations</a></p></li>
+<li><p><a class="reference internal" href="#conclusion" id="id10">Conclusion</a></p></li>
+<li><p><a class="reference internal" href="#plan-b" id="id11">Plan B</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="identifier-les-donnees">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Identifier les données</a><a class="headerlink" href="#identifier-les-donnees" title="Permalink to this heading">#</a></h2>
+<p>L’article orginal publié en 2016 par <a class="reference external" href="https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1006453">Kelliher <em>et al.</em></a> indique dans la rubrique <em>Data Availability</em> :</p>
+<blockquote>
+<div><p>RNA-Sequencing gene expression data from this manuscript have been submitted to the NCBI Gene Expression Omnibus (GEO; <a class="reference external" href="http://www.ncbi.nlm.nih.gov/geo/">http://www.ncbi.nlm.nih.gov/geo/</a>) under accession number GSE80474.</p>
+</div></blockquote>
+<p>Le numéro du projet qui nous intéresse est donc : <strong>GSE80474</strong></p>
+</section>
+<section id="creer-le-repertoire-de-travail">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Créer le répertoire de travail</a><a class="headerlink" href="#creer-le-repertoire-de-travail" title="Permalink to this heading">#</a></h2>
+<p>Sur le cluster de l’IFB, il ne faut pas travailler dans votre répertoire personnel car l’espace disponible est très limité. Il faut travailler dans un répertoire dédié à votre projet, ici, l’espace créé pour cette formation DUO : <code class="docutils literal notranslate"><span class="pre">/shared/projects/202304_duo</span></code>.</p>
+<p>Depuis l’interface JupyterLab du cluster IFB, ouvrez un terminal, créez un répertoire pour les données de ce tutoriel puis déplacez-vous y :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/shared/projects/202304_duo/<span class="nv">$USER</span>/rnaseq
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/shared/projects/202304_duo/<span class="nv">$USER</span>/rnaseq
+</pre></div>
+</div>
+<p>Ici, <code class="docutils literal notranslate"><span class="pre">$USER</span></code> va automatiquement être remplacé par votre nom d’utilisateur. Vous n’avez rien à faire.</p>
+<div class="tip admonition">
+<p class="admonition-title">Rappel</p>
+<p>Ne tapez pas le caractère <code class="docutils literal notranslate"><span class="pre">$</span></code> en début de ligne et faites bien attention aux majuscules et au minuscules.</p>
+</div>
+</section>
+<section id="telecharger-les-donnees-de-sequencage">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Télécharger les données de séquençage</a><a class="headerlink" href="#telecharger-les-donnees-de-sequencage" title="Permalink to this heading">#</a></h2>
+<p>L’article de Kelliher <em>et al.</em> nous a fourni le numéro du projet sur GEO. Cependant, l’étude a porté sur deux organismes : <em>Saccharomyces cerevisiae</em> et <em>Cryptococcus neoformans var. grubii</em>. Nous ne sommes intéressés que par les données de <em>Saccharomyces cerevisiae</em> que nous allons devoir sélectionner.</p>
+<section id="methode-1-sra-run-selector">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Méthode 1 : SRA Run Selector</a><a class="headerlink" href="#methode-1-sra-run-selector" title="Permalink to this heading">#</a></h3>
+<p>Dans l’outil <a class="reference external" href="https://trace.ncbi.nlm.nih.gov/Traces/study/">SRA Run Selector</a>, entrez l’identifiant du projet : GSE80474.</p>
+<p>Un total de 74 <em>runs</em> sont disponibles. Cliquez alors sur le bouton gris <em>Metadata</em> correspondant au total.</p>
+<p><strong>Sur votre machine du DU</strong></p>
+<p>Téléchargez le fichier <code class="docutils literal notranslate"><span class="pre">SraRunTable.txt</span></code> sur votre machine locale. Il s’agit d’un fichier CSV, c’est-à-dire d’un fichier tabulé avec des colonnes séparées par des virgules. Ouvrez-le avec Microsoft Excel ou LibreOffice Calc pour voir à quoi il ressemble.</p>
+<p><strong>Depuis l’interface JupyterLab du cluster IFB</strong></p>
+<p>Dans JupyterLab, utilisez l’explorateur de fichiers (à gauche) pour vous déplacer dans le répertoire que vous avez créé précédemment (<code class="docutils literal notranslate"><span class="pre">/shared/projects/202304_duo/$USER/rnaseq</span></code>).</p>
+<p>En cliquant sur l’icône <em>Upload Files</em>, importez le fichier <code class="docutils literal notranslate"><span class="pre">SraRunTable.txt</span></code> dans votre répertoire projet.</p>
+<p>Sélectionnez les identifiants des <em>runs</em> correspondant à <em>S. cerevisiae</em> avec la commande :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;Saccharomyces cerevisiae&quot;</span><span class="w"> </span>SraRunTable.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d<span class="s2">&quot;,&quot;</span><span class="w"> </span>-f1<span class="w"> </span>&gt;<span class="w"> </span>runs_scere.txt
+</pre></div>
+</div>
+<p>Pouvez-vous expliquer ce que fait cette commande ?</p>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>La commande <code class="docutils literal notranslate"><span class="pre">grep</span> <span class="pre">&quot;Saccharomyces</span> <span class="pre">cerevisiae&quot;</span> <span class="pre">SraRunTable.txt</span></code> extraie du fichier <code class="docutils literal notranslate"><span class="pre">SraRunTable.txt</span></code> les lignes qui contiennent le texte <code class="docutils literal notranslate"><span class="pre">Saccharomyces</span> <span class="pre">cerevisiae</span></code>.</p>
+<p>Le résultat est ensuite envoyé à la commande <code class="docutils literal notranslate"><span class="pre">cut</span></code> via le pipe <code class="docutils literal notranslate"><span class="pre">|</span></code>.</p>
+<p>La commande <code class="docutils literal notranslate"><span class="pre">cut</span> <span class="pre">-d&quot;,&quot;</span> <span class="pre">-f1</span></code> va extraire de chaque ligne le premier champ (<code class="docutils literal notranslate"><span class="pre">-f1</span></code>) séparé par une virgule (<code class="docutils literal notranslate"><span class="pre">-d&quot;,&quot;</span></code>).</p>
+<p>Le résultat est enfin enregistré dans le fichier <code class="docutils literal notranslate"><span class="pre">runs_scere.txt</span></code> avec la rediction <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>.</p>
+</div>
+<p>Vérifiez que vous avez bien 50 <em>runs</em> de listés dans le fichier <code class="docutils literal notranslate"><span class="pre">runs_scere.txt</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>wc<span class="w"> </span>-l<span class="w"> </span>runs_scere.txt<span class="w"> </span>
+<span class="m">50</span><span class="w"> </span>runs_scere.txt
+</pre></div>
+</div>
+<p>Créez ensuite un fichier qui ne va contenir que les 3 premiers échantillons avec la commande :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;Saccharomyces cerevisiae&quot;</span><span class="w"> </span>SraRunTable.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d<span class="s2">&quot;,&quot;</span><span class="w"> </span>-f1<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">3</span><span class="w"> </span>&gt;<span class="w"> </span>runs_scere_small.txt
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>À partir de maintenant, n’exécutez plus les commandes suivantes car le téléchargement et la compression des données vont prendre plusieurs dizaines de minutes. Lisez les commandes proposées et essayez de comprendre ce qu’elles font.</p>
+<p>Reprenez l’exécution des commandes à la méthode 2.</p>
+</div>
+<p>Téléchargez les fichiers fastq associés aux 3 premiers échantillons :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>reads
+<span class="k">for</span><span class="w"> </span>sample<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>cat<span class="w"> </span>runs_scere_small.txt<span class="k">)</span>
+<span class="k">do</span><span class="w"> </span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="si">${</span><span class="nv">sample</span><span class="si">}</span>
+<span class="w">    </span>fasterq-dump<span class="w"> </span>--progress<span class="w"> </span>--outdir<span class="w"> </span>reads<span class="w"> </span><span class="si">${</span><span class="nv">sample</span><span class="si">}</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+<p>Cette commande va prendre plusieurs minutes, patientez.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>du<span class="w"> </span>-csh<span class="w"> </span>reads/*
+<span class="m">4</span>,1G<span class="w">    </span>reads/SRR3405783.fastq
+<span class="m">4</span>,7G<span class="w">    </span>reads/SRR3405784.fastq
+<span class="m">4</span>,3G<span class="w">    </span>reads/SRR3405785.fastq
+13G<span class="w">     </span>total
+</pre></div>
+</div>
+<p>Pour économiser un peu d’espace, compressez les fichiers fastq avec <code class="docutils literal notranslate"><span class="pre">gzip</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>gzip<span class="w"> </span>reads/*
+</pre></div>
+</div>
+<p>Cette commande va prendre quelques minutes, patientez.</p>
+<p>Vérifiez que vous avez gagné de l’espace :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>du<span class="w"> </span>-csh<span class="w"> </span>reads/*
+864M<span class="w">    </span>reads/SRR3405783.fastq.gz
+983M<span class="w">    </span>reads/SRR3405784.fastq.gz
+910M<span class="w">    </span>reads/SRR3405785.fastq.gz
+<span class="m">2</span>.7G<span class="w">    </span>total
+</pre></div>
+</div>
+<p>On a gagné environ 10 Go d’espace disque, ce qui n’est pas négligeable.</p>
+</section>
+<section id="methode-2-sra-explorer">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Méthode 2 : SRA Explorer</a><a class="headerlink" href="#methode-2-sra-explorer" title="Permalink to this heading">#</a></h3>
+<p>Le numéro du projet GSE80474 commence par les lettres <code class="docutils literal notranslate"><span class="pre">GSE</span></code> ce qui nous indique que c’est un projet initialement déposé dans la base de données GEO. Cette base n’étant pas toujours bien prise en charge par l’outil sra-explorer, nous allons tout d’abord récupérer sur le site SRA Run Selector l’identifiant <em>BioProject</em> correspondant.</p>
+<p>Sur le site <a class="reference external" href="https://trace.ncbi.nlm.nih.gov/Traces/study/">SRA Run Selector</a> :</p>
+<ol class="arabic simple">
+<li><p>Entrez l’identifiant du projet : GSE80474.</p></li>
+<li><p>Cliquez sur le bouton bleu <em>Search</em>.</p></li>
+<li><p>Dans la rubrique <em>Common Fields</em> (tout en haut), récupérez l’identifiant <em>BioProject</em> : PRJNA319029</p></li>
+</ol>
+<p>C’est avec cet identifiant BioProject que nous allons récupérer les données.</p>
+<p>Sur le site <a class="reference external" href="https://sra-explorer.info/">SRA Explorer</a> :</p>
+<ol class="arabic simple">
+<li><p>Indiquez le numéro du <em>BioProject</em>, ici PRJNA319029, puis cliquez sur le petite loupe pour lancer la recherche.</p></li>
+<li><p>Vous obtenez ensuite 74 réponses qui correspondent aux différents fichiers / échantillons.</p></li>
+<li><p>Affinez les réponses en tapant « Scerevisiae » dans le champ « Filter results: ». Vous devriez obtenir 50 résultats.</p></li>
+<li><p>Sélectionnez tous les résultats en cliquant sur le case vide à droite de <em>Title</em>.</p></li>
+<li><p>Cliquez sur le bouton « Add 50 to collection ».</p></li>
+<li><p>Cliquez ensuite en haut à droite sur le bouton bleu « 50 saved datasets ».</p></li>
+<li><p>Cliquez enfin sur « Bash script for downloading FastQ files ».</p></li>
+<li><p>Téléchargez sur votre <strong>machine locale</strong> le script qui vous permettra de télécharger tous les fichiers fastq (<code class="docutils literal notranslate"><span class="pre">sra_explorer_fastq_download.sh</span></code>).</p></li>
+<li><p>Importer ce script dans l’interface JupyterLab du cluster IFB, dans votre répertoire projet.</p></li>
+</ol>
+<p>Voici les 5 premières lignes du script téléchargé :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">5</span><span class="w"> </span>sra_explorer_fastq_download.sh
+<span class="c1">#!/usr/bin/env bash</span>
+curl<span class="w"> </span>-L<span class="w"> </span>ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR340/009/SRR3405789/SRR3405789.fastq.gz<span class="w"> </span>-o<span class="w"> </span>SRR3405789_GSM2128026_Scerevisiae_YEPD_aF_30min_Saccharomyces_cerevisiae_RNA-Seq.fastq.gz
+curl<span class="w"> </span>-L<span class="w"> </span>ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR340/001/SRR3405791/SRR3405791.fastq.gz<span class="w"> </span>-o<span class="w"> </span>SRR3405791_GSM2128028_Scerevisiae_YEPD_aF_40min_Saccharomyces_cerevisiae_RNA-Seq.fastq.gz
+curl<span class="w"> </span>-L<span class="w"> </span>ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR340/004/SRR3405784/SRR3405784.fastq.gz<span class="w"> </span>-o<span class="w"> </span>SRR3405784_GSM2128021_Scerevisiae_YEPD_aF_5min_Saccharomyces_cerevisiae_RNA-Seq.fastq.gz
+curl<span class="w"> </span>-L<span class="w"> </span>ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR340/003/SRR3405783/SRR3405783.fastq.gz<span class="w"> </span>-o<span class="w"> </span>SRR3405783_GSM2128020_Scerevisiae_YEPD_aF_0min_Saccharomyces_cerevisiae_RNA-Seq.fastq.gz
+</pre></div>
+</div>
+<p>C’est bien un script Bash car la première ligne est <code class="docutils literal notranslate"><span class="pre">#!/usr/bin/env</span> <span class="pre">bash</span></code>. Ensuite, chaque ligne qui débute par <code class="docutils literal notranslate"><span class="pre">curl</span></code> télécharge un fichier .fastq.gz. La syntaxe de la commande <code class="docutils literal notranslate"><span class="pre">curl</span></code> est la suivante :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-L<span class="w"> </span>ADRESSE-DU-FICHIER-À-TÉLÉCHARGER<span class="w"> </span>-o<span class="w"> </span>NOM-DU-FICHIER-SUR-LE-DISQUE-LOCAL
+</pre></div>
+</div>
+<p>Nous aimerions modifier ce script pour faire en sorte que</p>
+<ol class="arabic simple">
+<li><p>Le nom du fichier enregistré localement ne contienne que le numéro d’accession du fichier, tel que présent sur les serveurs de SRA (par exemple : <code class="docutils literal notranslate"><span class="pre">SRR3405789</span></code>) et pas les métadonnnées associées (par exemple : <code class="docutils literal notranslate"><span class="pre">_GSM2128026_Scerevisiae_YEPD_aF_30min_Saccharomyces_cerevisiae_RNA-Seq.fastq.gz</span></code>). Pour cela, il faut remplacer l’option <code class="docutils literal notranslate"><span class="pre">-o</span></code> par <code class="docutils literal notranslate"><span class="pre">-O</span></code> (sans argument).</p></li>
+<li><p>Tous les fichiers soient enregistrés dans le même répertoire (par exemple <code class="docutils literal notranslate"><span class="pre">reads</span></code>). Il faut alors ajouter l’option <code class="docutils literal notranslate"><span class="pre">--output-dir</span></code> avec l’argument <code class="docutils literal notranslate"><span class="pre">reads</span></code>.</p></li>
+</ol>
+<p>Nous utilisons ici la commande <code class="docutils literal notranslate"><span class="pre">sed</span></code> qui peut modifier à la volée les lignes d’un fichier :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sed<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;s/-o .*/-O --output-dir reads/&#39;</span><span class="w"> </span>sra_explorer_fastq_download.sh<span class="w">  </span>&gt;<span class="w"> </span>sra_explorer_fastq_download_2.sh
+</pre></div>
+</div>
+<p>Voici les 5 premières lignes du script <code class="docutils literal notranslate"><span class="pre">sra_explorer_fastq_download_2.sh</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">5</span><span class="w"> </span>sra_explorer_fastq_download_2.sh
+<span class="c1">#!/usr/bin/env bash</span>
+curl<span class="w"> </span>-L<span class="w"> </span>ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR340/009/SRR3405789/SRR3405789.fastq.gz<span class="w"> </span>-O<span class="w"> </span>--output-dir<span class="w"> </span>reads
+curl<span class="w"> </span>-L<span class="w"> </span>ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR340/001/SRR3405791/SRR3405791.fastq.gz<span class="w"> </span>-O<span class="w"> </span>--output-dir<span class="w"> </span>reads
+curl<span class="w"> </span>-L<span class="w"> </span>ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR340/004/SRR3405784/SRR3405784.fastq.gz<span class="w"> </span>-O<span class="w"> </span>--output-dir<span class="w"> </span>reads
+curl<span class="w"> </span>-L<span class="w"> </span>ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR340/003/SRR3405783/SRR3405783.fastq.gz<span class="w"> </span>-O<span class="w"> </span>--output-dir<span class="w"> </span>reads
+</pre></div>
+</div>
+<p>Pour vérifier que notre script fonctionne, nous allons télécharger les 3 premiers fichiers <em>.fastq.gz</em>. Pour cela, créez un script intermédiaire en ne sélectionnant que les 4 premières lignes du script de téléchargement :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">4</span><span class="w"> </span>sra_explorer_fastq_download_2.sh<span class="w"> </span>&gt;<span class="w"> </span>sra_explorer_fastq_download_2_small.sh
+</pre></div>
+</div>
+<p>Le script fonctionne avec un version récente de <code class="docutils literal notranslate"><span class="pre">curl</span></code>, chargez cette version avec :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>module<span class="w"> </span>load<span class="w"> </span>curl
+</pre></div>
+</div>
+<p>Vérifiez que c’est bien le cas :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>curl<span class="w"> </span>--version<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span>
+curl<span class="w"> </span><span class="m">7</span>.80.0<span class="w"> </span><span class="o">(</span>x86_64-conda-linux-gnu<span class="o">)</span><span class="w"> </span>libcurl/7.80.0<span class="w"> </span>OpenSSL/3.0.0<span class="w"> </span>zlib/1.2.11<span class="w"> </span>libssh2/1.10.0<span class="w"> </span>nghttp2/1.43.0
+</pre></div>
+</div>
+<p>Enfin, lancez le script pour télécharger les données :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>reads
+$<span class="w"> </span>bash<span class="w"> </span>sra_explorer_fastq_download_2_small.sh
+</pre></div>
+</div>
+<p>Patientez quelques minutes que le téléchargement se termine.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Le script télécharge directement les données compressées, ce qui est beaucoup plus rapide que de télécharger les données non compressées puis de les compresser.</p>
+</div>
+<p>Calculez l’espace occupé par les données :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>du<span class="w"> </span>-csh<span class="w"> </span>reads/*
+776M<span class="w">    </span>reads/SRR3405783.fastq.gz
+883M<span class="w">    </span>reads/SRR3405784.fastq.gz
+818M<span class="w">    </span>reads/SRR3405785.fastq.gz
+<span class="m">2</span>.5G<span class="w">    </span>total
+</pre></div>
+</div>
+</section>
+</section>
+<section id="verifier-l-integrite-des-donnees">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Vérifier l’intégrité des données</a><a class="headerlink" href="#verifier-l-integrite-des-donnees" title="Permalink to this heading">#</a></h2>
+<p>Vous avez téléchargé des données, mais vous n’êtes pas certains de leur intégrité. Ces fichiers sont gros et il y a pu avoir un problème lors du téléchargement.</p>
+<p>Télécharger le fichier <code class="docutils literal notranslate"><span class="pre">reads_md5sum.txt</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>wget<span class="w"> </span>...
+</pre></div>
+</div>
+<p>Affichez le contenu de ce fichier avec la commande <code class="docutils literal notranslate"><span class="pre">cat</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cf46c1fcee2b373b557a9ab5222db5d8<span class="w">  </span>reads/SRR3405783.fastq.gz
+bb92561b5f5e123ffa284d0878b75e92<span class="w">  </span>reads/SRR3405784.fastq.gz
+43818ff76532430250f29f907f7a0621<span class="w">  </span>reads/SRR3405785.fastq.gz
+</pre></div>
+</div>
+<p>La première colonne contient l’empreinte MD5 du fichier et la seconde colonne contient le nom du fichier (avec son chemin relatif).</p>
+<p>Vérifiez maintenant l’intégrité des 3 fichiers que vous avez téléchargés :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>md5sum<span class="w"> </span>-c<span class="w"> </span>reads_md5sum.txt<span class="w"> </span>
+reads/SRR3405783.fastq.gz:<span class="w"> </span>OK
+reads/SRR3405784.fastq.gz:<span class="w"> </span>OK
+reads/SRR3405785.fastq.gz:<span class="w"> </span>OK
+</pre></div>
+</div>
+<p>Si vous n’obtenez pas <code class="docutils literal notranslate"><span class="pre">OK</span></code> à côté de chaque fichier, cela signifie que le fichier a été corrompu lors du téléchargement. Il faut le supprimer et le télécharger à nouveau.</p>
+</section>
+<section id="compter-les-reads">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Compter les <em>reads</em></a><a class="headerlink" href="#compter-les-reads" title="Permalink to this heading">#</a></h2>
+<p>La commande <code class="docutils literal notranslate"><span class="pre">zcat</span></code> est l’équivalent de la commande <code class="docutils literal notranslate"><span class="pre">cat</span></code> mais pour les fichiers texte compressés. Vous pouvez l’utiliser pour afficher le premier <em>read</em> du fichier <code class="docutils literal notranslate"><span class="pre">reads/SRR3405783.fastq.gz</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>zcat<span class="w"> </span>reads/SRR3405783.fastq.gz<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">4</span>
+@SRR3405783.1<span class="w"> </span>3NH4HQ1:254:C5A48ACXX:1:1101:1135:2105/1
+GGTTGAANGGCGTCGCGTCGTAACCCAGCTTGGTAAGTTGGATTAAGCACT
++
+?8?D<span class="p">;</span>DD#2&lt;C?CFE6CGGIFFFIE@DFF&lt;<span class="nv">FFB</span><span class="o">===</span><span class="nv">C7</span><span class="o">=</span>F37@C<span class="o">)=</span>DE&gt;EA
+</pre></div>
+</div>
+<p>La première ligne contient l’identifiant du <em>read</em>, la deuxième la séquence du <em>read</em> et la quatrième ligne les scores de qualité. La troisième ligne est un marqueur de séparation : <code class="docutils literal notranslate"><span class="pre">+</span></code>.</p>
+<p>Compter le nombre de marqueur de séparation <code class="docutils literal notranslate"><span class="pre">+</span></code> dans un fichier <em>.fastq.gz</em> revient à compter le nombre de <em>reads</em>. Pour cela, nous allons utiliser la commande <code class="docutils literal notranslate"><span class="pre">zgrep</span></code> qui est l’équivalent de la commande <code class="docutils literal notranslate"><span class="pre">grep</span></code> mais pour les fichiers texte compressés.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>zgrep<span class="w"> </span>-c<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;^+</span>$<span class="s2">&quot;</span><span class="w"> </span>reads/*.fastq.gz<span class="w"> </span>
+reads/SRR3405783.fastq.gz:17750348
+reads/SRR3405784.fastq.gz:20195297
+reads/SRR3405785.fastq.gz:18523100
+</pre></div>
+</div>
+<p>Patientez quelques secondes pour obtenir le résultat.</p>
+<div class="note admonition">
+<p class="admonition-title">Explications</p>
+<ul class="simple">
+<li><p>Tout comme <code class="docutils literal notranslate"><span class="pre">grep</span></code>, la commande <code class="docutils literal notranslate"><span class="pre">zgrep</span></code> recherche un motif dans un fichier, mais un fichier texte compressé.</p></li>
+<li><p>Le motif à chercher est le caractère <code class="docutils literal notranslate"><span class="pre">+</span></code>, seul sur une ligne. <code class="docutils literal notranslate"><span class="pre">^</span></code> désigne le début de la ligne et <code class="docutils literal notranslate"><span class="pre">$</span></code> désigne la fin de la ligne. L’option <code class="docutils literal notranslate"><span class="pre">-e</span> <span class="pre">&quot;^+$&quot;</span></code> permet de spécifier le motif à chercher sous la forme d’une expression régulière.</p></li>
+<li><p>Enfin, l’options <code class="docutils literal notranslate"><span class="pre">-c</span></code> compte le nombre de lignes qui contiennent le motif.</p></li>
+</ul>
+</div>
+</section>
+<section id="telecharger-le-genome-de-reference-et-ses-annotations">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">Télécharger le génome de référence et ses annotations</a><a class="headerlink" href="#telecharger-le-genome-de-reference-et-ses-annotations" title="Permalink to this heading">#</a></h2>
+<p>On trouve dans le fichier <em>S1 Supporting Information Methods</em> la desciption du génome de <em>S. cerevisiae</em> utilisé par Kelliher <em>et al.</em> :</p>
+<blockquote>
+<div><p>The S. cerevisiae S288C genome (Ensembl build R64-1-1) was downloaded from Illumina iGenomes on March 2, 2016 (<a class="reference external" href="https://support.illumina.com/sequencing/sequencing_software/igenome.html">https://support.illumina.com/sequencing/sequencing_software/igenome.html</a>).</p>
+</div></blockquote>
+<p>Téléchargez le fichier concerné (<code class="docutils literal notranslate"><span class="pre">Ensembl</span> <span class="pre">build</span> <span class="pre">R64-1-1.tar.gz</span></code>) et décompressez l’archive :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>wget<span class="w"> </span>http://igenomes.illumina.com.s3-website-us-east-1.amazonaws.com/Saccharomyces_cerevisiae/Ensembl/R64-1-1/Saccharomyces_cerevisiae_Ensembl_R64-1-1.tar.gz
+$<span class="w"> </span>tar<span class="w"> </span>zxvf<span class="w"> </span>Saccharomyces_cerevisiae_Ensembl_R64-1-1.tar.gz
+</pre></div>
+</div>
+<p>Récupérez ensuite les fichiers contenant le génome et les annotations :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>genome
+$<span class="w"> </span>cp<span class="w"> </span>Saccharomyces_cerevisiae/Ensembl/R64-1-1/Annotation/Genes/genes.gtf<span class="w"> </span>genome
+$<span class="w"> </span>cp<span class="w"> </span>Saccharomyces_cerevisiae/Ensembl/R64-1-1/Sequence/WholeGenomeFasta/genome.fa<span class="w"> </span>genome
+</pre></div>
+</div>
+<p>Supprimez enfin le répertoire <code class="docutils literal notranslate"><span class="pre">Saccharomyces_cerevisiae</span></code> et l’archive contenant le génome qui ne nous intéressent plus :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>Saccharomyces_cerevisiae<span class="w"> </span>Saccharomyces_cerevisiae_Ensembl_R64-1-1.tar.gz<span class="w"> </span>README.txt
+</pre></div>
+</div>
+<p>In fine, vous devriez obtenir l’organisation de fichiers suivante :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>tree
+.
+├──<span class="w"> </span>genome
+│<span class="w">   </span>├──<span class="w"> </span>genes.gtf
+│<span class="w">   </span>└──<span class="w"> </span>genome.fa
+├──<span class="w"> </span>reads
+│<span class="w">   </span>├──<span class="w"> </span>SRR3405783.fastq.gz
+│<span class="w">   </span>├──<span class="w"> </span>SRR3405784.fastq.gz
+│<span class="w">   </span>└──<span class="w"> </span>SRR3405785.fastq.gz
+├──<span class="w"> </span>reads_md5sum.txt
+├──<span class="w"> </span>runs_scere_small.txt
+├──<span class="w"> </span>runs_scere.txt
+├──<span class="w"> </span>sra_explorer_fastq_download_2.sh
+├──<span class="w"> </span>sra_explorer_fastq_download_2_small.sh
+├──<span class="w"> </span>sra_explorer_fastq_download.sh
+└──<span class="w"> </span>SraRunTable.txt
+
+<span class="m">2</span><span class="w"> </span>directories,<span class="w"> </span><span class="m">11</span><span class="w"> </span>files
+</pre></div>
+</div>
+<p>Les options <code class="docutils literal notranslate"><span class="pre">--du</span> <span class="pre">-h</span></code> de <code class="docutils literal notranslate"><span class="pre">tree</span></code> sont pratiques pour afficher la taille des fichiers et des répertoires :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>tree<span class="w"> </span>--du<span class="w"> </span>-h
+.
+├──<span class="w"> </span><span class="o">[</span><span class="w"> </span>23M<span class="o">]</span><span class="w">  </span>genome
+│<span class="w">   </span>├──<span class="w"> </span><span class="o">[</span><span class="w"> </span>11M<span class="o">]</span><span class="w">  </span>genes.gtf
+│<span class="w">   </span>└──<span class="w"> </span><span class="o">[</span><span class="w"> </span>12M<span class="o">]</span><span class="w">  </span>genome.fa
+├──<span class="w"> </span><span class="o">[</span><span class="m">2</span>.4G<span class="o">]</span><span class="w">  </span>reads
+│<span class="w">   </span>├──<span class="w"> </span><span class="o">[</span>776M<span class="o">]</span><span class="w">  </span>SRR3405783.fastq.gz
+│<span class="w">   </span>├──<span class="w"> </span><span class="o">[</span>883M<span class="o">]</span><span class="w">  </span>SRR3405784.fastq.gz
+│<span class="w">   </span>└──<span class="w"> </span><span class="o">[</span>817M<span class="o">]</span><span class="w">  </span>SRR3405785.fastq.gz
+├──<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="m">179</span><span class="o">]</span><span class="w">  </span>reads_md5sum.txt
+├──<span class="w"> </span><span class="o">[</span><span class="w">  </span><span class="m">32</span><span class="o">]</span><span class="w">  </span>runs_scere_small.txt
+├──<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="m">550</span><span class="o">]</span><span class="w">  </span>runs_scere.txt
+├──<span class="w"> </span><span class="o">[</span><span class="m">5</span>.2K<span class="o">]</span><span class="w">  </span>sra_explorer_fastq_download_2.sh
+├──<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="m">341</span><span class="o">]</span><span class="w">  </span>sra_explorer_fastq_download_2_small.sh
+├──<span class="w"> </span><span class="o">[</span><span class="m">8</span>.7K<span class="o">]</span><span class="w">  </span>sra_explorer_fastq_download.sh
+└──<span class="w"> </span><span class="o">[</span><span class="w"> </span>29K<span class="o">]</span><span class="w">  </span>SraRunTable.txt
+
+<span class="w"> </span><span class="m">2</span>.4G<span class="w"> </span>used<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>directories,<span class="w"> </span><span class="m">12</span><span class="w"> </span>files
+</pre></div>
+</div>
+</section>
+<section id="conclusion">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">Conclusion</a><a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<p>Vous avez sélectioné puis téléchargé les données pour votre analyse RNA-seq. Vous avez contrôlé l’intégrité des fichiers <em>.fastq.gz</em> et compté leur nombre de <em>reads</em>. Vous êtes mainenant prêt à lancer l’analyse.</p>
+</section>
+<section id="plan-b">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">Plan B</a><a class="headerlink" href="#plan-b" title="Permalink to this heading">#</a></h2>
+<p>Si le téléchargement des données prend trop de temps ou échoue, lancez les commandes suivantes pour obtenir les données nécessaires :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>reads
+$<span class="w"> </span>cp<span class="w"> </span>/shared/projects/202304_duo/data/rnaseq_scere/reads/SRR340578<span class="o">{</span><span class="m">3</span>,4,5<span class="o">}</span>.fastq.gz<span class="w"> </span>reads/
+$<span class="w"> </span>cp<span class="w"> </span>-R<span class="w"> </span>/shared/projects/202304_duo/data/rnaseq_scere/genome<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./tuto2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="1_preparer_logiciels_module.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Préparer l’environnement logiciel 🧰</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="3_analyser.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Analyser les données RNA-seq 💻</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identifier-les-donnees">Identifier les données</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creer-le-repertoire-de-travail">Créer le répertoire de travail</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#telecharger-les-donnees-de-sequencage">Télécharger les données de séquençage</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methode-1-sra-run-selector">Méthode 1 : SRA Run Selector</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#methode-2-sra-explorer">Méthode 2 : SRA Explorer</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verifier-l-integrite-des-donnees">Vérifier l’intégrité des données</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compter-les-reads">Compter les <em>reads</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#telecharger-le-genome-de-reference-et-ses-annotations">Télécharger le génome de référence et ses annotations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plan-b">Plan B</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Pierre Poulain
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+Ce contenu est mis à disposition selon les termes de la licence <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr" target="_blank">Creative Commons Attribution - Partage dans les Mêmes Conditions 4.0 International</a> (CC BY-SA 4.0).
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,796 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Automatiser l’analyse RNA-seq ⚙️ &#8212; Unix tutorial</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tuto2/4_automatiser';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Analyser les données RNA-seq 💻" href="3_analyser.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Bienvenue !
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">JupyterHub du cluster IFB</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../connection.html">Connexion au JupyterHub de l’IFB</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction à Unix</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tuto1/tutorial.html">Tuto 1 : un  aperçu du shell Unix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../more.html">Ressources complémentaires</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analyse RNA-seq avec Unix</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="0_intro.html">Introduction et contexte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_preparer_logiciels_module.html">Préparer l’environnement logiciel 🧰</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_preparer_donnees.html">Préparer les données 🗃️</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_analyser.html">Analyser les données RNA-seq 💻</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Automatiser l’analyse RNA-seq ⚙️</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/pierrepo/unix-tutorial" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/pierrepo/unix-tutorial/issues/new?title=Issue%20on%20page%20%2Ftuto2/4_automatiser.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/tuto2/4_automatiser.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Automatiser l’analyse RNA-seq ⚙️</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verifier-l-environnement-logiciel-et-les-donnees">Vérifier l’environnement logiciel et les données</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-bash">Variables Bash</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#script-bash">Script Bash</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automatiser-l-analyse-d-un-echantillon">Automatiser l’analyse d’un échantillon</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimiser-l-analyse-d-un-echantillon">Optimiser l’analyse d’un échantillon</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#repeter-une-action-en-bash">Répéter une action en Bash</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automatiser-l-analyse-de-3-echantillons">Automatiser l’analyse de 3 échantillons</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparer-les-versions-des-logiciels-utilises-dans-galaxy-si-vous-avez-du-temps">Comparer les versions des logiciels utilisés dans Galaxy (si vous avez du temps)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="automatiser-l-analyse-rna-seq">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Automatiser l’analyse RNA-seq ⚙️</a><a class="headerlink" href="#automatiser-l-analyse-rna-seq" title="Permalink to this heading">#</a></h1>
+<nav class="contents" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#automatiser-l-analyse-rna-seq" id="id1">Automatiser l’analyse RNA-seq ⚙️</a></p>
+<ul>
+<li><p><a class="reference internal" href="#verifier-l-environnement-logiciel-et-les-donnees" id="id2">Vérifier l’environnement logiciel et les données</a></p></li>
+<li><p><a class="reference internal" href="#variables-bash" id="id3">Variables Bash</a></p></li>
+<li><p><a class="reference internal" href="#script-bash" id="id4">Script Bash</a></p></li>
+<li><p><a class="reference internal" href="#automatiser-l-analyse-d-un-echantillon" id="id5">Automatiser l’analyse d’un échantillon</a></p></li>
+<li><p><a class="reference internal" href="#optimiser-l-analyse-d-un-echantillon" id="id6">Optimiser l’analyse d’un échantillon</a></p></li>
+<li><p><a class="reference internal" href="#repeter-une-action-en-bash" id="id7">Répéter une action en Bash</a></p></li>
+<li><p><a class="reference internal" href="#automatiser-l-analyse-de-3-echantillons" id="id8">Automatiser l’analyse de 3 échantillons</a></p></li>
+<li><p><a class="reference internal" href="#comparer-les-versions-des-logiciels-utilises-dans-galaxy-si-vous-avez-du-temps" id="id9">Comparer les versions des logiciels utilisés dans Galaxy (si vous avez du temps)</a></p></li>
+<li><p><a class="reference internal" href="#conclusion" id="id10">Conclusion</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<p>Dans la section précédente, vous avez analysé les données RNA-seq d’un seul échantillon en exécutant, une à une, chaque étape de l’analyse (contrôle qualité, alignement des <em>reads</em>…).</p>
+<p>Nous allons maintenant automatiser l’analyse d’un échantillon en une seule fois en utilisant un script. Puis nous automatiserons l’analyse de plusieurs échantillons.</p>
+<section id="verifier-l-environnement-logiciel-et-les-donnees">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Vérifier l’environnement logiciel et les données</a><a class="headerlink" href="#verifier-l-environnement-logiciel-et-les-donnees" title="Permalink to this heading">#</a></h2>
+<p>Si cela n’est pas déjà fait, chargez les outils nécessaires à l’analyse des données RNA-seq :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>module<span class="w"> </span>load<span class="w"> </span>sra-tools<span class="w"> </span>fastqc<span class="w"> </span>star<span class="w"> </span>htseq<span class="w"> </span>cufflinks<span class="w"> </span>samtools
+</pre></div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Rappel</p>
+<p>La commande <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">list</span></code> affiche les modules déjà chargés.</p>
+</div>
+<p>Vérifiez ensuite que vous êtes bien dans le répertoire <code class="docutils literal notranslate"><span class="pre">/shared/projects/202304_duo/$USER/rnaseq</span></code> avec la commande <code class="docutils literal notranslate"><span class="pre">pwd</span></code>. Déplacez-vous dans ce répertoire si ce n’est pas le cas.</p>
+<p>Supprimez les répertoires qui contiennet les résultats de l’analyse précédente :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>genome_index<span class="w"> </span>reads_qc<span class="w"> </span>reads_map<span class="w"> </span>counts
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Attention à la commande <code class="docutils literal notranslate"><span class="pre">rm</span></code> qui supprime irrémédiablement fichiers et répertoires.</p>
+</div>
+<p>Enfin, vérifiez que les données RNA-seq et le génome de <em>S. cerevisiae</em> sont bien disponibles :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>tree
+.
+├──<span class="w"> </span>genome
+│<span class="w">   </span>├──<span class="w"> </span>genes.gtf
+│<span class="w">   </span>└──<span class="w"> </span>genome.fa
+└──<span class="w"> </span>reads
+<span class="w">    </span>├──<span class="w"> </span>SRR3405783.fastq.gz
+<span class="w">    </span>├──<span class="w"> </span>SRR3405784.fastq.gz
+<span class="w">    </span>└──<span class="w"> </span>SRR3405785.fastq.gz
+</pre></div>
+</div>
+</section>
+<section id="variables-bash">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Variables Bash</a><a class="headerlink" href="#variables-bash" title="Permalink to this heading">#</a></h2>
+<p>Une variable va contenir de l’information qui sera utilisable autant de fois que nécessaire.</p>
+<p>Créer des variables :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nv">toto</span><span class="o">=</span><span class="m">33</span>
+$<span class="w"> </span><span class="nv">t</span><span class="o">=</span><span class="s2">&quot;salut&quot;</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Il faut coller le nom de la variable et son contenu au symbole <code class="docutils literal notranslate"><span class="pre">=</span></code>.</p>
+</div>
+<p>Afficher des variables :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$toto</span>
+<span class="m">33</span>
+$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$t</span><span class="s2"> Pierre&quot;</span>
+salut<span class="w"> </span>Pierre
+</pre></div>
+</div>
+<p>La commande <code class="docutils literal notranslate"><span class="pre">echo</span></code> affiche une chaîne de caractères, une variable, ou les deux.</p>
+<p>Pour utiliser une variable (et accéder à son contenu), il faut précéder son nom du caractère <code class="docutils literal notranslate"><span class="pre">$</span></code>. Attention, ne  confondez pas ce symbole avec celui qui désigne l’invite de commande de votre <em>shell</em> Linux.</p>
+<p>Enfin, une bonne pratique consiste à utiliser une variable avec le symbole <code class="docutils literal notranslate"><span class="pre">$</span></code> et son nom entre accolades :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="si">${</span><span class="nv">toto</span><span class="si">}</span>
+<span class="m">33</span>
+$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">t</span><span class="si">}</span><span class="s2"> Pierre&quot;</span>
+salut<span class="w"> </span>Pierre
+</pre></div>
+</div>
+</section>
+<section id="script-bash">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Script Bash</a><a class="headerlink" href="#script-bash" title="Permalink to this heading">#</a></h2>
+<p>Un script est un fichier texte qui contient des instructions Bash. Par convention, il porte l’extension <code class="docutils literal notranslate"><span class="pre">.sh</span></code>. L’objectif premier d’un script Bash est d’<strong>automatiser l’exécution de plusieurs commandes</strong> Bash, la plupart du temps pour manipuler ou analyser des fichiers.</p>
+<p>Dans un script Bash :</p>
+<ul class="simple">
+<li><p>La première ligne commence par <code class="docutils literal notranslate"><span class="pre">#!</span> <span class="pre">/bin/bash</span></code> et précise à l’ordinateur que le script est écrit en Bash.</p></li>
+<li><p>Tout ce qui suit le symbole <code class="docutils literal notranslate"><span class="pre">#</span></code> est considéré comme un commentaire et n’est donc pas traité par Bash.</p></li>
+<li><p>Le caractère <code class="docutils literal notranslate"><span class="pre">\</span></code> en fin de ligne permet de continuer une instruction sur la ligne suivante.</p></li>
+</ul>
+</section>
+<section id="automatiser-l-analyse-d-un-echantillon">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Automatiser l’analyse d’un échantillon</a><a class="headerlink" href="#automatiser-l-analyse-d-un-echantillon" title="Permalink to this heading">#</a></h2>
+<p>Téléchargez un premier script Bash, <a class="reference download internal" download="" href="../_downloads/f44c6d83aa8e66a72b4702f79db44b77/script_local_1.sh"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">script_local_1.sh</span></code></span></a> ,avec la commande <code class="docutils literal notranslate"><span class="pre">wget</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>wget<span class="w"> </span>xxx
+</pre></div>
+</div>
+<p>Ouvrez ce script dans un éditeur de texte :</p>
+<ul class="simple">
+<li><p>Soit dans un terminal avec l’éditeur de texte nano (<code class="docutils literal notranslate"><span class="pre">nano</span> <span class="pre">script_local_1.sh</span></code>).</p></li>
+<li><p>Soit depuis le navigateur de fichiers de JupyterLab, en double-cliquant sur son nom. Cette seconde solution est la plus confortable.</p></li>
+</ul>
+<p>Modifiez la variable <code class="docutils literal notranslate"><span class="pre">sample</span></code>, à la ligne 4 du script avec votre numéro d’échantillon. Vous avez le choix entre <code class="docutils literal notranslate"><span class="pre">SRR3405783</span></code>, <code class="docutils literal notranslate"><span class="pre">SRR3405784</span></code> et <code class="docutils literal notranslate"><span class="pre">SRR3405785</span></code>. Veillez à bien respecter :</p>
+<ul class="simple">
+<li><p>la casse (majuscules et minuscules),</p></li>
+<li><p>les guillemets autour du numéro de l’échantillon</p></li>
+<li><p>et l’absence d’espace autour du signe <code class="docutils literal notranslate"><span class="pre">=</span></code>.</p></li>
+</ul>
+<p>Retrouvez également dans ce script les différentes étapes de l’analyse RNA-seq que vous avez réalisées précédemment. Y-a-t-il des choses bizarres dont vous souhaiteriez des explications ? Si oui, notez-les, lancez-le script puis nous y reviendrons.</p>
+<p>Lancez le script avec la commande :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>bash<span class="w"> </span>script_local_1.sh
+</pre></div>
+</div>
+<p>Vérifiez que le déroulement du script se passe bien. Vous avez le temps de prendre un café, voir plusieurs ☕ 🍪 ☕ 🍪.</p>
+<p>Évaluez approximativement le temps nécessaire au script 1 pour s’exécuter. ⏱️ À partir de cette valeur, extrapoler le temps nécessaire qu’il faudrait pour analyser les 3 échantillons.</p>
+<p>D’après vous, quelle est l’étape la plus longue ?</p>
+<p>Utilisez enfin la commande <code class="docutils literal notranslate"><span class="pre">tree</span></code> pour contempler votre travail (ici avec l’échantillon <code class="docutils literal notranslate"><span class="pre">SRR3405783</span></code>) :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>tree
+.
+├──<span class="w"> </span>counts
+│<span class="w">   </span>└──<span class="w"> </span>SRR3405783
+│<span class="w">       </span>├──<span class="w"> </span>abundances.cxb
+│<span class="w">       </span>└──<span class="w"> </span>count_SRR3405783.txt
+├──<span class="w"> </span>genome
+│<span class="w">   </span>├──<span class="w"> </span>genes.gtf
+│<span class="w">   </span>└──<span class="w"> </span>genome.fa
+├──<span class="w"> </span>genome_index
+│<span class="w">   </span>├──<span class="w"> </span>chrLength.txt
+│<span class="w">   </span>├──<span class="w"> </span>chrNameLength.txt
+│<span class="w">   </span>├──<span class="w"> </span>chrName.txt
+│<span class="w">   </span>├──<span class="w"> </span>chrStart.txt
+│<span class="w">   </span>├──<span class="w"> </span>exonGeTrInfo.tab
+│<span class="w">   </span>├──<span class="w"> </span>exonInfo.tab
+│<span class="w">   </span>├──<span class="w"> </span>geneInfo.tab
+│<span class="w">   </span>├──<span class="w"> </span>Genome
+│<span class="w">   </span>├──<span class="w"> </span>genomeParameters.txt
+│<span class="w">   </span>├──<span class="w"> </span>Log.out
+│<span class="w">   </span>├──<span class="w"> </span>SA
+│<span class="w">   </span>├──<span class="w"> </span>SAindex
+│<span class="w">   </span>├──<span class="w"> </span>sjdbInfo.txt
+│<span class="w">   </span>├──<span class="w"> </span>sjdbList.fromGTF.out.tab
+│<span class="w">   </span>├──<span class="w"> </span>sjdbList.out.tab
+│<span class="w">   </span>└──<span class="w"> </span>transcriptInfo.tab
+├──<span class="w"> </span>reads
+│<span class="w">   </span>├──<span class="w"> </span>SRR3405783.fastq.gz
+│<span class="w">   </span>├──<span class="w"> </span>SRR3405784.fastq.gz
+│<span class="w">   </span>└──<span class="w"> </span>SRR3405785.fastq.gz
+├──<span class="w"> </span>reads_map
+│<span class="w">   </span>├──<span class="w"> </span>SRR3405783_Aligned.out.bam
+│<span class="w">   </span>├──<span class="w"> </span>SRR3405783_Aligned.sorted.out.bam
+│<span class="w">   </span>├──<span class="w"> </span>SRR3405783_Aligned.sorted.out.bam.bai
+│<span class="w">   </span>├──<span class="w"> </span>SRR3405783_Log.final.out
+│<span class="w">   </span>├──<span class="w"> </span>SRR3405783_Log.out
+│<span class="w">   </span>├──<span class="w"> </span>SRR3405783_Log.progress.out
+│<span class="w">   </span>├──<span class="w"> </span>SRR3405783_SJ.out.tab
+│<span class="w">   </span>└──<span class="w"> </span>SRR3405783__STARgenome
+│<span class="w">       </span>├──<span class="w"> </span>exonGeTrInfo.tab
+│<span class="w">       </span>├──<span class="w"> </span>exonInfo.tab
+│<span class="w">       </span>├──<span class="w"> </span>geneInfo.tab
+│<span class="w">       </span>├──<span class="w"> </span>sjdbInfo.txt
+│<span class="w">       </span>├──<span class="w"> </span>sjdbList.fromGTF.out.tab
+│<span class="w">       </span>├──<span class="w"> </span>sjdbList.out.tab
+│<span class="w">       </span>└──<span class="w"> </span>transcriptInfo.tab
+├──<span class="w"> </span>reads_qc
+│<span class="w">   </span>├──<span class="w"> </span>SRR3405783_fastqc.html
+│<span class="w">   </span>└──<span class="w"> </span>SRR3405783_fastqc.zip
+├──<span class="w"> </span>runs_scere_small.txt
+├──<span class="w"> </span>runs_scere.txt
+├──<span class="w"> </span>script_local_1.sh
+├──<span class="w"> </span>sra_explorer_fastq_download_2.sh
+├──<span class="w"> </span>sra_explorer_fastq_download_2_small.sh
+├──<span class="w"> </span>sra_explorer_fastq_download.sh
+└──<span class="w"> </span>SraRunTable.txt
+</pre></div>
+</div>
+<p>Affichez enfin la taille occupée par chaque sous-répertoire ainsi que la taille totale avec la commande :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>du<span class="w"> </span>-csh<span class="w"> </span>*
+<span class="m">5</span>.3M<span class="w">    </span>counts
+24M<span class="w">     </span>genome
+117M<span class="w">    </span>genome_index
+<span class="m">2</span>.5G<span class="w">    </span>reads
+<span class="m">1</span>.5G<span class="w">    </span>reads_map
+<span class="m">1</span>.1M<span class="w">    </span>reads_qc
+<span class="m">4</span>.0K<span class="w">    </span>runs_scere_small.txt
+<span class="m">4</span>.0K<span class="w">    </span>runs_scere.txt
+<span class="m">4</span>.0K<span class="w">    </span>script_local_1.sh
+<span class="m">8</span>.0K<span class="w">    </span>sra_explorer_fastq_download_2.sh
+<span class="m">4</span>.0K<span class="w">    </span>sra_explorer_fastq_download_2_small.sh
+12K<span class="w">     </span>sra_explorer_fastq_download.sh
+32K<span class="w">     </span>SraRunTable.txt
+<span class="m">4</span>.1G<span class="w">    </span>total
+</pre></div>
+</div>
+</section>
+<section id="optimiser-l-analyse-d-un-echantillon">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Optimiser l’analyse d’un échantillon</a><a class="headerlink" href="#optimiser-l-analyse-d-un-echantillon" title="Permalink to this heading">#</a></h2>
+<p>L’analyse précédente est complètement automatisée par un script Bash qui rassemble toutes les étapes de l’analyse. Par contre, l’analyse d’un seul échantillon prend environ 25 minutes, soit 75 minutes pour 3 échantillons et plus de 20 heures de calcul pour les 50 échantillons de <em>S. cerevisiae</em>.</p>
+<p>Nous allons essayer d’optimiser l’analyse d’un échantillon pour réduire le temps de calcul. Une première approche consiste à utiliser plusieurs processeurs (coeurs) par les logiciels qui le supporte. C’est le cas pour <code class="docutils literal notranslate"><span class="pre">star</span></code> et <code class="docutils literal notranslate"><span class="pre">cuffquant</span></code>.</p>
+<ul class="simple">
+<li><p>STAR propose l’option <code class="docutils literal notranslate"><span class="pre">--runThreadN</span> <span class="pre">x</span></code> pour utiliser <code class="docutils literal notranslate"><span class="pre">x</span></code> coeurs.</p></li>
+<li><p>Cuffquant propose l’option <code class="docutils literal notranslate"><span class="pre">--num-threads</span> <span class="pre">x</span></code> pour utiliser <code class="docutils literal notranslate"><span class="pre">x</span></code> coeurs.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Tous les logiciels ne proposent pas le multi-threading, c’est-à-dire l’utilisation de plusieurs coeurs. <code class="docutils literal notranslate"><span class="pre">htseq-count</span></code> par exemple ne prend pas en charge le multi-threading. Pour chaque logiciel, il faut donc le vérifier et trouver l’option adéquate.</p>
+</div>
+<p>Téléchargez un nouveau script Bash, <a class="reference download internal" download="" href="../_downloads/0990caa9c558ebf43a5c7ce0437965e6/script_local_2.sh"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">script_local_2.sh</span></code></span></a>, avec la commande <code class="docutils literal notranslate"><span class="pre">wget</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>wget<span class="w"> </span>xxx
+</pre></div>
+</div>
+<p>Ouvrez ce script avec l’éditeur de texte de JupyterLab. Essayer de trouver les différences avec le script précédent.</p>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>Lors de l’utilisation de <code class="docutils literal notranslate"><span class="pre">STAR</span></code> pour l’indexation du génome de référence et l’alignement des <em>reads</em> sur le génome, l’option <code class="docutils literal notranslate"><span class="pre">--runThreadN</span> <span class="pre">4</span></code> a été ajoutée pour utiliser 4 coeurs.</p>
+<p>Lors de l’utilisation de <code class="docutils literal notranslate"><span class="pre">cuffquant</span></code> pour le comptage des transcrits, l’option <code class="docutils literal notranslate"><span class="pre">--num-threads</span> <span class="pre">4</span></code> a été ajoutée pour utiliser 4 coeurs.</p>
+</div>
+<p>Supprimez les répertoires qui contiennet les résultats de l’analyse précédente :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>genome_index<span class="w"> </span>reads_qc<span class="w"> </span>reads_map<span class="w"> </span>counts
+</pre></div>
+</div>
+<p>Puis lancer ce nouveau script :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>bash<span class="w"> </span>script_local_2.sh
+</pre></div>
+</div>
+<p>Vérifiez que le déroulement du script se passe bien. Quelle étape vous semble la plus longue ?</p>
+<p>Normalement, le temps de calcul est passé de 25 minutes à environ 20 minutes. C’est mieux, mais cela représente toujours beaucoup d’heures de calcul pour analyser les 50 échantillons. Nous verrons lors de la prochaine sesssion commment utiliser un cluster de calcul pour réduire le temps d’analyse. 🚀</p>
+<p>Mais pour le moment, nous allons automatiser le traitement de plusieurs échantillons dans un même script Bash.</p>
+</section>
+<section id="repeter-une-action-en-bash">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Répéter une action en Bash</a><a class="headerlink" href="#repeter-une-action-en-bash" title="Permalink to this heading">#</a></h2>
+<p>Une boucle permet de répéter un ensemble d’instructions.</p>
+<p>Voici un exemple en Bash :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="k">for</span><span class="w"> </span>prenom<span class="w"> </span><span class="k">in</span><span class="w"> </span>gaelle<span class="w"> </span>bertrand<span class="w"> </span>pierre
+&gt;<span class="w"> </span><span class="k">do</span>
+&gt;<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Salut </span><span class="si">${</span><span class="nv">prenom</span><span class="si">}</span><span class="s2"> !&quot;</span>
+&gt;<span class="w"> </span><span class="k">done</span>
+Salut<span class="w"> </span>gaelle<span class="w"> </span>!
+Salut<span class="w"> </span>bertrand<span class="w"> </span>!
+Salut<span class="w"> </span>pierre<span class="w"> </span>!
+</pre></div>
+</div>
+<p>En sacrifiant un peu de lisibilité, la même commande peut s’écrire sur une seule ligne :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="k">for</span><span class="w"> </span>prenom<span class="w"> </span><span class="k">in</span><span class="w"> </span>gaelle<span class="w"> </span>bertrand<span class="w"> </span>pierre<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Salut </span><span class="si">${</span><span class="nv">prenom</span><span class="si">}</span><span class="s2"> !&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
+Salut<span class="w"> </span>gaelle<span class="w"> </span>!
+Salut<span class="w"> </span>bertrand<span class="w"> </span>!
+Salut<span class="w"> </span>pierre<span class="w"> </span>!
+</pre></div>
+</div>
+<p>Notez l’utilisation du symbole <code class="docutils literal notranslate"><span class="pre">;</span></code> pour séparer les différents éléments de la boucle.</p>
+<p>Une leçon de Software Carpentry aborde la notion de <a class="reference external" href="https://swcarpentry.github.io/shell-novice/05-loop/index.html">boucle</a>. Prenez quelques minutes pour parcourir cette leçon et comprendre de quoi il s’agit.</p>
+</section>
+<section id="automatiser-l-analyse-de-3-echantillons">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Automatiser l’analyse de 3 échantillons</a><a class="headerlink" href="#automatiser-l-analyse-de-3-echantillons" title="Permalink to this heading">#</a></h2>
+<p>Le script <a class="reference download internal" download="" href="../_downloads/e94fb752815f5d9b17b33ffd1b07cdc8/script_local_3.sh"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">script_local_3.sh</span></code></span></a> utilise une boucle pour automatiser l’analyse de plusieurs échantillons. Téléchargez-le avec la commande :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>wget<span class="w"> </span>...
+</pre></div>
+</div>
+<p>Ouvrez ce script avec l’éditeur de texte de JupyterLab (ou avec <code class="docutils literal notranslate"><span class="pre">less</span></code> dans un terminal). Observez la structure du script et essayez de comprendre son fonctionnement.</p>
+<p>La ligne <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">-euo</span> <span class="pre">pipefail</span></code> tout au début du script va arrêter celui-ci :</p>
+<ul class="simple">
+<li><p>à la première erreur ;</p></li>
+<li><p>si une variable n’est pas définie ;</p></li>
+<li><p>si une erreur est rencontrée dans une commande avec un <em>pipe</em> (<code class="docutils literal notranslate"><span class="pre">|</span></code>).</p></li>
+</ul>
+<p>C’est une mesure de sécurité importante pour votre script. Si vous le souhaitez, vous pouvez lire l’article de Aaron Maxwell à ce sujet : <a class="reference external" href="http://redsymbol.net/articles/unofficial-bash-strict-mode/">Use the Unofficial Bash Strict Mode (Unless You Looove Debugging)</a></p>
+<p>Remarquez également la structure de la boucle et la toute dernière étape qui normalise les comptages des transcrits sur tous les échantillons.</p>
+<p>Si vous pensez en avoir le temps, lancez le script <code class="docutils literal notranslate"><span class="pre">script_local_3.sh</span></code>. Comme ce script va automatiser toute l’analyse, il va fonctionner pendant plus d’une heure.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>bash<span class="w"> </span>script_local_3.sh
+</pre></div>
+</div>
+<p>Vérifiez régulièrement votre terminal qu’aucune erreur n’apparaît.</p>
+<p>Le fichier qui contient le comptage normalisé des transcrits est <code class="docutils literal notranslate"><span class="pre">counts/genes.count_table</span></code>.</p>
+</section>
+<section id="comparer-les-versions-des-logiciels-utilises-dans-galaxy-si-vous-avez-du-temps">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">Comparer les versions des logiciels utilisés dans Galaxy (si vous avez du temps)</a><a class="headerlink" href="#comparer-les-versions-des-logiciels-utilises-dans-galaxy-si-vous-avez-du-temps" title="Permalink to this heading">#</a></h2>
+<p>Connectez-vous maintenant à votre compte sur Galaxy. Essayez de retrouver les versions des logiciels que vous avez utilisés (FastQC, STAR, samtools, HTSeq, Cufflinks).</p>
+<p>Pour ce faire, dans votre <em>History</em>, cliquez sur le nom d’un résultat d’analyse, puis cliquez sur le petit i entouré (ℹ️) et lisez les informations de la section <em>Job Dependencies</em>.</p>
+<p>Comparez les versions des logiciels disponibles dans Galaxy avec celles que vous avez utilisés sur le cluster.</p>
+<p>Comment utilisez-vous la version particulière d’un outil dans Galaxy ?</p>
+</section>
+<section id="conclusion">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">Conclusion</a><a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<p>Vous avez automatisé votre analyse RNA-seq en regroupant les différentes étapes dans un script Bash. Vous avez également utilisé plusieurs coeurs pour accélérer autant que possible l’analyse.</p>
+<p>Ce n’est pas encore complètement satisfaisant. En effet, il vous faudrait 17 heures de calcul pour analyser les 50 échantillons.</p>
+<p>Quelles autres pistes pourriez-vous explorer pour réduire le temps de calcul ?</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./tuto2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="3_analyser.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Analyser les données RNA-seq 💻</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verifier-l-environnement-logiciel-et-les-donnees">Vérifier l’environnement logiciel et les données</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-bash">Variables Bash</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#script-bash">Script Bash</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automatiser-l-analyse-d-un-echantillon">Automatiser l’analyse d’un échantillon</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimiser-l-analyse-d-un-echantillon">Optimiser l’analyse d’un échantillon</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#repeter-une-action-en-bash">Répéter une action en Bash</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automatiser-l-analyse-de-3-echantillons">Automatiser l’analyse de 3 échantillons</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparer-les-versions-des-logiciels-utilises-dans-galaxy-si-vous-avez-du-temps">Comparer les versions des logiciels utilisés dans Galaxy (si vous avez du temps)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Pierre Poulain
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+Ce contenu est mis à disposition selon les termes de la licence <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr" target="_blank">Creative Commons Attribution - Partage dans les Mêmes Conditions 4.0 International</a> (CC BY-SA 4.0).
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
