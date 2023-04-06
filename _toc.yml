@@ -3,7 +3,19 @@
 
 format: jb-book
 root: intro
-chapters:
-- file: connection
-- file: tutorial_1/tutorial
-- file: more
+parts:
+- caption: JupyterHub du cluster IFB
+  chapters:
+  - file: connection
+- caption: Introduction à Unix
+  chapters:
+  - file: tuto1/tutorial
+  - file: more
+- caption: Analyse RNA-seq avec Unix
+  chapters:
+  - file: tuto2/0_intro
+  - file: tuto2/1_preparer_logiciels_module
+  - file: tuto2/2_preparer_donnees
+  - file: tuto2/3_analyser
+  - file: tuto2/4_automatiser
+

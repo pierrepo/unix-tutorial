@@ -1,0 +1,3 @@
+cf46c1fcee2b373b557a9ab5222db5d8  reads/SRR3405783.fastq.gz
+bb92561b5f5e123ffa284d0878b75e92  reads/SRR3405784.fastq.gz
+43818ff76532430250f29f907f7a0621  reads/SRR3405785.fastq.gz
