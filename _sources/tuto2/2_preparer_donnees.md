@@ -32,8 +32,11 @@ Ne tapez pas le caractère `$` en début de ligne et faites bien attention aux m
 
 ## Télécharger les données de séquençage
 
-L'article de Kelliher *et al.* nous a fourni le numéro du projet sur GEO. Cependant, l'étude a porté sur deux organismes : *Saccharomyces cerevisiae* et *Cryptococcus neoformans var. grubii*. Nous ne sommes intéressés que par les données de *Saccharomyces cerevisiae* que nous allons devoir sélectionner.
+L'article de Kelliher *et al.* nous a fourni le numéro du projet sur GEO. Cependant, l'étude a porté sur deux organismes :
+- *Saccharomyces cerevisiae*
+- *Cryptococcus neoformans var. grubii*.
 
+Nous nous intéressons uniquement aux données de *Saccharomyces cerevisiae* que nous allons devoir sélectionner.
 
 ### Méthode 1 : SRA Run Selector
 
@@ -43,7 +46,7 @@ Un total de 74 *runs* sont disponibles. Cliquez alors sur le bouton gris *Metada
 
 **Sur votre machine du DU**
 
-Téléchargez le fichier `SraRunTable.txt` sur votre machine locale. Il s'agit d'un fichier CSV, c'est-à-dire d'un fichier tabulé avec des colonnes séparées par des virgules. Ouvrez-le avec Microsoft Excel ou LibreOffice Calc pour voir à quoi il ressemble.
+Téléchargez le fichier `SraRunTable.txt` sur votre machine locale. Il s'agit d'un fichier CSV, c'est-à-dire d'un fichier tabulé avec des colonnes séparées par des virgules. Ouvrez-le avec Microsoft Excel ou LibreOffice Calc pour voir à quoi il ressemble, mais ne le modifiez pas.
 
 **Depuis l'interface JupyterLab du cluster IFB**
 
@@ -135,7 +138,7 @@ On a gagné environ 10 Go d'espace disque, ce qui n'est pas négligeable.
 
 ### Méthode 2 : SRA Explorer
 
-Le numéro du projet GSE80474 commence par les lettres `GSE` ce qui nous indique que c'est un projet initialement déposé dans la base de données GEO. Cette base n'étant pas toujours bien prise en charge par l'outil sra-explorer, nous allons tout d'abord récupérer sur le site SRA Run Selector l'identifiant *BioProject* correspondant.
+Le numéro du projet GSE80474 commence par les lettres `GSE` ce qui nous indique que c'est un projet initialement déposé dans la base de données GEO. Cette base n'étant pas toujours bien prise en charge par l'outil SRA Explorer, nous allons tout d'abord récupérer sur le site SRA Run Selector l'identifiant *BioProject* correspondant.
 
 Sur le site [SRA Run Selector](https://trace.ncbi.nlm.nih.gov/Traces/study/) :
 
@@ -245,7 +248,7 @@ Vous avez téléchargé des données, mais vous n'êtes pas certains de leur int
 Télécharger le fichier `reads_md5sum.txt` :
 
 ```bash
-$ wget ...
+$ wget https://raw.githubusercontent.com/pierrepo/unix-tutorial/master/tuto2/reads_md5sum.txt
 ```
 
 Affichez le contenu de ce fichier avec la commande `cat` :
@@ -376,7 +379,7 @@ $ tree --du -h
 
 ## Conclusion
 
-Vous avez sélectioné puis téléchargé les données pour votre analyse RNA-seq. Vous avez contrôlé l'intégrité des fichiers *.fastq.gz* et compté leur nombre de *reads*. Vous êtes mainenant prêt à lancer l'analyse.
+Vous avez sélectioné puis téléchargé les données pour votre analyse RNA-seq. Vous avez contrôlé l'intégrité des fichiers *.fastq.gz* et compté leur nombre de *reads*. Vous êtes maintenant prêt à lancer l'analyse.
 
 
 ## Plan B

@@ -436,13 +436,18 @@ $<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/shar
 </section>
 <section id="telecharger-les-donnees-de-sequencage">
 <h2><a class="toc-backref" href="#id4" role="doc-backlink">Télécharger les données de séquençage</a><a class="headerlink" href="#telecharger-les-donnees-de-sequencage" title="Permalink to this heading">#</a></h2>
-<p>L’article de Kelliher <em>et al.</em> nous a fourni le numéro du projet sur GEO. Cependant, l’étude a porté sur deux organismes : <em>Saccharomyces cerevisiae</em> et <em>Cryptococcus neoformans var. grubii</em>. Nous ne sommes intéressés que par les données de <em>Saccharomyces cerevisiae</em> que nous allons devoir sélectionner.</p>
+<p>L’article de Kelliher <em>et al.</em> nous a fourni le numéro du projet sur GEO. Cependant, l’étude a porté sur deux organismes :</p>
+<ul class="simple">
+<li><p><em>Saccharomyces cerevisiae</em></p></li>
+<li><p><em>Cryptococcus neoformans var. grubii</em>.</p></li>
+</ul>
+<p>Nous nous intéressons uniquement aux données de <em>Saccharomyces cerevisiae</em> que nous allons devoir sélectionner.</p>
 <section id="methode-1-sra-run-selector">
 <h3><a class="toc-backref" href="#id5" role="doc-backlink">Méthode 1 : SRA Run Selector</a><a class="headerlink" href="#methode-1-sra-run-selector" title="Permalink to this heading">#</a></h3>
 <p>Dans l’outil <a class="reference external" href="https://trace.ncbi.nlm.nih.gov/Traces/study/">SRA Run Selector</a>, entrez l’identifiant du projet : GSE80474.</p>
 <p>Un total de 74 <em>runs</em> sont disponibles. Cliquez alors sur le bouton gris <em>Metadata</em> correspondant au total.</p>
 <p><strong>Sur votre machine du DU</strong></p>
-<p>Téléchargez le fichier <code class="docutils literal notranslate"><span class="pre">SraRunTable.txt</span></code> sur votre machine locale. Il s’agit d’un fichier CSV, c’est-à-dire d’un fichier tabulé avec des colonnes séparées par des virgules. Ouvrez-le avec Microsoft Excel ou LibreOffice Calc pour voir à quoi il ressemble.</p>
+<p>Téléchargez le fichier <code class="docutils literal notranslate"><span class="pre">SraRunTable.txt</span></code> sur votre machine locale. Il s’agit d’un fichier CSV, c’est-à-dire d’un fichier tabulé avec des colonnes séparées par des virgules. Ouvrez-le avec Microsoft Excel ou LibreOffice Calc pour voir à quoi il ressemble, mais ne le modifiez pas.</p>
 <p><strong>Depuis l’interface JupyterLab du cluster IFB</strong></p>
 <p>Dans JupyterLab, utilisez l’explorateur de fichiers (à gauche) pour vous déplacer dans le répertoire que vous avez créé précédemment (<code class="docutils literal notranslate"><span class="pre">/shared/projects/202304_duo/$USER/rnaseq</span></code>).</p>
 <p>En cliquant sur l’icône <em>Upload Files</em>, importez le fichier <code class="docutils literal notranslate"><span class="pre">SraRunTable.txt</span></code> dans votre répertoire projet.</p>
@@ -506,7 +511,7 @@ $<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/shar
 </section>
 <section id="methode-2-sra-explorer">
 <h3><a class="toc-backref" href="#id6" role="doc-backlink">Méthode 2 : SRA Explorer</a><a class="headerlink" href="#methode-2-sra-explorer" title="Permalink to this heading">#</a></h3>
-<p>Le numéro du projet GSE80474 commence par les lettres <code class="docutils literal notranslate"><span class="pre">GSE</span></code> ce qui nous indique que c’est un projet initialement déposé dans la base de données GEO. Cette base n’étant pas toujours bien prise en charge par l’outil sra-explorer, nous allons tout d’abord récupérer sur le site SRA Run Selector l’identifiant <em>BioProject</em> correspondant.</p>
+<p>Le numéro du projet GSE80474 commence par les lettres <code class="docutils literal notranslate"><span class="pre">GSE</span></code> ce qui nous indique que c’est un projet initialement déposé dans la base de données GEO. Cette base n’étant pas toujours bien prise en charge par l’outil SRA Explorer, nous allons tout d’abord récupérer sur le site SRA Run Selector l’identifiant <em>BioProject</em> correspondant.</p>
 <p>Sur le site <a class="reference external" href="https://trace.ncbi.nlm.nih.gov/Traces/study/">SRA Run Selector</a> :</p>
 <ol class="arabic simple">
 <li><p>Entrez l’identifiant du projet : GSE80474.</p></li>
@@ -594,7 +599,7 @@ $<span class="w"> </span>bash<span class="w"> </span>sra_explorer_fastq_download
 <h2><a class="toc-backref" href="#id7" role="doc-backlink">Vérifier l’intégrité des données</a><a class="headerlink" href="#verifier-l-integrite-des-donnees" title="Permalink to this heading">#</a></h2>
 <p>Vous avez téléchargé des données, mais vous n’êtes pas certains de leur intégrité. Ces fichiers sont gros et il y a pu avoir un problème lors du téléchargement.</p>
 <p>Télécharger le fichier <code class="docutils literal notranslate"><span class="pre">reads_md5sum.txt</span></code> :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>wget<span class="w"> </span>...
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>wget<span class="w"> </span>https://raw.githubusercontent.com/pierrepo/unix-tutorial/master/tuto2/reads_md5sum.txt
 </pre></div>
 </div>
 <p>Affichez le contenu de ce fichier avec la commande <code class="docutils literal notranslate"><span class="pre">cat</span></code> :</p>
@@ -707,7 +712,7 @@ $<span class="w"> </span>cp<span class="w"> </span>Saccharomyces_cerevisiae/Ense
 </section>
 <section id="conclusion">
 <h2><a class="toc-backref" href="#id10" role="doc-backlink">Conclusion</a><a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
-<p>Vous avez sélectioné puis téléchargé les données pour votre analyse RNA-seq. Vous avez contrôlé l’intégrité des fichiers <em>.fastq.gz</em> et compté leur nombre de <em>reads</em>. Vous êtes mainenant prêt à lancer l’analyse.</p>
+<p>Vous avez sélectioné puis téléchargé les données pour votre analyse RNA-seq. Vous avez contrôlé l’intégrité des fichiers <em>.fastq.gz</em> et compté leur nombre de <em>reads</em>. Vous êtes maintenant prêt à lancer l’analyse.</p>
 </section>
 <section id="plan-b">
 <h2><a class="toc-backref" href="#id11" role="doc-backlink">Plan B</a><a class="headerlink" href="#plan-b" title="Permalink to this heading">#</a></h2>

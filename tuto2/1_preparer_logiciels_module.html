@@ -425,21 +425,21 @@ document.write(`
 <blockquote>
 <div><p>Transcript quantification of annotated yeast genes was performed using alignment files output from STAR and Cufflinks2 [4]. Time point samples from the respective yeasts were then normalized together using the CuffNorm feature.</p>
 </div></blockquote>
-<p>En résumé, nous avons besoin d’installer les outils : <code class="docutils literal notranslate"><span class="pre">STAR</span></code>, <code class="docutils literal notranslate"><span class="pre">HTSeq-count</span></code> et <code class="docutils literal notranslate"><span class="pre">Cufflinks</span></code>. Aucune version de logiciel n’étant spécifiée, nous allons installer la dernière version disponible.</p>
-<p>Nous installerons également <a class="reference external" href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> pour contrôler la qualité des <em>reads</em>, ainsi que <code class="docutils literal notranslate"><span class="pre">samtools</span></code> qui n’est pas explicitement mentionné dans l’article ni dans les <em>Supporting Information</em> mais qui est nécessaire pour indexer les <em>reads</em> alignés.</p>
+<p>En résumé, nous avons besoin d’installer les outils : <code class="docutils literal notranslate"><span class="pre">STAR</span></code>, <code class="docutils literal notranslate"><span class="pre">HTSeq-count</span></code> et <code class="docutils literal notranslate"><span class="pre">Cufflinks</span></code>. Aucune version de logiciel n’étant spécifiée, nous allons installer la dernière version disponible sur le cluster.</p>
+<p>Nous installerons également <a class="reference external" href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> pour contrôler la qualité des <em>reads</em>, ainsi que <code class="docutils literal notranslate"><span class="pre">samtools</span></code> qui n’est pas explicitement mentionné dans l’article ni dans les <em>Supporting Information</em> mais qui est nécessaire pour trier et indexer les <em>reads</em> alignés.</p>
 <p>Récapitulons les logiciels nécessaires :</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">sra-tools</span></code> : télécharger les données brutes de séquençage.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">fastqc</span></code> : contrôler la qualité des reads.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">star</span></code> : aligner les reads sur le génome de référence.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">htseq</span></code> : quantifier les reads alignés sur les gènes.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">cufflinks</span></code> : compter les transcrits.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">samtools</span></code> : indexer les reads alignés.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fastqc</span></code> : contrôler la qualité des <em>reads</em>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">star</span></code> : aligner les <em>reads</em> sur le génome de référence.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">htseq</span></code> : quantifier les <em>reads</em> alignés sur les gènes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cufflinks</span></code> : compter les transcrits (puis normaliser les comptages).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">samtools</span></code> : trier et indexer les <em>reads</em> alignés.</p></li>
 </ul>
 </section>
 <section id="verifier-la-disponibilite-des-logiciels">
 <h2><a class="toc-backref" href="#id4" role="doc-backlink">Vérifier la disponibilité des logiciels</a><a class="headerlink" href="#verifier-la-disponibilite-des-logiciels" title="Permalink to this heading">#</a></h2>
-<p>Vériez avec la commande <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">avail</span> <span class="pre">XXX</span></code> (avec <code class="docutils literal notranslate"><span class="pre">XXX</span></code> le nom du logiciel) que chacun des logiciels dont vous avez besoin est disponible :</p>
+<p>Vérifiez avec la commande <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">avail</span> <span class="pre">XXX</span></code> (avec <code class="docutils literal notranslate"><span class="pre">XXX</span></code> le nom du logiciel) que chacun des logiciels dont vous avez besoin est disponible :</p>
 <p>Par exemple pour <code class="docutils literal notranslate"><span class="pre">sra-tools</span></code>, vous devriez obtenir :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>module<span class="w"> </span>avail<span class="w"> </span>sra-tools
 ---------------------<span class="w"> </span>/shared/software/modulefiles<span class="w"> </span>----------------------
@@ -534,7 +534,7 @@ samtools<span class="w"> </span><span class="m">1</span>.15.1
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>Notez toujours la version des logiciels que vous utilisez pour analyser vos données. C’est une information indispensable pour assurer la <strong>reproductibilité de vos analyses</strong>.
-Quand vous publiez vos résultats dans un article, vous devez fournir les versions des logiciels que vous avez utilisés pour analyser vos données.</p>
+Quand vous publiez vos résultats dans un article, vous <strong>devez</strong> fournir les versions des logiciels que vous avez utilisés pour analyser vos données.</p>
 </div>
 </section>
 </section>
