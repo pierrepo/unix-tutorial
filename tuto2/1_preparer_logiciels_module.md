@@ -38,23 +38,23 @@ Le fichier *S1 Supporting Information Methods* fournit des précisions suppléme
 
 > Transcript quantification of annotated yeast genes was performed using alignment files output from STAR and Cufflinks2 [4]. Time point samples from the respective yeasts were then normalized together using the CuffNorm feature.
 
-En résumé, nous avons besoin d'installer les outils : `STAR`, `HTSeq-count` et `Cufflinks`. Aucune version de logiciel n'étant spécifiée, nous allons installer la dernière version disponible.
+En résumé, nous avons besoin d'installer les outils : `STAR`, `HTSeq-count` et `Cufflinks`. Aucune version de logiciel n'étant spécifiée, nous allons installer la dernière version disponible sur le cluster.
 
-Nous installerons également [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) pour contrôler la qualité des *reads*, ainsi que `samtools` qui n'est pas explicitement mentionné dans l'article ni dans les *Supporting Information* mais qui est nécessaire pour indexer les *reads* alignés.
+Nous installerons également [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) pour contrôler la qualité des *reads*, ainsi que `samtools` qui n'est pas explicitement mentionné dans l'article ni dans les *Supporting Information* mais qui est nécessaire pour trier et indexer les *reads* alignés.
 
 Récapitulons les logiciels nécessaires :
 
 - `sra-tools` : télécharger les données brutes de séquençage.
-- `fastqc` : contrôler la qualité des reads.
-- `star` : aligner les reads sur le génome de référence.
-- `htseq` : quantifier les reads alignés sur les gènes.
-- `cufflinks` : compter les transcrits.
-- `samtools` : indexer les reads alignés.
+- `fastqc` : contrôler la qualité des *reads*.
+- `star` : aligner les *reads* sur le génome de référence.
+- `htseq` : quantifier les *reads* alignés sur les gènes.
+- `cufflinks` : compter les transcrits (puis normaliser les comptages).
+- `samtools` : trier et indexer les *reads* alignés.
 
 
 ## Vérifier la disponibilité des logiciels
 
-Vériez avec la commande `module avail XXX` (avec `XXX` le nom du logiciel) que chacun des logiciels dont vous avez besoin est disponible :
+Vérifiez avec la commande `module avail XXX` (avec `XXX` le nom du logiciel) que chacun des logiciels dont vous avez besoin est disponible :
 
 Par exemple pour `sra-tools`, vous devriez obtenir :
 
@@ -145,5 +145,5 @@ samtools 1.15.1
 
 ```{important}
 Notez toujours la version des logiciels que vous utilisez pour analyser vos données. C'est une information indispensable pour assurer la **reproductibilité de vos analyses**.
-Quand vous publiez vos résultats dans un article, vous devez fournir les versions des logiciels que vous avez utilisés pour analyser vos données.
+Quand vous publiez vos résultats dans un article, vous **devez** fournir les versions des logiciels que vous avez utilisés pour analyser vos données.
 ```
