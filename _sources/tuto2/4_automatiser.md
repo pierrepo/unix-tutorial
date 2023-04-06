@@ -336,3 +336,5 @@ Vous avez automatisé votre analyse RNA-seq en regroupant les différentes étap
 Ce n'est pas encore complètement satisfaisant. En effet, il vous faudrait 17 heures de calcul pour analyser les 50 échantillons.
 
 Quelles autres pistes pourriez-vous explorer pour réduire le temps de calcul ?
+
+Nous en discuterons lors de la prochaine session...
