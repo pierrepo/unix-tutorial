@@ -10,9 +10,48 @@ Dans la rubrique [*Supporting Information*](https://journals.plos.org/plosgeneti
 
 Partant de ces informations, nous allons essayer de reproduire les différentes étapes de l'analyse RNA-seq. Nous verrons quelles sont les principales limitations et comment les contourner. Les analyses seront réalisées sur le cluster de calcul de l'IFB, mais, pour des raisons de progression pédagogique, nous n'utiliserons pas la puissance proposée par un tel cluster. Ce sera par contre l'object de la prochaine session.
 
+```{mermaid}
+---
+title: "Analyse RNA-seq"
+---
+flowchart TB
+	read["reads \n .fastq.gz"]
+    genome["genome \n de référence"]
+    annotation["annotations \n du génome"]
+
+    quality_control(["Contrôler la qualité \n des reads"])
+    star_index(["Indexer \n le génome de référence"])
+    star_map(["Aligner les reads \n sur le génome de référence"])
+    samtools_sort(["Trier les reads lignés"])
+    samtools_index(["Indexer les reads lignés"])
+    htseq(["Compter les reads alignés"])
+    cuffquant(["Compter \n les transcrits"])
+    cuffnorm(["Normaliser \n les transcrits"])
+
+    table[["Table \n de comptage"]]
+
+    genome -->|"STAR"| star_index
+    annotation -->|"STAR"| star_index
+    
+    read -->|"FastQC"| quality_control
+    
+    star_index -->|"STAR"| star_map
+    read -->|"STAR"| star_map
+
+    star_map -->|"samtools"| samtools_sort
+    samtools_sort -->|"samtools"| samtools_index
+
+    samtools_index -->|"HTseq"| htseq
+    annotation -->|"HTseq"| htseq 
+    samtools_index -->|"cuffquant"| cuffquant
+    annotation -->|"cuffquant"| cuffquant
+    cuffquant -->|"cuffnom"| cuffnorm
+    cuffnorm -->|"Aggréger les résultats"| table 
+```
+
 ### Prérequis
 
-- Avoir un compte sur le cluster de calcul de l'IFB.
+- Posséder un compte sur le cluster de calcul de l'IFB.
 - Avoir réalisé le tutoriel [Introduction à Unix](../tutorial_1/tutorial.md).
 
 ### Configuration du JupyterHub
