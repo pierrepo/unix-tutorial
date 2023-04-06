@@ -95,7 +95,7 @@ Dans un script Bash :
 
 ## Automatiser l'analyse d'un échantillon
 
-Téléchargez un premier script Bash, [`script_local_1.sh`](script_local_1.sh) ,avec la commande `wget` :
+Téléchargez dans un terminal de JupyterLab un premier script Bash ([`script_local_1.sh`](script_local_1.sh)) avec la commande `wget` :
 
 ```bash
 $ wget https://raw.githubusercontent.com/pierrepo/unix-tutorial/master/tuto2/script_local_1.sh
