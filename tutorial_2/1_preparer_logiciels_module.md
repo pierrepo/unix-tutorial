@@ -3,9 +3,26 @@
 ```{contents}
 ```
 
-Le cluster de calcul de l'IFB propose de nombreux logiciels pré-installés. Pour utiliser ces logiciels, il suffit de les charger dans l'environnement de travail avec la commande `module load`.
+## Valider la dimension de votre espace de travail 
+
+Exécutez la commande suivante pour connaitre le nombre de coeurs disponibles : 
+
+```bash
+$ echo "${SLURM_CPUS_PER_TASK}"
+```
+
+```{admonition} Rappel
+:class: tip
+Ne tapez pas le caractère `$` en début de ligne et faites bien attention aux majuscules et au minuscules.
+```
+
+Vous devriez obtenir `4`, ce qui correspond au nombre de `CPU(S)` demandé lors de [configuration](0_intro.md) de votre environnment JupyterHub/JupyterLab. Si ce n'est pas le cas, sollicitez-moi car vous serez bloqué par la suite.
+
 
 ## Lister les logiciels nécessaires
+
+Le cluster de calcul de l'IFB propose de nombreux logiciels pré-installés. Pour utiliser ces logiciels, il suffit de les charger dans l'environnement de travail avec la commande `module load`.
+
 
 Nous allons utiliser [SRA Toolkit](https://github.com/ncbi/sra-tools) pour télécharger les données brutes de séquençage.
 
@@ -67,6 +84,14 @@ Complétez le tableau suivant en indiquant, pour chaque logiciel, la version la 
 | cufflinks |                          |                         |
 | samtools  |                          |                         |
 
+
+
+```{admonition} Que faire si un logiciel n'est pas disponible ?
+:class: tip
+Si un outil que vous souhaitez utiliser n'est pas disponible ou pas dans la version souhaitée. Vous pouvez demander gentillement son installation au [support communautaire de l'IFB](https://community.france-bioinformatique.fr/). Pour cela, créez un ticket dans la rubrique « IFB Core Cluster ».
+
+Les administrateurs du cluster sont habituellement très réactifs (voir [exemple](https://community.france-bioinformatique.fr/t/installation-htseq-0-11-3/1092) de mise à jour de htseq).
+```
 
 ## Charger les logiciels
 

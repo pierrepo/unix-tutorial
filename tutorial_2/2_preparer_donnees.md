@@ -3,6 +3,8 @@
 ```{contents}
 ```
 
+## Identifier les données
+
 L'article orginal publié en 2016 par [Kelliher *et al.*](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1006453) indique dans la rubrique *Data Availability* :
 
 > RNA-Sequencing gene expression data from this manuscript have been submitted to the NCBI Gene Expression Omnibus (GEO; http://www.ncbi.nlm.nih.gov/geo/) under accession number GSE80474.
@@ -12,17 +14,21 @@ Le numéro du projet qui nous intéresse est donc : **GSE80474**
 
 ## Créer le répertoire de travail
 
-Sur le cluster de l'IFB, il ne faut pas travailler dans votre répertoire personnel car l'espace disponible est très limité. Il faut travailler dans un répertoire dédié à votre projet (ici, la formation DUO : `/shared/projects/202304_duo`)
+Sur le cluster de l'IFB, il ne faut pas travailler dans votre répertoire personnel car l'espace disponible est très limité. Il faut travailler dans un répertoire dédié à votre projet, ici, l'espace créé pour cette formation DUO : `/shared/projects/202304_duo`.
 
 Depuis l'interface JupyterLab du cluster IFB, ouvrez un terminal, créez un répertoire pour les données de ce tutoriel puis déplacez-vous y :
 
 ```bash
-mkdir -p /shared/projects/202304_duo/$USER/rnaseq
-cd /shared/projects/202304_duo/$USER/rnaseq
+$ mkdir -p /shared/projects/202304_duo/$USER/rnaseq
+$ cd /shared/projects/202304_duo/$USER/rnaseq
 ```
 
 Ici, `$USER` va automatiquement être remplacé par votre nom d'utilisateur. Vous n'avez rien à faire.
 
+```{admonition} Rappel
+:class: tip
+Ne tapez pas le caractère `$` en début de ligne et faites bien attention aux majuscules et au minuscules.
+```
 
 ## Télécharger les données de séquençage
 
@@ -48,7 +54,7 @@ En cliquant sur l'icône *Upload Files*, importez le fichier `SraRunTable.txt` d
 Sélectionnez les identifiants des *runs* correspondant à *S. cerevisiae* avec la commande :
 
 ```bash
-grep "Saccharomyces cerevisiae" SraRunTable.txt | cut -d"," -f1 > runs_scere.txt
+$ grep "Saccharomyces cerevisiae" SraRunTable.txt | cut -d"," -f1 > runs_scere.txt
 ```
 
 Pouvez-vous expliquer ce que fait cette commande ?
@@ -75,7 +81,7 @@ $ wc -l runs_scere.txt
 Créez ensuite un fichier qui ne va contenir que les 3 premiers échantillons avec la commande :
 
 ```bash
-grep "Saccharomyces cerevisiae" SraRunTable.txt | cut -d"," -f1 | head -n 3 > runs_scere_small.txt
+$ grep "Saccharomyces cerevisiae" SraRunTable.txt | cut -d"," -f1 | head -n 3 > runs_scere_small.txt
 ```
 
 ```{attention}
@@ -139,7 +145,7 @@ Sur le site [SRA Run Selector](https://trace.ncbi.nlm.nih.gov/Traces/study/) :
 
 C'est avec cet identifiant BioProject que nous allons récupérer les données.
 
-Sur le site [SRA EXplorer](https://sra-explorer.info/) :
+Sur le site [SRA Explorer](https://sra-explorer.info/) :
 
 1. Indiquez le numéro du *BioProject*, ici PRJNA319029, puis cliquez sur le petite loupe pour lancer la recherche.
 1. Vous obtenez ensuite 74 réponses qui correspondent aux différents fichiers / échantillons.
@@ -176,7 +182,7 @@ Nous aimerions modifier ce script pour faire en sorte que
 Nous utilisons ici la commande `sed` qui peut modifier à la volée les lignes d'un fichier :
 
 ```bash
-sed -E 's/-o .*/-O --output-dir reads/' sra_explorer_fastq_download.sh  > sra_explorer_fastq_download_2.sh
+$ sed -E 's/-o .*/-O --output-dir reads/' sra_explorer_fastq_download.sh  > sra_explorer_fastq_download_2.sh
 ```
 
 Voici les 5 premières lignes du script `sra_explorer_fastq_download_2.sh` : 
@@ -193,13 +199,13 @@ curl -L ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR340/003/SRR3405783/SRR3405783.fast
 Pour vérifier que notre script fonctionne, nous allons télécharger les 3 premiers fichiers *.fastq.gz*. Pour cela, créez un script intermédiaire en ne sélectionnant que les 4 premières lignes du script de téléchargement :
 
 ```bash
-head -n 4 sra_explorer_fastq_download_2.sh > sra_explorer_fastq_download_2_small.sh
+$ head -n 4 sra_explorer_fastq_download_2.sh > sra_explorer_fastq_download_2_small.sh
 ```
 
 Le script fonctionne avec un version récente de `curl`, chargez cette version avec :
 
 ```bash
-module load curl
+$ module load curl
 ```
 
 Vérifiez que c'est bien le cas :
@@ -212,8 +218,8 @@ curl 7.80.0 (x86_64-conda-linux-gnu) libcurl/7.80.0 OpenSSL/3.0.0 zlib/1.2.11 li
 Enfin, lancez le script pour télécharger les données :
 
 ```bash
-mkdir -p reads
-bash sra_explorer_fastq_download_2_small.sh
+$ mkdir -p reads
+$ bash sra_explorer_fastq_download_2_small.sh
 ```
 
 Patientez quelques minutes que le téléchargement se termine.
@@ -239,7 +245,7 @@ Vous avez téléchargé des données, mais vous n'êtes pas certains de leur int
 Télécharger le fichier `reads_md5sum.txt` :
 
 ```bash
-wget ...
+$ wget ...
 ```
 
 Affichez le contenu de ce fichier avec la commande `cat` :
@@ -273,21 +279,21 @@ On trouve dans le fichier *S1 Supporting Information Methods* la desciption du g
 Téléchargez le fichier concerné (`Ensembl build R64-1-1.tar.gz`) et décompressez l'archive :
 
 ```bash
-wget http://igenomes.illumina.com.s3-website-us-east-1.amazonaws.com/Saccharomyces_cerevisiae/Ensembl/R64-1-1/Saccharomyces_cerevisiae_Ensembl_R64-1-1.tar.gz
-tar zxvf Saccharomyces_cerevisiae_Ensembl_R64-1-1.tar.gz
+$ wget http://igenomes.illumina.com.s3-website-us-east-1.amazonaws.com/Saccharomyces_cerevisiae/Ensembl/R64-1-1/Saccharomyces_cerevisiae_Ensembl_R64-1-1.tar.gz
+$ tar zxvf Saccharomyces_cerevisiae_Ensembl_R64-1-1.tar.gz
 ```
 
 Récupérez ensuite les fichiers contenant le génome et les annotations :
 ```bash
-mkdir -p genome
-cp Saccharomyces_cerevisiae/Ensembl/R64-1-1/Annotation/Genes/genes.gtf genome
-cp Saccharomyces_cerevisiae/Ensembl/R64-1-1/Sequence/WholeGenomeFasta/genome.fa genome
+$ mkdir -p genome
+$ cp Saccharomyces_cerevisiae/Ensembl/R64-1-1/Annotation/Genes/genes.gtf genome
+$ cp Saccharomyces_cerevisiae/Ensembl/R64-1-1/Sequence/WholeGenomeFasta/genome.fa genome
 ```
 
 Supprimez enfin le répertoire `Saccharomyces_cerevisiae` et l'archive contenant le génome qui ne nous intéressent plus :
 
 ```bash
-rm -rf Saccharomyces_cerevisiae Saccharomyces_cerevisiae_Ensembl_R64-1-1.tar.gz README.txt
+$ rm -rf Saccharomyces_cerevisiae Saccharomyces_cerevisiae_Ensembl_R64-1-1.tar.gz README.txt
 ```
 
 In fine, vous devriez obtenir l'organisation de fichiers suivante :
@@ -315,7 +321,7 @@ $ tree
 Les options `--du -h` de `tree` sont pratiques pour afficher aussi la taille des fichiers et des répertoires :
 
 ```bash
- tree --du -h
+$ tree --du -h
 .
 ├── [ 23M]  genome
 │   ├── [ 11M]  genes.gtf

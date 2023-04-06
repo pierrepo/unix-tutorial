@@ -12,7 +12,7 @@ Nous allons maintenant automatiser l'analyse d'un échantillon en une seule fois
 Si cela n'est pas déjà fait, chargez les outils nécessaires à l'analyse des données RNA-seq :
 
 ```bash
-$ module load sra-tools fastqc star htseq cufflinks samtools
+module load sra-tools fastqc star htseq cufflinks samtools
 ```
 
 ```{hint}
