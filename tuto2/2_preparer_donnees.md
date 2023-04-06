@@ -224,7 +224,7 @@ $ bash sra_explorer_fastq_download_2_small.sh
 
 Patientez quelques minutes que le téléchargement se termine.
 
-```{hint} text
+```{hint}
 Le script télécharge directement les données compressées, ce qui est beaucoup plus rapide que de télécharger les données non compressées puis de les compresser.
 ```
 
@@ -258,7 +258,7 @@ bb92561b5f5e123ffa284d0878b75e92  reads/SRR3405784.fastq.gz
 
 La première colonne contient l'empreinte MD5 du fichier et la seconde colonne contient le nom du fichier (avec son chemin relatif).
 
-Vérifiez maintenant l'intégrié des 3 fichiers que vous avez télécharges :
+Vérifiez maintenant l'intégrité des 3 fichiers que vous avez téléchargés :
 
 ```bash
 $ md5sum -c reads_md5sum.txt 
@@ -268,6 +268,38 @@ reads/SRR3405785.fastq.gz: OK
 ```
 
 Si vous n'obtenez pas `OK` à côté de chaque fichier, cela signifie que le fichier a été corrompu lors du téléchargement. Il faut le supprimer et le télécharger à nouveau.
+
+## Compter les *reads*
+
+La commande `zcat` est l'équivalent de la commande `cat` mais pour les fichiers texte compressés. Vous pouvez l'utiliser pour afficher le premier *read* du fichier `reads/SRR3405783.fastq.gz` :
+
+```bash
+ zcat reads/SRR3405783.fastq.gz | head -n 4
+@SRR3405783.1 3NH4HQ1:254:C5A48ACXX:1:1101:1135:2105/1
+GGTTGAANGGCGTCGCGTCGTAACCCAGCTTGGTAAGTTGGATTAAGCACT
++
+?8?D;DD#2<C?CFE6CGGIFFFIE@DFF<FFB===C7=F37@C)=DE>EA
+```
+
+La première ligne contient l'identifiant du *read*, la deuxième la séquence du *read* et la quatrième ligne les scores de qualité. La troisième ligne est un marqueur de séparation : `+`.
+
+Compter le nombre de marqueur de séparation `+` dans un fichier *.fastq.gz* revient à compter le nombre de *reads*. Pour cela, nous allons utiliser la commande `zgrep` qui est l'équivalent de la commande `grep` mais pour les fichiers texte compressés.
+
+```bash
+$ zgrep -c -e "^+$" reads/*.fastq.gz 
+reads/SRR3405783.fastq.gz:17750348
+reads/SRR3405784.fastq.gz:20195297
+reads/SRR3405785.fastq.gz:18523100
+```
+
+Patientez quelques secondes pour obtenir le résultat.
+
+```{admonition} Explications
+:class: note
+- Tout comme `grep`, la commande `zgrep` recherche un motif dans un fichier, mais un fichier texte compressé.
+- Le motif à chercher est le caractère `+`, seul sur une ligne. `^` désigne le début de la ligne et `$` désigne la fin de la ligne. L'option `-e "^+$"` permet de spécifier le motif à chercher sous la forme d'une expression régulière.
+- Enfin, l'options `-c` compte le nombre de lignes qui contiennent le motif.
+```
 
 
 ## Télécharger le génome de référence et ses annotations
@@ -308,6 +340,7 @@ $ tree
 │   ├── SRR3405783.fastq.gz
 │   ├── SRR3405784.fastq.gz
 │   └── SRR3405785.fastq.gz
+├── reads_md5sum.txt
 ├── runs_scere_small.txt
 ├── runs_scere.txt
 ├── sra_explorer_fastq_download_2.sh
@@ -318,7 +351,7 @@ $ tree
 2 directories, 11 files
 ```
 
-Les options `--du -h` de `tree` sont pratiques pour afficher aussi la taille des fichiers et des répertoires :
+Les options `--du -h` de `tree` sont pratiques pour afficher la taille des fichiers et des répertoires :
 
 ```bash
 $ tree --du -h
@@ -330,6 +363,7 @@ $ tree --du -h
 │   ├── [776M]  SRR3405783.fastq.gz
 │   ├── [883M]  SRR3405784.fastq.gz
 │   └── [817M]  SRR3405785.fastq.gz
+├── [ 179]  reads_md5sum.txt
 ├── [  32]  runs_scere_small.txt
 ├── [ 550]  runs_scere.txt
 ├── [5.2K]  sra_explorer_fastq_download_2.sh
@@ -337,5 +371,20 @@ $ tree --du -h
 ├── [8.7K]  sra_explorer_fastq_download.sh
 └── [ 29K]  SraRunTable.txt
 
- 2.4G used in 2 directories, 11 files
+ 2.4G used in 2 directories, 12 files
+```
+
+## Conclusion
+
+Vous avez sélectioné puis téléchargé les données pour votre analyse RNA-seq. Vous avez contrôlé l'intégrité des fichiers *.fastq.gz* et compté leur nombre de *reads*. Vous êtes mainenant prêt à lancer l'analyse.
+
+
+## Plan B
+
+Si le téléchargement des données prend trop de temps ou échoue, lancez les commandes suivantes pour obtenir les données nécessaires :
+
+```bash
+$ mkdir -p reads
+$ cp /shared/projects/202304_duo/data/rnaseq_scere/reads/SRR340578{3,4,5}.fastq.gz reads/
+$ cp -R /shared/projects/202304_duo/data/rnaseq_scere/genome .
 ```
