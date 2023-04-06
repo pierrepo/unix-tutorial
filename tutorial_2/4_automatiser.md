@@ -97,7 +97,7 @@ Dans un script Bash :
 Téléchargez un premier script Bash, [`script_local_1.sh`](script_local_1.sh) ,avec la commande `wget` :
 
 ```bash
-wget xxx
+$ wget xxx
 ```
 
 Ouvrez ce script dans un éditeur de texte :
@@ -222,7 +222,7 @@ Tous les logiciels ne proposent pas le multi-threading, c'est-à-dire l'utilisat
 Téléchargez un nouveau script Bash, [`script_local_2.sh`](script_local_2.sh), avec la commande `wget` :
 
 ```bash
-wget xxx
+$ wget xxx
 ```
 
 Ouvrez ce script avec l'éditeur de texte de JupyterLab. Essayer de trouver les différences avec le script précédent.
@@ -238,7 +238,7 @@ Lors de l'utilisation de Cuffquant pour le comptage des transcrits, l'option `--
 Supprimez les répertoires qui contiennet les résultats de l'analyse précédente :
 
 ```bash
-rm -rf genome_index reads_qc reads_map counts
+$ rm -rf genome_index reads_qc reads_map counts
 ```
 
 Puis lancer ce nouveau script :
