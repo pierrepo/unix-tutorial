@@ -86,3 +86,5 @@ echo "=============================================================="
 cuffnorm --num-threads 4 \
 --library-type=fr-firststrand "${annotation_file}" \
 "counts"/*/*.cxb --output-dir "counts"
+
+date
