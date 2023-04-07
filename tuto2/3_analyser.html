@@ -497,11 +497,11 @@ CTGCAGACAAGGCATCTCCTCTCAAGGCCAAATGACGTTGGTCCAACAGTA
 <section id="aligner-les-reads-sur-le-genome-de-reference">
 <h2><a class="toc-backref" href="#id6" role="doc-backlink">Aligner les <em>reads</em> sur le génome de référence</a><a class="headerlink" href="#aligner-les-reads-sur-le-genome-de-reference" title="Permalink to this heading">#</a></h2>
 <p>Le fichier <em>S1 Supporting Information Methods</em> précise la commande utilisée pour l’alignement :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>STAR<span class="w"> </span>--runThreadN<span class="w"> </span><span class="m">1</span><span class="w"> </span>--runMode<span class="w"> </span>alignReads<span class="w"> </span>--genomeDir
-path_to_yeast_genome_build<span class="w"> </span>--sjdbGTFfile<span class="w"> </span>path_to_yeast_transcriptome_gtf
---readFilesIn<span class="w"> </span>sample.fastq<span class="w"> </span>--outFilterType<span class="w"> </span>BySJout<span class="w"> </span>--alignIntronMin<span class="w"> </span><span class="m">10</span><span class="w"> </span>--
-alignIntronMax<span class="w"> </span><span class="m">3000</span><span class="w"> </span>--outFileNamePrefix<span class="w"> </span>./STAR_out/<span class="w"> </span>--
-outFilterIntronMotifs<span class="w"> </span>RemoveNoncanonical
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">STAR</span> <span class="o">--</span><span class="n">runThreadN</span> <span class="mi">1</span> <span class="o">--</span><span class="n">runMode</span> <span class="n">alignReads</span> <span class="o">--</span><span class="n">genomeDir</span>
+<span class="n">path_to_yeast_genome_build</span> <span class="o">--</span><span class="n">sjdbGTFfile</span> <span class="n">path_to_yeast_transcriptome_gtf</span>
+<span class="o">--</span><span class="n">readFilesIn</span> <span class="n">sample</span><span class="o">.</span><span class="n">fastq</span> <span class="o">--</span><span class="n">outFilterType</span> <span class="n">BySJout</span> <span class="o">--</span><span class="n">alignIntronMin</span> <span class="mi">10</span> <span class="o">--</span>
+<span class="n">alignIntronMax</span> <span class="mi">3000</span> <span class="o">--</span><span class="n">outFileNamePrefix</span> <span class="o">./</span><span class="n">STAR_out</span><span class="o">/</span> <span class="o">--</span>
+<span class="n">outFilterIntronMotifs</span> <span class="n">RemoveNoncanonical</span>
 </pre></div>
 </div>
 <p>Les alignements des <em>reads</em> seront stockés dans le répertoire <code class="docutils literal notranslate"><span class="pre">reads_map</span></code> :</p>
@@ -541,18 +541,18 @@ L’alignement devrait prendre entre 5 et 10 minutes.</p>
 <section id="compter-les-reads-et-les-transcrits">
 <h2><a class="toc-backref" href="#id7" role="doc-backlink">Compter les <em>reads</em> et les transcrits</a><a class="headerlink" href="#compter-les-reads-et-les-transcrits" title="Permalink to this heading">#</a></h2>
 <p>Le fichier <em>S1 Supporting Information Methods</em> précise les commandes utilisées pour le comptage des <em>reads</em> :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>htseq-count<span class="w"> </span>--order<span class="o">=</span>pos<span class="w"> </span>--stranded<span class="o">=</span>reverse<span class="w"> </span>--mode<span class="o">=</span>intersection-nonempty
-sample.aligned.sorted.sam<span class="w"> </span>path_to_yeast_transcriptome_gtf<span class="w"> </span>&gt;<span class="w"> </span>sample.txt
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">htseq</span><span class="o">-</span><span class="n">count</span> <span class="o">--</span><span class="n">order</span><span class="o">=</span><span class="n">pos</span> <span class="o">--</span><span class="n">stranded</span><span class="o">=</span><span class="n">reverse</span> <span class="o">--</span><span class="n">mode</span><span class="o">=</span><span class="n">intersection</span><span class="o">-</span><span class="n">nonempty</span>
+<span class="n">sample</span><span class="o">.</span><span class="n">aligned</span><span class="o">.</span><span class="n">sorted</span><span class="o">.</span><span class="n">sam</span> <span class="n">path_to_yeast_transcriptome_gtf</span> <span class="o">&gt;</span> <span class="n">sample</span><span class="o">.</span><span class="n">txt</span>
 </pre></div>
 </div>
 <p>et celui des transcrits :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cuffquant<span class="w"> </span>--library-type<span class="o">=</span>fr-firststrand<span class="w"> </span>path_to_yeast_transcriptome_gtf
-sample.aligned.sorted.sam
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cuffquant</span> <span class="o">--</span><span class="n">library</span><span class="o">-</span><span class="nb">type</span><span class="o">=</span><span class="n">fr</span><span class="o">-</span><span class="n">firststrand</span> <span class="n">path_to_yeast_transcriptome_gtf</span>
+<span class="n">sample</span><span class="o">.</span><span class="n">aligned</span><span class="o">.</span><span class="n">sorted</span><span class="o">.</span><span class="n">sam</span>
 </pre></div>
 </div>
 <p>Enfin, la normalisation des comptages des transcrits :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cuffnorm<span class="w"> </span>--library-type<span class="o">=</span>fr-firststrand<span class="w"> </span>path_to_yeast_transcriptome_gtf
-*.cxb
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cuffnorm</span> <span class="o">--</span><span class="n">library</span><span class="o">-</span><span class="nb">type</span><span class="o">=</span><span class="n">fr</span><span class="o">-</span><span class="n">firststrand</span> <span class="n">path_to_yeast_transcriptome_gtf</span>
+<span class="o">*.</span><span class="n">cxb</span>
 </pre></div>
 </div>
 <p>Nous allons réaliser nous-mêmes ces étapes avec quelques adaptations.</p>
