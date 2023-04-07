@@ -121,8 +121,8 @@ Nous vous rappelons que l’indexation du génome n’est à faire qu’**une se
 
 Le fichier *S1 Supporting Information Methods* précise la commande utilisée pour l'alignement :
 
-```bash
-$ STAR --runThreadN 1 --runMode alignReads --genomeDir
+```
+STAR --runThreadN 1 --runMode alignReads --genomeDir
 path_to_yeast_genome_build --sjdbGTFfile path_to_yeast_transcriptome_gtf
 --readFilesIn sample.fastq --outFilterType BySJout --alignIntronMin 10 --
 alignIntronMax 3000 --outFileNamePrefix ./STAR_out/ --
@@ -169,22 +169,22 @@ L'alignement devrait prendre entre 5 et 10 minutes.
 
 Le fichier *S1 Supporting Information Methods* précise les commandes utilisées pour le comptage des *reads* :
 
-```bash
-$ htseq-count --order=pos --stranded=reverse --mode=intersection-nonempty
+```
+htseq-count --order=pos --stranded=reverse --mode=intersection-nonempty
 sample.aligned.sorted.sam path_to_yeast_transcriptome_gtf > sample.txt
 ```
 
 et celui des transcrits :
 
-```bash
-$ cuffquant --library-type=fr-firststrand path_to_yeast_transcriptome_gtf
+```
+cuffquant --library-type=fr-firststrand path_to_yeast_transcriptome_gtf
 sample.aligned.sorted.sam
 ```
 
 Enfin, la normalisation des comptages des transcrits :
 
-```bash
-$ cuffnorm --library-type=fr-firststrand path_to_yeast_transcriptome_gtf
+```
+cuffnorm --library-type=fr-firststrand path_to_yeast_transcriptome_gtf
 *.cxb
 ```
 

@@ -277,7 +277,7 @@ Si vous n'obtenez pas `OK` à côté de chaque fichier, cela signifie que le fic
 La commande `zcat` est l'équivalent de la commande `cat` mais pour les fichiers texte compressés. Vous pouvez l'utiliser pour afficher le premier *read* du fichier `reads/SRR3405783.fastq.gz` :
 
 ```bash
- zcat reads/SRR3405783.fastq.gz | head -n 4
+$ zcat reads/SRR3405783.fastq.gz | head -n 4
 @SRR3405783.1 3NH4HQ1:254:C5A48ACXX:1:1101:1135:2105/1
 GGTTGAANGGCGTCGCGTCGTAACCCAGCTTGGTAAGTTGGATTAAGCACT
 +
