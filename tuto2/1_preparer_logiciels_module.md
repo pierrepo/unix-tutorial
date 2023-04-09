@@ -110,38 +110,58 @@ Currently Loaded Modulefiles:
  2) fastqc/0.11.9      4) htseq/0.13.5   6) samtools/1.15.1  
 ```
 
-Vérifiez enfin les versions des logiciels en appelant chaque logiciel individuellement :
+Vérifiez enfin les versions des logiciels en appelant chaque logiciel individuellement.
 
+### sra-tools
+
+Si c'est la première fois que vous utilisez `fasterq-dump`, lancez au préalable la commande suivante :
+
+```bash
+$ vdb-config --interactive
+```
+puis tapez sur la touche <kbd>X</kbd>.
+
+Ensuite :
 ```bash
 $ fasterq-dump --version
 
 "fasterq-dump" version 2.11.0
 ```
 
+### fastqc
+
 ```bash
 $ fastqc --version
 FastQC v0.11.9
 ```
 
+### STAR
 ```bash
 $ STAR --version
 2.7.10b
 ```
+
+### samtools
+
+```bash
+$ samtools --version | head -n 1
+samtools 1.15.1
+```
+
+### htseq-count
 
 ```bash
 $ htseq-count --version
 0.13.5
 ```
 
+### cufflinks
+
 ```bash
 $ cufflinks 2>&1 | head -n 1
 cufflinks v2.2.1
 ```
 
-```bash
-$ samtools --version | head -n 1
-samtools 1.15.1
-```
 
 ```{important}
 Notez toujours la version des logiciels que vous utilisez pour analyser vos données. C'est une information indispensable pour assurer la **reproductibilité de vos analyses**.
