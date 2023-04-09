@@ -182,10 +182,10 @@ curl -L ADRESSE-DU-FICHIER-À-TÉLÉCHARGER -o NOM-DU-FICHIER-SUR-LE-DISQUE-LOCA
 ```
 
 ```{note}
-Il est possible que vous n'ayez pas exactement les mêmes lignes de commande `curl` avec les mêmes numéros d'accession. C'est normal, le script renvoyé par SRA Explorer ne revoie pas toujours les fichiers à télécharger dans le même ordre. 
+Il est possible que vous n'ayez pas exactement les mêmes lignes de commande `curl` avec les mêmes numéros d'accession. C'est normal, le script renvoyé par SRA Explorer ne liste pas toujours les fichiers à télécharger dans le même ordre. 
 ```
 
-Nous aimerions modifier ce script pour faire en sorte que 
+Nous aimerions modifier ce script pour faire en sorte que :
 
 1. Le nom du fichier enregistré localement ne contienne que le numéro d'accession du fichier, tel que présent sur les serveurs de SRA (par exemple : `SRR3405789`) et pas les métadonnnées associées (par exemple : `_GSM2128026_Scerevisiae_YEPD_aF_30min_Saccharomyces_cerevisiae_RNA-Seq.fastq.gz`). Pour cela, il faut remplacer l'option `-o` par `-O` (sans argument).
 2. Tous les fichiers soient enregistrés dans le même répertoire (par exemple `reads`). Il faut alors ajouter l'option `--output-dir` avec l'argument `reads`.
@@ -196,7 +196,7 @@ Nous utilisons ici la commande `sed` qui modifie les lignes d'un fichier :
 $ sed -E 's/-o .*/-O --output-dir reads/' sra_explorer_fastq_download.sh  > sra_explorer_fastq_download_2.sh
 ```
 
-Voici les 5 premières lignes du script `sra_explorer_fastq_download_2.sh` : 
+Voici les 5 premières lignes du nouveau script de téléchargement `sra_explorer_fastq_download_2.sh` : 
 
 ```bash
 $ head -n 5 sra_explorer_fastq_download_2.sh
@@ -207,7 +207,7 @@ curl -L ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR340/004/SRR3405784/SRR3405784.fast
 curl -L ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR340/003/SRR3405783/SRR3405783.fastq.gz -O --output-dir reads
 ```
 
-Le téléchargement des données peut prendre beaucoup de temps. Pour ce tutoriel, nous allons nous limiter à 3 échantillons dont les identifiants sont `SRR3405783`, `SRR3405784` et `SRR3405785`. La commande `grep` permet alors de sélectionner les fichiers voulus :
+Le téléchargement des données peut prendre beaucoup de temps. Pour ce tutoriel, nous allons nous limiter à 3 échantillons dont les identifiants sont `SRR3405783`, `SRR3405784` et `SRR3405785`. La commande `grep` va alors sélectionner les fichiers voulus :
 
 
 ```bash
@@ -227,7 +227,7 @@ curl -L ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR340/005/SRR3405785/SRR3405785.fast
 L'option `-E` permet de créer un motif avec des expressions régulières. Ici, on cherche toutes les lignes qui contient `bash` (la toute première ligne), ou `SRR3405783`, ou `SRR3405784`, ou `SRR3405785`.
 ```
 
-Le script fonctionne avec un version récente de `curl`, chargez cette version avec :
+Le script fonctionne avec une version récente de `curl`, chargez cette version avec :
 
 ```bash
 $ module load curl
@@ -250,7 +250,7 @@ $ bash sra_explorer_fastq_download_2_small.sh
 Patientez quelques minutes que le téléchargement se termine.
 
 ```{hint}
-Le script télécharge directement les données compressées, ce qui est beaucoup plus rapide que de télécharger les données non compressées puis de les compresser (ce qui fait dans la méthode 1).
+Le script télécharge directement les données compressées, ce qui est beaucoup plus rapide que de télécharger les données non compressées puis de les compresser (ce qui est fait dans la méthode 1).
 ```
 
 Calculez l'espace occupé par les données :
@@ -265,7 +265,7 @@ $ du -csh reads/*
 
 ## Vérifier l'intégrité des données
 
-Vous avez téléchargé des données, mais vous n'êtes pas certains de leur intégrité. Ces fichiers sont gros et il y a pu avoir un problème lors du téléchargement.
+Vous avez téléchargé des données, mais vous n'êtes pas certains de leur intégrité. En effet, ces fichiers sont gros et il y a pu avoir un problème lors du téléchargement.
 
 Téléchargez le fichier `reads_md5sum.txt` :
 

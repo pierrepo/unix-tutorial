@@ -552,9 +552,9 @@ curl<span class="w"> </span>-L<span class="w"> </span>ftp://ftp.sra.ebi.ac.uk/vo
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Il est possible que vous n’ayez pas exactement les mêmes lignes de commande <code class="docutils literal notranslate"><span class="pre">curl</span></code> avec les mêmes numéros d’accession. C’est normal, le script renvoyé par SRA Explorer ne revoie pas toujours les fichiers à télécharger dans le même ordre.</p>
+<p>Il est possible que vous n’ayez pas exactement les mêmes lignes de commande <code class="docutils literal notranslate"><span class="pre">curl</span></code> avec les mêmes numéros d’accession. C’est normal, le script renvoyé par SRA Explorer ne liste pas toujours les fichiers à télécharger dans le même ordre.</p>
 </div>
-<p>Nous aimerions modifier ce script pour faire en sorte que</p>
+<p>Nous aimerions modifier ce script pour faire en sorte que :</p>
 <ol class="arabic simple">
 <li><p>Le nom du fichier enregistré localement ne contienne que le numéro d’accession du fichier, tel que présent sur les serveurs de SRA (par exemple : <code class="docutils literal notranslate"><span class="pre">SRR3405789</span></code>) et pas les métadonnnées associées (par exemple : <code class="docutils literal notranslate"><span class="pre">_GSM2128026_Scerevisiae_YEPD_aF_30min_Saccharomyces_cerevisiae_RNA-Seq.fastq.gz</span></code>). Pour cela, il faut remplacer l’option <code class="docutils literal notranslate"><span class="pre">-o</span></code> par <code class="docutils literal notranslate"><span class="pre">-O</span></code> (sans argument).</p></li>
 <li><p>Tous les fichiers soient enregistrés dans le même répertoire (par exemple <code class="docutils literal notranslate"><span class="pre">reads</span></code>). Il faut alors ajouter l’option <code class="docutils literal notranslate"><span class="pre">--output-dir</span></code> avec l’argument <code class="docutils literal notranslate"><span class="pre">reads</span></code>.</p></li>
@@ -563,7 +563,7 @@ curl<span class="w"> </span>-L<span class="w"> </span>ftp://ftp.sra.ebi.ac.uk/vo
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sed<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;s/-o .*/-O --output-dir reads/&#39;</span><span class="w"> </span>sra_explorer_fastq_download.sh<span class="w">  </span>&gt;<span class="w"> </span>sra_explorer_fastq_download_2.sh
 </pre></div>
 </div>
-<p>Voici les 5 premières lignes du script <code class="docutils literal notranslate"><span class="pre">sra_explorer_fastq_download_2.sh</span></code> :</p>
+<p>Voici les 5 premières lignes du nouveau script de téléchargement <code class="docutils literal notranslate"><span class="pre">sra_explorer_fastq_download_2.sh</span></code> :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">5</span><span class="w"> </span>sra_explorer_fastq_download_2.sh
 <span class="c1">#!/usr/bin/env bash</span>
 curl<span class="w"> </span>-L<span class="w"> </span>ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR340/009/SRR3405789/SRR3405789.fastq.gz<span class="w"> </span>-O<span class="w"> </span>--output-dir<span class="w"> </span>reads
@@ -572,7 +572,7 @@ curl<span class="w"> </span>-L<span class="w"> </span>ftp://ftp.sra.ebi.ac.uk/vo
 curl<span class="w"> </span>-L<span class="w"> </span>ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR340/003/SRR3405783/SRR3405783.fastq.gz<span class="w"> </span>-O<span class="w"> </span>--output-dir<span class="w"> </span>reads
 </pre></div>
 </div>
-<p>Le téléchargement des données peut prendre beaucoup de temps. Pour ce tutoriel, nous allons nous limiter à 3 échantillons dont les identifiants sont <code class="docutils literal notranslate"><span class="pre">SRR3405783</span></code>, <code class="docutils literal notranslate"><span class="pre">SRR3405784</span></code> et <code class="docutils literal notranslate"><span class="pre">SRR3405785</span></code>. La commande <code class="docutils literal notranslate"><span class="pre">grep</span></code> permet alors de sélectionner les fichiers voulus :</p>
+<p>Le téléchargement des données peut prendre beaucoup de temps. Pour ce tutoriel, nous allons nous limiter à 3 échantillons dont les identifiants sont <code class="docutils literal notranslate"><span class="pre">SRR3405783</span></code>, <code class="docutils literal notranslate"><span class="pre">SRR3405784</span></code> et <code class="docutils literal notranslate"><span class="pre">SRR3405785</span></code>. La commande <code class="docutils literal notranslate"><span class="pre">grep</span></code> va alors sélectionner les fichiers voulus :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;bash|SRR3405783|SRR3405784|SRR3405785&quot;</span><span class="w"> </span>sra_explorer_fastq_download_2.sh<span class="w"> </span>&gt;<span class="w"> </span>sra_explorer_fastq_download_2_small.sh
 </pre></div>
 </div>
@@ -587,7 +587,7 @@ curl<span class="w"> </span>-L<span class="w"> </span>ftp://ftp.sra.ebi.ac.uk/vo
 <p class="admonition-title">Note</p>
 <p>L’option <code class="docutils literal notranslate"><span class="pre">-E</span></code> permet de créer un motif avec des expressions régulières. Ici, on cherche toutes les lignes qui contient <code class="docutils literal notranslate"><span class="pre">bash</span></code> (la toute première ligne), ou <code class="docutils literal notranslate"><span class="pre">SRR3405783</span></code>, ou <code class="docutils literal notranslate"><span class="pre">SRR3405784</span></code>, ou <code class="docutils literal notranslate"><span class="pre">SRR3405785</span></code>.</p>
 </div>
-<p>Le script fonctionne avec un version récente de <code class="docutils literal notranslate"><span class="pre">curl</span></code>, chargez cette version avec :</p>
+<p>Le script fonctionne avec une version récente de <code class="docutils literal notranslate"><span class="pre">curl</span></code>, chargez cette version avec :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>module<span class="w"> </span>load<span class="w"> </span>curl
 </pre></div>
 </div>
@@ -604,7 +604,7 @@ $<span class="w"> </span>bash<span class="w"> </span>sra_explorer_fastq_download
 <p>Patientez quelques minutes que le téléchargement se termine.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>Le script télécharge directement les données compressées, ce qui est beaucoup plus rapide que de télécharger les données non compressées puis de les compresser (ce qui fait dans la méthode 1).</p>
+<p>Le script télécharge directement les données compressées, ce qui est beaucoup plus rapide que de télécharger les données non compressées puis de les compresser (ce qui est fait dans la méthode 1).</p>
 </div>
 <p>Calculez l’espace occupé par les données :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>du<span class="w"> </span>-csh<span class="w"> </span>reads/*
@@ -618,7 +618,7 @@ $<span class="w"> </span>bash<span class="w"> </span>sra_explorer_fastq_download
 </section>
 <section id="verifier-l-integrite-des-donnees">
 <h2><a class="toc-backref" href="#id7" role="doc-backlink">Vérifier l’intégrité des données</a><a class="headerlink" href="#verifier-l-integrite-des-donnees" title="Permalink to this heading">#</a></h2>
-<p>Vous avez téléchargé des données, mais vous n’êtes pas certains de leur intégrité. Ces fichiers sont gros et il y a pu avoir un problème lors du téléchargement.</p>
+<p>Vous avez téléchargé des données, mais vous n’êtes pas certains de leur intégrité. En effet, ces fichiers sont gros et il y a pu avoir un problème lors du téléchargement.</p>
 <p>Téléchargez le fichier <code class="docutils literal notranslate"><span class="pre">reads_md5sum.txt</span></code> :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>wget<span class="w"> </span>https://raw.githubusercontent.com/pierrepo/unix-tutorial/master/tuto2/reads_md5sum.txt
 </pre></div>

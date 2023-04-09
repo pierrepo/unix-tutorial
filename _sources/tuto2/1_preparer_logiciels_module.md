@@ -110,7 +110,7 @@ Currently Loaded Modulefiles:
  2) fastqc/0.11.9      4) htseq/0.13.5   6) samtools/1.15.1  
 ```
 
-Vérifiez enfin les versions des logiciels en appelant chaque logiciel individuellement.
+Vérifiez enfin les versions des logiciels en appelant chaque logiciel individuellement. Ette étape est utilise pour vérifier que les versions des logiciels chargés avec `module load` sont bien les versions attendues.
 
 ### sra-tools
 
