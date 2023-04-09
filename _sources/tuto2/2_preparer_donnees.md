@@ -23,12 +23,16 @@ $ mkdir -p /shared/projects/202304_duo/$USER/rnaseq
 $ cd /shared/projects/202304_duo/$USER/rnaseq
 ```
 
-Ici, `$USER` va automatiquement être remplacé par votre nom d'utilisateur. Vous n'avez rien à faire.
-
 ```{admonition} Rappel
 :class: tip
 Ne tapez pas le caractère `$` en début de ligne et faites bien attention aux majuscules et au minuscules.
 ```
+
+```{note}
+- Ici, `$USER` va automatiquement être remplacé par votre nom d'utilisateur. Vous n'avez rien à faire.
+- L'option `-p` de `mkdir` évite de déclencher un message d'erreur si le répertoire que vous souhaitez créer existe déjà. Cette option est utile si vous exécutez plusieurs fois cette commande.
+```
+
 
 ## Télécharger les données de séquençage
 
@@ -37,6 +41,12 @@ L'article de Kelliher *et al.* nous a fourni le numéro du projet sur GEO. Cepen
 - *Cryptococcus neoformans var. grubii*.
 
 Nous nous intéressons uniquement aux données de *Saccharomyces cerevisiae* que nous allons devoir sélectionner.
+
+```{attention}
+Nous présentons ici 2 méthodes pour télécharger les fichiers *.fastq.gz*. La méthode 2 est beaucoup plus rapide, c'est la méthode que vous utiliserez pendant le TP. Vous pourrez bien sûr revenir à la méthode 1 plus tard si vous le souhaitez.
+
+➡️ [**Cliquez-ici pour aller directement à la méthode 2**](label:datamethode2) ⬅️
+```
 
 ### Méthode 1 : SRA Run Selector
 
@@ -87,13 +97,6 @@ Créez ensuite un fichier qui ne va contenir que les 3 premiers échantillons av
 $ grep "Saccharomyces cerevisiae" SraRunTable.txt | cut -d"," -f1 | head -n 3 > runs_scere_small.txt
 ```
 
-```{attention}
-À partir de maintenant, n'exécutez plus les commandes suivantes car le téléchargement et la compression des données vont prendre plusieurs dizaines de minutes. Lisez les commandes proposées et essayez de comprendre ce qu'elles font.
-
-Reprenez l'exécution des commandes à la méthode 2.
-```
-
-
 Téléchargez les fichiers fastq associés aux 3 premiers échantillons :
 
 ```bash
@@ -136,6 +139,7 @@ $ du -csh reads/*
 
 On a gagné environ 10 Go d'espace disque, ce qui n'est pas négligeable.
 
+(label:datamethode2)=
 ### Méthode 2 : SRA Explorer
 
 Le numéro du projet GSE80474 commence par les lettres `GSE` ce qui nous indique que c'est un projet initialement déposé dans la base de données GEO. Cette base n'étant pas toujours bien prise en charge par l'outil SRA Explorer, nous allons tout d'abord récupérer sur le site SRA Run Selector l'identifiant *BioProject* correspondant.
@@ -154,11 +158,11 @@ Sur le site [SRA Explorer](https://sra-explorer.info/) :
 1. Vous obtenez ensuite 74 réponses qui correspondent aux différents fichiers / échantillons.
 1. Affinez les réponses en tapant « Scerevisiae » dans le champ « Filter results: ». Vous devriez obtenir 50 résultats.
 1. Sélectionnez tous les résultats en cliquant sur le case vide à droite de *Title*.
-1. Cliquez sur le bouton « Add 50 to collection ».
+1. Cliquez sur le bouton bleu « Add 50 to collection ».
 1. Cliquez ensuite en haut à droite sur le bouton bleu « 50 saved datasets ».
 1. Cliquez enfin sur « Bash script for downloading FastQ files ».
-1. Téléchargez sur votre **machine locale** le script qui vous permettra de télécharger tous les fichiers fastq (`sra_explorer_fastq_download.sh`).
-1. Importer ce script dans l'interface JupyterLab du cluster IFB, dans votre répertoire projet.
+1. Cliquez sur le bouton « Download » pour enregistrer sur votre **machine locale** le script qui permettra de télécharger tous les fichiers .fastq.gz (`sra_explorer_fastq_download.sh`).
+1. Importez enfin ce script dans l'interface JupyterLab du cluster IFB, dans votre répertoire projet.
 
 Voici les 5 premières lignes du script téléchargé :
 
@@ -177,12 +181,16 @@ C'est bien un script Bash car la première ligne est `#!/usr/bin/env bash`. Ensu
 curl -L ADRESSE-DU-FICHIER-À-TÉLÉCHARGER -o NOM-DU-FICHIER-SUR-LE-DISQUE-LOCAL
 ```
 
+```{note}
+Il est possible que vous n'ayez pas exactement les mêmes lignes de commande `curl` avec les mêmes numéros d'accession. C'est normal, le script renvoyé par SRA Explorer ne revoie pas toujours les fichiers à télécharger dans le même ordre. 
+```
+
 Nous aimerions modifier ce script pour faire en sorte que 
 
 1. Le nom du fichier enregistré localement ne contienne que le numéro d'accession du fichier, tel que présent sur les serveurs de SRA (par exemple : `SRR3405789`) et pas les métadonnnées associées (par exemple : `_GSM2128026_Scerevisiae_YEPD_aF_30min_Saccharomyces_cerevisiae_RNA-Seq.fastq.gz`). Pour cela, il faut remplacer l'option `-o` par `-O` (sans argument).
 2. Tous les fichiers soient enregistrés dans le même répertoire (par exemple `reads`). Il faut alors ajouter l'option `--output-dir` avec l'argument `reads`.
 
-Nous utilisons ici la commande `sed` qui peut modifier à la volée les lignes d'un fichier :
+Nous utilisons ici la commande `sed` qui modifie les lignes d'un fichier :
 
 ```bash
 $ sed -E 's/-o .*/-O --output-dir reads/' sra_explorer_fastq_download.sh  > sra_explorer_fastq_download_2.sh
@@ -199,10 +207,24 @@ curl -L ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR340/004/SRR3405784/SRR3405784.fast
 curl -L ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR340/003/SRR3405783/SRR3405783.fastq.gz -O --output-dir reads
 ```
 
-Pour vérifier que notre script fonctionne, nous allons télécharger les 3 premiers fichiers *.fastq.gz*. Pour cela, créez un script intermédiaire en ne sélectionnant que les 4 premières lignes du script de téléchargement :
+Le téléchargement des données peut prendre beaucoup de temps. Pour ce tutoriel, nous allons nous limiter à 3 échantillons dont les identifiants sont `SRR3405783`, `SRR3405784` et `SRR3405785`. La commande `grep` permet alors de sélectionner les fichiers voulus :
+
 
 ```bash
-$ head -n 4 sra_explorer_fastq_download_2.sh > sra_explorer_fastq_download_2_small.sh
+$ grep -E "bash|SRR3405783|SRR3405784|SRR3405785" sra_explorer_fastq_download_2.sh > sra_explorer_fastq_download_2_small.sh
+```
+
+Si vous affichez le contenu de `sra_explorer_fastq_download_2_small.sh` vous devriez obtenir :
+
+```
+#!/usr/bin/env bash
+curl -L ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR340/003/SRR3405783/SRR3405783.fastq.gz -O --output-dir reads
+curl -L ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR340/004/SRR3405784/SRR3405784.fastq.gz -O --output-dir reads
+curl -L ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR340/005/SRR3405785/SRR3405785.fastq.gz -O --output-dir reads
+```
+
+```{note}
+L'option `-E` permet de créer un motif avec des expressions régulières. Ici, on cherche toutes les lignes qui contient `bash` (la toute première ligne), ou `SRR3405783`, ou `SRR3405784`, ou `SRR3405785`.
 ```
 
 Le script fonctionne avec un version récente de `curl`, chargez cette version avec :
@@ -228,7 +250,7 @@ $ bash sra_explorer_fastq_download_2_small.sh
 Patientez quelques minutes que le téléchargement se termine.
 
 ```{hint}
-Le script télécharge directement les données compressées, ce qui est beaucoup plus rapide que de télécharger les données non compressées puis de les compresser.
+Le script télécharge directement les données compressées, ce qui est beaucoup plus rapide que de télécharger les données non compressées puis de les compresser (ce qui fait dans la méthode 1).
 ```
 
 Calculez l'espace occupé par les données :
@@ -245,7 +267,7 @@ $ du -csh reads/*
 
 Vous avez téléchargé des données, mais vous n'êtes pas certains de leur intégrité. Ces fichiers sont gros et il y a pu avoir un problème lors du téléchargement.
 
-Télécharger le fichier `reads_md5sum.txt` :
+Téléchargez le fichier `reads_md5sum.txt` :
 
 ```bash
 $ wget https://raw.githubusercontent.com/pierrepo/unix-tutorial/master/tuto2/reads_md5sum.txt
@@ -254,6 +276,7 @@ $ wget https://raw.githubusercontent.com/pierrepo/unix-tutorial/master/tuto2/rea
 Affichez le contenu de ce fichier avec la commande `cat` :
 
 ```bash
+$ cat reads_md5sum.txt
 cf46c1fcee2b373b557a9ab5222db5d8  reads/SRR3405783.fastq.gz
 bb92561b5f5e123ffa284d0878b75e92  reads/SRR3405784.fastq.gz
 43818ff76532430250f29f907f7a0621  reads/SRR3405785.fastq.gz
@@ -271,6 +294,11 @@ reads/SRR3405785.fastq.gz: OK
 ```
 
 Si vous n'obtenez pas `OK` à côté de chaque fichier, cela signifie que le fichier a été corrompu lors du téléchargement. Il faut le supprimer et le télécharger à nouveau.
+
+```{note}
+- Habituellement, la commande `md5sum` calcule la somme de contrôle MD5 d'un fichier dont le nom est passé en arguement.
+- Ici, nous utilisons l'option `-c` pour vérifier l'intégrité de plusieurs fichiers dont le nom et la somme de contrôle de référence sont fournis dans le fichier `reads_md5sum.txt`. Cette option automatise la vérification de l'intégrité de nombreux fichiers en seule commande.
+```
 
 ## Compter les *reads*
 
@@ -315,7 +343,7 @@ Téléchargez le fichier concerné (`Ensembl build R64-1-1.tar.gz`) et décompre
 
 ```bash
 $ wget http://igenomes.illumina.com.s3-website-us-east-1.amazonaws.com/Saccharomyces_cerevisiae/Ensembl/R64-1-1/Saccharomyces_cerevisiae_Ensembl_R64-1-1.tar.gz
-$ tar zxvf Saccharomyces_cerevisiae_Ensembl_R64-1-1.tar.gz
+$ tar -zxvf Saccharomyces_cerevisiae_Ensembl_R64-1-1.tar.gz
 ```
 
 Récupérez ensuite les fichiers contenant le génome et les annotations :
@@ -331,7 +359,7 @@ Supprimez enfin le répertoire `Saccharomyces_cerevisiae` et l'archive contenant
 $ rm -rf Saccharomyces_cerevisiae Saccharomyces_cerevisiae_Ensembl_R64-1-1.tar.gz README.txt
 ```
 
-In fine, vous devriez obtenir l'organisation de fichiers suivante :
+In fine, vous devriez obtenir l'organisation de fichiers suivante (pour lé debut) :
 
 ```bash
 $ tree
@@ -343,15 +371,7 @@ $ tree
 │   ├── SRR3405783.fastq.gz
 │   ├── SRR3405784.fastq.gz
 │   └── SRR3405785.fastq.gz
-├── reads_md5sum.txt
-├── runs_scere_small.txt
-├── runs_scere.txt
-├── sra_explorer_fastq_download_2.sh
-├── sra_explorer_fastq_download_2_small.sh
-├── sra_explorer_fastq_download.sh
-└── SraRunTable.txt
-
-2 directories, 11 files
+[...]
 ```
 
 Les options `--du -h` de `tree` sont pratiques pour afficher la taille des fichiers et des répertoires :
@@ -366,20 +386,12 @@ $ tree --du -h
 │   ├── [776M]  SRR3405783.fastq.gz
 │   ├── [883M]  SRR3405784.fastq.gz
 │   └── [817M]  SRR3405785.fastq.gz
-├── [ 179]  reads_md5sum.txt
-├── [  32]  runs_scere_small.txt
-├── [ 550]  runs_scere.txt
-├── [5.2K]  sra_explorer_fastq_download_2.sh
-├── [ 341]  sra_explorer_fastq_download_2_small.sh
-├── [8.7K]  sra_explorer_fastq_download.sh
-└── [ 29K]  SraRunTable.txt
-
- 2.4G used in 2 directories, 12 files
+[...]
 ```
 
 ## Conclusion
 
-Vous avez sélectioné puis téléchargé les données pour votre analyse RNA-seq. Vous avez contrôlé l'intégrité des fichiers *.fastq.gz* et compté leur nombre de *reads*. Vous êtes maintenant prêt à lancer l'analyse.
+Vous avez sélectionné puis téléchargé les données pour votre analyse RNA-seq. Vous avez contrôlé l'intégrité des fichiers *.fastq.gz* et compté leur nombre de *reads*. Vous êtes maintenant prêts à lancer l'analyse.
 
 
 ## Plan B
