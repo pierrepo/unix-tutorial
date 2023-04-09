@@ -3,9 +3,9 @@
 ```{contents}
 ```
 
-Dans la section précédente, vous avez analysé les données RNA-seq d'un seul échantillon en exécutant, une à une, chaque étape de l'analyse (contrôle qualité, alignement des *reads*...).
+Dans la section précédente, vous avez analysé les données RNA-seq d'un seul échantillon en exécutant, une à une, chaque étape de l'analyse (contrôle qualité, alignement des *reads*, quantification...).
 
-Nous allons maintenant automatiser l'analyse d'un échantillon en une seule fois en utilisant un script. Puis nous automatiserons l'analyse de plusieurs échantillons.
+Nous allons maintenant automatiser l'analyse d'un échantillon en utilisant un script. Puis nous automatiserons l'analyse de plusieurs échantillons.
 
 ## Vérifier l'environnement logiciel et les données
 
@@ -101,14 +101,7 @@ Téléchargez dans un terminal de JupyterLab un premier script Bash ([`script_lo
 $ wget https://raw.githubusercontent.com/pierrepo/unix-tutorial/master/tuto2/script_local_1.sh
 ```
 
-Ouvrez ce script dans un éditeur de texte :
-- Soit dans un terminal avec l'éditeur de texte nano (`nano script_local_1.sh`).
-- Soit depuis le navigateur de fichiers de JupyterLab, en double-cliquant sur son nom. Cette seconde solution est la plus confortable.
-
-Modifiez la variable `sample`, à la ligne 4 du script avec votre numéro d'échantillon. Vous avez le choix entre `SRR3405783`, `SRR3405784` et `SRR3405785`. Veillez à bien respecter :
-- la casse (majuscules et minuscules),
-- les guillemets autour du numéro de l'échantillon
-- et l'absence d'espace autour du signe `=`.
+Ouvrez ce script avec l'éditeur de texte de JupyterLab. Pour cela, double-cliquez sur le nom du script dans le navigateur de fichiers (situé à gauche) de JupyterLab, .
 
 Retrouvez également dans ce script les différentes étapes de l'analyse RNA-seq que vous avez réalisées précédemment. Y-a-t-il des choses bizarres dont vous souhaiteriez des explications ? Si oui, notez-les, lancez-le script puis nous y reviendrons.
 
@@ -176,13 +169,7 @@ $ tree
 ├── reads_qc
 │   ├── SRR3405783_fastqc.html
 │   └── SRR3405783_fastqc.zip
-├── runs_scere_small.txt
-├── runs_scere.txt
-├── script_local_1.sh
-├── sra_explorer_fastq_download_2.sh
-├── sra_explorer_fastq_download_2_small.sh
-├── sra_explorer_fastq_download.sh
-└── SraRunTable.txt
+[...]
 ```
 
 
@@ -196,13 +183,7 @@ $ du -csh *
 2.5G    reads
 1.5G    reads_map
 1.1M    reads_qc
-4.0K    runs_scere_small.txt
-4.0K    runs_scere.txt
-4.0K    script_local_1.sh
-8.0K    sra_explorer_fastq_download_2.sh
-4.0K    sra_explorer_fastq_download_2_small.sh
-12K     sra_explorer_fastq_download.sh
-32K     SraRunTable.txt
+[...]
 4.1G    total
 ```
 
@@ -210,11 +191,11 @@ $ du -csh *
 
 L'analyse précédente est complètement automatisée par un script Bash qui rassemble toutes les étapes de l'analyse, mais l'analyse d'un seul échantillon prend environ 25 minutes.
 
-Combien de temps faudra-t-il pour analyser 3 échatillons ?
+Combien de temps faudrait-il pour analyser 3 échatillons ?
 
-Combien de temps faudra-t-il pour analyser les 50 échantillons de *S. cerevisiae* ?
+Combien de temps faudrait-il pour analyser les 50 échantillons de *S. cerevisiae* ?
 
-Nous allons essayer d'optimiser l'analyse d'un échantillon pour réduire le temps de calcul. Une première approche consiste à utiliser plusieurs processeurs (coeurs) par les logiciels qui le supporte. C'est le cas pour `star` et `cuffquant`.
+Nous allons essayer d'optimiser l'analyse d'un échantillon pour réduire le temps de calcul. Une première approche consiste à utiliser plusieurs processeurs (coeurs) pour les logiciels qui le supporte. C'est le cas pour `star` et `cuffquant`.
 
 - STAR propose l'option `--runThreadN x` pour utiliser `x` coeurs. 
 - Cuffquant propose l'option `--num-threads x` pour utiliser `x` coeurs.
@@ -245,7 +226,7 @@ Supprimez les répertoires qui contiennet les résultats de l'analyse précéden
 $ rm -rf genome_index reads_qc reads_map counts
 ```
 
-Puis lancer ce nouveau script :
+Puis lancez ce nouveau script :
 
 ```bash
 $ bash script_local_2.sh
@@ -253,7 +234,7 @@ $ bash script_local_2.sh
 
 Vérifiez que le déroulement du script se passe bien. Quelle étape vous semble la plus longue ?
 
-Normalement, le temps de calcul est passé de 25 minutes à environ 20 minutes. C'est mieux, mais cela représente toujours beaucoup d'heures de calcul pour analyser les 50 échantillons. Nous verrons lors de la prochaine sesssion commment utiliser un cluster de calcul pour réduire le temps d'analyse. 🚀
+Normalement, le temps de calcul est passé de 25 minutes à environ 20 minutes. C'est mieux, mais cela représente toujours beaucoup d'heures de calcul pour analyser les 50 échantillons. Nous verrons lors de la prochaine sesssion commment utiliser la puissance d'un cluster de calcul pour réduire le temps d'analyse. 🚀
 
 Mais pour le moment, nous allons automatiser le traitement de plusieurs échantillons dans un même script Bash.
 
@@ -298,22 +279,26 @@ $ wget https://raw.githubusercontent.com/pierrepo/unix-tutorial/master/tuto2/scr
 
 Ouvrez ce script avec l'éditeur de texte de JupyterLab (ou avec `less` dans un terminal). Observez la structure du script et essayez de comprendre son fonctionnement.
 
-La ligne `set -euo pipefail` tout au début du script va arrêter celui-ci :
-- à la première erreur ;
-- si une variable n'est pas définie ;
-- si une erreur est rencontrée dans une commande avec un *pipe* (`|`).
+- La ligne `set -euo pipefail` tout au début du script va arrêter celui-ci :
+    - à la première erreur ;
+    - si une variable n'est pas définie ;
+    - si une erreur est rencontrée dans une commande avec un *pipe* (`|`).
 
-C'est une mesure de sécurité importante pour votre script. Si vous le souhaitez, vous pouvez lire l'article de Aaron Maxwell à ce sujet : [Use the Unofficial Bash Strict Mode (Unless You Looove Debugging)](http://redsymbol.net/articles/unofficial-bash-strict-mode/)
+    C'est une mesure de sécurité importante pour votre script. Si vous le souhaitez, vous pouvez lire l'article de Aaron Maxwell à ce sujet : [Use the Unofficial Bash Strict Mode (Unless You Looove Debugging)](http://redsymbol.net/articles/unofficial-bash-strict-mode/)
 
-Remarquez également la structure de la boucle et la toute dernière étape qui normalise les comptages des transcrits sur tous les échantillons.
+- Remarquez également la structure de la boucle qui va automatiser le traitement des 3 échantillons.
 
-Si vous pensez en avoir le temps, lancez le script `script_local_3.sh`. Comme ce script va automatiser toute l'analyse, il va fonctionner pendant plus d'une heure.
+- Prêtez également attention, à la toute dernière étape, en dehors de la boucle, qui normalise les comptages des transcrits entre tous les échantillons.
+
+- Enfin, la dernier ligne contient l'instruction `date` qui affiche la date et l'heure lorsque le script se termine. En ayant noté l'heure à laquelle le script a été lancé, cela vous permettra de calculer le temps d'exécution du script.
+
+Lancez le script `script_local_3.sh`. Comme ce script va automatiser toute l'analyse, il va fonctionner pendant plus d'une heure.
 
 ```bash
 $ bash script_local_3.sh
 ```
 
-Vérifiez régulièrement votre terminal qu'aucune erreur n'apparaît.
+Vérifiez régulièrement votre terminal qu'aucune erreur n'apparaît. Une fois terminé, calculez le temps d'exécution du script.
 
 Le fichier qui contient le comptage normalisé des transcrits est `counts/genes.count_table`.
 
@@ -331,7 +316,7 @@ Comment utilisez-vous la version particulière d'un outil dans Galaxy ?
 
 ## Conclusion
 
-Vous avez automatisé votre analyse RNA-seq en regroupant les différentes étapes dans un script Bash. Vous avez également utilisé plusieurs coeurs pour accélérer autant que possible l'analyse.
+Vous avez automatisé votre analyse RNA-seq en regroupant les différentes étapes dans un script Bash. Vous avez également utilisé plusieurs coeurs pour accélérer autant que possible l'analyse. Enfin, vous avez automatisé l'analyse de plusieurs échantillons dans un même script.
 
 Ce n'est pas encore complètement satisfaisant. En effet, il vous faudrait 17 heures de calcul pour analyser les 50 échantillons.
 
