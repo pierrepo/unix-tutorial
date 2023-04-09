@@ -250,7 +250,8 @@ $ bash sra_explorer_fastq_download_2_small.sh
 Patientez quelques minutes que le téléchargement se termine.
 
 ```{hint}
-Le script télécharge directement les données compressées, ce qui est beaucoup plus rapide que de télécharger les données non compressées puis de les compresser (ce qui est fait dans la méthode 1).
+- Le script télécharge directement les fichiers .fastq.gz, c'est-à-dire les fichiers .fastq compressés, ce qui est beaucoup plus rapide que de télécharger les données non compressées puis de les compresser (ce qui est fait dans la méthode 1).
+- Pour information, les 50 fichiers .fastq.gz représentent environ 40 Go et sont téléchargés en 45 minutes avec cette méthode.
 ```
 
 Calculez l'espace occupé par les données :
