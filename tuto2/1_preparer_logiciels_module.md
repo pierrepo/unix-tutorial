@@ -90,7 +90,7 @@ Complétez le tableau suivant en indiquant, pour chaque logiciel, la version la 
 :class: tip
 Si un outil que vous souhaitez utiliser n'est pas disponible ou pas dans la version souhaitée. Vous pouvez demander gentillement son installation au [support communautaire de l'IFB](https://community.france-bioinformatique.fr/). Pour cela, créez un ticket dans la rubrique « IFB Core Cluster ».
 
-Les administrateurs du cluster sont habituellement très réactifs (voir [exemple](https://community.france-bioinformatique.fr/t/installation-htseq-0-11-3/1092) de mise à jour de htseq).
+Les administrateurs du cluster sont habituellement très réactifs (voir un [exemple](https://community.france-bioinformatique.fr/t/installation-htseq-0-11-3/1092) de demande de mise-à-jour pour le logiciel htseq).
 ```
 
 ## Charger les logiciels
