@@ -73,7 +73,7 @@ $ module load sra-tools
 
 chargera la dernière version disponible, ici la version `2.11.0`.
 
-Complétez le tableau suivant en indiquant, pour chaque logiciel, la version la plus ancienne et la version la plus récente disponible sur le cluster de l'IFB :
+Complétez le tableau suivant en indiquant, pour chaque logiciel, la version la plus ancienne (plus petit numéro) et la version la plus récente (plus grand numéro) disponibles sur le cluster de l'IFB :
 
 | Logiciel  | Version la plus ancienne | Version la plus récente |
 |-----------|--------------------------|-------------------------|
