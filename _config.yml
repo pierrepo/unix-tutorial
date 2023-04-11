@@ -34,8 +34,10 @@ parse:
 # Add GitHub buttons to your book
 # See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
 html:
+  use_download_button: false
   use_issues_button: true
   use_repository_button: true
+  use_edit_page_button: true
   extra_footer: |
     <p>
     Ce contenu est mis à disposition selon les termes de la licence <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr" target="_blank">Creative Commons Attribution - Partage dans les Mêmes Conditions 4.0 International</a> (CC BY-SA 4.0).
