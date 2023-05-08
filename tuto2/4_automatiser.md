@@ -266,7 +266,7 @@ Salut pierre !
 
 Notez l'utilisation du symbole `;` pour séparer les différents éléments de la boucle.
 
-Une leçon de Software Carpentry aborde la notion de [boucle](https://swcarpentry.github.io/shell-novice/05-loop/index.html). Prenez quelques minutes pour parcourir cette leçon et comprendre de quoi il s'agit.
+Une leçon de Software Carpentry aborde la notion de [boucle](https://swcarpentry.github.io/shell-novice/05-loop.html). Prenez quelques minutes pour parcourir cette leçon et comprendre de quoi il s'agit.
 
 
 ## Automatiser l'analyse de 3 échantillons
