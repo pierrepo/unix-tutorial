@@ -22,7 +22,7 @@ La commande `module list` affiche les modules déjà chargés.
 
 Vérifiez ensuite que vous êtes bien dans le répertoire `/shared/projects/202304_duo/$USER/rnaseq` avec la commande `pwd`. Déplacez-vous dans ce répertoire si ce n'est pas le cas.
 
-Supprimez les répertoires qui contiennet les résultats de l'analyse précédente :
+Supprimez les répertoires qui contiennent les résultats de l'analyse précédente :
 
 ```bash
 $ rm -rf genome_index reads_qc reads_map counts
