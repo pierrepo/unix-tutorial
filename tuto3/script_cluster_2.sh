@@ -35,7 +35,7 @@ fastq_dir="${data_dir}/reads"
 # liste de tous les fichiers .fastq.gz dans un tableau
 fastq_files=(${fastq_dir}/*fastq.gz)
 # extraction de l'identifiant de l'échantillon
-# à partir du nom de fichier : /shared/projects/form_2021_29/data/rnaseq_tauri/reads/SRR3405783.fastq.gz
+# à partir du nom de fichier : /shared/projects/202304_duo/data/rnaseq_scere/reads/SRR3405783.fastq.gz
 # on extrait : SRR3405783
 sample=$(basename -s .fastq.gz "${fastq_files[$SLURM_ARRAY_TASK_ID]}")
 

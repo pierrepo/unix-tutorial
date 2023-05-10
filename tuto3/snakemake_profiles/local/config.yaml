@@ -1,0 +1,4 @@
+---
+snakefile: Snakefile
+cores: 4
+use-conda: True

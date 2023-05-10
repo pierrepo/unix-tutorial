@@ -19,7 +19,7 @@ parts:
   - file: tuto2/2_preparer_donnees
   - file: tuto2/3_analyser
   - file: tuto2/4_automatiser
-- caption: Analyse RNA-seq avec Unix et un cluster
+- caption: Analyse RNA-seq avec un cluster de calcul
   chapters:
   - file: tuto3/0_intro
   - file: tuto3/1_automatiser

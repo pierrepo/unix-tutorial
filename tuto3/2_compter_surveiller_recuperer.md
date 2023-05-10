@@ -31,9 +31,11 @@ Usage reported in CPU Hours
 
 Ainsi, l'utilisateur `ppoulain` a déjà consommé 510 heures de temps CPU sur le projet `202304_duo`.
 
+```{warning}
 Attention, `sreport` ne prend pas en compte les heures immédiatement consommées. Il lui faut quelques minutes pour consolider les données.
+```
 
-Il est également possible de connaître la consommation CPU pour un projet donnée et par utilisateur :
+Il est également possible de connaître la consommation CPU pour un projet en particulier et par utilisateur :
 
 ```bash
 $ sreport -t hour Cluster AccountUtilizationByUser Start=2023-01-01 End=$(date --iso-8601)T23:59:59 Accounts=202304_duo
@@ -69,7 +71,7 @@ Ainsi, un total de 4982 heures de calcul a déjà été consommé sur le projet 
 
 ## Surveiller les jobs
 
-L'analyse RNA-seq présentée ici tourne en 20-25', c'est relativement rapide car le génome d'*S. cerevisiae* est relativement petit. Les temps d'analyse seront plus longs avec des génomes plus gros.
+L'analyse RNA-seq présentée ici tourne en 20-25', c'est relativement rapide car le génome de *S. cerevisiae* est relativement petit. Les temps d'analyse seront plus longs avec des génomes plus gros.
 
 Procédez toujours par itérations successives. Testez votre script d'analyse RNA-seq pour 1 échantillon, puis 2 ou 3 puis la totalité.
 
@@ -94,7 +96,7 @@ Prenez le temps d'explorer la [documentation très complète](https://ifb-elixir
 
 Pour récupérer vos résultats et les transférer depuis le cluster de calcul vers votre machine locale, il y a 3 possibilités.
 
-### 1. Avec l'explorateur de fichiers de JupyterLab
+### Avec l'explorateur de fichiers de JupyterLab
 
 Si les fichiers que vous souhaitez récupérer sont peu nombreux et peu volumineux (quelques Mo maximum), alors vous pouvez directement utiliser l'explorateur de fichiers de JupyterLab (panneau de gauche). Cliquez-droit sur un fichier puis sélectionnez *Download*.
 

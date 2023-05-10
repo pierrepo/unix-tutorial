@@ -121,7 +121,7 @@ avec `JOBID` (en fin de ligne) le numéro de votre job à remplacer par le vôtr
 
 Voici un exemple de sortie que vous pourriez obtenir :
 
-```bash
+```
 $ sacct --format=JobID,JobName,State,Start,Elapsed,CPUTime,NodeList -j 33332280
        JobID    JobName      State               Start    Elapsed    CPUTime        NodeList 
 ------------ ---------- ---------- ------------------- ---------- ---------- --------------- 
@@ -173,7 +173,7 @@ $ tree /shared/projects/202304_duo/data/rnaseq_scere
 Supprimez les répertoires qui contiennent les résultats d'une éventuelle précédente analyse :
 
 ```bash
-$ rm -rf genome_index reads_qc reads_map counts
+$ rm -rf genome_index reads_qc reads_map counts *.out
 ```
 
 Téléchargez dans un terminal de JupyterLab le script Bash ([`script_cluster_1.sh`](script_cluster_1.sh)) avec la commande `wget` :
@@ -217,14 +217,14 @@ Pour chacun des jobs, on lui attribue un échantillon avec les commandes suivant
 # liste de tous les fichiers .fastq.gz dans un tableau
 fastq_files=(${fastq_dir}/*fastq.gz)
 # extraction de l'identifiant de l'échantillon
-# à partir du nom de fichier : /shared/projects/form_2021_29/data/rnaseq_tauri/reads/SRR3405783.fastq.gz
+# à partir du nom de fichier : /shared/projects/202304_duo/data/rnaseq_scere/reads/SRR3405783.fastq.gz
 # on extrait : SRR3405783
 sample=$(basename -s .fastq.gz "${fastq_files[$SLURM_ARRAY_TASK_ID]}")
 ```
 
 Cette étape est importante car elle permet de savoir quel échantillon traiter pour chaque job. Par exemple, le job 0 va être associé à l'échantillon `SRR3405783` (le premier par ordre alphabétique).
 
-Pour ne pas emboliser le cluster et pour que tout le monde puisse obtenir des résultats rapidement, modifier la ligne 
+Pour ne pas emboliser le cluster et pour que tout le monde puisse obtenir des résultats rapidement, modifiez la ligne 
 
 ```
 #SBATCH --array=0-49 

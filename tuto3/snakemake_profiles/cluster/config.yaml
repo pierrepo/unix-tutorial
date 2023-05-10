@@ -1,0 +1,15 @@
+---
+snakefile: Snakefile
+use-conda: True
+latency-wait: 30
+keep-going: True
+rerun-incomplete: True
+# Job ressources
+default-resources:
+  - mem_mb=1000
+set-resources:
+  - map_reads:mem_mb=3000
+  - sort_index_bam:mem_mb=2000
+set-threads:
+- index_genome=4
+- map_reads=8
