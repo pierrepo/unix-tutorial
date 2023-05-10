@@ -7,6 +7,7 @@ parts:
 - caption: JupyterHub du cluster IFB
   chapters:
   - file: connection
+  - file: gestion_compte_ifb
 - caption: Introduction à Unix
   chapters:
   - file: tuto1/tutorial
@@ -22,6 +23,7 @@ parts:
   chapters:
   - file: tuto3/0_intro
   - file: tuto3/1_automatiser
-  - file: tuto3/2_automatiser_encore
+  - file: tuto3/2_compter_surveiller_recuperer
+  - file: tuto3/3_automatiser_encore
 
 

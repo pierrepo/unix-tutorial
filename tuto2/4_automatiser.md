@@ -234,7 +234,7 @@ $ bash script_local_2.sh
 
 Vérifiez que le déroulement du script se passe bien. Quelle étape vous semble la plus longue ?
 
-Normalement, le temps de calcul est passé de 25 minutes à environ 20 minutes. C'est mieux, mais cela représente toujours beaucoup d'heures de calcul pour analyser les 50 échantillons. Nous verrons lors de la prochaine sesssion commment utiliser la puissance d'un cluster de calcul pour réduire le temps d'analyse. 🚀
+Normalement, le temps de calcul est passé de 25 minutes à environ 20 minutes. C'est mieux, mais cela représente toujours beaucoup d'heures de calcul pour analyser les 50 échantillons. Nous verrons lors de la prochaine session commment utiliser la puissance d'un cluster de calcul pour réduire le temps d'analyse. 🚀
 
 Mais pour le moment, nous allons automatiser le traitement de plusieurs échantillons dans un même script Bash.
 

@@ -150,7 +150,7 @@ Le fichier `slurm-JOBID.out` (avec `JOBID` le numéro de votre job) contient le 
 Ouvrez ce fichier avec l'éditeur de texte de JupyterLab pour vous en rendre compte.
 ```
 
-## Analyser 50 échantillons
+## Analyser 50 échantillons (ou pas loin)
 
 Maintenant que nous savons comment analyser un échantillon avec un cluster de calcul, nous allons automatiser l'analyse de 50 échantillons. Mais pour cela nous prendre plusieurs précautions :
 
@@ -162,7 +162,7 @@ Maintenant que nous savons comment analyser un échantillon avec un cluster de c
 
 ### Préparer les données
 
-Nous avons préparer pour vous les 50 échantillons (fichiers .fastq.gz) ainsi que le génome de référencee et ses annotations dans le répertoire `/shared/projects/202304_duo/data/rnaseq_scere`. Vérifiez son contenu avec la commande :
+Nous avons téléchargé pour vous les 50 échantillons (fichiers .fastq.gz) ainsi que le génome de référence et ses annotations dans le répertoire `/shared/projects/202304_duo/data/rnaseq_scere`. Vérifiez son contenu avec la commande :
 
 ```bash
 $ tree /shared/projects/202304_duo/data/rnaseq_scere
@@ -195,8 +195,8 @@ Vérifiez avec les commandes `squeue` et `sacct` que le job est lancé et se ter
 Le fichier `slurm-JOBID.out` (avec `JOBID` le numéro de votre job) contient le « journal » de votre job. N'hésitez pas à le consulter.
 ```
 
-### Lancer le script de l'étape 2
 
+### Lancer le script de l'étape 2
 
 Téléchargez dans un terminal de JupyterLab le script Bash ([`script_cluster_2.sh`](script_cluster_2.sh)) avec la commande `wget` :
 
@@ -209,9 +209,9 @@ Ouvrez ce script avec l'éditeur de texte de JupyterLab. Notez en début de scri
 #SBATCH --array=0-49 
 ```
 
-qui nous permettra de créer un *job array*, c'est-à-dire un ensemble de 50 (de 0 à 49 inclus) sous-jobs qui vont être lancés en parallèle.
+qui nous permettra de créer un *job array*, c'est-à-dire un ensemble de 50 (de 0 à 49 inclus) jobs qui vont être lancés en parallèle.
 
-Pour chacun des sous-job, on lui attribue un échantillon avec les commandes suivantes :
+Pour chacun des jobs, on lui attribue un échantillon avec les commandes suivantes :
 
 ```bash
 # liste de tous les fichiers .fastq.gz dans un tableau
@@ -222,9 +222,9 @@ fastq_files=(${fastq_dir}/*fastq.gz)
 sample=$(basename -s .fastq.gz "${fastq_files[$SLURM_ARRAY_TASK_ID]}")
 ```
 
-Cette étape est importante car elle permet de savoir quel échantillon traiter pour chaque sous-job. Par exemple, le sous-job 0 va être associé à l'échantillon `SRR3405783` (le premier par ordre alphabétique).
+Cette étape est importante car elle permet de savoir quel échantillon traiter pour chaque job. Par exemple, le job 0 va être associé à l'échantillon `SRR3405783` (le premier par ordre alphabétique).
 
-Pour ne pas emboliser le cluster et pour que tout le monde puisse obtenir des résultats, modifier la ligne 
+Pour ne pas emboliser le cluster et pour que tout le monde puisse obtenir des résultats rapidement, modifier la ligne 
 
 ```
 #SBATCH --array=0-49 
@@ -233,10 +233,10 @@ Pour ne pas emboliser le cluster et pour que tout le monde puisse obtenir des r�
 par
 
 ```
-#SBATCH --array=0-4
+#SBATCH --array=0-2
 ```
 
-Vous n'analyserez que 5 échantillons dans 5 jobs en parallèle.  Pensez à sauvegarder vos modifications.
+Vous n'analyserez que 3 échantillons dans 3 jobs en parallèle. Pensez à sauvegarder vos modifications.
 
 Lancez enfin le script :
 
@@ -252,17 +252,74 @@ $ sacct --format=JobID,JobName,State,Start,Elapsed,CPUTime,NodeList -j JOBID
 
 avec `JOBID` le numéro de votre job.
 
-Vous avez mérité une pause café ☕️
-
-
 Plutôt que de relancer en permanence la commande `sacct` vous pouvez demander à la commande `watch` d'afficher les éventuels changements :
 
 ```bash
 $ watch sacct --format=JobID,JobName,State,Start,Elapsed,CPUTime,NodeList -j JOBID
 ```
 
+Vous devriez obtenir un affichage du type :
+
+```
+Every 2.0s: sacct --format=JobID,JobName,State,Start,Elapsed,CPUTime,NodeList -j ...  Wed May 10 22:22:53 2023
+
+       JobID    JobName      State               Start    Elapsed    CPUTime        NodeList
+------------ ---------- ---------- ------------------- ---------- ---------- ---------------
+33361021_0   script_cl+    RUNNING 2023-05-10T22:21:54   00:00:59   00:07:52     cpu-node-20
+33361021_0.+      batch    RUNNING 2023-05-10T22:21:54   00:00:59   00:07:52     cpu-node-20
+33361021_0.0     fastqc    RUNNING 2023-05-10T22:21:56   00:00:57   00:07:36     cpu-node-20
+33361021_1   script_cl+    RUNNING 2023-05-10T22:21:54   00:00:59   00:07:52     cpu-node-23
+33361021_1.+      batch    RUNNING 2023-05-10T22:21:54   00:00:59   00:07:52     cpu-node-23
+33361021_1.0     fastqc    RUNNING 2023-05-10T22:21:56   00:00:57   00:07:36     cpu-node-23
+33361021_2   script_cl+    RUNNING 2023-05-10T22:21:54   00:00:59   00:07:52     cpu-node-25
+33361021_2.+      batch    RUNNING 2023-05-10T22:21:54   00:00:59   00:07:52     cpu-node-25
+33361021_2.0     fastqc    RUNNING 2023-05-10T22:21:56   00:00:57   00:07:36     cpu-node-25
+```
+
+On apprend ici que 3 jobs sont en cours d'exécution (`RUNNING`) et qu'ils sont appelés `33361021_0`, `33361021_1` et `33361021_2`. Chacun de ces jobs a été lancé sur un noeud de calcul différent (`cpu-node-20`, `cpu-node-23` et `cpu-node-25`) mais cela aurait pu être le même. Chaque job est décomposé en sous-jobs, pour le moment à l'étape `fastqc`.
+
+Le temps que les 3 jobs se terminent, profitez-en pour faire une pause café ☕️ bien méritée.
+
 ```{hint}
 Utilisez la combinaison de touches <kbd>Ctrl</kbd> + <kbd>C</kbd> pour arrêter la commande `watch`.
 ```
 
+Quand tous les jobs sont à `COMPLETED`, comparez le temps d'exécution de chacun (dans le colonne *Elapsed* au niveau des lignes *script_cl+*). Ce temps d'exécution devrait être compris entre 20 et 25 min, ce qui est équivalent au temps d'exécution du script `script_local_2.sh` pour un **seul échantillon**. C'est tout l'intérêt de lancer des jobs en parallèle.
+
+Remarquez que le temps CPU (`CPUTime`) qui correspond au temps de calcul consommé par tous les processeurs est supérieur au temps « humain » (*Elapsed*). Ainsi, si vous avez lancé un job avec 8 coeurs qui se termine en 1 heure, la consommation CPU sera de 8 coeurs x 1 heure = 8 heures. Sur un cluster, c'est toujours le temps CPU qui est facturé.
+
+
 ### Lancer le script de l'étape 3
+
+Vous allez maintenant normaliser les différents comptages.
+
+Téléchargez dans un terminal de JupyterLab le script Bash ([`script_cluster_3.sh`](script_cluster_3.sh)) avec la commande `wget` :
+
+```bash
+$ wget https://raw.githubusercontent.com/pierrepo/unix-tutorial/master/tuto3/script_cluster_3.sh
+```
+
+Ouvrez ce script avec l'éditeur de texte de JupyterLab. Retrouvez les lignes spécifiques à l'utilisation d'un cluster de calcul et qui débutent par :
+
+- `#SBATCH`
+- `module load`
+- `srun`
+
+Puis lancez le script :
+
+```bash
+$ sbatch -A 202304_duo script_cluster_3.sh
+```
+
+Affichez l'avancement de votre job avec la commande `sacct` :
+
+```bash
+$ sacct --format=JobID,JobName,State,Start,Elapsed,CPUTime,NodeList -j JOBID
+```
+
+avec `JOBID` le numéro de votre job.
+
+L'exécution de ce script devrait moins d'une minute.
+
+Le fichier qui contient le comptage normalisé des transcrits est `counts/genes.count_table`.
+
