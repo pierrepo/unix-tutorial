@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Tuto 1 : un aperçu du shell Unix &#8212; Unix tutorial</title>
+    <title>Un aperçu du shell Unix &#8212; Unix tutorial</title>
   
   
   
@@ -65,7 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Ressources complémentaires" href="../more.html" />
-    <link rel="prev" title="Connexion au JupyterHub de l’IFB" href="../connection.html" />
+    <link rel="prev" title="Gestion de votre compte utilisateur sur le cluster de calcul" href="../gestion_compte_ifb.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -159,10 +159,11 @@ const thebe_selector_output = ".output, .cell_output"
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">JupyterHub du cluster IFB</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../connection.html">Connexion au JupyterHub de l’IFB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gestion_compte_ifb.html">Gestion de votre compte utilisateur sur le cluster de calcul</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction à Unix</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tuto 1 : un  aperçu du shell Unix</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Un  aperçu du shell Unix</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../more.html">Ressources complémentaires</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Analyse RNA-seq avec Unix</span></p>
@@ -172,6 +173,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../tuto2/2_preparer_donnees.html">Préparer les données 🗃️</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tuto2/3_analyser.html">Analyser les données RNA-seq 💻</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tuto2/4_automatiser.html">Automatiser l’analyse RNA-seq ⚙️</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analyse RNA-seq avec un cluster de calcul</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tuto3/0_intro.html">Introduction et contexte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tuto3/1_automatiser.html">Automatiser l’analyse RNA-seq avec un cluster 🚀</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tuto3/2_compter_surveiller_recuperer.html">Compter ⏲ les heures, surveiller 📬 les jobs et récupérer 📥 les résultats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tuto3/3_automatiser_encore.html">Automatiser encore plus avec Snakemake 🐍 ⚙</a></li>
 </ul>
 
     </div>
@@ -372,7 +380,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Tuto 1 : un  aperçu du shell Unix</h1>
+    <h1>Un  aperçu du shell Unix</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -438,8 +446,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="tuto-1-un-apercu-du-shell-unix">
-<h1>Tuto 1 : un  aperçu du shell Unix<a class="headerlink" href="#tuto-1-un-apercu-du-shell-unix" title="Permalink to this heading">#</a></h1>
+  <section id="un-apercu-du-shell-unix">
+<h1>Un  aperçu du shell Unix<a class="headerlink" href="#un-apercu-du-shell-unix" title="Permalink to this heading">#</a></h1>
 <p>Un <em>shell</em> est un programme qui attend un ordre de la part de l’utilisateur, exécute cet ordre, affiche le résultat puis attend à nouveau un ordre. En anglais on parle de <em>REPL</em> pour <em>Read Execute Print Loop</em>. Il existe plusieurs <em>shells</em> : <em>Bash</em>, <em>csh</em>, <em>zsh</em>… Ici on ne parlera que du <em>shell</em> <em>Bash</em> qui est le plus utilisé. Cela dit, toutes les commandes présentées ici sont communes à tous les <em>shells</em> Unix.</p>
 <p>Lorsqu’on donne des ordres à un <em>shell</em>, on utilise ni menu, ni bouton, ni case à cocher. Tous les ordres sont <strong>écrits</strong> au <em>shell</em>.</p>
 <p>Le <em>shell</em> fonctionne sur un ordinateur, qui n’a aucune capacité d’abstraction ni d’intuition. Pour que les ordres donnés au <em>shell</em> soient compris et exécutés, il faut respecter des règles bien précises :</p>
@@ -1405,12 +1413,12 @@ find<span class="w"> </span>./<span class="w"> </span>-name<span class="w"> </sp
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../connection.html"
+       href="../gestion_compte_ifb.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Connexion au JupyterHub de l’IFB</p>
+        <p class="prev-next-title">Gestion de votre compte utilisateur sur le cluster de calcul</p>
       </div>
     </a>
     <a class="right-next"

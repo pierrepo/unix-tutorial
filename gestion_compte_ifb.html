@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Bienvenue ! &#8212; Unix tutorial</title>
+    <title>Gestion de votre compte utilisateur sur le cluster de calcul &#8212; Unix tutorial</title>
   
   
   
@@ -61,10 +61,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'gestion_compte_ifb';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Connexion au JupyterHub de l’IFB" href="connection.html" />
+    <link rel="next" title="Un aperçu du shell Unix" href="tuto1/tutorial.html" />
+    <link rel="prev" title="Connexion au JupyterHub de l’IFB" href="connection.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -130,7 +131,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="sidebar-primary-item">
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="intro.html">
   
   
   
@@ -149,16 +150,16 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
                     Bienvenue !
                 </a>
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">JupyterHub du cluster IFB</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="connection.html">Connexion au JupyterHub de l’IFB</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gestion_compte_ifb.html">Gestion de votre compte utilisateur sur le cluster de calcul</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Gestion de votre compte utilisateur sur le cluster de calcul</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction à Unix</span></p>
 <ul class="nav bd-sidenav">
@@ -250,7 +251,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/pierrepo/unix-tutorial/edit/master/docs/intro.md" target="_blank"
+      <li><a href="https://github.com/pierrepo/unix-tutorial/edit/master/docs/gestion_compte_ifb.md" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -267,7 +268,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/pierrepo/unix-tutorial/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/pierrepo/unix-tutorial/issues/new?title=Issue%20on%20page%20%2Fgestion_compte_ifb.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -297,7 +298,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="_sources/intro.md" target="_blank"
+      <li><a href="_sources/gestion_compte_ifb.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -377,7 +378,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Bienvenue !</h1>
+    <h1>Gestion de votre compte utilisateur sur le cluster de calcul</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -391,47 +392,14 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="bienvenue">
-<h1>Bienvenue !<a class="headerlink" href="#bienvenue" title="Permalink to this heading">#</a></h1>
-<p>Bienvenue sur ce tutoriel Unix dans lequel vous allez découvrir les bases des commandes Unix et du <em>Shell</em> Bash. Vous expérimenterez également l’analyse de données RNA-seq sous Unix, puis avec un cluster de calcul.</p>
-<p>Pour réaliser ce tutoriel vous utiliserez le JupyterHub de l’IFB.</p>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">JupyterHub du cluster IFB</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="connection.html">Connexion au JupyterHub de l’IFB</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gestion_compte_ifb.html">Gestion de votre compte utilisateur sur le cluster de calcul</a></li>
+  <section id="gestion-de-votre-compte-utilisateur-sur-le-cluster-de-calcul">
+<h1>Gestion de votre compte utilisateur sur le cluster de calcul<a class="headerlink" href="#gestion-de-votre-compte-utilisateur-sur-le-cluster-de-calcul" title="Permalink to this heading">#</a></h1>
+<p>Le cluster de calcul est celui de l’<a class="reference external" href="https://www.france-bioinformatique.fr/cluster-ifb-core/">Institut Français de Bioinformatique</a> (IFB). Voici quelques liens pratiques pour gérer votre compte sur ce cluster :</p>
+<ul class="simple">
+<li><p>Demande de <a class="reference external" href="https://my.cluster.france-bioinformatique.fr/manager2/register">création de compte</a> avec rattachement au projet <code class="docutils literal notranslate"><span class="pre">202304_duo</span></code> (déjà fait)</p></li>
+<li><p>Connexion à votre <a class="reference external" href="https://my.cluster.france-bioinformatique.fr/manager2/">espace utilisateur</a> (web). Dans cet espace, vous aurez la possibilité d’étendre la validé de votre compte, de <strong>créer un nouveau projet</strong> et de gérer vos projets existants.</p></li>
+<li><p>Si vous avez oublié votre mot de passe, ouvrez <a class="reference external" href="https://my.cluster.france-bioinformatique.fr/manager2/">cette page</a>, renseignez votre identifiant (<em>User id</em>) puis cliquez sur <code class="docutils literal notranslate"><span class="pre">RESET</span></code>. Un nouveau mot de passe vous sera envoyé par mail.</p></li>
 </ul>
-</div>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction à Unix</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="tuto1/tutorial.html">Un  aperçu du shell Unix</a></li>
-<li class="toctree-l1"><a class="reference internal" href="more.html">Ressources complémentaires</a></li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analyse RNA-seq avec Unix</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="tuto2/0_intro.html">Introduction et contexte</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tuto2/1_preparer_logiciels_module.html">Préparer l’environnement logiciel 🧰</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tuto2/2_preparer_donnees.html">Préparer les données 🗃️</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tuto2/3_analyser.html">Analyser les données RNA-seq 💻</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tuto2/4_automatiser.html">Automatiser l’analyse RNA-seq ⚙️</a></li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analyse RNA-seq avec un cluster de calcul</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="tuto3/0_intro.html">Introduction et contexte</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tuto3/1_automatiser.html">Automatiser l’analyse RNA-seq avec un cluster 🚀</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tuto3/2_compter_surveiller_recuperer.html">Compter ⏲ les heures, surveiller 📬 les jobs et récupérer 📥 les résultats</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tuto3/3_automatiser_encore.html">Automatiser encore plus avec Snakemake 🐍 ⚙</a></li>
-</ul>
-</div>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Vous avez repéré une erreur ou une typo ? N’hésitez pas à m’en faire part pour que je puisse rapidement la corriger.</p>
-</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -465,12 +433,21 @@ document.write(`
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="right-next"
+    <a class="left-prev"
        href="connection.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Connexion au JupyterHub de l’IFB</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="tuto1/tutorial.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Connexion au JupyterHub de l’IFB</p>
+        <p class="prev-next-title">Un  aperçu du shell Unix</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

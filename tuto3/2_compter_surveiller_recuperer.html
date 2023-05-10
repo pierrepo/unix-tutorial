@@ -1,0 +1,675 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Compter ⏲ les heures, surveiller 📬 les jobs et récupérer 📥 les résultats &#8212; Unix tutorial</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tuto3/2_compter_surveiller_recuperer';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Automatiser encore plus avec Snakemake 🐍 ⚙" href="3_automatiser_encore.html" />
+    <link rel="prev" title="Automatiser l’analyse RNA-seq avec un cluster 🚀" href="1_automatiser.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Bienvenue !
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">JupyterHub du cluster IFB</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../connection.html">Connexion au JupyterHub de l’IFB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gestion_compte_ifb.html">Gestion de votre compte utilisateur sur le cluster de calcul</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction à Unix</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tuto1/tutorial.html">Un  aperçu du shell Unix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../more.html">Ressources complémentaires</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analyse RNA-seq avec Unix</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tuto2/0_intro.html">Introduction et contexte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tuto2/1_preparer_logiciels_module.html">Préparer l’environnement logiciel 🧰</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tuto2/2_preparer_donnees.html">Préparer les données 🗃️</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tuto2/3_analyser.html">Analyser les données RNA-seq 💻</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tuto2/4_automatiser.html">Automatiser l’analyse RNA-seq ⚙️</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analyse RNA-seq avec un cluster de calcul</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="0_intro.html">Introduction et contexte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_automatiser.html">Automatiser l’analyse RNA-seq avec un cluster 🚀</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Compter ⏲ les heures, surveiller 📬 les jobs et récupérer 📥 les résultats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_automatiser_encore.html">Automatiser encore plus avec Snakemake 🐍 ⚙</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/pierrepo/unix-tutorial" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/pierrepo/unix-tutorial/edit/master/docs/tuto3/2_compter_surveiller_recuperer.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/pierrepo/unix-tutorial/issues/new?title=Issue%20on%20page%20%2Ftuto3/2_compter_surveiller_recuperer.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/tuto3/2_compter_surveiller_recuperer.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Compter ⏲ les heures, surveiller 📬 les jobs et récupérer 📥 les résultats</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compter-les-heures-de-calcul-consommees">Compter les heures de calcul consommées</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#surveiller-les-jobs">Surveiller les jobs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recuperer-les-resultats">Récupérer les résultats</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#avec-l-explorateur-de-fichiers-de-jupyterlab">Avec l’explorateur de fichiers de JupyterLab</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#avec-filezilla">Avec FileZilla</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#avec-scp">Avec scp</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="compter-les-heures-surveiller-les-jobs-et-recuperer-les-resultats">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Compter ⏲ les heures, surveiller 📬 les jobs et récupérer 📥 les résultats</a><a class="headerlink" href="#compter-les-heures-surveiller-les-jobs-et-recuperer-les-resultats" title="Permalink to this heading">#</a></h1>
+<nav class="contents" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#compter-les-heures-surveiller-les-jobs-et-recuperer-les-resultats" id="id1">Compter ⏲ les heures, surveiller 📬 les jobs et récupérer 📥 les résultats</a></p>
+<ul>
+<li><p><a class="reference internal" href="#compter-les-heures-de-calcul-consommees" id="id2">Compter les heures de calcul consommées</a></p></li>
+<li><p><a class="reference internal" href="#surveiller-les-jobs" id="id3">Surveiller les jobs</a></p></li>
+<li><p><a class="reference internal" href="#recuperer-les-resultats" id="id4">Récupérer les résultats</a></p>
+<ul>
+<li><p><a class="reference internal" href="#avec-l-explorateur-de-fichiers-de-jupyterlab" id="id5">Avec l’explorateur de fichiers de JupyterLab</a></p></li>
+<li><p><a class="reference internal" href="#avec-filezilla" id="id6">Avec FileZilla</a></p></li>
+<li><p><a class="reference internal" href="#avec-scp" id="id7">Avec scp</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="compter-les-heures-de-calcul-consommees">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Compter les heures de calcul consommées</a><a class="headerlink" href="#compter-les-heures-de-calcul-consommees" title="Permalink to this heading">#</a></h2>
+<p>Expérimentez la commande <code class="docutils literal notranslate"><span class="pre">sreport</span></code> pour avoir une idée du temps de calcul consommé par tous vos jobs :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sreport<span class="w"> </span>-t<span class="w"> </span>hour<span class="w"> </span>Cluster<span class="w"> </span>UserUtilizationByAccount<span class="w"> </span><span class="nv">Start</span><span class="o">=</span><span class="m">2023</span>-01-01<span class="w"> </span><span class="nv">End</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>--iso-8601<span class="k">)</span>T23:59:59<span class="w"> </span><span class="nv">Users</span><span class="o">=</span><span class="nv">$USER</span>
+</pre></div>
+</div>
+<p>La colonne <code class="docutils literal notranslate"><span class="pre">Used</span></code> indique le nombre d’heures de temps CPU consommées. Cette valeur est utile pour estimer le « coût CPU » d’un projet.</p>
+<p>Voici un exemple de rapport produit par <code class="docutils literal notranslate"><span class="pre">sreport</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sreport<span class="w"> </span>-t<span class="w"> </span>hour<span class="w"> </span>Cluster<span class="w"> </span>UserUtilizationByAccount<span class="w"> </span><span class="nv">Start</span><span class="o">=</span><span class="m">2023</span>-01-01<span class="w"> </span><span class="nv">End</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>--iso-8601<span class="k">)</span>T23:59:59<span class="w"> </span><span class="nv">Users</span><span class="o">=</span><span class="nv">$USER</span>
+--------------------------------------------------------------------------------
+Cluster/User/Account<span class="w"> </span>Utilization<span class="w"> </span><span class="m">2023</span>-01-01T00:00:00<span class="w"> </span>-<span class="w"> </span><span class="m">2023</span>-05-10T22:59:59<span class="w"> </span><span class="o">(</span><span class="m">11224800</span><span class="w"> </span>secs<span class="o">)</span>
+Usage<span class="w"> </span>reported<span class="w"> </span><span class="k">in</span><span class="w"> </span>CPU<span class="w"> </span>Hours
+--------------------------------------------------------------------------------
+<span class="w">  </span>Cluster<span class="w">     </span>Login<span class="w">     </span>Proper<span class="w"> </span>Name<span class="w">         </span>Account<span class="w">     </span>Used<span class="w">   </span>Energy<span class="w"> </span>
+---------<span class="w"> </span>---------<span class="w"> </span>---------------<span class="w"> </span>---------------<span class="w"> </span>--------<span class="w"> </span>--------<span class="w"> </span>
+<span class="w">     </span>core<span class="w">  </span>ppoulain<span class="w">  </span>Pierre<span class="w"> </span>Poulain<span class="w">      </span>202304_duo<span class="w">      </span><span class="m">510</span><span class="w">        </span><span class="m">0</span><span class="w"> </span>
+<span class="w">     </span>core<span class="w">  </span>ppoulain<span class="w">  </span>Pierre<span class="w"> </span>Poulain<span class="w">        </span>minomics<span class="w">      </span><span class="m">192</span><span class="w">        </span><span class="m">0</span><span class="w"> </span>
+<span class="w">     </span>core<span class="w">  </span>ppoulain<span class="w">  </span>Pierre<span class="w"> </span>Poulain<span class="w">          </span>gonseq<span class="w">       </span><span class="m">48</span><span class="w">        </span><span class="m">0</span><span class="w"> </span>
+<span class="w">     </span>core<span class="w">  </span>ppoulain<span class="w">  </span>Pierre<span class="w"> </span>Poulain<span class="w">           </span>mdner<span class="w">       </span><span class="m">14</span><span class="w">        </span><span class="m">0</span><span class="w"> </span>
+</pre></div>
+</div>
+<p>Ainsi, l’utilisateur <code class="docutils literal notranslate"><span class="pre">ppoulain</span></code> a déjà consommé 510 heures de temps CPU sur le projet <code class="docutils literal notranslate"><span class="pre">202304_duo</span></code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Attention, <code class="docutils literal notranslate"><span class="pre">sreport</span></code> ne prend pas en compte les heures immédiatement consommées. Il lui faut quelques minutes pour consolider les données.</p>
+</div>
+<p>Il est également possible de connaître la consommation CPU pour un projet en particulier et par utilisateur :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sreport<span class="w"> </span>-t<span class="w"> </span>hour<span class="w"> </span>Cluster<span class="w"> </span>AccountUtilizationByUser<span class="w"> </span><span class="nv">Start</span><span class="o">=</span><span class="m">2023</span>-01-01<span class="w"> </span><span class="nv">End</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>--iso-8601<span class="k">)</span>T23:59:59<span class="w"> </span><span class="nv">Accounts</span><span class="o">=</span>202304_duo
+--------------------------------------------------------------------------------
+Cluster/Account/User<span class="w"> </span>Utilization<span class="w"> </span><span class="m">2023</span>-01-01T00:00:00<span class="w"> </span>-<span class="w"> </span><span class="m">2023</span>-05-10T22:59:59<span class="w"> </span><span class="o">(</span><span class="m">11224800</span><span class="w"> </span>secs<span class="o">)</span>
+Usage<span class="w"> </span>reported<span class="w"> </span><span class="k">in</span><span class="w"> </span>CPU<span class="w"> </span>Hours
+--------------------------------------------------------------------------------
+<span class="w">  </span>Cluster<span class="w">         </span>Account<span class="w">     </span>Login<span class="w">     </span>Proper<span class="w"> </span>Name<span class="w">     </span>Used<span class="w">   </span>Energy<span class="w"> </span>
+---------<span class="w"> </span>---------------<span class="w"> </span>---------<span class="w"> </span>---------------<span class="w"> </span>--------<span class="w"> </span>--------<span class="w"> </span>
+<span class="w">     </span>core<span class="w">      </span>202304_duo<span class="w">                               </span><span class="m">4982</span><span class="w">        </span><span class="m">0</span><span class="w"> </span>
+<span class="w">     </span>core<span class="w">      </span>202304_duo<span class="w"> </span>amailleux<span class="w"> </span>Arnaud<span class="w"> </span>MAILLEUX<span class="w">      </span><span class="m">268</span><span class="w">        </span><span class="m">0</span><span class="w"> </span>
+<span class="w">     </span>core<span class="w">      </span>202304_duo<span class="w">   </span>amasson<span class="w"> </span>Aurélie<span class="w"> </span>Masson<span class="w">      </span><span class="m">513</span><span class="w">        </span><span class="m">0</span><span class="w"> </span>
+<span class="w">     </span>core<span class="w">      </span>202304_duo<span class="w">   </span>bcosson<span class="w"> </span>Bertrand<span class="w"> </span>Cosson<span class="w">       </span><span class="m">72</span><span class="w">        </span><span class="m">0</span><span class="w"> </span>
+<span class="w">     </span>core<span class="w">      </span>202304_duo<span class="w">    </span>bmadec<span class="w">   </span>Benoît<span class="w"> </span>Madec<span class="w">      </span><span class="m">196</span><span class="w">        </span><span class="m">0</span><span class="w"> </span>
+<span class="w">     </span>core<span class="w">      </span>202304_duo<span class="w">    </span>cdub76<span class="w"> </span>Christophe<span class="w"> </span>Dub+<span class="w">      </span><span class="m">342</span><span class="w">        </span><span class="m">0</span><span class="w"> </span>
+<span class="w">     </span>core<span class="w">      </span>202304_duo<span class="w">   </span>dbonnin<span class="w"> </span>Delphine<span class="w"> </span>Bonnin<span class="w">      </span><span class="m">203</span><span class="w">        </span><span class="m">0</span><span class="w"> </span>
+<span class="w">     </span>core<span class="w">      </span>202304_duo<span class="w"> </span>dlatrasse<span class="w">  </span>David<span class="w"> </span>Latrasse<span class="w">      </span><span class="m">122</span><span class="w">        </span><span class="m">0</span><span class="w"> </span>
+<span class="w">     </span>core<span class="w">      </span>202304_duo<span class="w">  </span>fdedeine<span class="w">  </span>Franck<span class="w"> </span>Dedeine<span class="w">      </span><span class="m">220</span><span class="w">        </span><span class="m">0</span><span class="w"> </span>
+<span class="w">     </span>core<span class="w">      </span>202304_duo<span class="w">   </span>fdelort<span class="w"> </span>Florence<span class="w"> </span>Delort<span class="w">      </span><span class="m">244</span><span class="w">        </span><span class="m">0</span><span class="w"> </span>
+<span class="w">     </span>core<span class="w">      </span>202304_duo<span class="w"> </span>fmalagnac<span class="w"> </span>Fabienne<span class="w"> </span>Malag+<span class="w">      </span><span class="m">255</span><span class="w">        </span><span class="m">0</span><span class="w"> </span>
+<span class="w">     </span>core<span class="w">      </span>202304_duo<span class="w"> </span>glelanda+<span class="w"> </span>Gaëlle<span class="w"> </span>Leland+<span class="w">       </span><span class="m">60</span><span class="w">        </span><span class="m">0</span><span class="w"> </span>
+<span class="w">     </span>core<span class="w">      </span>202304_duo<span class="w">    </span>lferry<span class="w">     </span>laure<span class="w"> </span>ferry<span class="w">      </span><span class="m">280</span><span class="w">        </span><span class="m">0</span><span class="w"> </span>
+<span class="w">     </span>core<span class="w">      </span>202304_duo<span class="w">  </span>melzaiat<span class="w">  </span>Maëva<span class="w"> </span>Elzaiat<span class="w">      </span><span class="m">279</span><span class="w">        </span><span class="m">0</span><span class="w"> </span>
+<span class="w">     </span>core<span class="w">      </span>202304_duo<span class="w">  </span>ppoulain<span class="w">  </span>Pierre<span class="w"> </span>Poulain<span class="w">      </span><span class="m">510</span><span class="w">        </span><span class="m">0</span><span class="w"> </span>
+<span class="w">     </span>core<span class="w">      </span>202304_duo<span class="w">   </span>rshamsi<span class="w">    </span>Roula<span class="w"> </span>SHAMSI<span class="w">      </span><span class="m">539</span><span class="w">        </span><span class="m">0</span><span class="w"> </span>
+<span class="w">     </span>core<span class="w">      </span>202304_duo<span class="w">   </span>sletuve<span class="w"> </span>Séverine<span class="w"> </span>Lét+<span class="w">      </span><span class="m">289</span><span class="w">        </span><span class="m">0</span><span class="w"> </span>
+<span class="w">     </span>core<span class="w">      </span>202304_duo<span class="w"> </span>spiquerez<span class="w"> </span>Sophie<span class="w"> </span>Piquerez<span class="w">      </span><span class="m">207</span><span class="w">        </span><span class="m">0</span><span class="w"> </span>
+<span class="w">     </span>core<span class="w">      </span>202304_duo<span class="w"> </span>xvuillem+<span class="w"> </span>Xavier<span class="w"> </span>Vuillem+<span class="w">      </span><span class="m">384</span><span class="w">        </span><span class="m">0</span><span class="w"> </span>
+</pre></div>
+</div>
+<p>Ainsi, un total de 4982 heures de calcul a déjà été consommé sur le projet <code class="docutils literal notranslate"><span class="pre">202304_duo</span></code> ⏱️.</p>
+</section>
+<section id="surveiller-les-jobs">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Surveiller les jobs</a><a class="headerlink" href="#surveiller-les-jobs" title="Permalink to this heading">#</a></h2>
+<p>L’analyse RNA-seq présentée ici tourne en 20-25’, c’est relativement rapide car le génome de <em>S. cerevisiae</em> est relativement petit. Les temps d’analyse seront plus longs avec des génomes plus gros.</p>
+<p>Procédez toujours par itérations successives. Testez votre script d’analyse RNA-seq pour 1 échantillon, puis 2 ou 3 puis la totalité.</p>
+<p>Quand vous lancez un job qui sera potentiellement long, n’hésitez pas à ajouter les directives ci-dessous au début de votre script avec les autres instructions <code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#SBATCH --mail-type=END,FAIL</span>
+<span class="c1">#SBATCH --mail-user=votre-adresse-mail@email.fr</span>
+</pre></div>
+</div>
+<p>Vous recevrez alors automatiquement un e-mail lorsque le job se termine ou si celui-ci plante.</p>
+<p>Sur le cluster IFB :</p>
+<ul class="simple">
+<li><p>Un utilisateur ne peut utiliser plus de 300 coeurs en même temps.</p></li>
+<li><p>Un job dure, par défaut, au maximum 24 h. Une queue plus longue (appelée <code class="docutils literal notranslate"><span class="pre">long</span></code>) est disponible pour des jobs qui durent jusqu’à 30 jours et est utilisable via la directive <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--partition=long</span></code> en début de script. D’autres queues plus spécifiques (plus de temps, beaucoup de mémoire vive, GPU) sont disponibles sur demande.</p></li>
+</ul>
+<p>Prenez le temps d’explorer la <a class="reference external" href="https://ifb-elixirfr.gitlab.io/cluster/doc/">documentation très complète</a> sur le cluster. Vous y trouverez notamment un <a class="reference external" href="https://ifb-elixirfr.gitlab.io/cluster/doc/tutorials/analysis_slurm/">tutoriel</a> sur une autre analyse RNA-seq.</p>
+</section>
+<section id="recuperer-les-resultats">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Récupérer les résultats</a><a class="headerlink" href="#recuperer-les-resultats" title="Permalink to this heading">#</a></h2>
+<p>Pour récupérer vos résultats et les transférer depuis le cluster de calcul vers votre machine locale, il y a 3 possibilités.</p>
+<section id="avec-l-explorateur-de-fichiers-de-jupyterlab">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Avec l’explorateur de fichiers de JupyterLab</a><a class="headerlink" href="#avec-l-explorateur-de-fichiers-de-jupyterlab" title="Permalink to this heading">#</a></h3>
+<p>Si les fichiers que vous souhaitez récupérer sont peu nombreux et peu volumineux (quelques Mo maximum), alors vous pouvez directement utiliser l’explorateur de fichiers de JupyterLab (panneau de gauche). Cliquez-droit sur un fichier puis sélectionnez <em>Download</em>.</p>
+</section>
+<section id="avec-filezilla">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Avec FileZilla</a><a class="headerlink" href="#avec-filezilla" title="Permalink to this heading">#</a></h3>
+<p>Lancez le logiciel FileZilla. Puis entrez les informations suivantes :</p>
+<ul class="simple">
+<li><p>Hôte : <code class="docutils literal notranslate"><span class="pre">sftp://core.cluster.france-bioinformatique.fr</span></code></p></li>
+<li><p>Identifiant : votre login sur le cluster</p></li>
+<li><p>Mot de passe : votre mot de passe sur le cluster</p></li>
+</ul>
+<p>Cliquez ensuite sur le bouton <em>Connexion rapide</em>. Cliquez sur <em>OK</em> dans la fenêtre <em>Clé de l’hôte inconnue</em></p>
+<p>Une fois connecté :</p>
+<ul class="simple">
+<li><p>Dans le champ texte à côté de <em>Site local</em> (à gauche de la fenêtre), choississez le répertoire local (sur votre machine) dans lequel vous souhaitez copier les fichiers.</p></li>
+<li><p>Dans le champ texte à coté de <em>Site distant</em> (à droite de la fenêtre), entrez le chemin <code class="docutils literal notranslate"><span class="pre">/shared/projects/202304_duo/LOGIN/rnaseq</span></code> (avec <code class="docutils literal notranslate"><span class="pre">LOGIN</span></code> votre identifiant sur le cluster).</p></li>
+</ul>
+<p>Essayez de transférer des fichiers dans un sens puis dans l’autre. Double-cliquez sur les fichiers pour lancer les transferts.</p>
+</section>
+<section id="avec-scp">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">Avec scp</a><a class="headerlink" href="#avec-scp" title="Permalink to this heading">#</a></h3>
+<p>⚠ Uniquement si vous avez un Mac ou un Linux ou une machine sous Windows avec WSL. ⚠</p>
+<p>Depuis un shell Unix sur une machine locale, déplacez vous dans un répertoire dans lequel vous souhaitez copier les fichiers.</p>
+<p>Lancez ensuite la commande suivante pour récupérer les fichiers de comptage :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>scp<span class="w"> </span>LOGIN@core.cluster.france-bioinformatique.fr:/shared/projects/202304_duo/LOGIN/rnaseq/counts/genes.count_table<span class="w"> </span>.
+</pre></div>
+</div>
+<p>où <code class="docutils literal notranslate"><span class="pre">LOGIN</span></code> est votre identifiant sur le cluster (qui apparait deux fois dans la ligne de commande ci-dessus). Faites bien attention à garder le <code class="docutils literal notranslate"><span class="pre">.</span></code> à la fin de la ligne de commande.</p>
+<p>Entrez votre mot de passe du cluster en aveugle.</p>
+<p>Pour récupérer directement le répertoire <code class="docutils literal notranslate"><span class="pre">counts</span></code> sur le cluster, vous auriez pu utiliser la commande :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>scp<span class="w"> </span>-r<span class="w"> </span>LOGIN@core.cluster.france-bioinformatique.fr:/shared/projects/202304_duo/LOGIN/rnaseq/counts<span class="w"> </span>.
+</pre></div>
+</div>
+<p>Notez l’option <code class="docutils literal notranslate"><span class="pre">-r</span></code> qui indique qu’on transfère un répertoire.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./tuto3"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="1_automatiser.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Automatiser l’analyse RNA-seq avec un cluster 🚀</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="3_automatiser_encore.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Automatiser encore plus avec Snakemake 🐍 ⚙</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compter-les-heures-de-calcul-consommees">Compter les heures de calcul consommées</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#surveiller-les-jobs">Surveiller les jobs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recuperer-les-resultats">Récupérer les résultats</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#avec-l-explorateur-de-fichiers-de-jupyterlab">Avec l’explorateur de fichiers de JupyterLab</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#avec-filezilla">Avec FileZilla</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#avec-scp">Avec scp</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Pierre Poulain
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+Ce contenu est mis à disposition selon les termes de la licence <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr" target="_blank">Creative Commons Attribution - Partage dans les Mêmes Conditions 4.0 International</a> (CC BY-SA 4.0).
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -22,7 +22,7 @@ La commande `module list` affiche les modules déjà chargés.
 
 Vérifiez ensuite que vous êtes bien dans le répertoire `/shared/projects/202304_duo/$USER/rnaseq` avec la commande `pwd`. Déplacez-vous dans ce répertoire si ce n'est pas le cas.
 
-Supprimez les répertoires qui contiennet les résultats de l'analyse précédente :
+Supprimez les répertoires qui contiennent les résultats de l'analyse précédente :
 
 ```bash
 $ rm -rf genome_index reads_qc reads_map counts
@@ -234,7 +234,7 @@ $ bash script_local_2.sh
 
 Vérifiez que le déroulement du script se passe bien. Quelle étape vous semble la plus longue ?
 
-Normalement, le temps de calcul est passé de 25 minutes à environ 20 minutes. C'est mieux, mais cela représente toujours beaucoup d'heures de calcul pour analyser les 50 échantillons. Nous verrons lors de la prochaine sesssion commment utiliser la puissance d'un cluster de calcul pour réduire le temps d'analyse. 🚀
+Normalement, le temps de calcul est passé de 25 minutes à environ 20 minutes. C'est mieux, mais cela représente toujours beaucoup d'heures de calcul pour analyser les 50 échantillons. Nous verrons lors de la prochaine session commment utiliser la puissance d'un cluster de calcul pour réduire le temps d'analyse. 🚀
 
 Mais pour le moment, nous allons automatiser le traitement de plusieurs échantillons dans un même script Bash.
 
@@ -323,3 +323,38 @@ Ce n'est pas encore complètement satisfaisant. En effet, il vous faudrait 17 he
 Quelles autres pistes pourriez-vous explorer pour réduire le temps de calcul ?
 
 Nous en discuterons lors de la prochaine session...
+
+
+## Bonus : aggréger les données produites par HTSeq-count
+
+Si vous analysez plusieurs échantillons, vous souhaiterez peut-être aggréger tous les fichiers produits par HTSeq-count.
+
+Les instructions Bash suivantes pourront vous y aider :
+
+```bash
+for name in counts/*/*.txt
+do
+    echo "${name}"
+    # On récupère le nom de l'échantillon
+    sample="$(basename -s .txt ${name} | sed 's/count_//g' )"
+    # On stocke dans un fichier temporaire pour chaque échantillon
+    # un entête avec "gene" et le nom de l'échantillon
+    echo -e "${sample}" > "count_${sample}_tmp.txt"
+    # On copie le contenu du fichier de comptage dans ce fichier temporaire
+    cut -f2 "${name}" >> "count_${sample}_tmp.txt"
+done
+
+# On récupère les noms des gènes
+echo "gene" > genes.txt
+cut -f1 "${name}" >> genes.txt
+
+# On fusionne tous les fichiers
+paste genes.txt *tmp.txt > count_all.txt
+
+# On supprime les lignes qui débutent par '__'
+# et qui ne sont pas utiles
+grep -v "^__" count_all.txt > count_all_clean.txt
+
+# On supprime les fichiers temporaires
+rm -f genes.txt *tmp.txt count_all.txt
+```

@@ -64,6 +64,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'tuto2/4_automatiser';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction et contexte" href="../tuto3/0_intro.html" />
     <link rel="prev" title="Analyser les données RNA-seq 💻" href="3_analyser.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -158,10 +159,11 @@ const thebe_selector_output = ".output, .cell_output"
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">JupyterHub du cluster IFB</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../connection.html">Connexion au JupyterHub de l’IFB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gestion_compte_ifb.html">Gestion de votre compte utilisateur sur le cluster de calcul</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction à Unix</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../tuto1/tutorial.html">Tuto 1 : un  aperçu du shell Unix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tuto1/tutorial.html">Un  aperçu du shell Unix</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../more.html">Ressources complémentaires</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Analyse RNA-seq avec Unix</span></p>
@@ -171,6 +173,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="2_preparer_donnees.html">Préparer les données 🗃️</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_analyser.html">Analyser les données RNA-seq 💻</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Automatiser l’analyse RNA-seq ⚙️</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Analyse RNA-seq avec un cluster de calcul</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tuto3/0_intro.html">Introduction et contexte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tuto3/1_automatiser.html">Automatiser l’analyse RNA-seq avec un cluster 🚀</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tuto3/2_compter_surveiller_recuperer.html">Compter ⏲ les heures, surveiller 📬 les jobs et récupérer 📥 les résultats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tuto3/3_automatiser_encore.html">Automatiser encore plus avec Snakemake 🐍 ⚙</a></li>
 </ul>
 
     </div>
@@ -390,6 +399,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automatiser-l-analyse-de-3-echantillons">Automatiser l’analyse de 3 échantillons</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparer-les-versions-des-logiciels-utilises-dans-galaxy-si-vous-avez-du-temps">Comparer les versions des logiciels utilisés dans Galaxy (si vous avez du temps)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-aggreger-les-donnees-produites-par-htseq-count">Bonus : aggréger les données produites par HTSeq-count</a></li>
 </ul>
             </nav>
         </div>
@@ -417,6 +427,7 @@ document.write(`
 <li><p><a class="reference internal" href="#automatiser-l-analyse-de-3-echantillons" id="id8">Automatiser l’analyse de 3 échantillons</a></p></li>
 <li><p><a class="reference internal" href="#comparer-les-versions-des-logiciels-utilises-dans-galaxy-si-vous-avez-du-temps" id="id9">Comparer les versions des logiciels utilisés dans Galaxy (si vous avez du temps)</a></p></li>
 <li><p><a class="reference internal" href="#conclusion" id="id10">Conclusion</a></p></li>
+<li><p><a class="reference internal" href="#bonus-aggreger-les-donnees-produites-par-htseq-count" id="id11">Bonus : aggréger les données produites par HTSeq-count</a></p></li>
 </ul>
 </li>
 </ul>
@@ -434,7 +445,7 @@ document.write(`
 <p>La commande <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">list</span></code> affiche les modules déjà chargés.</p>
 </div>
 <p>Vérifiez ensuite que vous êtes bien dans le répertoire <code class="docutils literal notranslate"><span class="pre">/shared/projects/202304_duo/$USER/rnaseq</span></code> avec la commande <code class="docutils literal notranslate"><span class="pre">pwd</span></code>. Déplacez-vous dans ce répertoire si ce n’est pas le cas.</p>
-<p>Supprimez les répertoires qui contiennet les résultats de l’analyse précédente :</p>
+<p>Supprimez les répertoires qui contiennent les résultats de l’analyse précédente :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>genome_index<span class="w"> </span>reads_qc<span class="w"> </span>reads_map<span class="w"> </span>counts
 </pre></div>
 </div>
@@ -608,7 +619,7 @@ salut<span class="w"> </span>Pierre
 </pre></div>
 </div>
 <p>Vérifiez que le déroulement du script se passe bien. Quelle étape vous semble la plus longue ?</p>
-<p>Normalement, le temps de calcul est passé de 25 minutes à environ 20 minutes. C’est mieux, mais cela représente toujours beaucoup d’heures de calcul pour analyser les 50 échantillons. Nous verrons lors de la prochaine sesssion commment utiliser la puissance d’un cluster de calcul pour réduire le temps d’analyse. 🚀</p>
+<p>Normalement, le temps de calcul est passé de 25 minutes à environ 20 minutes. C’est mieux, mais cela représente toujours beaucoup d’heures de calcul pour analyser les 50 échantillons. Nous verrons lors de la prochaine session commment utiliser la puissance d’un cluster de calcul pour réduire le temps d’analyse. 🚀</p>
 <p>Mais pour le moment, nous allons automatiser le traitement de plusieurs échantillons dans un même script Bash.</p>
 </section>
 <section id="repeter-une-action-en-bash">
@@ -675,6 +686,38 @@ Salut<span class="w"> </span>pierre<span class="w"> </span>!
 <p>Quelles autres pistes pourriez-vous explorer pour réduire le temps de calcul ?</p>
 <p>Nous en discuterons lors de la prochaine session…</p>
 </section>
+<section id="bonus-aggreger-les-donnees-produites-par-htseq-count">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">Bonus : aggréger les données produites par HTSeq-count</a><a class="headerlink" href="#bonus-aggreger-les-donnees-produites-par-htseq-count" title="Permalink to this heading">#</a></h2>
+<p>Si vous analysez plusieurs échantillons, vous souhaiterez peut-être aggréger tous les fichiers produits par HTSeq-count.</p>
+<p>Les instructions Bash suivantes pourront vous y aider :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span>name<span class="w"> </span><span class="k">in</span><span class="w"> </span>counts/*/*.txt
+<span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">name</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="c1"># On récupère le nom de l&#39;échantillon</span>
+<span class="w">    </span><span class="nv">sample</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>basename<span class="w"> </span>-s<span class="w"> </span>.txt<span class="w"> </span><span class="si">${</span><span class="nv">name</span><span class="si">}</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/count_//g&#39;</span><span class="w"> </span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="c1"># On stocke dans un fichier temporaire pour chaque échantillon</span>
+<span class="w">    </span><span class="c1"># un entête avec &quot;gene&quot; et le nom de l&#39;échantillon</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">sample</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;count_</span><span class="si">${</span><span class="nv">sample</span><span class="si">}</span><span class="s2">_tmp.txt&quot;</span>
+<span class="w">    </span><span class="c1"># On copie le contenu du fichier de comptage dans ce fichier temporaire</span>
+<span class="w">    </span>cut<span class="w"> </span>-f2<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;count_</span><span class="si">${</span><span class="nv">sample</span><span class="si">}</span><span class="s2">_tmp.txt&quot;</span>
+<span class="k">done</span>
+
+<span class="c1"># On récupère les noms des gènes</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;gene&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>genes.txt
+cut<span class="w"> </span>-f1<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>genes.txt
+
+<span class="c1"># On fusionne tous les fichiers</span>
+paste<span class="w"> </span>genes.txt<span class="w"> </span>*tmp.txt<span class="w"> </span>&gt;<span class="w"> </span>count_all.txt
+
+<span class="c1"># On supprime les lignes qui débutent par &#39;__&#39;</span>
+<span class="c1"># et qui ne sont pas utiles</span>
+grep<span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;^__&quot;</span><span class="w"> </span>count_all.txt<span class="w"> </span>&gt;<span class="w"> </span>count_all_clean.txt
+
+<span class="c1"># On supprime les fichiers temporaires</span>
+rm<span class="w"> </span>-f<span class="w"> </span>genes.txt<span class="w"> </span>*tmp.txt<span class="w"> </span>count_all.txt
+</pre></div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -717,6 +760,15 @@ Salut<span class="w"> </span>pierre<span class="w"> </span>!
         <p class="prev-next-title">Analyser les données RNA-seq 💻</p>
       </div>
     </a>
+    <a class="right-next"
+       href="../tuto3/0_intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction et contexte</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div></div>
   
 </div>
@@ -744,6 +796,7 @@ Salut<span class="w"> </span>pierre<span class="w"> </span>!
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automatiser-l-analyse-de-3-echantillons">Automatiser l’analyse de 3 échantillons</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparer-les-versions-des-logiciels-utilises-dans-galaxy-si-vous-avez-du-temps">Comparer les versions des logiciels utilisés dans Galaxy (si vous avez du temps)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-aggreger-les-donnees-produites-par-htseq-count">Bonus : aggréger les données produites par HTSeq-count</a></li>
 </ul>
   </nav></div>
 
