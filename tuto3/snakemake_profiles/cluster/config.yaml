@@ -10,6 +10,7 @@ default-resources:
 set-resources:
   - map_reads:mem_mb=3000
   - sort_index_bam:mem_mb=2000
+  - count_transcrits:mem_mb=3000
 set-threads:
 - index_genome=4
 - map_reads=8
