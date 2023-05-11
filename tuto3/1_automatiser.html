@@ -476,7 +476,7 @@ document.write(`
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>wget<span class="w"> </span>https://raw.githubusercontent.com/pierrepo/unix-tutorial/master/tuto3/script_cluster_0.sh
 </pre></div>
 </div>
-<p>Ce script est le script <code class="docutils literal notranslate"><span class="pre">script_local_2.sh</span></code> adapté pour une utilisation sur un cluster. Ouvrez ce script avec l’éditeur de texte de JupyterLab et essayez d’identifier les différences avec <code class="docutils literal notranslate"><span class="pre">script_local_2.sh</span></code>.</p>
+<p>Ce script correspond au script <code class="docutils literal notranslate"><span class="pre">script_local_2.sh</span></code> adapté pour une utilisation sur un cluster. Ouvrez le script <code class="docutils literal notranslate"><span class="pre">script_cluster_0.sh</span></code> avec l’éditeur de texte de JupyterLab et essayez d’identifier les différences avec <code class="docutils literal notranslate"><span class="pre">script_local_2.sh</span></code>.</p>
 <ol class="arabic">
 <li><p>Au début du script, deux lignes sont nouvelles :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#SBATCH --mem=2G</span>
@@ -494,11 +494,12 @@ module<span class="w"> </span>load<span class="w"> </span>cufflinks/2.2.1
 </pre></div>
 </div>
 </li>
-<li><p>De plus, à l’étape d’indexation du génome de référence, dans la ligne</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">srun</span> <span class="n">STAR</span> <span class="o">--</span><span class="n">runThreadN</span> <span class="s2">&quot;$</span><span class="si">{SLURM_CPUS_PER_TASK}</span><span class="s2">&quot;</span> \
+<li><p>L’appel aux différents programmes (<code class="docutils literal notranslate"><span class="pre">STAR</span></code>, <code class="docutils literal notranslate"><span class="pre">fastqc</span></code>, <code class="docutils literal notranslate"><span class="pre">samtools</span></code>…) est préfixé par l’instruction <code class="docutils literal notranslate"><span class="pre">srun</span></code> qui va explicitement indiquer à Slurm qu’il s’agit d’un sous-job. Nous en verrons l’utilité plus tard.</p></li>
+<li><p>Pour STAR, la définition du nombre de coeurs à utiliser est défini sous la forme :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>srun<span class="w"> </span>STAR<span class="w"> </span>--runThreadN<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">SLURM_CPUS_PER_TASK</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
 </pre></div>
 </div>
-<p>la variable <code class="docutils literal notranslate"><span class="pre">SLURM_CPUS_PER_TASK</span></code> est utilisée pour indiquer à STAR le nombre de processeurs à utiliser. Cette variable est automatiquement définie par Slurm lors de l’exécution du script. Dans le cas présent, elle vaut 8. Le lancement de <code class="docutils literal notranslate"><span class="pre">STAR</span></code> est précédé de l’instruction <code class="docutils literal notranslate"><span class="pre">srun</span></code> qui va explicitement indique à Slurm qu’il s’agit d’un sous-job. Nous en verrons l’utilité plus tard.</p>
+<p>La variable <code class="docutils literal notranslate"><span class="pre">SLURM_CPUS_PER_TASK</span></code> est utilisée pour indiquer à STAR le nombre de processeurs à utiliser. Cette variable est automatiquement définie par Slurm lors de l’exécution du script et la lecture de l’instruction <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--cpus-per-task=8</span></code>. Dans le cas présent, elle vaut 8.</p>
 </li>
 </ol>
 <p>Lancez enfin le script avec la commande suivante :</p>
