@@ -409,10 +409,14 @@ document.write(`
 <p>Dans le tutoriel précédent :</p>
 <ul class="simple">
 <li><p>Vous avez reproduit la méthodologie publié dans l’article <a class="reference external" href="https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1006453"><em>Investigating Conservation of the Cell-Cycle-Regulated Transcriptional Program in the Fungal Pathogen, Cryptococcus neoformans</em></a> (Kelliher <em>et al.</em>, PLOS Genetics, 2016) pour analyser des données RNA-seq de <em>Saccharomyces cerevisiae</em>.</p></li>
-<li><p>Vous avez utilisé un script pour automatiser l’analyse <strong>successive</strong> de plusieurs fichiers de données RNA-seq .fastq.gz.</p></li>
-<li><p>Enfin, vous avez accéléré le fonctionnement des logiciels <code class="docutils literal notranslate"><span class="pre">star</span></code> et <code class="docutils literal notranslate"><span class="pre">cuffquant</span></code> en utilisant plusieurs processeurs.</p></li>
+<li><p>Vous avez utilisé un script (<code class="docutils literal notranslate"><span class="pre">script_local_2.sh</span></code>) pour accélérer le fonctionnement des logiciels <code class="docutils literal notranslate"><span class="pre">star</span></code> et <code class="docutils literal notranslate"><span class="pre">cuffquant</span></code> en utilisant plusieurs processeurs.</p></li>
+<li><p>Enfin vous avez utilisé un autre script (<code class="docutils literal notranslate"><span class="pre">script_local_3.sh</span></code>) pour automatiser l’analyse <strong>successive</strong> de plusieurs fichiers de données RNA-seq .fastq.gz.</p></li>
 </ul>
 <p>L’objectif de ce tutoriel est d’utiliser toute la puissance d’un cluster de calcul pour analyser <strong>simultanément</strong> plusieurs jeux de données RNA-seq en ayant à disposition plusieurs milliers de processeurs.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Dans ce tutoriel, les termes « processeur » (ou <em>Central Processing Unit</em>, CPU), « cœur » (<em>core</em>) et « <em>thread</em> » seront equivalents. C’est une approximation. Un processeur est un objet physique qui est branché sur une carte mère et qui peut contenir plusieurs cœurs qui eux-mêmes peuvent avoir plusieurs <em>threads</em>.</p>
+</div>
 <section id="prerequis">
 <h2>Prérequis<a class="headerlink" href="#prerequis" title="Permalink to this heading">#</a></h2>
 <ul class="simple">

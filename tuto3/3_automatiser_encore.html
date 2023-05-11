@@ -398,7 +398,7 @@ document.write(`
 <p>Lancer ces trois scripts les uns après les autres est fastidieux. On peut automatiser cela plus encore avec un gestionnaire de workflow comme <a class="reference external" href="https://snakemake.readthedocs.io/en/stable/">Snakemake</a>. Un gestionnaire de workflow va s’occuper de lancer les différents jobs dans le bon ordre et de gérer les dépendances entre les jobs.</p>
 <p>Depuis un terminal de JupyterLab, vérifiez que vous êtes toujours dans le répertoire <code class="docutils literal notranslate"><span class="pre">/shared/projects/202304_duo/$USER/rnaseq</span></code>.</p>
 <p>Supprimez les répertoires qui contiennent les résultats d’une éventuelle précédente analyse :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>genome_index<span class="w"> </span>reads_qc<span class="w"> </span>reads_map<span class="w"> </span>counts<span class="w"> </span>*.out
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>genome_index<span class="w"> </span>reads_qc<span class="w"> </span>reads_map<span class="w"> </span>counts<span class="w"> </span>slurm*.out
 </pre></div>
 </div>
 <p>Téléchargez le script Bash (<a class="reference download internal" download="" href="../_downloads/bb4a4e338bdd48436e49fa5b709a7ceb/snakemake.zip"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">snakemake.zip</span></code></span></a>) avec la commande <code class="docutils literal notranslate"><span class="pre">wget</span></code> :</p>
@@ -420,6 +420,12 @@ document.write(`
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sbatch<span class="w"> </span>-A<span class="w"> </span>202304_duo<span class="w"> </span>run_snakemake.sh
 </pre></div>
 </div>
+<p>La commande <code class="docutils literal notranslate"><span class="pre">sacct</span></code> ne sera ici pas très utile car tous les jobs seront lancés indépendamment les uns des autres.</p>
+<p>La commande <code class="docutils literal notranslate"><span class="pre">squeue</span></code> avec quelques options d’affichage sera plus utile :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>squeue<span class="w"> </span>--format<span class="o">=</span><span class="s2">&quot;%.10i %.40j %.8T %.8M %.9P %.10u %R&quot;</span><span class="w"> </span>-u<span class="w"> </span><span class="nv">$USER</span>
+</pre></div>
+</div>
+<p>N’hésitez pas à préfixer cette commande par <code class="docutils literal notranslate"><span class="pre">watch</span> <span class="pre">-x</span></code> pour afficher l’avancement du calcul.</p>
 </section>
 
     <script type="text/x-thebe-config">

@@ -450,7 +450,7 @@ document.write(`
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>squeue<span class="w"> </span>-t<span class="w"> </span>PENDING<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
 </pre></div>
 </div>
-<p>Et vous alors ? Avez-vous lancé un calcul ? Vérifiez-le en entrant la commande suivante qui va lister les calculs en cours pour votre compte :</p>
+<p>Et vous alors ? Avez-vous lancé un calcul ? Vérifiez-le en entrant la commande suivante pour lister les calculs associés à votre compte :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>squeue<span class="w"> </span>-u<span class="w"> </span><span class="nv">$USER</span>
 </pre></div>
 </div>
@@ -462,7 +462,7 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">R</span></code> (<em>running</em>) : le job est en cours d’exécution</p></li>
 </ul>
 <p>Bizarre ! Vous avez un job avec le statut <em>running</em> en cours d’exécution alors que vous n’avez a priori rien lancé 🤔</p>
-<p>En fait, le JupyterLab dans lequel vous êtes est lui-même un job lancé sur le cluster. C’est d’ailleurs pour cela qu’avant de lancer JupyterLab, vous avez dû préciser le compte à utiliser (<code class="docutils literal notranslate"><span class="pre">202304_duo</span></code>) et choisir le nombre de processeurs et la quantité de mémoire vive dont vous aviez besoin.</p>
+<p>En fait, le JupyterLab dans lequel vous êtes est lui-même un job lancé sur le cluster. C’est d’ailleurs pour cela qu’avant de lancer JupyterLab, vous avez dû préciser le compte à utiliser (<code class="docutils literal notranslate"><span class="pre">202304_duo</span></code>) et choisir le nombre de processeurs et la quantité de mémoire vive dont vous aviez besoin. Finalement, vous étiez dans la matrice sans même le savoir 😱</p>
 <p>Comme plusieurs utilisateurs peuvent lancer des jobs sur un cluster, un gestionnaire de jobs (ou ordonnanceur) s’occupe de répartir les ressources entre les différents utilisateurs. Sur le cluster de l’IFB, le gestionnaire de jobs est <a class="reference external" href="https://slurm.schedmd.com/">Slurm</a>. Désormais le lancement de vos analyses se fera via Slurm.</p>
 </section>
 <section id="analyser-un-echantillon">
@@ -515,7 +515,9 @@ module<span class="w"> </span>load<span class="w"> </span>cufflinks/2.2.1
 </pre></div>
 </div>
 <p>Et pour avoir plus de détails, utilisez la commande :</p>
-<p>$ sacct –format=JobID,JobName,State,Start,Elapsed,CPUTime,NodeList -j JOBID</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sacct<span class="w"> </span>--format<span class="o">=</span>JobID,JobName,State,Start,Elapsed,CPUTime,NodeList<span class="w"> </span>-j<span class="w"> </span>JOBID
+</pre></div>
+</div>
 <p>avec <code class="docutils literal notranslate"><span class="pre">JOBID</span></code> (en fin de ligne) le numéro de votre job à remplacer par le vôtre.</p>
 <p>Voici un exemple de sortie que vous pourriez obtenir :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sacct --format=JobID,JobName,State,Start,Elapsed,CPUTime,NodeList -j 33332280
@@ -529,7 +531,7 @@ module<span class="w"> </span>load<span class="w"> </span>cufflinks/2.2.1
 </div>
 <p>Quand la colonne <em>State</em> est à <code class="docutils literal notranslate"><span class="pre">COMPLETED</span></code>, cela signifie que le sous-job est terminé. Un sous-job est créé à chaque fois que la commande <code class="docutils literal notranslate"><span class="pre">srun</span></code> est utilisée dans le script de soumission. Ici, on voit que le sous-job <code class="docutils literal notranslate"><span class="pre">STAR</span></code> est terminé, mais que le sous-job <code class="docutils literal notranslate"><span class="pre">fastqc</span></code> est toujours en cours d’exécution.</p>
 <p>Relancez régulièrement la commande précédente pour suivre l’avancement de votre job.</p>
-<p>Quand vous avez terminé l’alignement sur le génome de référence , c’est-à-dire que vous avez obtenu un second sous-job <code class="docutils literal notranslate"><span class="pre">STAR</span></code> avec le statut <code class="docutils literal notranslate"><span class="pre">COMPLETED</span></code>, stopper le job en cours avec la commande :</p>
+<p>Quand vous avez terminé l’alignement sur le génome de référence , c’est-à-dire que vous avez obtenu un second sous-job <code class="docutils literal notranslate"><span class="pre">STAR</span></code> avec le statut <code class="docutils literal notranslate"><span class="pre">COMPLETED</span></code>, stoppez le job en cours avec la commande :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>scancel<span class="w"> </span>JOBID
 </pre></div>
 </div>
@@ -563,7 +565,7 @@ module<span class="w"> </span>load<span class="w"> </span>cufflinks/2.2.1
 <section id="lancer-le-script-de-l-etape-1">
 <h3><a class="toc-backref" href="#id6" role="doc-backlink">Lancer le script de l’étape 1</a><a class="headerlink" href="#lancer-le-script-de-l-etape-1" title="Permalink to this heading">#</a></h3>
 <p>Supprimez les répertoires qui contiennent les résultats d’une éventuelle précédente analyse :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>genome_index<span class="w"> </span>reads_qc<span class="w"> </span>reads_map<span class="w"> </span>counts<span class="w"> </span>*.out
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>genome_index<span class="w"> </span>reads_qc<span class="w"> </span>reads_map<span class="w"> </span>counts<span class="w"> </span>slurm*.out
 </pre></div>
 </div>
 <p>Téléchargez dans un terminal de JupyterLab le script Bash (<a class="reference download internal" download="" href="../_downloads/c3187cdf0191618760ed0e4163360193/script_cluster_1.sh"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">script_cluster_1.sh</span></code></span></a>) avec la commande <code class="docutils literal notranslate"><span class="pre">wget</span></code> :</p>

@@ -30,7 +30,7 @@ Vous pouvez aussi compter le nombre de jobs en attente d'exécution :
 $ squeue -t PENDING | wc -l
 ```
 
-Et vous alors ? Avez-vous lancé un calcul ? Vérifiez-le en entrant la commande suivante qui va lister les calculs en cours pour votre compte :
+Et vous alors ? Avez-vous lancé un calcul ? Vérifiez-le en entrant la commande suivante pour lister les calculs associés à votre compte :
 
 ```bash
 $ squeue -u $USER
@@ -45,7 +45,7 @@ La colonne `ST` indique le statut de votre job :
 
 Bizarre ! Vous avez un job avec le statut *running* en cours d'exécution alors que vous n'avez a priori rien lancé 🤔
 
-En fait, le JupyterLab dans lequel vous êtes est lui-même un job lancé sur le cluster. C'est d'ailleurs pour cela qu'avant de lancer JupyterLab, vous avez dû préciser le compte à utiliser (`202304_duo`) et choisir le nombre de processeurs et la quantité de mémoire vive dont vous aviez besoin.
+En fait, le JupyterLab dans lequel vous êtes est lui-même un job lancé sur le cluster. C'est d'ailleurs pour cela qu'avant de lancer JupyterLab, vous avez dû préciser le compte à utiliser (`202304_duo`) et choisir le nombre de processeurs et la quantité de mémoire vive dont vous aviez besoin. Finalement, vous étiez dans la matrice sans même le savoir 😱
 
 Comme plusieurs utilisateurs peuvent lancer des jobs sur un cluster, un gestionnaire de jobs (ou ordonnanceur) s'occupe de répartir les ressources entre les différents utilisateurs. Sur le cluster de l'IFB, le gestionnaire de jobs est [Slurm](https://slurm.schedmd.com/). Désormais le lancement de vos analyses se fera via Slurm.
 
@@ -76,7 +76,7 @@ Ce script est le script `script_local_2.sh` adapté pour une utilisation sur un 
 
     Ces lignes commencent par le caractère `#` qui indique qu'il s'agit de commentaires pour Bash, elles seront donc ignorées par le *shell*. Par contre, elles ont un sens très particulier pour le gestionnaire de jobs du cluster Slurm. Ces lignes indiquent à Slurm que le job a besoin de 2 Go de mémoire vive et de 8 processeurs pour s'exécuter.
 
-2. Un peu plus loin, on indique explicitement les modules (les logiciels) à charger avec leurs versions :
+1. Un peu plus loin, on indique explicitement les modules (les logiciels) à charger avec leurs versions :
 
     ```bash
     module load fastqc/0.11.9
@@ -86,7 +86,7 @@ Ce script est le script `script_local_2.sh` adapté pour une utilisation sur un 
     module load cufflinks/2.2.1
     ```
 
-2. De plus, à l'étape d'indexation du génome de référence, dans la ligne
+1. De plus, à l'étape d'indexation du génome de référence, dans la ligne
 
     ```
     srun STAR --runThreadN "${SLURM_CPUS_PER_TASK}" \
@@ -115,7 +115,9 @@ $ squeue -u $USER
 
 Et pour avoir plus de détails, utilisez la commande :
 
+```bash
 $ sacct --format=JobID,JobName,State,Start,Elapsed,CPUTime,NodeList -j JOBID
+```
 
 avec `JOBID` (en fin de ligne) le numéro de votre job à remplacer par le vôtre.
 
@@ -135,7 +137,7 @@ Quand la colonne *State* est à `COMPLETED`, cela signifie que le sous-job est t
 
 Relancez régulièrement la commande précédente pour suivre l'avancement de votre job.
 
-Quand vous avez terminé l'alignement sur le génome de référence , c'est-à-dire que vous avez obtenu un second sous-job `STAR` avec le statut `COMPLETED`, stopper le job en cours avec la commande :
+Quand vous avez terminé l'alignement sur le génome de référence , c'est-à-dire que vous avez obtenu un second sous-job `STAR` avec le statut `COMPLETED`, stoppez le job en cours avec la commande :
 
 ```bash
 $ scancel JOBID
@@ -173,7 +175,7 @@ $ tree /shared/projects/202304_duo/data/rnaseq_scere
 Supprimez les répertoires qui contiennent les résultats d'une éventuelle précédente analyse :
 
 ```bash
-$ rm -rf genome_index reads_qc reads_map counts *.out
+$ rm -rf genome_index reads_qc reads_map counts slurm*.out
 ```
 
 Téléchargez dans un terminal de JupyterLab le script Bash ([`script_cluster_1.sh`](script_cluster_1.sh)) avec la commande `wget` :
