@@ -11,7 +11,7 @@ Depuis un terminal de JupyterLab, vérifiez que vous êtes toujours dans le rép
 Supprimez les répertoires qui contiennent les résultats d'une éventuelle précédente analyse :
 
 ```bash
-$ rm -rf genome_index reads_qc reads_map counts *.out
+$ rm -rf genome_index reads_qc reads_map counts slurm*.out
 ```
 
 Téléchargez le script Bash ([`snakemake.zip`](snakemake.zip)) avec la commande `wget` :
@@ -39,3 +39,15 @@ Lancez l'analyse avec Snakemake avec la commande :
 ```bash
 $ sbatch -A 202304_duo run_snakemake.sh
 ```
+
+La commande `sacct` ne sera ici pas très utile car tous les jobs seront lancés indépendamment les uns des autres.
+
+La commande `squeue` avec quelques options d'affichage sera plus utile : 
+
+
+```bash
+$ squeue --format="%.10i %.40j %.8T %.8M %.9P %.10u %R" -u $USER
+```
+
+N'hésitez pas à préfixer cette commande par `watch -x` pour afficher l'avancement du calcul.
+
