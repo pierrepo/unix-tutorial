@@ -453,7 +453,7 @@ Usage<span class="w"> </span>reported<span class="w"> </span><span class="k">in<
 <p>Ainsi, l’utilisateur <code class="docutils literal notranslate"><span class="pre">ppoulain</span></code> a déjà consommé 510 heures de temps CPU sur le projet <code class="docutils literal notranslate"><span class="pre">202304_duo</span></code>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Attention, <code class="docutils literal notranslate"><span class="pre">sreport</span></code> ne prend pas en compte les heures immédiatement consommées. Il lui faut quelques minutes pour consolider les données.</p>
+<p><code class="docutils literal notranslate"><span class="pre">sreport</span></code> ne prend pas en compte les heures immédiatement consommées. Il lui faut quelques minutes pour consolider les données.</p>
 </div>
 <p>Il est également possible de connaître la consommation CPU pour un projet en particulier et par utilisateur :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sreport<span class="w"> </span>-t<span class="w"> </span>hour<span class="w"> </span>Cluster<span class="w"> </span>AccountUtilizationByUser<span class="w"> </span><span class="nv">Start</span><span class="o">=</span><span class="m">2023</span>-01-01<span class="w"> </span><span class="nv">End</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>--iso-8601<span class="k">)</span>T23:59:59<span class="w"> </span><span class="nv">Accounts</span><span class="o">=</span>202304_duo
@@ -488,8 +488,8 @@ Usage<span class="w"> </span>reported<span class="w"> </span><span class="k">in<
 </section>
 <section id="surveiller-les-jobs">
 <h2><a class="toc-backref" href="#id3" role="doc-backlink">Surveiller les jobs</a><a class="headerlink" href="#surveiller-les-jobs" title="Permalink to this heading">#</a></h2>
-<p>L’analyse RNA-seq présentée ici tourne en 20-25’, c’est relativement rapide car le génome de <em>S. cerevisiae</em> est relativement petit. Les temps d’analyse seront plus longs avec des génomes plus gros.</p>
-<p>Procédez toujours par itérations successives. Testez votre script d’analyse RNA-seq pour 1 échantillon, puis 2 ou 3 puis la totalité.</p>
+<p>L’analyse RNA-seq présentée ici tourne en 20-25’, c’est relativement rapide car le génome de <em>S. cerevisiae</em> est petit (environ 12 Mb). Les temps d’analyse seront plus longs avec des génomes plus gros.</p>
+<p>Procédez toujours par itérations successives. Testez votre script d’analyse RNA-seq pour 1 échantillon, puis 3, puis la totalité.</p>
 <p>Quand vous lancez un job qui sera potentiellement long, n’hésitez pas à ajouter les directives ci-dessous au début de votre script avec les autres instructions <code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#SBATCH --mail-type=END,FAIL</span>
 <span class="c1">#SBATCH --mail-user=votre-adresse-mail@email.fr</span>
@@ -512,6 +512,10 @@ Usage<span class="w"> </span>reported<span class="w"> </span><span class="k">in<
 </section>
 <section id="avec-filezilla">
 <h3><a class="toc-backref" href="#id6" role="doc-backlink">Avec FileZilla</a><a class="headerlink" href="#avec-filezilla" title="Permalink to this heading">#</a></h3>
+<div class="admonition-rappel admonition">
+<p class="admonition-title">Rappel</p>
+<p>L’utilisation de FileZilla avait déjà été abordée dans le tutoriel sur les <a class="reference external" href="https://cupnet.net/formats-echanges-donnees-biologie/tutoriel/">formats et échange de données en biologie</a></p>
+</div>
 <p>Lancez le logiciel FileZilla. Puis entrez les informations suivantes :</p>
 <ul class="simple">
 <li><p>Hôte : <code class="docutils literal notranslate"><span class="pre">sftp://core.cluster.france-bioinformatique.fr</span></code></p></li>
@@ -528,7 +532,10 @@ Usage<span class="w"> </span>reported<span class="w"> </span><span class="k">in<
 </section>
 <section id="avec-scp">
 <h3><a class="toc-backref" href="#id7" role="doc-backlink">Avec scp</a><a class="headerlink" href="#avec-scp" title="Permalink to this heading">#</a></h3>
-<p>⚠ Uniquement si vous avez un Mac ou un Linux ou une machine sous Windows avec WSL. ⚠</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Uniquement si vous avez un Mac ou un Linux ou une machine sous Windows avec WSL.</p>
+</div>
 <p>Depuis un shell Unix sur une machine locale, déplacez vous dans un répertoire dans lequel vous souhaitez copier les fichiers.</p>
 <p>Lancez ensuite la commande suivante pour récupérer les fichiers de comptage :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>scp<span class="w"> </span>LOGIN@core.cluster.france-bioinformatique.fr:/shared/projects/202304_duo/LOGIN/rnaseq/counts/genes.count_table<span class="w"> </span>.

@@ -32,7 +32,7 @@ Usage reported in CPU Hours
 Ainsi, l'utilisateur `ppoulain` a déjà consommé 510 heures de temps CPU sur le projet `202304_duo`.
 
 ```{warning}
-Attention, `sreport` ne prend pas en compte les heures immédiatement consommées. Il lui faut quelques minutes pour consolider les données.
+`sreport` ne prend pas en compte les heures immédiatement consommées. Il lui faut quelques minutes pour consolider les données.
 ```
 
 Il est également possible de connaître la consommation CPU pour un projet en particulier et par utilisateur :
@@ -71,9 +71,9 @@ Ainsi, un total de 4982 heures de calcul a déjà été consommé sur le projet 
 
 ## Surveiller les jobs
 
-L'analyse RNA-seq présentée ici tourne en 20-25', c'est relativement rapide car le génome de *S. cerevisiae* est relativement petit. Les temps d'analyse seront plus longs avec des génomes plus gros.
+L'analyse RNA-seq présentée ici tourne en 20-25', c'est relativement rapide car le génome de *S. cerevisiae* est petit (environ 12 Mb). Les temps d'analyse seront plus longs avec des génomes plus gros.
 
-Procédez toujours par itérations successives. Testez votre script d'analyse RNA-seq pour 1 échantillon, puis 2 ou 3 puis la totalité.
+Procédez toujours par itérations successives. Testez votre script d'analyse RNA-seq pour 1 échantillon, puis 3, puis la totalité.
 
 Quand vous lancez un job qui sera potentiellement long, n'hésitez pas à ajouter les directives ci-dessous au début de votre script avec les autres instructions `#SBATCH` :
 
@@ -103,6 +103,10 @@ Si les fichiers que vous souhaitez récupérer sont peu nombreux et peu volumine
 
 ### Avec FileZilla
 
+```{admonition} Rappel
+L'utilisation de FileZilla avait déjà été abordée dans le tutoriel sur les [formats et échange de données en biologie](https://cupnet.net/formats-echanges-donnees-biologie/tutoriel/)
+```
+
 Lancez le logiciel FileZilla. Puis entrez les informations suivantes :
 
 - Hôte : `sftp://core.cluster.france-bioinformatique.fr`
@@ -120,7 +124,9 @@ Essayez de transférer des fichiers dans un sens puis dans l'autre. Double-cliqu
 
 ### Avec scp
 
-⚠ Uniquement si vous avez un Mac ou un Linux ou une machine sous Windows avec WSL. ⚠
+```{warning}
+Uniquement si vous avez un Mac ou un Linux ou une machine sous Windows avec WSL.
+```
 
 Depuis un shell Unix sur une machine locale, déplacez vous dans un répertoire dans lequel vous souhaitez copier les fichiers.
 
