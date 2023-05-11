@@ -65,7 +65,7 @@ Téléchargez dans un terminal de JupyterLab un premier script Bash ([`script_cl
 $ wget https://raw.githubusercontent.com/pierrepo/unix-tutorial/master/tuto3/script_cluster_0.sh
 ```
 
-Ce script est le script `script_local_2.sh` adapté pour une utilisation sur un cluster. Ouvrez ce script avec l'éditeur de texte de JupyterLab et essayez d'identifier les différences avec `script_local_2.sh`. 
+Ce script correspond au script `script_local_2.sh` adapté pour une utilisation sur un cluster. Ouvrez le script `script_cluster_0.sh` avec l'éditeur de texte de JupyterLab et essayez d'identifier les différences avec `script_local_2.sh`. 
 
 1. Au début du script, deux lignes sont nouvelles :
 
@@ -86,13 +86,15 @@ Ce script est le script `script_local_2.sh` adapté pour une utilisation sur un 
     module load cufflinks/2.2.1
     ```
 
-1. De plus, à l'étape d'indexation du génome de référence, dans la ligne
+1. L'appel aux différents programmes (`STAR`, `fastqc`, `samtools`...) est préfixé par l'instruction `srun` qui va explicitement indiquer à Slurm qu'il s'agit d'un sous-job. Nous en verrons l'utilité plus tard.
 
-    ```
+1. Pour STAR, la définition du nombre de coeurs à utiliser est défini sous la forme :
+
+    ```bash
     srun STAR --runThreadN "${SLURM_CPUS_PER_TASK}" \
     ```
 
-    la variable `SLURM_CPUS_PER_TASK` est utilisée pour indiquer à STAR le nombre de processeurs à utiliser. Cette variable est automatiquement définie par Slurm lors de l'exécution du script. Dans le cas présent, elle vaut 8. Le lancement de `STAR` est précédé de l'instruction `srun` qui va explicitement indique à Slurm qu'il s'agit d'un sous-job. Nous en verrons l'utilité plus tard.
+    La variable `SLURM_CPUS_PER_TASK` est utilisée pour indiquer à STAR le nombre de processeurs à utiliser. Cette variable est automatiquement définie par Slurm lors de l'exécution du script et la lecture de l'instruction `#SBATCH --cpus-per-task=8`. Dans le cas présent, elle vaut 8.
 
 
 Lancez enfin le script avec la commande suivante :

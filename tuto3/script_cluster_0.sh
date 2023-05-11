@@ -30,7 +30,7 @@ echo "=============================================================="
 echo "Indexer le génome de référence"
 echo "=============================================================="
 mkdir -p "genome_index"
-STAR --runThreadN "${SLURM_CPUS_PER_TASK}" \
+srun STAR --runThreadN "${SLURM_CPUS_PER_TASK}" \
 --runMode genomeGenerate \
 --genomeDir "genome_index" \
 --genomeFastaFiles "${genome_file}" \
@@ -42,13 +42,13 @@ echo "=============================================================="
 echo "Contrôler la qualité : échantillon ${sample}"
 echo "=============================================================="
 mkdir -p "reads_qc"
-fastqc "reads/${sample}.fastq.gz" --outdir "reads_qc"
+srun fastqc "reads/${sample}.fastq.gz" --outdir "reads_qc"
 
 echo "=============================================================="
 echo "Aligner les reads sur le génome de référence : échantillon ${sample}"
 echo "=============================================================="
 mkdir -p "reads_map"
-STAR --runThreadN "${SLURM_CPUS_PER_TASK}" \
+srun STAR --runThreadN "${SLURM_CPUS_PER_TASK}" \
 --runMode alignReads \
 --genomeDir genome_index \
 --sjdbGTFfile ${annotation_file} \
@@ -64,19 +64,19 @@ STAR --runThreadN "${SLURM_CPUS_PER_TASK}" \
 echo "=============================================================="
 echo "Trier les reads alignés : échantillon ${sample}"
 echo "=============================================================="
-samtools sort "reads_map/${sample}_Aligned.out.bam" \
+srun samtools sort "reads_map/${sample}_Aligned.out.bam" \
 -o "reads_map/${sample}_Aligned.sorted.out.bam"
 
 echo "=============================================================="
 echo "Indexer les reads alignés : échantillon ${sample}"
 echo "=============================================================="
-samtools index "reads_map/${sample}_Aligned.sorted.out.bam"
+srun samtools index "reads_map/${sample}_Aligned.sorted.out.bam"
 
 echo "=============================================================="
 echo "Compter les reads : échantillon ${sample}"
 echo "=============================================================="
 mkdir -p "counts/${sample}"
-htseq-count --order=pos --stranded=reverse \
+srun htseq-count --order=pos --stranded=reverse \
 --mode=intersection-nonempty \
 "reads_map/${sample}_Aligned.sorted.out.bam" \
 "${annotation_file}" > "counts/${sample}/count_${sample}.txt"
@@ -84,7 +84,7 @@ htseq-count --order=pos --stranded=reverse \
 echo "=============================================================="
 echo "Compter les transcrits : échantillon ${sample}"
 echo "=============================================================="
-cuffquant --num-threads "${SLURM_CPUS_PER_TASK}" \
+srun cuffquant --num-threads "${SLURM_CPUS_PER_TASK}" \
 --library-type=fr-firststrand "${annotation_file}" \
 "reads_map/${sample}_Aligned.sorted.out.bam" \
 --output-dir "counts/${sample}"
