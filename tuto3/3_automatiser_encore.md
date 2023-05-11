@@ -34,20 +34,19 @@ Deux nouveaux fichiers vont être créés ainsi qu'un répertoire :
 
 Avec l'éditeur de fichier de JupyterLab, ouvrez les fichiers `run_snakemake.sh` et `Snakefile`. Le fichier `run_snakemake.sh` est relativement court. Le fichier `Snakefile` est plus complexe mais vous devriez y retrouver les différentes étapes de l'analyse. Pour chaque étape d'analyse, on définit en *input* les fichiers nécessaire pour cette étape et en *output* les fichiers qui seront produits.
 
-Lancez l'analyse avec Snakemake avec la commande :
+Lancez l'analyse avec Snakemake :
 
 ```bash
 $ sbatch -A 202304_duo run_snakemake.sh
 ```
 
-La commande `sacct` ne sera ici pas très utile car tous les jobs seront lancés indépendamment les uns des autres.
+La commande `sacct` ne sera ici pas très utile car tous les jobs seront lancés **indépendamment** les uns des autres (donc avec des numéros de jobs différents).
 
-La commande `squeue` avec quelques options d'affichage sera plus utile : 
-
+La commande `squeue` avec quelques options d'affichage sera plus pertinente pour suivre la progression du calcul : 
 
 ```bash
 $ squeue --format="%.10i %.40j %.8T %.8M %.9P %.10u %R" -u $USER
 ```
 
-N'hésitez pas à préfixer cette commande par `watch -x` pour afficher l'avancement du calcul.
+N'hésitez pas à préfixer cette commande par `watch -x` pour afficher automatiquement l'avancement du calcul.
 
