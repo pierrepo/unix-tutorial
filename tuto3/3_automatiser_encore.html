@@ -416,16 +416,16 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">snakemake_profiles/</span></code> : répertoire qui contient des fichiers de configuration de Snakemake.</p></li>
 </ul>
 <p>Avec l’éditeur de fichier de JupyterLab, ouvrez les fichiers <code class="docutils literal notranslate"><span class="pre">run_snakemake.sh</span></code> et <code class="docutils literal notranslate"><span class="pre">Snakefile</span></code>. Le fichier <code class="docutils literal notranslate"><span class="pre">run_snakemake.sh</span></code> est relativement court. Le fichier <code class="docutils literal notranslate"><span class="pre">Snakefile</span></code> est plus complexe mais vous devriez y retrouver les différentes étapes de l’analyse. Pour chaque étape d’analyse, on définit en <em>input</em> les fichiers nécessaire pour cette étape et en <em>output</em> les fichiers qui seront produits.</p>
-<p>Lancez l’analyse avec Snakemake avec la commande :</p>
+<p>Lancez l’analyse avec Snakemake :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sbatch<span class="w"> </span>-A<span class="w"> </span>202304_duo<span class="w"> </span>run_snakemake.sh
 </pre></div>
 </div>
-<p>La commande <code class="docutils literal notranslate"><span class="pre">sacct</span></code> ne sera ici pas très utile car tous les jobs seront lancés indépendamment les uns des autres.</p>
-<p>La commande <code class="docutils literal notranslate"><span class="pre">squeue</span></code> avec quelques options d’affichage sera plus utile :</p>
+<p>La commande <code class="docutils literal notranslate"><span class="pre">sacct</span></code> ne sera ici pas très utile car tous les jobs seront lancés <strong>indépendamment</strong> les uns des autres (donc avec des numéros de jobs différents).</p>
+<p>La commande <code class="docutils literal notranslate"><span class="pre">squeue</span></code> avec quelques options d’affichage sera plus pertinente pour suivre la progression du calcul :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>squeue<span class="w"> </span>--format<span class="o">=</span><span class="s2">&quot;%.10i %.40j %.8T %.8M %.9P %.10u %R&quot;</span><span class="w"> </span>-u<span class="w"> </span><span class="nv">$USER</span>
 </pre></div>
 </div>
-<p>N’hésitez pas à préfixer cette commande par <code class="docutils literal notranslate"><span class="pre">watch</span> <span class="pre">-x</span></code> pour afficher l’avancement du calcul.</p>
+<p>N’hésitez pas à préfixer cette commande par <code class="docutils literal notranslate"><span class="pre">watch</span> <span class="pre">-x</span></code> pour afficher automatiquement l’avancement du calcul.</p>
 </section>
 
     <script type="text/x-thebe-config">
