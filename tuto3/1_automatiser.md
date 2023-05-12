@@ -379,4 +379,4 @@ $ squeue -u ppoulain
         33390299_2      fast script_c ppoulain  R       1:44      1 cpu-node-35
 ```
 
-Dans cet exemple le premier job (`33390286`) est déjà terminé.
+Dans cet exemple le premier job (`33390286`) est déjà terminé. Le job `33390299` est en cours d'exécution (pour 3 échantillons seulement) et le job `33390315` est en attente que le job `33390299` se termine.
