@@ -1,10 +1,15 @@
 # Automatiser encore plus avec Snakemake 🐍 ⚙
 
+## Introduction
+
 Précédemment, vous avez automatisé votre analyse RNA-seq en utilisant plusieurs scripts Bash que vous avez soumis au gestionnaire du cluster, Slurm.
 
 D'abord `script_cluster_1.sh` pour indexer le génome de référence, puis `script_cluster_2.sh` pour contrôler la qualité, aligner et quantifier les *reads* et enfin, `script_cluster_3.sh` pour normaliser les comptages de tous les échantillons.
 
-Lancer ces trois scripts les uns après les autres est fastidieux. On peut automatiser cela plus encore avec un gestionnaire de workflow comme [Snakemake](https://snakemake.readthedocs.io/en/stable/). Un gestionnaire de workflow va s'occuper de lancer les différents jobs dans le bon ordre et de gérer les dépendances entre les jobs.
+Lancer ces trois scripts les uns après les autres est fastidieux. On peut automatiser cela plus encore avec un gestionnaire de workflow comme [Snakemake](https://snakemake.readthedocs.io/en/stable/). Un gestionnaire de workflow va s'occuper de lancer les différents étapes du workflow d'analyse dans le bon ordre et de gérer les dépendances entre ces étapes.
+
+
+## Mise en oeuvre
 
 Depuis un terminal de JupyterLab, vérifiez que vous êtes toujours dans le répertoire `/shared/projects/202304_duo/$USER/rnaseq`.
 
@@ -14,7 +19,7 @@ Supprimez les répertoires qui contiennent les résultats d'une éventuelle pré
 $ rm -rf genome_index reads_qc reads_map counts slurm*.out
 ```
 
-Téléchargez le script Bash ([`snakemake.zip`](snakemake.zip)) avec la commande `wget` :
+Téléchargez le fichier ([`snakemake.zip`](snakemake.zip)) avec la commande `wget` :
 
 ```bash
 $ wget https://raw.githubusercontent.com/pierrepo/unix-tutorial/master/tuto3/snakemake.zip
@@ -50,3 +55,13 @@ $ squeue --format="%.10i %.40j %.8T %.8M %.9P %.10u %R" -u $USER
 
 N'hésitez pas à préfixer cette commande par `watch -x` pour afficher automatiquement l'avancement du calcul.
 
+```{hint}
+Utilisez la combinaison de touches <kbd>Ctrl</kbd> + <kbd>C</kbd> pour arrêter la commande `watch`.
+```
+
+## Pour aller plus loin
+
+Si vous souhaitez découvrir Snakemake, voici deux vidéos d'introduction à Snakemake :
+
+- [Reproducible data analysis with Snakemake](https://www.youtube.com/watch?v=UOKxta3061g), 2019, (YouTube, 2'). Très courte vidéo d'introduction à Snakemake.
+- [Reproducible data analysis with Snakemake](https://www.youtube.com/watch?v=hPrXcUUp70Y), 2019, (YouTube, 1h22'). Tutoriel pour une analyse RNA-Seq, par Johannes Köster, le créateur de Snakemake

@@ -366,7 +366,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -382,6 +384,16 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mise-en-oeuvre">Mise en oeuvre</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pour-aller-plus-loin">Pour aller plus loin</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -393,15 +405,20 @@ document.write(`
                   
   <section id="automatiser-encore-plus-avec-snakemake">
 <h1>Automatiser encore plus avec Snakemake 🐍 ⚙<a class="headerlink" href="#automatiser-encore-plus-avec-snakemake" title="Permalink to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
 <p>Précédemment, vous avez automatisé votre analyse RNA-seq en utilisant plusieurs scripts Bash que vous avez soumis au gestionnaire du cluster, Slurm.</p>
 <p>D’abord <code class="docutils literal notranslate"><span class="pre">script_cluster_1.sh</span></code> pour indexer le génome de référence, puis <code class="docutils literal notranslate"><span class="pre">script_cluster_2.sh</span></code> pour contrôler la qualité, aligner et quantifier les <em>reads</em> et enfin, <code class="docutils literal notranslate"><span class="pre">script_cluster_3.sh</span></code> pour normaliser les comptages de tous les échantillons.</p>
-<p>Lancer ces trois scripts les uns après les autres est fastidieux. On peut automatiser cela plus encore avec un gestionnaire de workflow comme <a class="reference external" href="https://snakemake.readthedocs.io/en/stable/">Snakemake</a>. Un gestionnaire de workflow va s’occuper de lancer les différents jobs dans le bon ordre et de gérer les dépendances entre les jobs.</p>
+<p>Lancer ces trois scripts les uns après les autres est fastidieux. On peut automatiser cela plus encore avec un gestionnaire de workflow comme <a class="reference external" href="https://snakemake.readthedocs.io/en/stable/">Snakemake</a>. Un gestionnaire de workflow va s’occuper de lancer les différents étapes du workflow d’analyse dans le bon ordre et de gérer les dépendances entre ces étapes.</p>
+</section>
+<section id="mise-en-oeuvre">
+<h2>Mise en oeuvre<a class="headerlink" href="#mise-en-oeuvre" title="Permalink to this heading">#</a></h2>
 <p>Depuis un terminal de JupyterLab, vérifiez que vous êtes toujours dans le répertoire <code class="docutils literal notranslate"><span class="pre">/shared/projects/202304_duo/$USER/rnaseq</span></code>.</p>
 <p>Supprimez les répertoires qui contiennent les résultats d’une éventuelle précédente analyse :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>genome_index<span class="w"> </span>reads_qc<span class="w"> </span>reads_map<span class="w"> </span>counts<span class="w"> </span>slurm*.out
 </pre></div>
 </div>
-<p>Téléchargez le script Bash (<a class="reference download internal" download="" href="../_downloads/bb4a4e338bdd48436e49fa5b709a7ceb/snakemake.zip"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">snakemake.zip</span></code></span></a>) avec la commande <code class="docutils literal notranslate"><span class="pre">wget</span></code> :</p>
+<p>Téléchargez le fichier (<a class="reference download internal" download="" href="../_downloads/bb4a4e338bdd48436e49fa5b709a7ceb/snakemake.zip"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">snakemake.zip</span></code></span></a>) avec la commande <code class="docutils literal notranslate"><span class="pre">wget</span></code> :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>wget<span class="w"> </span>https://raw.githubusercontent.com/pierrepo/unix-tutorial/master/tuto3/snakemake.zip
 </pre></div>
 </div>
@@ -426,6 +443,19 @@ document.write(`
 </pre></div>
 </div>
 <p>N’hésitez pas à préfixer cette commande par <code class="docutils literal notranslate"><span class="pre">watch</span> <span class="pre">-x</span></code> pour afficher automatiquement l’avancement du calcul.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Utilisez la combinaison de touches <kbd>Ctrl</kbd> + <kbd>C</kbd> pour arrêter la commande <code class="docutils literal notranslate"><span class="pre">watch</span></code>.</p>
+</div>
+</section>
+<section id="pour-aller-plus-loin">
+<h2>Pour aller plus loin<a class="headerlink" href="#pour-aller-plus-loin" title="Permalink to this heading">#</a></h2>
+<p>Si vous souhaitez découvrir Snakemake, voici deux vidéos d’introduction à Snakemake :</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=UOKxta3061g">Reproducible data analysis with Snakemake</a>, 2019, (YouTube, 2’). Très courte vidéo d’introduction à Snakemake.</p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=hPrXcUUp70Y">Reproducible data analysis with Snakemake</a>, 2019, (YouTube, 1h22’). Tutoriel pour une analyse RNA-Seq, par Johannes Köster, le créateur de Snakemake</p></li>
+</ul>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -477,6 +507,22 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mise-en-oeuvre">Mise en oeuvre</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pour-aller-plus-loin">Pour aller plus loin</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
