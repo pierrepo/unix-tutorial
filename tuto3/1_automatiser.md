@@ -74,7 +74,7 @@ Ce script correspond au script `script_local_2.sh` adapté pour une utilisation 
     #SBATCH --cpus-per-task=8
     ```
 
-    Ces lignes commencent par le caractère `#` qui indique qu'il s'agit de commentaires pour Bash, elles seront donc ignorées par le *shell*. Par contre, elles ont un sens très particulier pour le gestionnaire de jobs du cluster Slurm. Ces lignes indiquent à Slurm que le job a besoin de 2 Go de mémoire vive et de 8 processeurs pour s'exécuter.
+    Ces lignes commencent par le caractère `#` qui indique qu'il s'agit de commentaires pour Bash, elles seront donc ignorées par le *shell*. Par contre, elles ont un sens très particulier pour le gestionnaire de jobs du cluster Slurm. Ici, ces lignes indiquent à Slurm que le job a besoin de 2 Go de mémoire vive et de 8 processeurs pour s'exécuter.
 
 1. Un peu plus loin, on indique explicitement les modules (les logiciels) à charger avec leurs versions :
 
@@ -88,7 +88,7 @@ Ce script correspond au script `script_local_2.sh` adapté pour une utilisation 
 
 1. L'appel aux différents programmes (`STAR`, `fastqc`, `samtools`...) est préfixé par l'instruction `srun` qui va explicitement indiquer à Slurm qu'il s'agit d'un sous-job. Nous en verrons l'utilité plus tard.
 
-1. Pour STAR, la définition du nombre de coeurs à utiliser est défini sous la forme :
+1. Pour STAR, l'indication du nombre de coeurs à utiliser est défini sous la forme :
 
     ```bash
     srun STAR --runThreadN "${SLURM_CPUS_PER_TASK}" \
@@ -103,7 +103,7 @@ Lancez enfin le script avec la commande suivante :
 $ sbatch -A 202304_duo script_cluster_0.sh
 ```
 
-Vous devriez obtenir un message du type `Submitted batch job 33332280`. Ici, `33332280` correspond au numéro du job. Notez bien le numéro de votre job.
+Vous devriez obtenir un message du type `Submitted batch job 33389786`. Ici, `33389786` correspond au numéro du job. Notez bien le numéro de votre job.
 
 
 - L'instruction `sbatch` est la manière de demander à Slurm de lancer un script.
@@ -115,37 +115,57 @@ Vérifiez que votre script est en train de tourner avec la commande :
 $ squeue -u $USER
 ```
 
+Le statut du job devrait être `RUNNING`.
+
 Et pour avoir plus de détails, utilisez la commande :
 
 ```bash
 $ sacct --format=JobID,JobName,State,Start,Elapsed,CPUTime,NodeList -j JOBID
 ```
 
-avec `JOBID` (en fin de ligne) le numéro de votre job à remplacer par le vôtre.
+avec `JOBID` (en fin de ligne) le numéro du job à remplacer par le vôtre.
 
 Voici un exemple de sortie que vous pourriez obtenir :
 
 ```
-$ sacct --format=JobID,JobName,State,Start,Elapsed,CPUTime,NodeList -j 33332280
+$  sacct --format=JobID,JobName,State,Start,Elapsed,CPUTime,NodeList -j 33389786
        JobID    JobName      State               Start    Elapsed    CPUTime        NodeList 
 ------------ ---------- ---------- ------------------- ---------- ---------- --------------- 
-33332280     script_cl+    RUNNING 2023-05-10T00:11:56   00:01:10   00:09:20     cpu-node-19 
-33332280.ba+      batch    RUNNING 2023-05-10T00:11:56   00:01:10   00:09:20     cpu-node-19 
-33332280.0         STAR  COMPLETED 2023-05-10T00:11:57   00:00:10   00:01:20     cpu-node-19 
-33332280.1       fastqc    RUNNING 2023-05-10T00:12:07   00:00:59   00:07:52     cpu-node-19
+33389786     script_cl+    RUNNING 2023-05-12T10:25:21   00:00:46   00:06:08     cpu-node-11 
+33389786.ba+      batch    RUNNING 2023-05-12T10:25:21   00:00:46   00:06:08     cpu-node-11 
+33389786.0         STAR  COMPLETED 2023-05-12T10:25:23   00:00:08   00:01:04     cpu-node-11 
+33389786.1       fastqc    RUNNING 2023-05-12T10:25:31   00:00:36   00:04:48     cpu-node-11 
 ```
 
 Quand la colonne *State* est à `COMPLETED`, cela signifie que le sous-job est terminé. Un sous-job est créé à chaque fois que la commande `srun` est utilisée dans le script de soumission. Ici, on voit que le sous-job `STAR` est terminé, mais que le sous-job `fastqc` est toujours en cours d'exécution.
 
 Relancez régulièrement la commande précédente pour suivre l'avancement de votre job.
 
-Quand vous avez terminé l'alignement sur le génome de référence , c'est-à-dire que vous avez obtenu un second sous-job `STAR` avec le statut `COMPLETED`, stoppez le job en cours avec la commande :
+Notez le moment où vous avez terminé l'alignement sur le génome de référence, c'est-à-dire que vous avez obtenu un second sous-job `STAR` avec le statut `COMPLETED` dans la sortie renvoyée par `sacct`. Par exemple :
+
+```
+$  sacct --format=JobID,JobName,State,Start,Elapsed,CPUTime,NodeList -j 33389786
+       JobID    JobName      State               Start    Elapsed    CPUTime        NodeList 
+------------ ---------- ---------- ------------------- ---------- ---------- --------------- 
+33389786     script_cl+    RUNNING 2023-05-12T10:25:21   00:03:25   00:27:20     cpu-node-11 
+33389786.ba+      batch    RUNNING 2023-05-12T10:25:21   00:03:25   00:27:20     cpu-node-11 
+33389786.0         STAR  COMPLETED 2023-05-12T10:25:23   00:00:08   00:01:04     cpu-node-11 
+33389786.1       fastqc  COMPLETED 2023-05-12T10:25:31   00:01:23   00:11:04     cpu-node-11 
+33389786.2         STAR  COMPLETED 2023-05-12T10:26:54   00:01:36   00:12:48     cpu-node-11 
+33389786.3     samtools    RUNNING 2023-05-12T10:28:30   00:00:16   00:02:08     cpu-node-11 
+```
+
+Nous ne souhaitons pas poursuivre plus longtemps cette analyse car cela prendrait trop de temps.
+
+Stoppez le job en cours avec la commande :
 
 ```bash
 $ scancel JOBID
 ```
 
-avec `JOBID` le numéro de votre job à remplacer par le vôtre.
+avec `JOBID` le numéro de votre job.
+
+Vérifiez avec la commande `squeue -u $USER` que votre job ne tourne plus.
 
 
 ```{note}
