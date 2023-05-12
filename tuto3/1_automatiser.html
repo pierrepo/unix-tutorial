@@ -400,6 +400,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bilan">Bilan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aller-plus-loin-connecter-les-jobs">Aller plus loin : connecter les jobs</a></li>
 </ul>
             </nav>
         </div>
@@ -429,6 +430,7 @@ document.write(`
 </ul>
 </li>
 <li><p><a class="reference internal" href="#bilan" id="id9">Bilan</a></p></li>
+<li><p><a class="reference internal" href="#aller-plus-loin-connecter-les-jobs" id="id10">Aller plus loin : connecter les jobs</a></p></li>
 </ul>
 </li>
 </ul>
@@ -695,6 +697,9 @@ module<span class="w"> </span>load<span class="w"> </span>cufflinks/2.2.1
 <h2><a class="toc-backref" href="#id9" role="doc-backlink">Bilan</a><a class="headerlink" href="#bilan" title="Permalink to this heading">#</a></h2>
 <p>Vous avez lancé une analyse RNA-seq complète en utilisant le gestionnaire de ressources (Slurm) d’un cluster de calcul. Bravo ✨</p>
 <p>Un peu plus tard, nous vous inviterons à reprendre cette analyse mais cette fois sur les 50 échantillons. Pour cela, il vous faudra modifier le script <code class="docutils literal notranslate"><span class="pre">script_cluster_2.sh</span></code> en remplaçant la ligne <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--array=0-2</span></code> (pour 3 échantillons) par <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--array=0-49</span></code> (pour 50 échantillons). Pensez aussi à relancer le script  <code class="docutils literal notranslate"><span class="pre">script_cluster_3.sh</span></code> pour normaliser les résultats de comptage.</p>
+</section>
+<section id="aller-plus-loin-connecter-les-jobs">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">Aller plus loin : connecter les jobs</a><a class="headerlink" href="#aller-plus-loin-connecter-les-jobs" title="Permalink to this heading">#</a></h2>
 <p>Pour cette analyse, il faut lancer 3 scripts :  <code class="docutils literal notranslate"><span class="pre">script_cluster_1.sh</span></code>,  <code class="docutils literal notranslate"><span class="pre">script_cluster_2.sh</span></code> et  <code class="docutils literal notranslate"><span class="pre">script_cluster_3.sh</span></code>. À chaque fois, il faut attendre que le précédent soit terminé, ce qui peut être pénible. Slurm offre la possibilité de chaîner les jobs les uns avec les autres avec l’option <code class="docutils literal notranslate"><span class="pre">--dependency</span></code>. Voici un exemple d’utilisation :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sbatch<span class="w"> </span>-A<span class="w"> </span>202304_duo<span class="w"> </span>script_cluster_1.sh
 Submitted<span class="w"> </span>batch<span class="w"> </span>job<span class="w"> </span><span class="m">33390286</span>
@@ -796,6 +801,7 @@ Submitted<span class="w"> </span>batch<span class="w"> </span>job<span class="w"
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bilan">Bilan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aller-plus-loin-connecter-les-jobs">Aller plus loin : connecter les jobs</a></li>
 </ul>
   </nav></div>
 

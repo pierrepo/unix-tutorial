@@ -354,6 +354,9 @@ Vous avez lancé une analyse RNA-seq complète en utilisant le gestionnaire de r
 
 Un peu plus tard, nous vous inviterons à reprendre cette analyse mais cette fois sur les 50 échantillons. Pour cela, il vous faudra modifier le script `script_cluster_2.sh` en remplaçant la ligne `#SBATCH --array=0-2` (pour 3 échantillons) par `#SBATCH --array=0-49` (pour 50 échantillons). Pensez aussi à relancer le script  `script_cluster_3.sh` pour normaliser les résultats de comptage.
 
+
+## Aller plus loin : connecter les jobs
+
 Pour cette analyse, il faut lancer 3 scripts :  `script_cluster_1.sh`,  `script_cluster_2.sh` et  `script_cluster_3.sh`. À chaque fois, il faut attendre que le précédent soit terminé, ce qui peut être pénible. Slurm offre la possibilité de chaîner les jobs les uns avec les autres avec l'option `--dependency`. Voici un exemple d'utilisation :
 
 ```bash
