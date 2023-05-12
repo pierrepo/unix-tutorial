@@ -368,7 +368,7 @@ $ sbatch -A 202304_duo --dependency=afterok:33390299 script_cluster_3.sh
 Submitted batch job 33390315
 ```
 
-Dans l'exemple ci-dessus, le job `33390315` (pour `script_cluster_3.sh`) ne va s'exécuter que quand le job `33390299` (pour `script_cluster_2.sh`) sera terminé. Et le job `33390299` ne va s'exécuter que quand le job `33390286` (pour `script_cluster_1.sh`) sera terminé.
+Dans l'exemple ci-dessus, le job `33390315` (pour `script_cluster_3.sh`) ne va s'exécuter que quand le job `33390299` (pour `script_cluster_2.sh`) sera terminé avec succès. Et le job `33390299` ne va s'exécuter que quand le job `33390286` (pour `script_cluster_1.sh`) sera lui aussi terminé avec succès.
 
 Voici le résultat obtenu avec `squeue` : 
 
