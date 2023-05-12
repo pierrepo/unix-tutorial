@@ -1,4 +1,4 @@
-# Automatiser encore plus avec Snakemake 🐍 ⚙
+# Automatiser avec Snakemake 🐍 ⚙
 
 ## Introduction
 
@@ -64,4 +64,5 @@ Utilisez la combinaison de touches <kbd>Ctrl</kbd> + <kbd>C</kbd> pour arrêter 
 Si vous souhaitez découvrir Snakemake, voici deux vidéos d'introduction à Snakemake :
 
 - [Reproducible data analysis with Snakemake](https://www.youtube.com/watch?v=UOKxta3061g), 2019, (YouTube, 2'). Très courte vidéo d'introduction à Snakemake.
-- [Reproducible data analysis with Snakemake](https://www.youtube.com/watch?v=hPrXcUUp70Y), 2019, (YouTube, 1h22'). Tutoriel pour une analyse RNA-Seq, par Johannes Köster, le créateur de Snakemake
+- [Reproducible data analysis with Snakemake](https://www.youtube.com/watch?v=hPrXcUUp70Y), 2019, (YouTube, 1h22'). Tutoriel pour une analyse RNA-Seq, par Johannes Köster, le créateur de Snakemake.
+

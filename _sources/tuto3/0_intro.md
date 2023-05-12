@@ -40,4 +40,4 @@ Vous remarquerez que nous utilisons cette fois apparemment peu de processeurs et
 
 1. [Automatiser l'analyse RNA-seq avec un cluster](1_automatiser.md)
 1. [Compter les heures de calculs, surveiller les jobs et récupérer les résultats](2_compter_surveiller_recuperer.md)
-1. [Automatiser encore plus avec Snakemake](3_automatiser_encore.md)
+1. [Automatiser encore plus avec Snakemake](3_automatiser_snakemake.md)
