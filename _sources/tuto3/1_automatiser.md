@@ -407,4 +407,4 @@ sbatch -A 202304_duo --dependency=afterok:${jobid2} script_cluster_3.sh
 squeue -u $USER
 ```
 
-La `squeue` à la fin permet simplement de vérifier que le premier job est en cours d'exécution et que les deux autres sont en attente.
+La commande `squeue` à la fin permet simplement de vérifier que le premier job est en cours d'exécution et que les deux autres sont en attente.
