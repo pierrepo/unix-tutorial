@@ -357,13 +357,24 @@ Un peu plus tard, nous vous inviterons à reprendre cette analyse mais cette foi
 
 ## Aller plus loin : connecter les jobs
 
-Pour cette analyse, il faut lancer 3 scripts :  `script_cluster_1.sh`,  `script_cluster_2.sh` et  `script_cluster_3.sh`. À chaque fois, il faut attendre que le précédent soit terminé, ce qui peut être pénible. Slurm offre la possibilité de chaîner les jobs les uns avec les autres avec l'option `--dependency`. Voici un exemple d'utilisation :
+Pour cette analyse, il faut lancer 3 scripts :  `script_cluster_1.sh`,  `script_cluster_2.sh` et  `script_cluster_3.sh`. À chaque fois, il faut attendre que le précédent soit terminé, ce qui peut être pénible. Slurm offre la possibilité de chaîner les jobs les uns avec les autres avec l'option `--dependency`. Voici un exemple d'utilisation.
+
+Tout d'abord on lance le script `script_cluster_1.sh` :
 
 ```bash
 $ sbatch -A 202304_duo script_cluster_1.sh
 Submitted batch job 33390286
+```
+
+On récupère le job id (`33390286`) puis on lance immédiatement le script `script_cluster_2.sh` :
+```bash
 $ sbatch -A 202304_duo --dependency=afterok:33390286 script_cluster_2.sh
 Submitted batch job 33390299
+```
+
+On récupère le nouveau job id (`33390299`) puis on lance immédiatement le dernier script `script_cluster_3.sh` :
+
+```bash
 $ sbatch -A 202304_duo --dependency=afterok:33390299 script_cluster_3.sh
 Submitted batch job 33390315
 ```
@@ -383,3 +394,17 @@ $ squeue -u ppoulain
 ```
 
 Dans cet exemple le premier job (`33390286`) est déjà terminé. Le job `33390299` est en cours d'exécution (pour 3 échantillons seulement) et le job `33390315` est en attente que le job `33390299` se termine.
+
+Cette méthode évite d'attendre que le job précédent se termine pour lancer le suivant, mais il faut quand même les lancer manuellement pour récupére les différents job ids. On peut automatiser cela avec les commandes suivantes :
+
+
+```bash
+jobid1=$(sbatch -A 202304_duo script_cluster_1.sh | cut -d' ' -f 4)
+echo "Running job 1: ${jobid1}"
+jobid2=$(sbatch -A 202304_duo --dependency=afterok:${jobid1} script_cluster_2.sh | cut -d' ' -f 4)
+echo "Running job 2: ${jobid2}"
+sbatch -A 202304_duo --dependency=afterok:${jobid2} script_cluster_3.sh
+squeue -u $USER
+```
+
+La `squeue` à la fin permet simplement de vérifier que le premier job est en cours d'exécution et que les deux autres sont en attente.

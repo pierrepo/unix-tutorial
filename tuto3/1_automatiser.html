@@ -700,12 +700,19 @@ module<span class="w"> </span>load<span class="w"> </span>cufflinks/2.2.1
 </section>
 <section id="aller-plus-loin-connecter-les-jobs">
 <h2><a class="toc-backref" href="#id10" role="doc-backlink">Aller plus loin : connecter les jobs</a><a class="headerlink" href="#aller-plus-loin-connecter-les-jobs" title="Permalink to this heading">#</a></h2>
-<p>Pour cette analyse, il faut lancer 3 scripts :  <code class="docutils literal notranslate"><span class="pre">script_cluster_1.sh</span></code>,  <code class="docutils literal notranslate"><span class="pre">script_cluster_2.sh</span></code> et  <code class="docutils literal notranslate"><span class="pre">script_cluster_3.sh</span></code>. À chaque fois, il faut attendre que le précédent soit terminé, ce qui peut être pénible. Slurm offre la possibilité de chaîner les jobs les uns avec les autres avec l’option <code class="docutils literal notranslate"><span class="pre">--dependency</span></code>. Voici un exemple d’utilisation :</p>
+<p>Pour cette analyse, il faut lancer 3 scripts :  <code class="docutils literal notranslate"><span class="pre">script_cluster_1.sh</span></code>,  <code class="docutils literal notranslate"><span class="pre">script_cluster_2.sh</span></code> et  <code class="docutils literal notranslate"><span class="pre">script_cluster_3.sh</span></code>. À chaque fois, il faut attendre que le précédent soit terminé, ce qui peut être pénible. Slurm offre la possibilité de chaîner les jobs les uns avec les autres avec l’option <code class="docutils literal notranslate"><span class="pre">--dependency</span></code>. Voici un exemple d’utilisation.</p>
+<p>Tout d’abord on lance le script <code class="docutils literal notranslate"><span class="pre">script_cluster_1.sh</span></code> :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sbatch<span class="w"> </span>-A<span class="w"> </span>202304_duo<span class="w"> </span>script_cluster_1.sh
 Submitted<span class="w"> </span>batch<span class="w"> </span>job<span class="w"> </span><span class="m">33390286</span>
-$<span class="w"> </span>sbatch<span class="w"> </span>-A<span class="w"> </span>202304_duo<span class="w"> </span>--dependency<span class="o">=</span>afterok:33390286<span class="w"> </span>script_cluster_2.sh
+</pre></div>
+</div>
+<p>On récupère le job id (<code class="docutils literal notranslate"><span class="pre">33390286</span></code>) puis on lance immédiatement le script <code class="docutils literal notranslate"><span class="pre">script_cluster_2.sh</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sbatch<span class="w"> </span>-A<span class="w"> </span>202304_duo<span class="w"> </span>--dependency<span class="o">=</span>afterok:33390286<span class="w"> </span>script_cluster_2.sh
 Submitted<span class="w"> </span>batch<span class="w"> </span>job<span class="w"> </span><span class="m">33390299</span>
-$<span class="w"> </span>sbatch<span class="w"> </span>-A<span class="w"> </span>202304_duo<span class="w"> </span>--dependency<span class="o">=</span>afterok:33390299<span class="w"> </span>script_cluster_3.sh
+</pre></div>
+</div>
+<p>On récupère le nouveau job id (<code class="docutils literal notranslate"><span class="pre">33390299</span></code>) puis on lance immédiatement le dernier script <code class="docutils literal notranslate"><span class="pre">script_cluster_3.sh</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sbatch<span class="w"> </span>-A<span class="w"> </span>202304_duo<span class="w"> </span>--dependency<span class="o">=</span>afterok:33390299<span class="w"> </span>script_cluster_3.sh
 Submitted<span class="w"> </span>batch<span class="w"> </span>job<span class="w"> </span><span class="m">33390315</span>
 </pre></div>
 </div>
@@ -721,6 +728,16 @@ Submitted<span class="w"> </span>batch<span class="w"> </span>job<span class="w"
 </pre></div>
 </div>
 <p>Dans cet exemple le premier job (<code class="docutils literal notranslate"><span class="pre">33390286</span></code>) est déjà terminé. Le job <code class="docutils literal notranslate"><span class="pre">33390299</span></code> est en cours d’exécution (pour 3 échantillons seulement) et le job <code class="docutils literal notranslate"><span class="pre">33390315</span></code> est en attente que le job <code class="docutils literal notranslate"><span class="pre">33390299</span></code> se termine.</p>
+<p>Cette méthode évite d’attendre que le job précédent se termine pour lancer le suivant, mais il faut quand même les lancer manuellement pour récupére les différents job ids. On peut automatiser cela avec les commandes suivantes :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">jobid1</span><span class="o">=</span><span class="k">$(</span>sbatch<span class="w"> </span>-A<span class="w"> </span>202304_duo<span class="w"> </span>script_cluster_1.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d<span class="s1">&#39; &#39;</span><span class="w"> </span>-f<span class="w"> </span><span class="m">4</span><span class="k">)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Running job 1: </span><span class="si">${</span><span class="nv">jobid1</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nv">jobid2</span><span class="o">=</span><span class="k">$(</span>sbatch<span class="w"> </span>-A<span class="w"> </span>202304_duo<span class="w"> </span>--dependency<span class="o">=</span>afterok:<span class="si">${</span><span class="nv">jobid1</span><span class="si">}</span><span class="w"> </span>script_cluster_2.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d<span class="s1">&#39; &#39;</span><span class="w"> </span>-f<span class="w"> </span><span class="m">4</span><span class="k">)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Running job 2: </span><span class="si">${</span><span class="nv">jobid2</span><span class="si">}</span><span class="s2">&quot;</span>
+sbatch<span class="w"> </span>-A<span class="w"> </span>202304_duo<span class="w"> </span>--dependency<span class="o">=</span>afterok:<span class="si">${</span><span class="nv">jobid2</span><span class="si">}</span><span class="w"> </span>script_cluster_3.sh
+squeue<span class="w"> </span>-u<span class="w"> </span><span class="nv">$USER</span>
+</pre></div>
+</div>
+<p>La <code class="docutils literal notranslate"><span class="pre">squeue</span></code> à la fin permet simplement de vérifier que le premier job est en cours d’exécution et que les deux autres sont en attente.</p>
 </section>
 </section>
 
