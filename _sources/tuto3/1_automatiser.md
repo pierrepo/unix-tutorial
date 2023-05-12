@@ -347,3 +347,34 @@ L'exécution de ce script devrait moins d'une minute.
 
 Le fichier qui contient le comptage normalisé des transcrits est `counts/genes.count_table`.
 
+
+## Bilan
+
+Vous avez lancé une analyse RNA-seq complète en utilisant le gestionnaire de ressources (Slurm) d'un cluster de calcul. Bravo ✨
+
+Un peu plus tard, nous vous inviterons à reprendre cette analyse mais cette fois sur les 50 échantillons. Pour cela, il vous faudra modifier le script `script_cluster_2.sh` en remplaçant la ligne `#SBATCH --array=0-2` (pour 3 échantillons) par `#SBATCH --array=0-49` (pour 50 échantillons). Pensez aussi à relancer le script  `script_cluster_3.sh` pour normaliser les résultats de comptage.
+
+Pour cette analyse, il faut lancer 3 scripts :  `script_cluster_1.sh`,  `script_cluster_2.sh` et  `script_cluster_3.sh`. À chaque fois, il faut attendre que le précédent soit terminé, ce qui peut être pénible. Slurm offre la possibilité de chaîner les jobs les uns avec les autres avec l'option `--dependency`. Voici un exemple d'utilisation :
+
+```bash
+$ sbatch -A 202304_duo script_cluster_1.sh
+Submitted batch job 33390286
+$ sbatch -A 202304_duo --dependency=afterok:33390286 script_cluster_2.sh
+Submitted batch job 33390299
+$ sbatch -A 202304_duo --dependency=afterok:33390299 script_cluster_3.sh
+Submitted batch job 33390315
+```
+
+Dans l'exemple ci-dessus, le job 33390315 (pour `script_cluster_3.sh`) ne va s'exécuter que quand le job 33390299 (pour `script_cluster_2.sh`) sera terminé. Et le job 33390299 ne va s'exécuter que quand le job 33390286 (pour `script_cluster_1.sh`) sera terminé.
+
+Voici le résultat obtenu avec `squeue` (dans cet exemple le premier job est déjà terminé) : 
+
+```bash
+$ squeue -u ppoulain
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+          33390315      fast script_c ppoulain PD       0:00      1 (Dependency)
+          33389748      fast  jupyter ppoulain  R      28:36      1 cpu-node-15
+        33390299_0      fast script_c ppoulain  R       1:44      1 cpu-node-2
+        33390299_1      fast script_c ppoulain  R       1:44      1 cpu-node-30
+        33390299_2      fast script_c ppoulain  R       1:44      1 cpu-node-35
+```
