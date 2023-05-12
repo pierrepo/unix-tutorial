@@ -9,7 +9,7 @@ Dans le tutoriel précédent :
 L'objectif de ce tutoriel est d'utiliser toute la puissance d'un cluster de calcul pour analyser **simultanément** plusieurs jeux de données RNA-seq en ayant à disposition plusieurs milliers de processeurs.
 
 ```{note}
-Dans ce tutoriel, les termes « processeur » (ou *Central Processing Unit*, CPU), « cœur » (*core*) et « *thread* » seront equivalents. C'est une approximation. Un processeur est un objet physique qui est branché sur une carte mère et qui peut contenir plusieurs cœurs qui eux-mêmes peuvent avoir plusieurs *threads*.
+Dans ce tutoriel, les termes « processeur » (ou *Central Processing Unit*, CPU), « cœur » (*core*) et « *thread* » seront equivalents. C'est une approximation. Un processeur est un composant électronique qui est branché sur une carte mère et qui peut contenir plusieurs cœurs qui eux-mêmes peuvent avoir plusieurs *threads*.
 ```
 
 ## Prérequis
