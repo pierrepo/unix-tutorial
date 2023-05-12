@@ -483,7 +483,7 @@ document.write(`
 <span class="c1">#SBATCH --cpus-per-task=8</span>
 </pre></div>
 </div>
-<p>Ces lignes commencent par le caractère <code class="docutils literal notranslate"><span class="pre">#</span></code> qui indique qu’il s’agit de commentaires pour Bash, elles seront donc ignorées par le <em>shell</em>. Par contre, elles ont un sens très particulier pour le gestionnaire de jobs du cluster Slurm. Ces lignes indiquent à Slurm que le job a besoin de 2 Go de mémoire vive et de 8 processeurs pour s’exécuter.</p>
+<p>Ces lignes commencent par le caractère <code class="docutils literal notranslate"><span class="pre">#</span></code> qui indique qu’il s’agit de commentaires pour Bash, elles seront donc ignorées par le <em>shell</em>. Par contre, elles ont un sens très particulier pour le gestionnaire de jobs du cluster Slurm. Ici, ces lignes indiquent à Slurm que le job a besoin de 2 Go de mémoire vive et de 8 processeurs pour s’exécuter.</p>
 </li>
 <li><p>Un peu plus loin, on indique explicitement les modules (les logiciels) à charger avec leurs versions :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>module<span class="w"> </span>load<span class="w"> </span>fastqc/0.11.9
@@ -495,7 +495,7 @@ module<span class="w"> </span>load<span class="w"> </span>cufflinks/2.2.1
 </div>
 </li>
 <li><p>L’appel aux différents programmes (<code class="docutils literal notranslate"><span class="pre">STAR</span></code>, <code class="docutils literal notranslate"><span class="pre">fastqc</span></code>, <code class="docutils literal notranslate"><span class="pre">samtools</span></code>…) est préfixé par l’instruction <code class="docutils literal notranslate"><span class="pre">srun</span></code> qui va explicitement indiquer à Slurm qu’il s’agit d’un sous-job. Nous en verrons l’utilité plus tard.</p></li>
-<li><p>Pour STAR, la définition du nombre de coeurs à utiliser est défini sous la forme :</p>
+<li><p>Pour STAR, l’indication du nombre de coeurs à utiliser est défini sous la forme :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>srun<span class="w"> </span>STAR<span class="w"> </span>--runThreadN<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">SLURM_CPUS_PER_TASK</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
 </pre></div>
 </div>
@@ -506,7 +506,7 @@ module<span class="w"> </span>load<span class="w"> </span>cufflinks/2.2.1
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sbatch<span class="w"> </span>-A<span class="w"> </span>202304_duo<span class="w"> </span>script_cluster_0.sh
 </pre></div>
 </div>
-<p>Vous devriez obtenir un message du type <code class="docutils literal notranslate"><span class="pre">Submitted</span> <span class="pre">batch</span> <span class="pre">job</span> <span class="pre">33332280</span></code>. Ici, <code class="docutils literal notranslate"><span class="pre">33332280</span></code> correspond au numéro du job. Notez bien le numéro de votre job.</p>
+<p>Vous devriez obtenir un message du type <code class="docutils literal notranslate"><span class="pre">Submitted</span> <span class="pre">batch</span> <span class="pre">job</span> <span class="pre">33389786</span></code>. Ici, <code class="docutils literal notranslate"><span class="pre">33389786</span></code> correspond au numéro du job. Notez bien le numéro de votre job.</p>
 <ul class="simple">
 <li><p>L’instruction <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> est la manière de demander à Slurm de lancer un script.</p></li>
 <li><p>L’option <code class="docutils literal notranslate"><span class="pre">-A</span> <span class="pre">202304_duo</span></code> spécifie quel projet utiliser (facturer) pour cette commande. Un même utilisateur peut appartenir à plusieurs projets. Le nombre d’heures de calcul attribuées à un projet étant limité, il est important de savoir quel projet imputer pour telle ou telle commande. Pensez-y pour vos futurs projets.</p></li>
@@ -515,28 +515,43 @@ module<span class="w"> </span>load<span class="w"> </span>cufflinks/2.2.1
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>squeue<span class="w"> </span>-u<span class="w"> </span><span class="nv">$USER</span>
 </pre></div>
 </div>
+<p>Le statut du job devrait être <code class="docutils literal notranslate"><span class="pre">RUNNING</span></code>.</p>
 <p>Et pour avoir plus de détails, utilisez la commande :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sacct<span class="w"> </span>--format<span class="o">=</span>JobID,JobName,State,Start,Elapsed,CPUTime,NodeList<span class="w"> </span>-j<span class="w"> </span>JOBID
 </pre></div>
 </div>
-<p>avec <code class="docutils literal notranslate"><span class="pre">JOBID</span></code> (en fin de ligne) le numéro de votre job à remplacer par le vôtre.</p>
+<p>avec <code class="docutils literal notranslate"><span class="pre">JOBID</span></code> (en fin de ligne) le numéro du job à remplacer par le vôtre.</p>
 <p>Voici un exemple de sortie que vous pourriez obtenir :</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sacct --format=JobID,JobName,State,Start,Elapsed,CPUTime,NodeList -j 33332280
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$  sacct --format=JobID,JobName,State,Start,Elapsed,CPUTime,NodeList -j 33389786
        JobID    JobName      State               Start    Elapsed    CPUTime        NodeList 
 ------------ ---------- ---------- ------------------- ---------- ---------- --------------- 
-33332280     script_cl+    RUNNING 2023-05-10T00:11:56   00:01:10   00:09:20     cpu-node-19 
-33332280.ba+      batch    RUNNING 2023-05-10T00:11:56   00:01:10   00:09:20     cpu-node-19 
-33332280.0         STAR  COMPLETED 2023-05-10T00:11:57   00:00:10   00:01:20     cpu-node-19 
-33332280.1       fastqc    RUNNING 2023-05-10T00:12:07   00:00:59   00:07:52     cpu-node-19
+33389786     script_cl+    RUNNING 2023-05-12T10:25:21   00:00:46   00:06:08     cpu-node-11 
+33389786.ba+      batch    RUNNING 2023-05-12T10:25:21   00:00:46   00:06:08     cpu-node-11 
+33389786.0         STAR  COMPLETED 2023-05-12T10:25:23   00:00:08   00:01:04     cpu-node-11 
+33389786.1       fastqc    RUNNING 2023-05-12T10:25:31   00:00:36   00:04:48     cpu-node-11 
 </pre></div>
 </div>
 <p>Quand la colonne <em>State</em> est à <code class="docutils literal notranslate"><span class="pre">COMPLETED</span></code>, cela signifie que le sous-job est terminé. Un sous-job est créé à chaque fois que la commande <code class="docutils literal notranslate"><span class="pre">srun</span></code> est utilisée dans le script de soumission. Ici, on voit que le sous-job <code class="docutils literal notranslate"><span class="pre">STAR</span></code> est terminé, mais que le sous-job <code class="docutils literal notranslate"><span class="pre">fastqc</span></code> est toujours en cours d’exécution.</p>
 <p>Relancez régulièrement la commande précédente pour suivre l’avancement de votre job.</p>
-<p>Quand vous avez terminé l’alignement sur le génome de référence , c’est-à-dire que vous avez obtenu un second sous-job <code class="docutils literal notranslate"><span class="pre">STAR</span></code> avec le statut <code class="docutils literal notranslate"><span class="pre">COMPLETED</span></code>, stoppez le job en cours avec la commande :</p>
+<p>Notez le moment où vous avez terminé l’alignement sur le génome de référence, c’est-à-dire que vous avez obtenu un second sous-job <code class="docutils literal notranslate"><span class="pre">STAR</span></code> avec le statut <code class="docutils literal notranslate"><span class="pre">COMPLETED</span></code> dans la sortie renvoyée par <code class="docutils literal notranslate"><span class="pre">sacct</span></code>. Par exemple :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$  sacct --format=JobID,JobName,State,Start,Elapsed,CPUTime,NodeList -j 33389786
+       JobID    JobName      State               Start    Elapsed    CPUTime        NodeList 
+------------ ---------- ---------- ------------------- ---------- ---------- --------------- 
+33389786     script_cl+    RUNNING 2023-05-12T10:25:21   00:03:25   00:27:20     cpu-node-11 
+33389786.ba+      batch    RUNNING 2023-05-12T10:25:21   00:03:25   00:27:20     cpu-node-11 
+33389786.0         STAR  COMPLETED 2023-05-12T10:25:23   00:00:08   00:01:04     cpu-node-11 
+33389786.1       fastqc  COMPLETED 2023-05-12T10:25:31   00:01:23   00:11:04     cpu-node-11 
+33389786.2         STAR  COMPLETED 2023-05-12T10:26:54   00:01:36   00:12:48     cpu-node-11 
+33389786.3     samtools    RUNNING 2023-05-12T10:28:30   00:00:16   00:02:08     cpu-node-11 
+</pre></div>
+</div>
+<p>Nous ne souhaitons pas poursuivre plus longtemps cette analyse car cela prendrait trop de temps.</p>
+<p>Stoppez le job en cours avec la commande :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>scancel<span class="w"> </span>JOBID
 </pre></div>
 </div>
-<p>avec <code class="docutils literal notranslate"><span class="pre">JOBID</span></code> le numéro de votre job à remplacer par le vôtre.</p>
+<p>avec <code class="docutils literal notranslate"><span class="pre">JOBID</span></code> le numéro de votre job.</p>
+<p>Vérifiez avec la commande <code class="docutils literal notranslate"><span class="pre">squeue</span> <span class="pre">-u</span> <span class="pre">$USER</span></code> que votre job ne tourne plus.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Le fichier <code class="docutils literal notranslate"><span class="pre">slurm-JOBID.out</span></code> (avec <code class="docutils literal notranslate"><span class="pre">JOBID</span></code> le numéro de votre job) contient le « journal » de votre job. C’est-à-dire tout ce qui s’affiche habituellement à l’écran a été enregistré dans ce fichier.</p>
