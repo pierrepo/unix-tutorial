@@ -365,11 +365,11 @@ $ sbatch -A 202304_duo --dependency=afterok:33390299 script_cluster_3.sh
 Submitted batch job 33390315
 ```
 
-Dans l'exemple ci-dessus, le job 33390315 (pour `script_cluster_3.sh`) ne va s'exécuter que quand le job 33390299 (pour `script_cluster_2.sh`) sera terminé. Et le job 33390299 ne va s'exécuter que quand le job 33390286 (pour `script_cluster_1.sh`) sera terminé.
+Dans l'exemple ci-dessus, le job `33390315` (pour `script_cluster_3.sh`) ne va s'exécuter que quand le job `33390299` (pour `script_cluster_2.sh`) sera terminé. Et le job `33390299` ne va s'exécuter que quand le job `33390286` (pour `script_cluster_1.sh`) sera terminé.
 
-Voici le résultat obtenu avec `squeue` (dans cet exemple le premier job est déjà terminé) : 
+Voici le résultat obtenu avec `squeue` : 
 
-```bash
+```
 $ squeue -u ppoulain
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
           33390315      fast script_c ppoulain PD       0:00      1 (Dependency)
@@ -378,3 +378,5 @@ $ squeue -u ppoulain
         33390299_1      fast script_c ppoulain  R       1:44      1 cpu-node-30
         33390299_2      fast script_c ppoulain  R       1:44      1 cpu-node-35
 ```
+
+Dans cet exemple le premier job (`33390286`) est déjà terminé.

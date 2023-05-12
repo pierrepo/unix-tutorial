@@ -704,17 +704,18 @@ $<span class="w"> </span>sbatch<span class="w"> </span>-A<span class="w"> </span
 Submitted<span class="w"> </span>batch<span class="w"> </span>job<span class="w"> </span><span class="m">33390315</span>
 </pre></div>
 </div>
-<p>Dans l’exemple ci-dessus, le job 33390315 (pour <code class="docutils literal notranslate"><span class="pre">script_cluster_3.sh</span></code>) ne va s’exécuter que quand le job 33390299 (pour <code class="docutils literal notranslate"><span class="pre">script_cluster_2.sh</span></code>) sera terminé. Et le job 33390299 ne va s’exécuter que quand le job 33390286 (pour <code class="docutils literal notranslate"><span class="pre">script_cluster_1.sh</span></code>) sera terminé.</p>
-<p>Voici le résultat obtenu avec <code class="docutils literal notranslate"><span class="pre">squeue</span></code> (dans cet exemple le premier job est déjà terminé) :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>squeue<span class="w"> </span>-u<span class="w"> </span>ppoulain
-<span class="w">             </span>JOBID<span class="w"> </span>PARTITION<span class="w">     </span>NAME<span class="w">     </span>USER<span class="w"> </span>ST<span class="w">       </span>TIME<span class="w">  </span>NODES<span class="w"> </span>NODELIST<span class="o">(</span>REASON<span class="o">)</span>
-<span class="w">          </span><span class="m">33390315</span><span class="w">      </span>fast<span class="w"> </span>script_c<span class="w"> </span>ppoulain<span class="w"> </span>PD<span class="w">       </span><span class="m">0</span>:00<span class="w">      </span><span class="m">1</span><span class="w"> </span><span class="o">(</span>Dependency<span class="o">)</span>
-<span class="w">          </span><span class="m">33389748</span><span class="w">      </span>fast<span class="w">  </span>jupyter<span class="w"> </span>ppoulain<span class="w">  </span>R<span class="w">      </span><span class="m">28</span>:36<span class="w">      </span><span class="m">1</span><span class="w"> </span>cpu-node-15
-<span class="w">        </span>33390299_0<span class="w">      </span>fast<span class="w"> </span>script_c<span class="w"> </span>ppoulain<span class="w">  </span>R<span class="w">       </span><span class="m">1</span>:44<span class="w">      </span><span class="m">1</span><span class="w"> </span>cpu-node-2
-<span class="w">        </span>33390299_1<span class="w">      </span>fast<span class="w"> </span>script_c<span class="w"> </span>ppoulain<span class="w">  </span>R<span class="w">       </span><span class="m">1</span>:44<span class="w">      </span><span class="m">1</span><span class="w"> </span>cpu-node-30
-<span class="w">        </span>33390299_2<span class="w">      </span>fast<span class="w"> </span>script_c<span class="w"> </span>ppoulain<span class="w">  </span>R<span class="w">       </span><span class="m">1</span>:44<span class="w">      </span><span class="m">1</span><span class="w"> </span>cpu-node-35
+<p>Dans l’exemple ci-dessus, le job <code class="docutils literal notranslate"><span class="pre">33390315</span></code> (pour <code class="docutils literal notranslate"><span class="pre">script_cluster_3.sh</span></code>) ne va s’exécuter que quand le job <code class="docutils literal notranslate"><span class="pre">33390299</span></code> (pour <code class="docutils literal notranslate"><span class="pre">script_cluster_2.sh</span></code>) sera terminé. Et le job <code class="docutils literal notranslate"><span class="pre">33390299</span></code> ne va s’exécuter que quand le job <code class="docutils literal notranslate"><span class="pre">33390286</span></code> (pour <code class="docutils literal notranslate"><span class="pre">script_cluster_1.sh</span></code>) sera terminé.</p>
+<p>Voici le résultat obtenu avec <code class="docutils literal notranslate"><span class="pre">squeue</span></code> :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ squeue -u ppoulain
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+          33390315      fast script_c ppoulain PD       0:00      1 (Dependency)
+          33389748      fast  jupyter ppoulain  R      28:36      1 cpu-node-15
+        33390299_0      fast script_c ppoulain  R       1:44      1 cpu-node-2
+        33390299_1      fast script_c ppoulain  R       1:44      1 cpu-node-30
+        33390299_2      fast script_c ppoulain  R       1:44      1 cpu-node-35
 </pre></div>
 </div>
+<p>Dans cet exemple le premier job (<code class="docutils literal notranslate"><span class="pre">33390286</span></code>) est déjà terminé.</p>
 </section>
 </section>
 
