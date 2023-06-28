@@ -220,7 +220,7 @@ Lors de l'utilisation de `STAR` pour l'indexation du génome de référence et l
 Lors de l'utilisation de `cuffquant` pour le comptage des transcrits, l'option `--num-threads 4` a été ajoutée pour utiliser 4 coeurs.
 ````
 
-Supprimez les répertoires qui contiennet les résultats de l'analyse précédente :
+Supprimez les répertoires qui contiennent les résultats de l'analyse précédente :
 
 ```bash
 $ rm -rf genome_index reads_qc reads_map counts
