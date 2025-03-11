@@ -9,7 +9,7 @@ Le *shell* fonctionne sur un ordinateur, qui n'a aucune capacité d'abstraction 
 1. Respecter la casse, c'est-à-dire l'utilisation des majuscules et des minuscules. Par exemple la commande `ls` existe mais pas `LS` ou `Ls`.
 2. Comprendre que le caractère espace est utilisé pour séparer l'instruction des options et des arguments et que par conséquent **ce caractère ne doit plus être utilisé** dans les noms de fichiers ou de répertoires. 
 
-Enfin, un terminal (ou une console) est un logiciel graphique qui lance un *shell*. C'est ce dernier (le *shell*) qui va exécuter vos ordres.
+Enfin, un terminal (ou une console) est un logiciel graphique qui lance un *shell*. C'est ce dernier (le *shell*) qui va exécuter vos instructions.
 
 
 ## 1. Invite de commande

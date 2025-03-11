@@ -6,7 +6,7 @@ root: intro
 parts:
 - caption: JupyterHub du cluster IFB
   chapters:
-  - file: connection
+  - file: connexion
   - file: gestion_compte_ifb
 - caption: Introduction à Unix
   chapters:
