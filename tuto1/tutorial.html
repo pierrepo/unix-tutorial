@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Un aperçu du shell Unix &#8212; Unix tutorial</title>
   
@@ -15,52 +14,49 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'tuto1/tutorial';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -75,19 +71,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -109,12 +109,20 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -129,9 +137,13 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
+  
+    
   
 
 <a class="navbar-brand logo" href="../intro.html">
+  
   
   
   
@@ -141,12 +153,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Unix tutorial - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Unix tutorial - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -158,7 +181,7 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">JupyterHub du cluster IFB</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../connection.html">Connexion au JupyterHub de l’IFB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../connexion.html">Connexion à l’application JupyterLab de l’IFB</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../gestion_compte_ifb.html">Gestion de votre compte utilisateur sur le cluster de calcul</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction à Unix</span></p>
@@ -195,7 +218,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -204,14 +227,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -350,26 +373,28 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -444,10 +469,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section id="un-apercu-du-shell-unix">
-<h1>Un  aperçu du shell Unix<a class="headerlink" href="#un-apercu-du-shell-unix" title="Permalink to this heading">#</a></h1>
+<h1>Un  aperçu du shell Unix<a class="headerlink" href="#un-apercu-du-shell-unix" title="Link to this heading">#</a></h1>
 <p>Un <em>shell</em> est un programme qui attend un ordre de la part de l’utilisateur, exécute cet ordre, affiche le résultat puis attend à nouveau un ordre. En anglais on parle de <em>REPL</em> pour <em>Read Execute Print Loop</em>. Il existe plusieurs <em>shells</em> : <em>Bash</em>, <em>csh</em>, <em>zsh</em>… Ici on ne parlera que du <em>shell</em> <em>Bash</em> qui est le plus utilisé. Cela dit, toutes les commandes présentées ici sont communes à tous les <em>shells</em> Unix.</p>
 <p>Lorsqu’on donne des ordres à un <em>shell</em>, on utilise ni menu, ni bouton, ni case à cocher. Tous les ordres sont <strong>écrits</strong> au <em>shell</em>.</p>
 <p>Le <em>shell</em> fonctionne sur un ordinateur, qui n’a aucune capacité d’abstraction ni d’intuition. Pour que les ordres donnés au <em>shell</em> soient compris et exécutés, il faut respecter des règles bien précises :</p>
@@ -455,9 +480,9 @@ document.write(`
 <li><p>Respecter la casse, c’est-à-dire l’utilisation des majuscules et des minuscules. Par exemple la commande <code class="docutils literal notranslate"><span class="pre">ls</span></code> existe mais pas <code class="docutils literal notranslate"><span class="pre">LS</span></code> ou <code class="docutils literal notranslate"><span class="pre">Ls</span></code>.</p></li>
 <li><p>Comprendre que le caractère espace est utilisé pour séparer l’instruction des options et des arguments et que par conséquent <strong>ce caractère ne doit plus être utilisé</strong> dans les noms de fichiers ou de répertoires.</p></li>
 </ol>
-<p>Enfin, un terminal (ou une console) est un logiciel graphique qui lance un <em>shell</em>. C’est ce dernier (le <em>shell</em>) qui va exécuter vos ordres.</p>
+<p>Enfin, un terminal (ou une console) est un logiciel graphique qui lance un <em>shell</em>. C’est ce dernier (le <em>shell</em>) qui va exécuter vos instructions.</p>
 <section id="invite-de-commande">
-<h2>1. Invite de commande<a class="headerlink" href="#invite-de-commande" title="Permalink to this heading">#</a></h2>
+<h2>1. Invite de commande<a class="headerlink" href="#invite-de-commande" title="Link to this heading">#</a></h2>
 <p>Lorsque vous lancez un <em>shell</em>, l’invite de commande, c’est-à-dire la zone à gauche du curseur, ressemble à quelque chose du type :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pierre@jeera:~$
 </pre></div>
@@ -481,7 +506,7 @@ document.write(`
 <p>signifie : tapez l’instruction <code class="docutils literal notranslate"><span class="pre">pwd</span></code> dans le <em>shell</em> (sans le <code class="docutils literal notranslate"><span class="pre">$</span></code>), puis validez cette commande en pressant la touche <kbd>Entrée</kbd>.</p>
 </section>
 <section id="preparer-les-donnees">
-<h2>2. Préparer les données<a class="headerlink" href="#preparer-les-donnees" title="Permalink to this heading">#</a></h2>
+<h2>2. Préparer les données<a class="headerlink" href="#preparer-les-donnees" title="Link to this heading">#</a></h2>
 <p>Pour reproduire les exemples suivants, vous allez préparer les données nécessaires. Déplacez-vous tout d’abord dans votre répertoire utilisateur avec la commande <code class="docutils literal notranslate"><span class="pre">cd</span></code> :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span>
 </pre></div>
@@ -499,9 +524,9 @@ $<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>unix
 <p>Ces commandes seront en partie expliquées plus loin. Pour ne pas réécrire complètement ces commandes, vous pouvez les copier / coller avec les raccourcis <kbd>Ctrl</kbd>+<kbd>C</kbd> pour copier et <kbd>Ctrl</kbd>+<kbd>V</kbd> (ou parfois <kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>C</kbd>) pour coller.</p>
 </section>
 <section id="parcourir-les-repertoires-et-les-fichiers">
-<h2>3. Parcourir les répertoires et les fichiers<a class="headerlink" href="#parcourir-les-repertoires-et-les-fichiers" title="Permalink to this heading">#</a></h2>
+<h2>3. Parcourir les répertoires et les fichiers<a class="headerlink" href="#parcourir-les-repertoires-et-les-fichiers" title="Link to this heading">#</a></h2>
 <section id="savoir-ou-on-se-trouve-pwd">
-<h3>Savoir où on se trouve : <code class="docutils literal notranslate"><span class="pre">pwd</span></code><a class="headerlink" href="#savoir-ou-on-se-trouve-pwd" title="Permalink to this heading">#</a></h3>
+<h3>Savoir où on se trouve : <code class="docutils literal notranslate"><span class="pre">pwd</span></code><a class="headerlink" href="#savoir-ou-on-se-trouve-pwd" title="Link to this heading">#</a></h3>
 <p>La première commande à connaître est la commande <code class="docutils literal notranslate"><span class="pre">pwd</span></code> qui signifie <em>print working directory</em> et qui affiche le nom du répertoire courant.</p>
 <p>Par exemple :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">pwd</span>
@@ -528,7 +553,7 @@ $<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>unix
 <p>Lorsqu’un chemin débute par <code class="docutils literal notranslate"><span class="pre">/</span></code> (la racine), on parle de <strong>chemin absolu</strong>. Il existe aussi des <strong>chemins relatifs</strong> (donc qui ne débutent pas par <code class="docutils literal notranslate"><span class="pre">/</span></code>) que l’on verra plus tard.</p>
 </section>
 <section id="afficher-le-contenu-d-un-repertoire-ls">
-<h3>Afficher le contenu d’un répertoire : <code class="docutils literal notranslate"><span class="pre">ls</span></code><a class="headerlink" href="#afficher-le-contenu-d-un-repertoire-ls" title="Permalink to this heading">#</a></h3>
+<h3>Afficher le contenu d’un répertoire : <code class="docutils literal notranslate"><span class="pre">ls</span></code><a class="headerlink" href="#afficher-le-contenu-d-un-repertoire-ls" title="Link to this heading">#</a></h3>
 <p>La commande <code class="docutils literal notranslate"><span class="pre">ls</span></code> (pour <em>list</em>) affiche le contenu d’un répertoire :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ls
 genomes<span class="w">  </span>paper.pdf<span class="w">  </span>protein.txt<span class="w">  </span>shopping.txt<span class="w">  </span>transferrin.csv<span class="w">	</span>transferrin.tsv
@@ -632,7 +657,7 @@ NC_002976_head.gbk<span class="w">  </span>NC_006840_head.gbk<span class="w">  <
 </div>
 </section>
 <section id="se-documenter-man-et-help">
-<h3>Se documenter : <code class="docutils literal notranslate"><span class="pre">man</span></code> et <code class="docutils literal notranslate"><span class="pre">--help</span></code><a class="headerlink" href="#se-documenter-man-et-help" title="Permalink to this heading">#</a></h3>
+<h3>Se documenter : <code class="docutils literal notranslate"><span class="pre">man</span></code> et <code class="docutils literal notranslate"><span class="pre">--help</span></code><a class="headerlink" href="#se-documenter-man-et-help" title="Link to this heading">#</a></h3>
 <p>La commande <code class="docutils literal notranslate"><span class="pre">man</span></code> (pour <em>manuel</em>) affiche la documentation associée à une commande. Par exemple pour la commande <code class="docutils literal notranslate"><span class="pre">ls</span></code> :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>man<span class="w"> </span>ls
 </pre></div>
@@ -656,7 +681,7 @@ Mandatory<span class="w"> </span>arguments<span class="w"> </span>to<span class=
 </div>
 </section>
 <section id="preter-attention-aux-noms-de-fichiers-et-repertoires">
-<h3>Prêter attention aux noms de fichiers et répertoires<a class="headerlink" href="#preter-attention-aux-noms-de-fichiers-et-repertoires" title="Permalink to this heading">#</a></h3>
+<h3>Prêter attention aux noms de fichiers et répertoires<a class="headerlink" href="#preter-attention-aux-noms-de-fichiers-et-repertoires" title="Link to this heading">#</a></h3>
 <p>Sous Unix, les noms de fichiers et de répertoires sont sensibles à la casse, c’est-à-dire aux majuscules et aux minuscules. Par conséquent, le <em>shell</em> fait la différence entre le fichier <code class="docutils literal notranslate"><span class="pre">test.txt</span></code> et le fichier <code class="docutils literal notranslate"><span class="pre">Test.txt</span></code>.</p>
 <p>Par ailleurs, l’extension de fichier est facultative et purement indicative. Le <em>shell</em> ne l’utilise pas. Elle sert simplement à l’utilisateur pour mieux organiser ses fichiers. Un nom de fichier du type <code class="docutils literal notranslate"><span class="pre">test</span></code> ou <code class="docutils literal notranslate"><span class="pre">test.my_extension</span></code> est parfaitement valide. On peut même nommer un répertoire <code class="docutils literal notranslate"><span class="pre">directory.txt</span></code> (mais ce n’est pas très malin 🙄).</p>
 <p>Enfin, pour nommer un fichier ou un répertoire, on peut utiliser :</p>
@@ -673,7 +698,7 @@ Mandatory<span class="w"> </span>arguments<span class="w"> </span>to<span class=
 <p>Pour le reste, laisser faire votre imagination et utilisez des noms de fichiers et de répertoires expressifs.</p>
 </section>
 <section id="se-deplacer-cd">
-<h3>Se déplacer : <code class="docutils literal notranslate"><span class="pre">cd</span></code><a class="headerlink" href="#se-deplacer-cd" title="Permalink to this heading">#</a></h3>
+<h3>Se déplacer : <code class="docutils literal notranslate"><span class="pre">cd</span></code><a class="headerlink" href="#se-deplacer-cd" title="Link to this heading">#</a></h3>
 <p>La commande <code class="docutils literal notranslate"><span class="pre">cd</span></code> (pour <em>change directory</em>) permet de se déplacer d’un répertoire à l’autre. Par exemple :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">pwd</span>
 /shared/home/ppoulain/unix
@@ -710,7 +735,7 @@ $<span class="w"> </span><span class="nb">pwd</span>
 </div>
 </section>
 <section id="creer-un-repertoire-mkdir">
-<h3>Créer un répertoire : <code class="docutils literal notranslate"><span class="pre">mkdir</span></code><a class="headerlink" href="#creer-un-repertoire-mkdir" title="Permalink to this heading">#</a></h3>
+<h3>Créer un répertoire : <code class="docutils literal notranslate"><span class="pre">mkdir</span></code><a class="headerlink" href="#creer-un-repertoire-mkdir" title="Link to this heading">#</a></h3>
 <p>Revenez au préalable dans le bon répertoire avec la commande :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>~/unix
 $<span class="w"> </span><span class="nb">pwd</span>
@@ -727,7 +752,7 @@ genomes<span class="w">  </span>paper.pdf<span class="w">  </span>protein.txt<sp
 </div>
 </section>
 <section id="copier-cp">
-<h3>Copier : <code class="docutils literal notranslate"><span class="pre">cp</span></code><a class="headerlink" href="#copier-cp" title="Permalink to this heading">#</a></h3>
+<h3>Copier : <code class="docutils literal notranslate"><span class="pre">cp</span></code><a class="headerlink" href="#copier-cp" title="Link to this heading">#</a></h3>
 <p>La commande <code class="docutils literal notranslate"><span class="pre">cp</span></code> (pour <em>copy</em>) copie un fichier vers un nouveau fichier :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ls
 genomes<span class="w">  </span>paper.pdf<span class="w">  </span>protein.txt<span class="w">  </span>shopping.txt<span class="w">  </span><span class="nb">test</span><span class="w">  </span>transferrin.csv<span class="w">  </span>transferrin.tsv
@@ -751,7 +776,7 @@ article.pdf<span class="w">  </span>genomes<span class="w">  </span>paper.pdf
 </div>
 </section>
 <section id="visualiser-une-bout-d-arborescence-tree">
-<h3>Visualiser une bout d’arborescence : <code class="docutils literal notranslate"><span class="pre">tree</span></code><a class="headerlink" href="#visualiser-une-bout-d-arborescence-tree" title="Permalink to this heading">#</a></h3>
+<h3>Visualiser une bout d’arborescence : <code class="docutils literal notranslate"><span class="pre">tree</span></code><a class="headerlink" href="#visualiser-une-bout-d-arborescence-tree" title="Link to this heading">#</a></h3>
 <p>La commande <code class="docutils literal notranslate"><span class="pre">tree</span></code> permet de visualiser une partie de l’arborescence des répertoires et des fichiers. Par exemple, pour visualiser l’arborescence du répertoire <code class="docutils literal notranslate"><span class="pre">test</span></code> :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>tree<span class="w"> </span>test/
 test/
@@ -784,7 +809,7 @@ test/
 </div>
 </section>
 <section id="renommer-et-deplacer-mv">
-<h3>Renommer et déplacer : <code class="docutils literal notranslate"><span class="pre">mv</span></code><a class="headerlink" href="#renommer-et-deplacer-mv" title="Permalink to this heading">#</a></h3>
+<h3>Renommer et déplacer : <code class="docutils literal notranslate"><span class="pre">mv</span></code><a class="headerlink" href="#renommer-et-deplacer-mv" title="Link to this heading">#</a></h3>
 <p>La commande <code class="docutils literal notranslate"><span class="pre">mv</span></code> (pour <em>move</em>) renomme des fichiers ou des répertoires :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ls
 article.pdf<span class="w">  </span>genomes<span class="w">  </span>paper.pdf<span class="w">  </span>protein.txt<span class="w">  </span>shopping.txt<span class="w">  </span><span class="nb">test</span><span class="w">  </span>transferrin.csv<span class="w">  </span>transferrin.tsv
@@ -809,7 +834,7 @@ genomes<span class="w">  </span>paper.pdf<span class="w">  </span>protein.txt<sp
 </div>
 </section>
 <section id="supprimer-rm">
-<h3>Supprimer : <code class="docutils literal notranslate"><span class="pre">rm</span></code><a class="headerlink" href="#supprimer-rm" title="Permalink to this heading">#</a></h3>
+<h3>Supprimer : <code class="docutils literal notranslate"><span class="pre">rm</span></code><a class="headerlink" href="#supprimer-rm" title="Link to this heading">#</a></h3>
 <p>La commande <code class="docutils literal notranslate"><span class="pre">rm</span></code> (pour <em>remove</em>) supprime des fichiers ou des répertoires :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>test3
 $<span class="w"> </span>ls
@@ -829,7 +854,7 @@ $<span class="w"> </span>ls
 </div>
 </section>
 <section id="automatiser-un-peu">
-<h3>Automatiser (un peu)<a class="headerlink" href="#automatiser-un-peu" title="Permalink to this heading">#</a></h3>
+<h3>Automatiser (un peu)<a class="headerlink" href="#automatiser-un-peu" title="Link to this heading">#</a></h3>
 <p>Les caractères <code class="docutils literal notranslate"><span class="pre">*</span></code> et <code class="docutils literal notranslate"><span class="pre">?</span></code> peuvent remplacer n’importe quels caractères dans les noms de fichiers ou de répertoires :</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">*</span></code> remplace 0, 1 ou plus caractères.</p></li>
@@ -857,28 +882,28 @@ transferrin.csv<span class="w">  </span>transferrin.tsv
 </section>
 </section>
 <section id="trucs-et-astuces">
-<h2>4. Trucs et astuces<a class="headerlink" href="#trucs-et-astuces" title="Permalink to this heading">#</a></h2>
+<h2>4. Trucs et astuces<a class="headerlink" href="#trucs-et-astuces" title="Link to this heading">#</a></h2>
 <p>Écrire des commandes dans un <em>shell</em> peut sembler rébarbatif mais on gagne rapidement en efficacité avec les astuces suivantes.</p>
 <section id="rappel-des-anciennes-commandes">
-<h3>Rappel des anciennes commandes<a class="headerlink" href="#rappel-des-anciennes-commandes" title="Permalink to this heading">#</a></h3>
+<h3>Rappel des anciennes commandes<a class="headerlink" href="#rappel-des-anciennes-commandes" title="Link to this heading">#</a></h3>
 <p>La flèche du haut <kbd>↑</kbd> rappelle les commandes précédentes (depuis la plus récente jusqu’à la plus ancienne).</p>
 </section>
 <section id="completion-automatique">
-<h3>Complétion automatique<a class="headerlink" href="#completion-automatique" title="Permalink to this heading">#</a></h3>
+<h3>Complétion automatique<a class="headerlink" href="#completion-automatique" title="Link to this heading">#</a></h3>
 <p>La touche tabulation <kbd>Tab</kbd> est utile pour compléter une commande, un nom de répertoire ou de fichier. Appuyez deux fois sur <kbd>Tab</kbd> en cas d’ambiguïté.</p>
 <p>Par exemple, si vous tapez <code class="docutils literal notranslate"><span class="pre">/h</span></code> puis la touche <kbd>Tab</kbd>, le <em>shell</em> va compléter automatiquement à <code class="docutils literal notranslate"><span class="pre">/home</span></code>.</p>
 </section>
 <section id="arreter-une-commande-en-cours">
-<h3>Arrêter une commande en cours<a class="headerlink" href="#arreter-une-commande-en-cours" title="Permalink to this heading">#</a></h3>
+<h3>Arrêter une commande en cours<a class="headerlink" href="#arreter-une-commande-en-cours" title="Link to this heading">#</a></h3>
 <p>Pressez la touche <kbd>Ctrl</kbd> et la touche <kbd>C</kbd> en même temps pour arrêter une commande en cours.</p>
 </section>
 <section id="copier-coller">
-<h3>Copier / coller<a class="headerlink" href="#copier-coller" title="Permalink to this heading">#</a></h3>
+<h3>Copier / coller<a class="headerlink" href="#copier-coller" title="Link to this heading">#</a></h3>
 <p>Pour copier / coller quelque chose dans le <em>shell</em>, sélectionnez du texte puis utilisez les combinaisons de touches <kbd>Ctrl</kbd>+<kbd>C</kbd> pour copier et <kbd>Ctrl</kbd>+<kbd>V</kbd> (ou <kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>V</kbd>) pour coller.</p>
 </section>
 </section>
 <section id="explorer-le-contenu-de-fichiers">
-<h2>5. Explorer le contenu de fichiers<a class="headerlink" href="#explorer-le-contenu-de-fichiers" title="Permalink to this heading">#</a></h2>
+<h2>5. Explorer le contenu de fichiers<a class="headerlink" href="#explorer-le-contenu-de-fichiers" title="Link to this heading">#</a></h2>
 <p>Jusqu’à présent, on s’est contenté d’afficher le contenu de répertoires et de déplacer ou copier des fichiers, sans connaître leur contenu.</p>
 <p>Pour afficher le contenu d’un fichier, on utilise la commande <code class="docutils literal notranslate"><span class="pre">cat</span></code> (pour <em>concatenate</em>) :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cat<span class="w"> </span>shopping.txt
@@ -980,7 +1005,7 @@ startxref
 <p>Dans l’exemple ci-dessus, on a affiché les 2 dernières lignes du fichier <code class="docutils literal notranslate"><span class="pre">transferrin.csv</span></code>.</p>
 </section>
 <section id="creer-ou-editer-un-fichier-texte">
-<h2>6. Créer ou éditer un fichier texte<a class="headerlink" href="#creer-ou-editer-un-fichier-texte" title="Permalink to this heading">#</a></h2>
+<h2>6. Créer ou éditer un fichier texte<a class="headerlink" href="#creer-ou-editer-un-fichier-texte" title="Link to this heading">#</a></h2>
 <p>Nano est un éditeur de texte qui fonctionne dans un <em>shell</em>, donc sans interface graphique, sans menu, sans icône, contrairement à des éditeurs de texte comme Notepad++.</p>
 <p>Pour le lancer, on utilise la commande <code class="docutils literal notranslate"><span class="pre">nano</span></code> :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>nano
@@ -1006,9 +1031,9 @@ genomes<span class="w">  </span>paper.pdf<span class="w">  </span>protein.txt<sp
 <p>Modifiez le fichier <code class="docutils literal notranslate"><span class="pre">shopping.txt</span></code> (en respectant le format <em>un_élement une_quantité</em>) avec nano, puis enregistrez-le.</p>
 </section>
 <section id="manipuler-des-donnees">
-<h2>7. Manipuler des données<a class="headerlink" href="#manipuler-des-donnees" title="Permalink to this heading">#</a></h2>
+<h2>7. Manipuler des données<a class="headerlink" href="#manipuler-des-donnees" title="Link to this heading">#</a></h2>
 <section id="compter-wc">
-<h3>Compter : <code class="docutils literal notranslate"><span class="pre">wc</span></code><a class="headerlink" href="#compter-wc" title="Permalink to this heading">#</a></h3>
+<h3>Compter : <code class="docutils literal notranslate"><span class="pre">wc</span></code><a class="headerlink" href="#compter-wc" title="Link to this heading">#</a></h3>
 <p>La commande <code class="docutils literal notranslate"><span class="pre">wc</span></code> (pour <em>word count</em>) compte le nombre de lignes, de mots et de caractères d’un fichier.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>wc<span class="w"> </span>shopping.txt
 <span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">45</span><span class="w"> </span>shopping.txt
@@ -1026,7 +1051,7 @@ genomes<span class="w">  </span>paper.pdf<span class="w">  </span>protein.txt<sp
 <p>Les fichiers <code class="docutils literal notranslate"><span class="pre">transferrin.csv</span></code> et <code class="docutils literal notranslate"><span class="pre">transferrin.tsv</span></code> contiennent chacun 41 lignes, soit un total de 82 lignes.</p>
 </section>
 <section id="trier-sort">
-<h3>Trier : <code class="docutils literal notranslate"><span class="pre">sort</span></code><a class="headerlink" href="#trier-sort" title="Permalink to this heading">#</a></h3>
+<h3>Trier : <code class="docutils literal notranslate"><span class="pre">sort</span></code><a class="headerlink" href="#trier-sort" title="Link to this heading">#</a></h3>
 <p>La commande <code class="docutils literal notranslate"><span class="pre">sort</span></code> trie le contenu d’un fichier.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cat<span class="w"> </span>shopping.txt
 banana<span class="w"> </span><span class="m">6</span>
@@ -1085,7 +1110,7 @@ pineaple<span class="w"> </span><span class="m">1</span>
 </div>
 </section>
 <section id="trouver-les-elements-uniques-uniq">
-<h3>Trouver les éléments uniques : <code class="docutils literal notranslate"><span class="pre">uniq</span></code><a class="headerlink" href="#trouver-les-elements-uniques-uniq" title="Permalink to this heading">#</a></h3>
+<h3>Trouver les éléments uniques : <code class="docutils literal notranslate"><span class="pre">uniq</span></code><a class="headerlink" href="#trouver-les-elements-uniques-uniq" title="Link to this heading">#</a></h3>
 <p>La commande <code class="docutils literal notranslate"><span class="pre">uniq</span></code> affiche les éléments uniques.</p>
 <p>Par exemple avec le contenu du fichier <code class="docutils literal notranslate"><span class="pre">protein.txt</span></code> :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cat<span class="w"> </span>protein.txt
@@ -1128,7 +1153,7 @@ transferrin
 </div>
 </section>
 <section id="extraire-un-colonne-cut">
-<h3>Extraire un colonne : <code class="docutils literal notranslate"><span class="pre">cut</span></code><a class="headerlink" href="#extraire-un-colonne-cut" title="Permalink to this heading">#</a></h3>
+<h3>Extraire un colonne : <code class="docutils literal notranslate"><span class="pre">cut</span></code><a class="headerlink" href="#extraire-un-colonne-cut" title="Link to this heading">#</a></h3>
 <p>La commande <code class="docutils literal notranslate"><span class="pre">cut</span></code> extrait une ou plusieurs colonnes d’un fichier.</p>
 <p>Par exemple avec le fichier <code class="docutils literal notranslate"><span class="pre">transferrin.csv</span></code> qui contient les identifiants PDB de structures de transferrines, avec l’organisme d’origine et le nombre d’acides aminés de la structure :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">5</span><span class="w"> </span>transferrin.csv
@@ -1155,7 +1180,7 @@ Homo<span class="w"> </span>sapiens
 </section>
 </section>
 <section id="gerer-les-flux-redirection-et-emboitement">
-<h2>8. Gérer les flux : redirection et emboîtement<a class="headerlink" href="#gerer-les-flux-redirection-et-emboitement" title="Permalink to this heading">#</a></h2>
+<h2>8. Gérer les flux : redirection et emboîtement<a class="headerlink" href="#gerer-les-flux-redirection-et-emboitement" title="Link to this heading">#</a></h2>
 <p>On souhaite extraire du fichier <code class="docutils literal notranslate"><span class="pre">transferrin.csv</span></code> la liste des différents organismes d’où proviennent les structures de transferrines. On a besoin pour cela de réaliser 3 étapes :</p>
 <ol class="arabic simple">
 <li><p>Extraire la liste des organismes (avec <code class="docutils literal notranslate"><span class="pre">cut</span></code>).</p></li>
@@ -1164,7 +1189,7 @@ Homo<span class="w"> </span>sapiens
 </ol>
 <p>Pour stocker l’information, d’une étape à l’autre, on peut renvoyer le résultat dans un fichier avec la redirection «<code class="docutils literal notranslate"><span class="pre">&gt;</span></code>».</p>
 <section id="etape-1-cut">
-<h3>Étape 1 (<code class="docutils literal notranslate"><span class="pre">cut</span></code>)<a class="headerlink" href="#etape-1-cut" title="Permalink to this heading">#</a></h3>
+<h3>Étape 1 (<code class="docutils literal notranslate"><span class="pre">cut</span></code>)<a class="headerlink" href="#etape-1-cut" title="Link to this heading">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cut<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;,&quot;</span><span class="w"> </span>-f<span class="w"> </span><span class="m">2</span><span class="w"> </span>transferrin.csv<span class="w"> </span>&gt;<span class="w"> </span>organism.txt
 </pre></div>
 </div>
@@ -1185,7 +1210,7 @@ Homo<span class="w"> </span>sapiens
 </div>
 </section>
 <section id="etape-2-sort">
-<h3>Étape 2 (<code class="docutils literal notranslate"><span class="pre">sort</span></code>)<a class="headerlink" href="#etape-2-sort" title="Permalink to this heading">#</a></h3>
+<h3>Étape 2 (<code class="docutils literal notranslate"><span class="pre">sort</span></code>)<a class="headerlink" href="#etape-2-sort" title="Link to this heading">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sort<span class="w"> </span>organism.txt<span class="w"> </span>&gt;<span class="w"> </span>organism_sorted.txt
 </pre></div>
 </div>
@@ -1204,7 +1229,7 @@ Gallus<span class="w"> </span>gallus
 </div>
 </section>
 <section id="etape-3-uniq">
-<h3>Étape 3 (<code class="docutils literal notranslate"><span class="pre">uniq</span></code>)<a class="headerlink" href="#etape-3-uniq" title="Permalink to this heading">#</a></h3>
+<h3>Étape 3 (<code class="docutils literal notranslate"><span class="pre">uniq</span></code>)<a class="headerlink" href="#etape-3-uniq" title="Link to this heading">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>uniq<span class="w"> </span>organism_sorted.txt
 Anas<span class="w"> </span>platyrhynchos
 Gallus<span class="w"> </span>gallus
@@ -1250,9 +1275,9 @@ Sus<span class="w"> </span>scrofa
 </section>
 </section>
 <section id="chercher">
-<h2>9. Chercher<a class="headerlink" href="#chercher" title="Permalink to this heading">#</a></h2>
+<h2>9. Chercher<a class="headerlink" href="#chercher" title="Link to this heading">#</a></h2>
 <section id="chercher-dans-des-fichiers-grep">
-<h3>Chercher dans des fichiers : <code class="docutils literal notranslate"><span class="pre">grep</span></code><a class="headerlink" href="#chercher-dans-des-fichiers-grep" title="Permalink to this heading">#</a></h3>
+<h3>Chercher dans des fichiers : <code class="docutils literal notranslate"><span class="pre">grep</span></code><a class="headerlink" href="#chercher-dans-des-fichiers-grep" title="Link to this heading">#</a></h3>
 <p>La commande <code class="docutils literal notranslate"><span class="pre">grep</span></code> cherche un motif dans un ou plusieurs fichiers et renvoie les lignes correspondantes :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;apple&quot;</span><span class="w"> </span>shopping.txt
 apple<span class="w"> </span><span class="m">10</span>
@@ -1305,7 +1330,7 @@ genomes/NC_013893_head.gbk:DEFINITION<span class="w">  </span>Staphylococcus<spa
 </div>
 </section>
 <section id="petit-defi">
-<h3>Petit défi<a class="headerlink" href="#petit-defi" title="Permalink to this heading">#</a></h3>
+<h3>Petit défi<a class="headerlink" href="#petit-defi" title="Link to this heading">#</a></h3>
 <p>Construisez l’enchaînement de commandes Unix qui :</p>
 <ul class="simple">
 <li><p>cherche le motif <code class="docutils literal notranslate"><span class="pre">DEFINITION</span></code> dans tous les fichiers GenBank du répertoire <code class="docutils literal notranslate"><span class="pre">genomes</span></code> ;</p></li>
@@ -1322,7 +1347,7 @@ genomes/NC_013893_head.gbk:DEFINITION<span class="w">  </span>Staphylococcus<spa
 </div>
 </section>
 <section id="chercher-des-fichiers-find">
-<h3>Chercher des fichiers : <code class="docutils literal notranslate"><span class="pre">find</span></code><a class="headerlink" href="#chercher-des-fichiers-find" title="Permalink to this heading">#</a></h3>
+<h3>Chercher des fichiers : <code class="docutils literal notranslate"><span class="pre">find</span></code><a class="headerlink" href="#chercher-des-fichiers-find" title="Link to this heading">#</a></h3>
 <p>La commande <code class="docutils literal notranslate"><span class="pre">find</span></code> recherche des fichiers ou des répertoires.</p>
 <p>On revient tout d’abord dans le répertoire parent :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">pwd</span>
@@ -1341,7 +1366,7 @@ $<span class="w"> </span><span class="nb">pwd</span>
 </section>
 </section>
 <section id="se-souvenir">
-<h2>10. Se souvenir<a class="headerlink" href="#se-souvenir" title="Permalink to this heading">#</a></h2>
+<h2>10. Se souvenir<a class="headerlink" href="#se-souvenir" title="Link to this heading">#</a></h2>
 <p>La commande <code class="docutils literal notranslate"><span class="pre">history</span></code> affiche toutes les commandes que vous avez entrées, de la plus ancienne à la plus récente.</p>
 <p>Ainsi, la commande</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">history</span>
@@ -1406,11 +1431,10 @@ find<span class="w"> </span>./<span class="w"> </span>-name<span class="w"> </sp
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer d-print-none">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="../gestion_compte_ifb.html"
@@ -1430,10 +1454,7 @@ find<span class="w"> </span>./<span class="w"> </span>-name<span class="w"> </sp
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -1441,6 +1462,7 @@ find<span class="w"> </span>./<span class="w"> </span>-name<span class="w"> </sp
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -1514,6 +1536,7 @@ By Pierre Poulain
   
   <div class="footer-item">
     
+
   </div>
   
   <div class="footer-item">
@@ -1539,8 +1562,8 @@ Ce contenu est mis à disposition selon les termes de la licence <a href="https:
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Automatiser l’analyse RNA-seq avec un cluster 🚀 &#8212; Unix tutorial</title>
   
@@ -15,52 +14,49 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'tuto3/1_automatiser';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -75,19 +71,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -109,12 +109,20 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -129,9 +137,13 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
+  
+    
   
 
 <a class="navbar-brand logo" href="../intro.html">
+  
   
   
   
@@ -141,12 +153,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Unix tutorial - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Unix tutorial - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -158,7 +181,7 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">JupyterHub du cluster IFB</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../connection.html">Connexion au JupyterHub de l’IFB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../connexion.html">Connexion à l’application JupyterLab de l’IFB</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../gestion_compte_ifb.html">Gestion de votre compte utilisateur sur le cluster de calcul</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction à Unix</span></p>
@@ -195,7 +218,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -204,14 +227,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -350,26 +373,28 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -410,10 +435,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section id="automatiser-l-analyse-rna-seq-avec-un-cluster">
-<h1><a class="toc-backref" href="#id1" role="doc-backlink">Automatiser l’analyse RNA-seq avec un cluster 🚀</a><a class="headerlink" href="#automatiser-l-analyse-rna-seq-avec-un-cluster" title="Permalink to this heading">#</a></h1>
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Automatiser l’analyse RNA-seq avec un cluster 🚀</a><a class="headerlink" href="#automatiser-l-analyse-rna-seq-avec-un-cluster" title="Link to this heading">#</a></h1>
 <nav class="contents" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
@@ -436,7 +461,7 @@ document.write(`
 </ul>
 </nav>
 <section id="decouvrir-le-cluster">
-<h2><a class="toc-backref" href="#id2" role="doc-backlink">Découvrir le cluster</a><a class="headerlink" href="#decouvrir-le-cluster" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Découvrir le cluster</a><a class="headerlink" href="#decouvrir-le-cluster" title="Link to this heading">#</a></h2>
 <p>Un cluster de calcul met à disposition de ses utilisateurs des processeurs et de la mémoire vive pour réaliser des calculs. Ces ressouces sont réparties sur plusieurs machines, appelées <em>nœuds de calcul</em>. Chaque nœud de calcul contient plusieurs dizaines de processeurs (ou coeurs) et plusieurs centaines de Go de mémoire vive.</p>
 <p>Plusieurs utilisateurs utilisent simultanément un cluster de calcul. Pour vous en rendre compte, dans JupyterLab, ouvrez un terminal puis entrez la commande suivante qui va lister tous les calculs (appelés <em>job</em>) en cours sur le cluster :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>squeue<span class="w"> </span>-t<span class="w"> </span>RUNNING
@@ -470,7 +495,7 @@ document.write(`
 <p>Comme plusieurs utilisateurs peuvent lancer des jobs sur un cluster, un gestionnaire de jobs (ou ordonnanceur) s’occupe de répartir les ressources entre les différents utilisateurs. Sur le cluster de l’IFB, le gestionnaire de jobs est <a class="reference external" href="https://slurm.schedmd.com/">Slurm</a>. Désormais le lancement de vos analyses se fera via Slurm.</p>
 </section>
 <section id="analyser-un-echantillon">
-<h2><a class="toc-backref" href="#id3" role="doc-backlink">Analyser un échantillon</a><a class="headerlink" href="#analyser-un-echantillon" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Analyser un échantillon</a><a class="headerlink" href="#analyser-un-echantillon" title="Link to this heading">#</a></h2>
 <p>Déplacez-vous le répertoire <code class="docutils literal notranslate"><span class="pre">/shared/projects/202304_duo/$USER/rnaseq</span></code> puis vérifiez que vous êtes dans le bon répertoire avec la commande <code class="docutils literal notranslate"><span class="pre">pwd</span></code>.</p>
 <p>Supprimez les répertoires qui contiennent les résultats d’une éventuelle précédente analyse :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>genome_index<span class="w"> </span>reads_qc<span class="w"> </span>reads_map<span class="w"> </span>counts
@@ -563,7 +588,7 @@ module<span class="w"> </span>load<span class="w"> </span>cufflinks/2.2.1
 </div>
 </section>
 <section id="analyser-50-echantillons-ou-pas-loin">
-<h2><a class="toc-backref" href="#id4" role="doc-backlink">Analyser 50 échantillons (ou pas loin)</a><a class="headerlink" href="#analyser-50-echantillons-ou-pas-loin" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Analyser 50 échantillons (ou pas loin)</a><a class="headerlink" href="#analyser-50-echantillons-ou-pas-loin" title="Link to this heading">#</a></h2>
 <p>Maintenant que nous savons comment analyser un échantillon avec un cluster de calcul, nous allons automatiser l’analyse de 50 échantillons. Mais pour cela nous prendre plusieurs précautions :</p>
 <ul class="simple">
 <li><p>Nous allons séparer les étapes suivantes :</p>
@@ -576,14 +601,14 @@ module<span class="w"> </span>load<span class="w"> </span>cufflinks/2.2.1
 <li><p>L’étape 2 ne doit pas se faire successivement pour chaque échantillon, mais en parallèle. C’est-à-dire qu’on souhaite idéalement lancer l’analyse des 50 échantillons <strong>en même temps</strong>.</p></li>
 </ul>
 <section id="preparer-les-donnees">
-<h3><a class="toc-backref" href="#id5" role="doc-backlink">Préparer les données</a><a class="headerlink" href="#preparer-les-donnees" title="Permalink to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Préparer les données</a><a class="headerlink" href="#preparer-les-donnees" title="Link to this heading">#</a></h3>
 <p>Nous avons téléchargé pour vous les 50 échantillons (fichiers .fastq.gz) ainsi que le génome de référence et ses annotations dans le répertoire <code class="docutils literal notranslate"><span class="pre">/shared/projects/202304_duo/data/rnaseq_scere</span></code>. Vérifiez son contenu avec la commande :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>tree<span class="w"> </span>/shared/projects/202304_duo/data/rnaseq_scere
 </pre></div>
 </div>
 </section>
 <section id="lancer-le-script-de-l-etape-1">
-<h3><a class="toc-backref" href="#id6" role="doc-backlink">Lancer le script de l’étape 1</a><a class="headerlink" href="#lancer-le-script-de-l-etape-1" title="Permalink to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Lancer le script de l’étape 1</a><a class="headerlink" href="#lancer-le-script-de-l-etape-1" title="Link to this heading">#</a></h3>
 <p>Supprimez les répertoires qui contiennent les résultats d’une éventuelle précédente analyse :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>genome_index<span class="w"> </span>reads_qc<span class="w"> </span>reads_map<span class="w"> </span>counts<span class="w"> </span>slurm*.out
 </pre></div>
@@ -600,7 +625,7 @@ module<span class="w"> </span>load<span class="w"> </span>cufflinks/2.2.1
 <p>Vérifiez avec les commandes <code class="docutils literal notranslate"><span class="pre">squeue</span></code> et <code class="docutils literal notranslate"><span class="pre">sacct</span></code> que le job est lancé et se termine correctement (normalement rapidement).</p>
 </section>
 <section id="lancer-le-script-de-l-etape-2">
-<h3><a class="toc-backref" href="#id7" role="doc-backlink">Lancer le script de l’étape 2</a><a class="headerlink" href="#lancer-le-script-de-l-etape-2" title="Permalink to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">Lancer le script de l’étape 2</a><a class="headerlink" href="#lancer-le-script-de-l-etape-2" title="Link to this heading">#</a></h3>
 <p>Téléchargez dans un terminal de JupyterLab le script Bash (<a class="reference download internal" download="" href="../_downloads/5a5d8fac92614335d844f7ff5c822398/script_cluster_2.sh"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">script_cluster_2.sh</span></code></span></a>) avec la commande <code class="docutils literal notranslate"><span class="pre">wget</span></code> :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>wget<span class="w"> </span>https://raw.githubusercontent.com/pierrepo/unix-tutorial/master/tuto3/script_cluster_2.sh
 </pre></div>
@@ -668,7 +693,7 @@ module<span class="w"> </span>load<span class="w"> </span>cufflinks/2.2.1
 <p>Remarquez que le temps CPU (<code class="docutils literal notranslate"><span class="pre">CPUTime</span></code>) qui correspond au temps de calcul consommé par tous les processeurs est supérieur au temps « humain » (<em>Elapsed</em>). Ainsi, si vous avez lancé un job avec 8 coeurs qui se termine en 1 heure, la consommation CPU sera de 8 coeurs x 1 heure = 8 heures. Sur un cluster, c’est toujours le temps CPU qui est facturé.</p>
 </section>
 <section id="lancer-le-script-de-l-etape-3">
-<h3><a class="toc-backref" href="#id8" role="doc-backlink">Lancer le script de l’étape 3</a><a class="headerlink" href="#lancer-le-script-de-l-etape-3" title="Permalink to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">Lancer le script de l’étape 3</a><a class="headerlink" href="#lancer-le-script-de-l-etape-3" title="Link to this heading">#</a></h3>
 <p>Vous allez maintenant normaliser les différents comptages.</p>
 <p>Téléchargez dans un terminal de JupyterLab le script Bash (<a class="reference download internal" download="" href="../_downloads/8543b16244ff515cb25c8536d3549018/script_cluster_3.sh"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">script_cluster_3.sh</span></code></span></a>) avec la commande <code class="docutils literal notranslate"><span class="pre">wget</span></code> :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>wget<span class="w"> </span>https://raw.githubusercontent.com/pierrepo/unix-tutorial/master/tuto3/script_cluster_3.sh
@@ -694,12 +719,12 @@ module<span class="w"> </span>load<span class="w"> </span>cufflinks/2.2.1
 </section>
 </section>
 <section id="bilan">
-<h2><a class="toc-backref" href="#id9" role="doc-backlink">Bilan</a><a class="headerlink" href="#bilan" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">Bilan</a><a class="headerlink" href="#bilan" title="Link to this heading">#</a></h2>
 <p>Vous avez lancé une analyse RNA-seq complète en utilisant le gestionnaire de ressources (Slurm) d’un cluster de calcul. Bravo ✨</p>
 <p>Un peu plus tard, nous vous inviterons à reprendre cette analyse mais cette fois sur les 50 échantillons. Pour cela, il vous faudra modifier le script <code class="docutils literal notranslate"><span class="pre">script_cluster_2.sh</span></code> en remplaçant la ligne <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--array=0-2</span></code> (pour 3 échantillons) par <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--array=0-49</span></code> (pour 50 échantillons). Pensez aussi à relancer le script  <code class="docutils literal notranslate"><span class="pre">script_cluster_3.sh</span></code> pour normaliser les résultats de comptage.</p>
 </section>
 <section id="aller-plus-loin-connecter-les-jobs">
-<h2><a class="toc-backref" href="#id10" role="doc-backlink">Aller plus loin : connecter les jobs</a><a class="headerlink" href="#aller-plus-loin-connecter-les-jobs" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">Aller plus loin : connecter les jobs</a><a class="headerlink" href="#aller-plus-loin-connecter-les-jobs" title="Link to this heading">#</a></h2>
 <p>Pour cette analyse, il faut lancer 3 scripts :  <code class="docutils literal notranslate"><span class="pre">script_cluster_1.sh</span></code>,  <code class="docutils literal notranslate"><span class="pre">script_cluster_2.sh</span></code> et  <code class="docutils literal notranslate"><span class="pre">script_cluster_3.sh</span></code>. À chaque fois, il faut attendre que le précédent soit terminé, ce qui peut être pénible. Slurm offre la possibilité de chaîner les jobs les uns avec les autres avec l’option <code class="docutils literal notranslate"><span class="pre">--dependency</span></code>. Voici un exemple d’utilisation.</p>
 <p>Tout d’abord on lance le script <code class="docutils literal notranslate"><span class="pre">script_cluster_1.sh</span></code> :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sbatch<span class="w"> </span>-A<span class="w"> </span>202304_duo<span class="w"> </span>script_cluster_1.sh
@@ -766,11 +791,10 @@ squeue<span class="w"> </span>-u<span class="w"> </span><span class="nv">$USER</
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer d-print-none">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="0_intro.html"
@@ -790,10 +814,7 @@ squeue<span class="w"> </span>-u<span class="w"> </span><span class="nv">$USER</
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -801,6 +822,7 @@ squeue<span class="w"> </span>-u<span class="w"> </span><span class="nv">$USER</
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -840,6 +862,7 @@ By Pierre Poulain
   
   <div class="footer-item">
     
+
   </div>
   
   <div class="footer-item">
@@ -865,8 +888,8 @@ Ce contenu est mis à disposition selon les termes de la licence <a href="https:
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>
