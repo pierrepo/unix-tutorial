@@ -71,7 +71,9 @@ $ cd unix
 
 Ces commandes seront en partie expliquées plus loin. Pour ne pas réécrire complètement ces commandes, vous pouvez les copier / coller avec les raccourcis <kbd>Ctrl</kbd>+<kbd>C</kbd> pour copier et <kbd>Ctrl</kbd>+<kbd>V</kbd> (ou parfois <kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>C</kbd>) pour coller.
 
+
 ## 3. Parcourir les répertoires et les fichiers
+
 ### Savoir où on se trouve : `pwd`
 
 La première commande à connaître est la commande `pwd` qui signifie *print working directory* et qui affiche le nom du répertoire courant.
