@@ -21,7 +21,7 @@
 Les paramètres de mémoire et de CPU pourront être différents d'une séance à l'autre, en fonction du type d'analyse que nous aurons à réaliser.
 ```
 
-Voici une illustration de la connexion au JupyterHub de l'IFB ainsi que les premiers pas dans l'interface JupyterLab :
+Voici une vidéo illustrant le lancement de l'application JupyterLab depuis le portail Open OnDemand de l'IFB, ainsi que les premiers pas dans l'interface de JupyterLab :
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/LIUKSxrPBnc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/3Vu6iD3HDzY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 

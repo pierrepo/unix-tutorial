@@ -153,7 +153,7 @@ total 120
 drwxr-xr-x 2 ppoulain ppoulain  4096 Mar 13  2019 genomes
 -rw-r--r-- 1 ppoulain ppoulain 97830 Mar 13  2019 paper.pdf
 -rw-r--r-- 1 ppoulain ppoulain   144 Mar 13  2019 protein.txt
--rw-r--r-- 1 ppoulain ppoulain    45 Mar 13  2019 shopping.txt
+-rw-r--r-- 1 ppoulain ppoulain    46 Mar 12 14:19 shopping.txt
 -rw-r--r-- 1 ppoulain ppoulain   940 Mar 13  2019 transferrin.csv
 -rw-r--r-- 1 ppoulain ppoulain   940 Mar 12  2019 transferrin.tsv
 ```
@@ -166,7 +166,7 @@ total 120K
 drwxr-xr-x 2 ppoulain ppoulain 4.0K Mar 13  2019 genomes
 -rw-r--r-- 1 ppoulain ppoulain  96K Mar 13  2019 paper.pdf
 -rw-r--r-- 1 ppoulain ppoulain  144 Mar 13  2019 protein.txt
--rw-r--r-- 1 ppoulain ppoulain   45 Mar 13  2019 shopping.txt
+-rw-r--r-- 1 ppoulain ppoulain   46 Mar 12 14:19 shopping.txt
 -rw-r--r-- 1 ppoulain ppoulain  940 Mar 13  2019 transferrin.csv
 -rw-r--r-- 1 ppoulain ppoulain  940 Mar 12  2019 transferrin.tsv
 ```
@@ -181,7 +181,7 @@ total 120K
 drwxr-xr-x 2 ppoulain ppoulain 4.0K Mar 13  2019 genomes
 -rw-r--r-- 1 ppoulain ppoulain  96K Mar 13  2019 paper.pdf
 -rw-r--r-- 1 ppoulain ppoulain  144 Mar 13  2019 protein.txt
--rw-r--r-- 1 ppoulain ppoulain   45 Mar 13  2019 shopping.txt
+-rw-r--r-- 1 ppoulain ppoulain   46 Mar 12 14:19 shopping.txt
 -rw-r--r-- 1 ppoulain ppoulain  940 Mar 13  2019 transferrin.csv
 -rw-r--r-- 1 ppoulain ppoulain  940 Mar 12  2019 transferrin.tsv
 ```
@@ -193,13 +193,13 @@ $ ls -lhrt
 total 120K
 -rw-r--r-- 1 ppoulain ppoulain  940 Mar 12  2019 transferrin.tsv
 drwxr-xr-x 2 ppoulain ppoulain 4.0K Mar 13  2019 genomes
--rw-r--r-- 1 ppoulain ppoulain   45 Mar 13  2019 shopping.txt
 -rw-r--r-- 1 ppoulain ppoulain  940 Mar 13  2019 transferrin.csv
 -rw-r--r-- 1 ppoulain ppoulain  96K Mar 13  2019 paper.pdf
 -rw-r--r-- 1 ppoulain ppoulain  144 Mar 13  2019 protein.txt
+-rw-r--r-- 1 ppoulain ppoulain   46 Mar 12 14:19 shopping.txt
 ```
 
-L'option `-t` affiche les fichiers du plus récent au plus ancien et l'option `-r` inverse cet ordre. Ici, le dernier fichier modifié est `protein.txt`.
+L'option `-t` affiche les fichiers du plus récent au plus ancien et l'option `-r` inverse cet ordre. Ici, le dernier fichier modifié est `shopping.txt`.
 
 L'option `-a` affiche tout le contenu du répertoire courant, notamment les fichiers et répertoires cachés qui commencent (sous Unix) par le caractère `.` :
 
@@ -541,14 +541,14 @@ Pour afficher le contenu d'un fichier, on utilise la commande `cat` (pour *conca
 
 ```bash
 $ cat shopping.txt
-banana 6
+banana 21
 pineaple 1
 pear 3
 apple 10
 orange 4
 ```
 
-Bien sûr, afficher le contenu d'un fichier n'a de sens ici que pour un fichier texte. En effet, afficher le contenu d'un fichier binaire produit une suite de caractères incompréhensibles.
+Bien sûr, afficher le contenu d'un fichier dans un terminal n'a de sens ici que pour un fichier texte. En effet, afficher le contenu d'un fichier binaire produit une suite de caractères incompréhensibles.
 
 ```bash
 $ cat paper.pdf
@@ -577,7 +577,7 @@ startxref
 Dans la suite, nous n'explorerons que le contenu de **fichiers textes**.
 ```
 
-La commande `cat` n'a de sens que si le fichier est assez court. Si ce n'est pas le cas, le contenu du fichier va défiler d'un seul coup à l'écran, sans qu'on puisse en voir le début. Par exemple :
+La commande `cat` n'est utile que si le fichier est assez court. Si ce n'est pas le cas, le contenu du fichier va défiler d'un seul coup à l'écran, sans qu'on puisse en voir le début. Par exemple :
 
 ```bash
 $ cat transferrin.csv
@@ -652,6 +652,7 @@ $ tail -n 2 transferrin.csv
 
 Dans l'exemple ci-dessus, on a affiché les 2 dernières lignes du fichier `transferrin.csv`.
 
+
 ## Créer ou éditer un fichier texte
 
 Nano est un éditeur de texte qui fonctionne dans un *shell*, donc sans interface graphique, sans menu, sans icône, contrairement à des éditeurs de texte comme Notepad++.
@@ -704,6 +705,22 @@ Vérifiez avec la commande `cat` que les modifications ont bien été prises en 
 $ cat shopping.txt
 ```
 
+````{admonition} Aide
+:class: tip, dropdown
+
+Le fichier `shopping.txt` devrait ressembler à ceci :
+
+```bash
+banana 21
+pineaple 1
+pear 3
+apple 10
+orange 8
+kiwi 16
+```
+
+````
+
 
 
 ## Manipuler des données
@@ -714,10 +731,10 @@ La commande `wc` (pour *word count*) compte le nombre de lignes, de mots et de c
 
 ```bash
 $ wc shopping.txt
- 5 10 45 shopping.txt
+ 6 12 54 shopping.txt
 ```
 
-On apprend ainsi que le fichier `shopping.txt` contient 5 lignes, 10 mots et 45 caractères, ou des valeurs équivalentes si vous avez modifé ce fichier.
+On apprend ainsi que le fichier `shopping.txt` contient 6 lignes, 12 mots et 54 caractères, ou des valeurs équivalentes si vous avez modifé ce fichier.
 
 L'option `-l` indique à la commande `wc` de ne compter que le nombre de lignes. Et réciproquement pour `-w` et le nombre de mots, et `-c` et le nombre de caractères.
 
@@ -739,18 +756,20 @@ La commande `sort` trie le contenu d'un fichier.
 
 ```bash
 $ cat shopping.txt
-banana 6
+banana 21
 pineaple 1
 pear 3
 apple 10
-orange 4
+orange 8
+kiwi 16
 ```
 
 ```bash
 $ sort shopping.txt
 apple 10
-banana 6
-orange 4
+banana 21
+kiwi 16
+orange 8
 pear 3
 pineaple 1
 ```
@@ -765,9 +784,10 @@ On peut trier le fichier `shopping.txt` suivant le nombre de fruits en indiquant
 $ sort -k 2 shopping.txt
 pineaple 1
 apple 10
+kiwi 16
+banana 21
 pear 3
-orange 4
-banana 6
+orange 8
 ```
 
 Les lignes sont alors triées suivant la seconde colonne, mais par ordre alphabétique, ce qui explique que `10` soit avant `3`. Pour trier explicitement des valeurs numériques, on utilise l'option `-g` :
@@ -776,9 +796,10 @@ Les lignes sont alors triées suivant la seconde colonne, mais par ordre alphab�
 $ sort -k 2 -g shopping.txt
 pineaple 1
 pear 3
-orange 4
-banana 6
+orange 8
 apple 10
+kiwi 16
+banana 21
 ```
 
 L'ordre numérique est ainsi respecté puisque 3 est plus petit (donc situé avant) que 10.
@@ -789,8 +810,9 @@ Enfin l'option `-r` inverse le tri initial :
 $ sort -r shopping.txt
 pineaple 1
 pear 3
-orange 4
-banana 6
+orange 8
+kiwi 16
+banana 21
 apple 10
 ```
 
@@ -798,12 +820,14 @@ On peut aussi utiliser l'option `-r` pour trier des valeurs numériques (option 
 
 ```bash
 $ sort -k 2 -g -r shopping.txt
+banana 21
+kiwi 16
 apple 10
-banana 6
-orange 4
+orange 8
 pear 3
 pineaple 1
 ```
+
 
 ### Trouver les éléments uniques : `uniq`
 
@@ -995,7 +1019,7 @@ $ cut -f 2 transferrin.tsv | sort | uniq -c
 ```
 
 ```{admonition} Rappel
-La tabulation est le caractère par défaut utilisé par `cut` pour séparer les différentes colonnes.
+La tabulation est le caractère par défaut utilisé par la commande `cut` pour séparer les différentes colonnes.
 ```
 
 
