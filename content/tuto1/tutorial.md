@@ -62,7 +62,7 @@ Ne tapez pas le caractère `$` en début de ligne et faites attention aux majusc
 puis exécutez les commandes suivant :
 
 ```bash
-$ wget https://github.com/pierrepo/unix-tutorial/raw/master/tutorial_1/unix.tgz
+$ wget https://github.com/pierrepo/unix-tutorial/raw/master/content/tuto1/unix.tgz
 $ tar zxvf unix.tgz
 $ cd unix
 ```
