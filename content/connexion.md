@@ -4,12 +4,12 @@
 - Cliquez sur *JupyterLab: Core*
 - Choisissez ensuite les paramètres suivants :
     - Reservation: `No reservation` 
-    - Account: `2501_duo` (**ce paramètre est très important, vérifiez qu'il est correct**)
+    - Account: `2501_duo` ⚠️
     - Partition: `fast`
-    - Number of CPUs: `2`
-    - Amount of memory: `2G`
+    - Number of CPUs: `2` ⚠️
+    - Amount of memory: `2G` ⚠️
     - GPUs: `No GPU`
-    - Number of hours: `2`
+    - Number of hours: `4` ⚠️
 
 - Cliquez ensuite sur le bouton *Launch*
 - Patientez quelques secondes, le temps qu'une nouvelle session soit créée.

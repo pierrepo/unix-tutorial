@@ -1,4 +1,4 @@
-# Un  aperçu du shell Unix
+# Un aperçu du shell Unix 🖵
 
 Un *shell* est un programme qui attend un ordre de la part de l'utilisateur, exécute cet ordre, affiche le résultat puis attend à nouveau un ordre. En anglais on parle de *REPL* pour *Read Execute Print Loop*. Il existe plusieurs *shells* : *Bash*, *csh*, *zsh*... Ici on ne parlera que du *shell* *Bash* qui est le plus utilisé. Cela dit, toutes les commandes présentées ici sont communes à tous les *shells* Unix.
 
@@ -66,8 +66,6 @@ $ wget https://github.com/pierrepo/unix-tutorial/raw/master/content/tuto1/unix.t
 $ tar zxvf unix.tgz
 $ cd unix
 ```
-
-
 
 Ces commandes seront en partie expliquées plus loin. Pour ne pas réécrire complètement ces commandes, vous pouvez les copier / coller avec les raccourcis <kbd>Ctrl</kbd>+<kbd>C</kbd> pour copier et <kbd>Ctrl</kbd>+<kbd>V</kbd> (ou parfois <kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>C</kbd>) pour coller.
 
@@ -672,7 +670,7 @@ Selon la version de votre système Unix, il se peut que l'interface soit en angl
 
 On peut tout de suite commencer à taper du texte.
 
-Pour sauvegarder le texte ainsi entré dans nano, on utilise la combinaison de touches <kbd>Ctrl</kbd>+<kbd>O</kbd> (c'est-à-dire qu'on presse en même temps les touches <kbd>Ctrl</kbd> et <kbd>O</kbd>). On entre ensuite le nom qu'on souhaite donner au fichier (par exemple `test.txt`) puis on valide par la touche  <kbd>Entrée</kbd>.
+Pour sauvegarder le texte ainsi entré dans nano, on utilise la combinaison de touches <kbd>Ctrl</kbd>+<kbd>O</kbd> (c'est-à-dire qu'on presse en même temps les touches <kbd>Ctrl</kbd> et <kbd>O</kbd>). On entre ensuite le nom qu'on souhaite donner au fichier (par exemple `test.txt`) puis on valide par la touche <kbd>Entrée</kbd>.
 
 Les différentes combinaisons de touches sont rappelées en bas de l'écran. Le caractère « `^` » désigne la touche <kbd>Ctrl</kbd>.
 
@@ -693,7 +691,18 @@ On peut aussi ouvrir un fichier texte existant en indiquant en argument le nom d
 $ nano shopping.txt
 ```
 
-Modifiez le fichier `shopping.txt` (en respectant le format *un_élement une_quantité*) avec nano, puis enregistrez-le.
+Modifiez le fichier `shopping.txt` avec nano :
+
+- ajouter la ligne `kiwi 16` à la fin du fichier,
+- remplacer le nombre d'oranges par `8`.
+
+Enregistrez le fichier (<kbd>Ctrl</kbd>+<kbd>O</kbd> puis <kbd>Entrée</kbd>) et enfin quitter nano (<kbd>Ctrl</kbd>+<kbd>X</kbd>).
+
+Vérifiez avec la commande `cat` que les modifications ont bien été prises en compte :
+
+```bash
+$ cat shopping.txt
+```
 
 
 
@@ -1149,3 +1158,14 @@ $ history > $(date --iso-8601)_history.txt
 ```
 
 Nous verrons le fonctionnement de `$(date --iso-8601)` prochainement.
+
+
+## Préparation de la prochaine séance
+
+Afin de vérifier que vous avez les droits nécessaires pour réaliser les activités pratiques de la prochaine séance, exécutez dans un *shell* la commande suivante :
+
+```bash
+$ touch /shared/projects/2501_duo/$USER/test
+```
+
+Signalez tout problème ou message d'erreur.

@@ -1,4 +1,4 @@
-# Ressources complémentaires
+# Ressources complémentaires 📚
 
 ## Tutoriel supplémentaire
 

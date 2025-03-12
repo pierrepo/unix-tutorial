@@ -12,7 +12,7 @@ parts:
   numbered: true
   chapters:
   - file: tuto1/tutorial
-  - file: more
+  - file: tuto1/more
 - caption: Analyse RNA-seq avec Unix
   numbered: true
   chapters:
