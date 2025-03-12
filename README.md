@@ -22,7 +22,7 @@ Le site compilé se trouve dans le dossier `content/_build/html`.
 
 ## Licence
 
-![](content/CC-BY-SA.png)
+![](content/img/CC-BY-SA.png)
 
 Ce contenu est mis à disposition selon les termes de la licence [Creative Commons Attribution - Partage dans les Mêmes Conditions 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/deed.fr) (CC BY-SA 4.0). Consultez le fichier [LICENSE](LICENSE) pour plus de détails.
 
