@@ -239,7 +239,7 @@ Dans cet exemple, `ls` est la commande Unix, `-lh` sont les options et `paper.pd
 Cette anatomie d'une instruction Unix est schématisée dans l'illustration suivante :
 ![](https://swcarpentry.github.io/shell-novice/fig/shell_command_syntax.svg)
 
-Source : [Software Carpentry](https://swcarpentry.github.io/shell-novice/02-filedir/index.html).
+Source : [Software Carpentry](https://swcarpentry.github.io/shell-novice/02-filedir.html#general-syntax-of-a-shell-command).
 ```
 
 
@@ -983,7 +983,7 @@ Les structures de transferrines du fichier `transferrin.csv` proviennent de 5 or
 
 Pour cette analyse, nous avons dû créer deux fichiers intermédiaires : `organism.txt` et `organism_sorted.txt`.
 
-Pour éviter la création de ces fichiers et réaliser cette analyse en une seule fois, on emboîte (« chaîne ») les différentes étapes. La sortie produite par une étape devient l'entrée de l'étape suivante (voir l'[illustration](https://swcarpentry.github.io/shell-novice/fig/redirects-and-pipes.svg) de [Software Carpentry](http://swcarpentry.github.io/shell-novice/04-pipefilter/index.html)). On utilise pour cela le caractère «`|`» :
+Pour éviter la création de ces fichiers et réaliser cette analyse en une seule fois, on emboîte (« chaîne ») les différentes étapes. La sortie produite par une étape devient l'entrée de l'étape suivante (voir l'[illustration](https://swcarpentry.github.io/shell-novice/fig/redirects-and-pipes.svg) de [Software Carpentry](https://swcarpentry.github.io/shell-novice/04-pipefilter.html)). On utilise pour cela le caractère «`|`» :
 
 ```bash
 $ cut -d "," -f 2 transferrin.csv | sort | uniq
