@@ -89,7 +89,7 @@ Cela signifie qu'on se trouve actuellement dans le répertoire `/shared/home/ppo
 
 Dans votre session, `ppoulain` sera bien sur remplacé par votre nom d'utilisateur sur le cluster IFB.
 
-Sous Unix, les répertoires et les fichiers sont organisés sous forme d'une structure en arbre. On parle d'arborescence (voir l'[illustration](https://swcarpentry.github.io/shell-novice/fig/home-directories.svg) de [Software Carpentry](http://swcarpentry.github.io/shell-novice/02-filedir/index.html)).
+Sous Unix, les répertoires et les fichiers sont organisés sous forme d'une structure en arbre. On parle d'arborescence (voir l'[illustration](https://swcarpentry.github.io/shell-novice/fig/home-directories.svg) de [Software Carpentry](https://swcarpentry.github.io/shell-novice/02-filedir.html)).
 
 Le répertoire dont dépendent tous les autres est le `/` qu'on appelle la « racine » (*root* en anglais), les différents sous-répertoires sont séparés les uns des autres par le caractère `/` (le même caractère que la racine).
 
