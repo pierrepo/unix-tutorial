@@ -1,0 +1,44 @@
+Bonjour,
+
+voici une courte vidéo pour vous montrer comment accéder à l'application JupyterLab via l'interface Open OnDemand de l'IFB.
+
+Une fois que vous êtes authentifié avec votre login et votre mot de passe IFB,
+sélectionnez l'application JupyterLab
+puis vous allez définir un certain nombre d'options.
+
+La plus importante ici c'est le account..
+Ici il faut bien prendre le compte de la formation : 2501_duo
+Ensuite, on peut choisir le nombre de CPU, de processeurs qu'on souhaite allouer à JupiterLab, et la quantité de mémoire vive.
+
+Je vous conseille de prendre ici 2 CPU et 2 Go (2G) de mémoire vive. Ce sera largement suffisant.
+On sera amené à adapter ces valeurs en fonction du type de tâche d'analyse qu'on devra réaliser.
+Mais pour aujourd'hui, c'est suffisant.
+
+Pensez aussi à prévoir suffisamment de temps pour travail en indiquant 4 dans le champ "number of hours"
+Cliquez maintenant sur le bouton "Launch"
+
+Patientez quelques secondes ou minutes le temps que le job contenant l'application JupyterLab soient lancées sur le cluster.
+Quand l'application est lancée, cliquez sur le bouton "Connect to Jupyter".
+
+Vous arrivez enfin dans l'application JupyterLab.
+Depuis cette interface, vous pouvez créer des notebooks Jupyter en Python.
+Aujourd'hui, on va s'intéresser à la partie terminale de cette interface.
+
+Une chose intéressante, sur la gauche ici, vous avez un explorateur de fichiers.
+Vous pouvez naviguer visuellement dans l'organisation de vos répertoires.
+Pour retrouver votre répertoire utilisateur, cliquez sur "shared" puis "home" puis votre "login"
+
+On peut aussi faire disparaître l'explorateur de fichier en cliquant sur l'icône en forme de dossier tout à gauche.
+Cela peut être utile quand on a besoin d'avoir un petit peu plus d'espace sur notre espace de travail.
+Pour l'instant, je vais le garder.
+
+Enfin, pour lancer un terminal, il faut cliquer sur cette icône en bas à gauche.
+Il faut cliquer sur terminal et là c'est bon vous êtes prêt vous êtes connecté avec un terminal dans l'application JupyterLab
+Vous êtes prêt à travailler, par exemple en tapant la commande PWD qui permet de vérifier 
+que vous êtes bien dans votre répertoire utilisateur.
+
+Pour le moment, votreterminal est en écriture noire sur fond blanc.
+Si vous préférez avoir un fond noir, vous pouez le changer dans le menu Settings > Terminal > Theme
+Vous pouvez alors choisir Dark. Dans ces cas, vous aurez Un fond noir avec du texte blanc
+
+Voilà à vous de jouer !
