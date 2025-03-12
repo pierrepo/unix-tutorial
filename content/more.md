@@ -12,7 +12,7 @@ Si vous travaillez avec les systèmes d'exploitations Linux (Ubuntu, Mint, Debia
 
 ### Windows
 
-Si vous travaillez avec Windows 10, nous vous conseillons le [Windows Subsystem Linux](https://github.com/pierrepo/intro-wsl) (WSL).
+Si vous travaillez avec Windows 10 ou 11, nous vous conseillons le [Windows Subsystem Linux](https://github.com/pierrepo/intro-wsl) (WSL).
 
 
 ## Obtenir de l'aide 🆘

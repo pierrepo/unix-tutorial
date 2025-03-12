@@ -12,7 +12,7 @@ Le *shell* fonctionne sur un ordinateur, qui n'a aucune capacité d'abstraction 
 Enfin, un terminal (ou une console) est un logiciel graphique qui lance un *shell*. C'est ce dernier (le *shell*) qui va exécuter vos instructions.
 
 
-## 1. Invite de commande
+## Invite de commande
 
 Lorsque vous lancez un *shell*, l'invite de commande, c'est-à-dire la zone à gauche du curseur, ressemble à quelque chose du type :
 
@@ -47,7 +47,7 @@ $ pwd
 signifie : tapez l'instruction `pwd` dans le *shell* (sans le `$`), puis validez cette commande en pressant la touche <kbd>Entrée</kbd>.
 
 
-## 2. Préparer les données
+## Préparer les données
 
 Pour reproduire les exemples suivants, vous allez préparer les données nécessaires. Déplacez-vous tout d'abord dans votre répertoire utilisateur avec la commande `cd` :
 
@@ -72,7 +72,7 @@ $ cd unix
 Ces commandes seront en partie expliquées plus loin. Pour ne pas réécrire complètement ces commandes, vous pouvez les copier / coller avec les raccourcis <kbd>Ctrl</kbd>+<kbd>C</kbd> pour copier et <kbd>Ctrl</kbd>+<kbd>V</kbd> (ou parfois <kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>C</kbd>) pour coller.
 
 
-## 3. Parcourir les répertoires et les fichiers
+## Parcourir les répertoires et les fichiers
 
 ### Savoir où on se trouve : `pwd`
 
@@ -512,30 +512,30 @@ cp transferrin.csv transferrin.tsv test4
 Cela fonctionne avec autant de fichiers qu'on le souhaite.
 
 
-## 4. Trucs et astuces
+## Trucs et astuces
 
 Écrire des commandes dans un *shell* peut sembler rébarbatif mais on gagne rapidement en efficacité avec les astuces suivantes.
 
-#### Rappel des anciennes commandes
+### Rappel des anciennes commandes
 
 La flèche du haut <kbd>↑</kbd> rappelle les commandes précédentes (depuis la plus récente jusqu'à la plus ancienne).
 
-#### Complétion automatique
+### Complétion automatique
 
 La touche tabulation <kbd>Tab</kbd> est utile pour compléter une commande, un nom de répertoire ou de fichier. Appuyez deux fois sur <kbd>Tab</kbd> en cas d’ambiguïté.
 
 Par exemple, si vous tapez `/h` puis la touche <kbd>Tab</kbd>, le *shell* va compléter automatiquement à `/home`.
 
-#### Arrêter une commande en cours
+### Arrêter une commande en cours
 
 Pressez la touche <kbd>Ctrl</kbd> et la touche <kbd>C</kbd> en même temps pour arrêter une commande en cours.
 
-#### Copier / coller
+### Copier / coller
 
 Pour copier / coller quelque chose dans le *shell*, sélectionnez du texte puis utilisez les combinaisons de touches <kbd>Ctrl</kbd>+<kbd>C</kbd> pour copier et <kbd>Ctrl</kbd>+<kbd>V</kbd> (ou <kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>V</kbd>) pour coller.
 
 
-## 5. Explorer le contenu de fichiers
+## Explorer le contenu de fichiers
 
 Jusqu'à présent, on s'est contenté d'afficher le contenu de répertoires et de déplacer ou copier des fichiers, sans connaître leur contenu.
 
@@ -654,7 +654,7 @@ $ tail -n 2 transferrin.csv
 
 Dans l'exemple ci-dessus, on a affiché les 2 dernières lignes du fichier `transferrin.csv`.
 
-## 6. Créer ou éditer un fichier texte
+## Créer ou éditer un fichier texte
 
 Nano est un éditeur de texte qui fonctionne dans un *shell*, donc sans interface graphique, sans menu, sans icône, contrairement à des éditeurs de texte comme Notepad++.
 
@@ -697,7 +697,7 @@ Modifiez le fichier `shopping.txt` (en respectant le format *un_élement une_qua
 
 
 
-## 7. Manipuler des données
+## Manipuler des données
 
 ### Compter : `wc`
 
@@ -880,7 +880,7 @@ L'option `-d` spécifie le délimiteur, c'est-à-dire le caractère utilisé pou
 L'option `-f` précise le numéro du champ qu'on souhaite extraire.
 
 
-## 8. Gérer les flux : redirection et emboîtement
+## Gérer les flux : redirection et emboîtement
 
 On souhaite extraire du fichier `transferrin.csv` la liste des différents organismes d'où proviennent les structures de transferrines. On a besoin pour cela de réaliser 3 étapes :
 
@@ -990,7 +990,7 @@ La tabulation est le caractère par défaut utilisé par `cut` pour séparer les
 ```
 
 
-## 9. Chercher
+## Chercher
 
 ### Chercher dans des fichiers : `grep`
 
@@ -1099,7 +1099,7 @@ $ find ./ -name "*.csv"
 La commande `find` prend comme argument l'endroit à partir duquel on cherche, ici le répertoire courant désigné par `./` (on aurait aussi pu simplement indiquer « `.` »). Puis on précise le critère de recherche avec l'option `-name`, ici tous les fichiers qui se terminent par `.csv`.
 
 
-## 10. Se souvenir
+## Se souvenir
 
 La commande `history` affiche toutes les commandes que vous avez entrées, de la plus ancienne à la plus récente.
 

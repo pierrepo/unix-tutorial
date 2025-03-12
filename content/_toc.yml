@@ -5,7 +5,6 @@ format: jb-book
 root: intro
 parts:
 - caption: JupyterHub du cluster IFB
-  numbered: true
   chapters:
   - file: connexion
   - file: gestion_compte_ifb
