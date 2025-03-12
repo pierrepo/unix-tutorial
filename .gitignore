@@ -1,2 +1,5 @@
-# JupyterBook outptu
-_build/
+# JupyterBook output
+content/_build/
+
+# Virtual environment
+.venv/
