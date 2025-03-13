@@ -468,7 +468,7 @@ $ ls
 test2
 ```
 
-Pour que `rm` réalise la suppression sans demande de confirmation, il faut utiliser l'option`-f`.
+Pour que `rm` réalise la suppression sans demander de confirmation, il faut utiliser l'option`-f`.
 
 Pour supprimer un répertoire, il faut utiliser l'option supplémentaire `-r` :
 
