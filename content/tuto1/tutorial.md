@@ -466,13 +466,17 @@ article2.pdf  test2
 $ rm article2.pdf
 $ ls
 test2
-$ rm -r test2
+```
+
+Pour que le *shell* réalise la suppression sans demande de confirmation, il faut utiliser l'option`-f`.
+
+Pour supprimer un répertoire, il faut utiliser l'option supplémentaire `-r` :
+
+```bash
+$ rm -rf test2
 $ ls
 ```
 
-Pour supprimer un répertoire, il faut utiliser l'option supplémentaire `-r`.
-
-Suivant la configuration de votre *shell*, il faudra peut être ajouter l'option `-f` pour que la suppression fonctionne.
 
 ```{warning}
 Il n'y a pas de corbeille dans le *shell* Unix, c'est-à-dire aucune possibilité de récupérer un fichier ou un répertoire effacé par erreur. Pensez à sauvegarder régulièrement vos fichiers.
