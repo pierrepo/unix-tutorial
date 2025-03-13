@@ -915,9 +915,9 @@ Homo sapiens
 [...]
 ```
 
-L'option `-d` spécifie le délimiteur, c'est-à-dire le caractère utilisé pour séparer les différents champs (les colonnes). Par défaut, `cut` utilise la tabulation.
+L'option `-d` spécifie le délimiteur, c'est-à-dire le caractère utilisé pour séparer les différents champs (les colonnes). Par défaut, `cut` utilise la tabulation. Nous manipulons ici un fichier au format CSV (pour *comma-separated values*) dont les colonnes sont séparées par une virgule.
 
-L'option `-f` précise le numéro du champ qu'on souhaite extraire.
+L'option `-f` précise le numéro du champ qu'on souhaite extraire (ici le 2e champ).
 
 
 ## Gérer les flux : redirection et emboîtement
