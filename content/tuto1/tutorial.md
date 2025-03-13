@@ -120,7 +120,7 @@ genomes  paper.pdf  protein.txt  shopping.txt  transferrin.csv	transferrin.tsv
 
 On peut modifier le comportement par défaut d'une commande avec une (ou plusieurs) option(s). Cette option est séparée de la commande `ls` par un ou plusieurs espaces.
 
-Par exemple avec `-F` :
+Par exemple avec l'option `-F` :
 
 ```bash
 $ ls -F
