@@ -392,7 +392,7 @@ $ ls test
 article.pdf  genomes  paper.pdf
 ```
 
-### Visualiser une bout d'arborescence : `tree`
+### Visualiser un bout d'arborescence : `tree`
 
 La commande `tree` permet de visualiser une partie de l'arborescence des répertoires et des fichiers. Par exemple, pour visualiser l'arborescence du répertoire `test` :
 
