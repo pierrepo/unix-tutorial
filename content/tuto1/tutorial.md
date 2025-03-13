@@ -479,7 +479,7 @@ $ ls
 
 
 ```{warning}
-Il n'y a pas de corbeille dans le *shell* Unix, c'est-à-dire aucune possibilité de récupérer un fichier ou un répertoire effacé par erreur. Pensez à sauvegarder régulièrement vos fichiers.
+Il n'y a pas de corbeille dans le *shell* Unix, c'est-à-dire qu'il n'y a aucune possibilité de récupérer un fichier ou un répertoire effacé par erreur. Pensez à sauvegarder régulièrement vos fichiers.
 ```
 
 
