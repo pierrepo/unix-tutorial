@@ -988,9 +988,11 @@ Sus scrofa
 
 Les structures de transferrines du fichier `transferrin.csv` proviennent de 5 organismes différents.
 
-Pour cette analyse, nous avons dû créer deux fichiers intermédiaires : `organism.txt` et `organism_sorted.txt`.
+### Emboîtement
 
-Pour éviter la création de ces fichiers et réaliser cette analyse en une seule fois, on emboîte (« chaîne ») les différentes étapes. La sortie produite par une étape devient l'entrée de l'étape suivante (voir l'[illustration](https://swcarpentry.github.io/shell-novice/fig/redirects-and-pipes.svg) de [Software Carpentry](https://swcarpentry.github.io/shell-novice/04-pipefilter.html)). On utilise pour cela le caractère «`|`» :
+Pour réaliser l'analyse précédente, nous avons dû créer deux fichiers intermédiaires : `organism.txt` et `organism_sorted.txt`.
+
+Pour éviter la création de ces fichiers temporaires et réaliser l'analyse en une seule fois, on emboîte (« chaîne ») les différentes étapes. La sortie produite par une étape devient l'entrée de l'étape suivante (voir l'[illustration](https://swcarpentry.github.io/shell-novice/fig/redirects-and-pipes.svg) de [Software Carpentry](https://swcarpentry.github.io/shell-novice/04-pipefilter.html)). On utilise pour cela le caractère «`|`» :
 
 ```bash
 $ cut -d "," -f 2 transferrin.csv | sort | uniq
