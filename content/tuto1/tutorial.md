@@ -145,7 +145,7 @@ genomes/  paper.pdf  protein.txt  shopping.txt	transferrin.csv  transferrin.tsv
 
 Retenez qu'il faut au moins un espace entre une commande et son option.
 
-Une autre option sympa est l'option `-l` (lettre *l* en minuscule) qui affiche des informations complémentaires sur le contenu d'un répertoire :
+Une autre option sympa est l'option `-l` (la lettre *l* en minuscule) qui affiche des informations complémentaires sur le contenu d'un répertoire :
 
 ```bash
 $ ls -l
@@ -232,6 +232,9 @@ On peut même obtenir des informations détaillées sur un fichier en particulie
 $ ls -lh paper.pdf
 -rw-r--r-- 1 ppoulain ppoulain 96K Mar 13  2019 paper.pdf
 ```
+
+Dans cet exemple, on apprend que le fichier `paper.pdf` appartient à l'utilisateur `ppoulain`, qu'il a été modifié pour la dernière fois le 13 mars 2019 et qu'il a une taille de 96 kilo-octets.
+
 
 ```{note}
 Dans cet exemple, `ls` est la commande Unix, `-lh` sont les options et `paper.pdf` est l'argument.
