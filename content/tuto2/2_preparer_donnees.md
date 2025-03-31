@@ -14,13 +14,13 @@ Le numéro du projet qui nous intéresse est donc : **GSE80474**
 
 ## Créer le répertoire de travail
 
-Sur le cluster de l'IFB, il ne faut pas travailler dans votre répertoire personnel car l'espace disponible est très limité. Il faut travailler dans un répertoire dédié à votre projet, ici, l'espace créé pour cette formation DUO : `/shared/projects/202304_duo`.
+Sur le cluster de l'IFB, il ne faut pas travailler dans votre répertoire personnel, car l'espace disponible est très limité. Il faut travailler dans un répertoire dédié à votre projet, ici, l'espace créé pour cette formation DUO : `/shared/projects/2501_duo`.
 
-Depuis l'interface JupyterLab du cluster IFB, ouvrez un terminal, créez un répertoire pour les données de ce tutoriel puis déplacez-vous y :
+Depuis l'interface JupyterLab, ouvrez un terminal, créez un répertoire pour les données de ce tutoriel puis déplacez-vous y :
 
 ```bash
-$ mkdir -p /shared/projects/202304_duo/$USER/rnaseq
-$ cd /shared/projects/202304_duo/$USER/rnaseq
+$ mkdir -p /shared/projects/2501_duo/$USER/rnaseq
+$ cd /shared/projects/2501_duo/$USER/rnaseq
 ```
 
 ```{admonition} Rappel
@@ -60,7 +60,7 @@ Téléchargez le fichier `SraRunTable.txt` sur votre machine locale. Il s'agit d
 
 **Depuis l'interface JupyterLab du cluster IFB**
 
-Dans JupyterLab, utilisez l'explorateur de fichiers (à gauche) pour vous déplacer dans le répertoire que vous avez créé précédemment (`/shared/projects/202304_duo/$USER/rnaseq`).
+Dans JupyterLab, utilisez l'explorateur de fichiers (à gauche) pour vous déplacer dans le répertoire que vous avez créé précédemment (`/shared/projects/2501_duo/$USER/rnaseq`).
 
 En cliquant sur l'icône *Upload Files*, importez le fichier `SraRunTable.txt` dans votre répertoire projet.
 
@@ -154,7 +154,7 @@ C'est avec cet identifiant BioProject que nous allons récupérer les données.
 
 Sur le site [SRA Explorer](https://sra-explorer.info/) :
 
-1. Indiquez le numéro du *BioProject*, ici PRJNA319029, puis cliquez sur le petite loupe pour lancer la recherche.
+1. Indiquez le numéro du *BioProject*, ici PRJNA319029, puis cliquez sur la petite loupe pour lancer la recherche.
 1. Vous obtenez ensuite 74 réponses qui correspondent aux différents fichiers / échantillons.
 1. Affinez les réponses en tapant « Scerevisiae » dans le champ « Filter results: ». Vous devriez obtenir 50 résultats.
 1. Sélectionnez tous les résultats en cliquant sur le case vide à droite de *Title*.
@@ -187,7 +187,7 @@ Il est possible que vous n'ayez pas exactement les mêmes lignes de commande `cu
 
 Nous aimerions modifier ce script pour faire en sorte que :
 
-1. Le nom du fichier enregistré localement ne contienne que le numéro d'accession du fichier, tel que présent sur les serveurs de SRA (par exemple : `SRR3405789`) et pas les métadonnnées associées (par exemple : `_GSM2128026_Scerevisiae_YEPD_aF_30min_Saccharomyces_cerevisiae_RNA-Seq.fastq.gz`). Pour cela, il faut remplacer l'option `-o` par `-O` (sans argument).
+1. Le nom du fichier enregistré localement ne contienne que le numéro d'accession du fichier, tel que présent sur les serveurs de SRA (par exemple : `SRR3405789`) et pas les métadonnées associées (par exemple : `_GSM2128026_Scerevisiae_YEPD_aF_30min_Saccharomyces_cerevisiae_RNA-Seq.fastq.gz`). Pour cela, il faut remplacer l'option `-o` par `-O` (sans argument).
 2. Tous les fichiers soient enregistrés dans le même répertoire (par exemple `reads`). Il faut alors ajouter l'option `--output-dir` avec l'argument `reads`.
 
 Nous utilisons ici la commande `sed` qui modifie les lignes d'un fichier :
@@ -271,7 +271,7 @@ Vous avez téléchargé des données, mais vous n'êtes pas certains de leur int
 Téléchargez le fichier `reads_md5sum.txt` :
 
 ```bash
-$ wget https://raw.githubusercontent.com/pierrepo/unix-tutorial/master/tuto2/reads_md5sum.txt
+$ wget https://raw.githubusercontent.com/pierrepo/unix-tutorial/master/content/tuto2/reads_md5sum.txt
 ```
 
 Affichez le contenu de ce fichier avec la commande `cat` :
@@ -303,7 +303,7 @@ Si vous n'obtenez pas `OK` à côté de chaque fichier, cela signifie que le fic
 
 ## Compter les *reads*
 
-La commande `zcat` est l'équivalent de la commande `cat` mais pour les fichiers texte compressés. Vous pouvez l'utiliser pour afficher le premier *read* du fichier `reads/SRR3405783.fastq.gz` :
+La commande `zcat` est l'équivalent de la commande `cat`, mais pour les fichiers texte compressés. Vous pouvez l'utiliser pour afficher le premier *read* du fichier `reads/SRR3405783.fastq.gz` :
 
 ```bash
 $ zcat reads/SRR3405783.fastq.gz | head -n 4
@@ -315,7 +315,7 @@ GGTTGAANGGCGTCGCGTCGTAACCCAGCTTGGTAAGTTGGATTAAGCACT
 
 La première ligne contient l'identifiant du *read*, la deuxième la séquence du *read* et la quatrième ligne les scores de qualité. La troisième ligne est un marqueur de séparation : `+`.
 
-Compter le nombre de marqueur de séparation `+` dans un fichier *.fastq.gz* revient à compter le nombre de *reads*. Pour cela, nous allons utiliser la commande `zgrep` qui est l'équivalent de la commande `grep` mais pour les fichiers texte compressés.
+Compter le nombre de marqueurs de séparation `+` dans un fichier *.fastq.gz* revient à compter le nombre de *reads*. Pour cela, nous allons utiliser la commande `zgrep` qui est l'équivalent de la commande `grep` mais pour les fichiers texte compressés.
 
 ```bash
 $ zgrep -c -e "^+$" reads/*.fastq.gz 
@@ -336,7 +336,7 @@ Patientez quelques secondes pour obtenir le résultat.
 
 ## Télécharger le génome de référence et ses annotations
 
-On trouve dans le fichier *S1 Supporting Information Methods* la desciption du génome de *S. cerevisiae* utilisé par Kelliher *et al.* :
+On trouve dans le fichier *S1 Supporting Information Methods* la description du génome de *S. cerevisiae* utilisé par Kelliher *et al.* :
 
 > The S. cerevisiae S288C genome (Ensembl build R64-1-1) was downloaded from Illumina iGenomes on March 2, 2016 (https://support.illumina.com/sequencing/sequencing_software/igenome.html).
 
@@ -360,7 +360,7 @@ Supprimez enfin le répertoire `Saccharomyces_cerevisiae` et l'archive contenant
 $ rm -rf Saccharomyces_cerevisiae Saccharomyces_cerevisiae_Ensembl_R64-1-1.tar.gz README.txt
 ```
 
-In fine, vous devriez obtenir l'organisation de fichiers suivante (pour lé debut) :
+In fine, vous devriez obtenir l'organisation de fichiers suivante (pour le début) :
 
 ```bash
 $ tree
@@ -401,6 +401,6 @@ Si le téléchargement des données prend trop de temps ou échoue, lancez les c
 
 ```bash
 $ mkdir -p reads
-$ cp /shared/projects/202304_duo/data/rnaseq_scere/reads/SRR340578{3,4,5}.fastq.gz reads/
-$ cp -R /shared/projects/202304_duo/data/rnaseq_scere/genome .
+$ cp /shared/projects/2501_duo/data/rnaseq_scere/reads/SRR340578{3,4,5}.fastq.gz reads/
+$ cp -R /shared/projects/2501_duo/data/rnaseq_scere/genome .
 ```
