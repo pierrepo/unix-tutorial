@@ -13,14 +13,14 @@ parts:
   chapters:
   - file: tuto1/tutorial
   - file: tuto1/more
-# - caption: Analyse RNA-seq avec Unix
-#   numbered: true
-#   chapters:
-#   - file: tuto2/0_intro
-#   - file: tuto2/1_preparer_logiciels_module
-#   - file: tuto2/2_preparer_donnees
-#   - file: tuto2/3_analyser
-#   - file: tuto2/4_automatiser
+- caption: Analyse RNA-seq avec Unix
+  numbered: true
+  chapters:
+  - file: tuto2/0_intro
+  - file: tuto2/1_preparer_logiciels_module
+  - file: tuto2/2_preparer_donnees
+  - file: tuto2/3_analyser
+  - file: tuto2/4_automatiser
 # - caption: Analyse RNA-seq avec un cluster de calcul
 #   numbered: true
 #   chapters:
