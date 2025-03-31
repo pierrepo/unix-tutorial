@@ -5,7 +5,7 @@
 
 ## Valider la dimension de votre espace de travail 
 
-Exécutez la commande suivante pour connaitre le nombre de coeurs disponibles : 
+Ouvrez un terminal dans JupyterLab puis exécutez la commande suivante : 
 
 ```bash
 $ echo "${SLURM_CPUS_PER_TASK}"
@@ -16,7 +16,7 @@ $ echo "${SLURM_CPUS_PER_TASK}"
 Ne tapez pas le caractère `$` en début de ligne et faites bien attention aux majuscules et au minuscules.
 ```
 
-Vous devriez obtenir `6`, ce qui correspond au nombre de `CPU(S)` demandé lors de [configuration](0_intro.md) de votre environnment JupyterHub/JupyterLab. Si ce n'est pas le cas, sollicitez-moi car vous serez bloqué par la suite.
+Vous devriez obtenir `6`, ce qui correspond au paramètre `Number of CPUs` demandé lors de [configuration](0_intro.md) de JupyterLab. Si ce n'est pas le cas, sollicitez-moi, car vous serez bloqué par la suite.
 
 
 ## Lister les logiciels nécessaires
@@ -38,9 +38,9 @@ Le fichier *S1 Supporting Information Methods* fournit des précisions suppléme
 
 > Transcript quantification of annotated yeast genes was performed using alignment files output from STAR and Cufflinks2 [4]. Time point samples from the respective yeasts were then normalized together using the CuffNorm feature.
 
-En résumé, nous avons besoin d'installer les outils : `STAR`, `HTSeq-count` et `Cufflinks`. Aucune version de logiciel n'étant spécifiée, nous allons installer la dernière version disponible sur le cluster.
+En résumé, nous avons besoin d'utiliser les outils : `STAR`, `HTSeq-count` et `Cufflinks`. Aucune version de logiciel n'étant spécifiée, nous allons utiliser des versions disponibles sur le cluster il y 2 ans, lorsque j'ai créé cette activité.
 
-Nous installerons également [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) pour contrôler la qualité des *reads*, ainsi que `samtools` qui n'est pas explicitement mentionné dans l'article ni dans les *Supporting Information* mais qui est nécessaire pour trier et indexer les *reads* alignés.
+Nous installerons également [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) pour contrôler la qualité des *reads*, ainsi que `samtools` qui n'est pas explicitement mentionné dans l'article ni dans les *Supporting Information*, mais qui est nécessaire pour trier et indexer les *reads* alignés.
 
 Récapitulons les logiciels nécessaires :
 
@@ -61,17 +61,31 @@ Par exemple pour `sra-tools`, vous devriez obtenir :
 ```bash
 $ module avail sra-tools
 --------------------- /shared/software/modulefiles ----------------------
-sra-tools/2.10.0  sra-tools/2.10.3  sra-tools/2.11.0
+sra-tools/2.10.0  sra-tools/2.10.3  sra-tools/2.11.0  sra-tools/3.1.0  sra-tools/3.1.1
 ```
 
-Trois versions de `sra-tools` sont disponibles. Par défaut, la commande 
+Cinq versions de `sra-tools` sont disponibles. Par défaut, la commande 
 
 
 ```bash
 $ module load sra-tools
 ```
 
-chargera la dernière version disponible, ici la version `2.11.0`.
+chargera la dernière version disponible, ici la version `3.1.1`.
+
+Pour charger une version spécifique, il faut d'abord décharger la version par défaut (car on ne peut pas charger deux versions d'un même logiciel en même temps) :
+
+```bash
+$ module unload sra-tools
+```
+
+puis charger la version souhaitée :
+
+```bash
+$ module load sra-tools/2.11.0
+```
+
+C'est maintenant la version `2.11.0` de `sra-tools` qui sera chargée.
 
 Complétez le tableau suivant en indiquant, pour chaque logiciel, la version la plus ancienne (plus petit numéro) et la version la plus récente (plus grand numéro) disponibles sur le cluster de l'IFB :
 
@@ -98,7 +112,7 @@ Les administrateurs du cluster sont habituellement très réactifs (voir un [exe
 Chargez les différents logiciels dans votre espace de travail avec la commande `module load` :
 
 ```bash
-$ module load sra-tools fastqc star htseq cufflinks samtools
+$ module load sra-tools/2.11.0 fastqc/0.11.9 star/2.7.10b htseq/0.13.5 cufflinks/2.2.1 samtools/1.15.1
 ```
 
 Affichez maintenant la liste des modules chargés dans votre espace de travail :
@@ -110,7 +124,7 @@ Currently Loaded Modulefiles:
  2) fastqc/0.11.9      4) htseq/0.13.5   6) samtools/1.15.1  
 ```
 
-Vérifiez enfin les versions des logiciels en appelant chaque logiciel individuellement. Ette étape est utilise pour vérifier que les versions des logiciels chargés avec `module load` sont bien les versions attendues.
+Vérifiez enfin les versions des logiciels en appelant chaque logiciel individuellement. Cette étape est utile pour vérifier que les versions des logiciels chargés avec `module load` sont bien les versions attendues.
 
 ### sra-tools
 
