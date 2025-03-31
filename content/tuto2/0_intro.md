@@ -8,30 +8,32 @@ L'objectif de ce tutoriel est de reproduire les résultats de l'article [*Invest
 
 Dans la rubrique [*Supporting Information*](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1006453#sec011) de l'article, le fichier [*S1 Supporting Information Methods*](https://doi.org/10.1371/journal.pgen.1006453.s001) décrit les outils et les méthodes utilisés pour l'analyse RNA-seq.
 
-Partant de ces informations, nous allons essayer de reproduire les différentes étapes de l'analyse RNA-seq. Nous verrons quelles sont les principales limitations et comment les contourner. Les analyses seront réalisées sur le cluster de calcul de l'IFB, mais, pour des raisons de progression pédagogique, nous n'utiliserons pas la puissance proposée par un tel cluster. Ce sera par contre l'object de la prochaine session.
+Partant de ces informations, nous allons essayer de reproduire les différentes étapes de l'analyse RNA-seq. Nous verrons quelles sont les principales limitations et comment les contourner. Les analyses seront réalisées sur le cluster de calcul de l'IFB, mais, pour des raisons de progression pédagogique, nous n'utiliserons pas la puissance d'un tel cluster. Ce sera l'objet de la prochaine session.
 
-### Prérequis
+
+## Prérequis
 
 - Posséder un compte sur le cluster de calcul de l'IFB.
 - Avoir réalisé le tutoriel [Introduction à Unix](../tuto1/tutorial.md).
 
-### Configuration du JupyterHub
 
-Connectez-vous au serveur JupyterHub de l'IFB.
+## Connexion à l’application JupyterLab de l’IFB
 
-Dans la page *Server Options*, choisissez les paramètres suivants :
+ Depuis le <a href="https://ondemand.cluster.france-bioinformatique.fr/" target="_blank">portail Open OnDemand</a> de l'IFB, lancez l'application JupyterLab avec les paramètres suivants :
 - Reservation: `No reservation` 
-- Account: `202304_duo`  ⚠️
+- Account: `2501_duo` ⚠️
 - Partition: `fast`
-- CPU(s): `6`  ⚠️
-- Memory (in GB): `6`  ⚠️
-- GPU(s): `0` `No GRES`
+- Number of CPUs: `6` ⚠️
+- Amount of memory: `6G` ⚠️
+- GPUs: `No GPU`
+- Number of hours: `3` ⚠️
 
 ```{warning}
-La configuration demandée pour cette session est différente de celle demandée pour l'introduction à Unix. Soyez particulièrement attentif aux paramètres `Account`, `CPU(s)` et `Memory (in GB)`.
+La configuration demandée pour cette session est différente de celle demandée pour l'introduction à Unix. Soyez particulièrement attentif aux paramètres *Number of CPUs* et *Amount of memory* .
 ```
 
-### Analyse de données RNA-seq
+
+## Analyse des données RNA-seq
 
 1. [Préparer l'environnement logiciel](1_preparer_logiciels_module.md)
 1. [Préparer les données](2_preparer_donnees.md)
