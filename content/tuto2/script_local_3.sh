@@ -8,7 +8,7 @@ set -euo pipefail
 
 # Références des échantillons à analyser.
 # Les numéros sont entre guillemets et séparés par un espace.
-samples="SRR3405783 SRR3405784 SRR3405785"
+samples="SRR3405801 SRR3405802 SRR3405804"
 # Chemin et nom du fichier contenant le génome de référence.
 genome_file="genome/genome.fa"
 # Chemin et nom du fichier contenant les annotations.
@@ -16,6 +16,7 @@ annotation_file="genome/genes.gtf"
 
 echo "=============================================================="
 echo "Indexer le génome de référence"
+echo "Date et heure : $(date --iso-8601=seconds)"
 echo "=============================================================="
 mkdir -p "genome_index"
 STAR --runThreadN 4 \
@@ -30,12 +31,14 @@ for sample in ${samples}
 do
     echo "=============================================================="
     echo "Contrôler la qualité : échantillon ${sample}"
+	echo "Date et heure : $(date --iso-8601=seconds)"
     echo "=============================================================="
     mkdir -p "reads_qc"
     fastqc "reads/${sample}.fastq.gz" --outdir "reads_qc"
 
     echo "=============================================================="
     echo "Aligner les reads sur le génome de référence : échantillon ${sample}"
+	echo "Date et heure : $(date --iso-8601=seconds)"
     echo "=============================================================="
     mkdir -p "reads_map"
     STAR --runThreadN 4 \
@@ -53,17 +56,20 @@ do
 
     echo "=============================================================="
     echo "Trier les reads alignés : échantillon ${sample}"
+	echo "Date et heure : $(date --iso-8601=seconds)"
     echo "=============================================================="
     samtools sort "reads_map/${sample}_Aligned.out.bam" \
     -o "reads_map/${sample}_Aligned.sorted.out.bam"
 
     echo "=============================================================="
     echo "Indexer les reads alignés : échantillon ${sample}"
+	echo "Date et heure : $(date --iso-8601=seconds)"
     echo "=============================================================="
     samtools index "reads_map/${sample}_Aligned.sorted.out.bam"
 
     echo "=============================================================="
     echo "Compter les reads : échantillon ${sample}"
+	echo "Date et heure : $(date --iso-8601=seconds)"
     echo "=============================================================="
     mkdir -p "counts/${sample}"
     htseq-count --order=pos --stranded=reverse \
@@ -82,9 +88,13 @@ done
 
 echo "=============================================================="
 echo "Normaliser les comptages des transcrits"
+echo "Date et heure : $(date --iso-8601=seconds)"
 echo "=============================================================="
 cuffnorm --num-threads 4 \
 --library-type=fr-firststrand "${annotation_file}" \
 "counts"/*/*.cxb --output-dir "counts"
 
-date
+echo "=============================================================="
+echo "Fin"
+echo "Date et heure : $(date --iso-8601=seconds)"
+echo "=============================================================="
