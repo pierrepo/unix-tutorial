@@ -332,7 +332,7 @@ Comment utilisez-vous la version particulière d'un outil dans Galaxy ?
 
 Vous avez automatisé votre analyse RNA-seq en regroupant les différentes étapes dans un script Bash. Vous avez également utilisé plusieurs coeurs pour accélérer autant que possible l'analyse. Enfin, vous avez automatisé l'analyse de plusieurs échantillons dans un même script.
 
-Ce n'est pas encore complètement satisfaisant. En effet, il vous faudrait 11 heures de calcul pour analyser les 50 échantillons.
+Ce n'est pas encore complètement satisfaisant. En effet, il vous faudrait près de 12 heures de calcul pour analyser les 50 échantillons.
 
 Quelles autres pistes pourriez-vous explorer pour réduire le temps de calcul ?
 
