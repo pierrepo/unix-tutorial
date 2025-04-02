@@ -124,9 +124,7 @@ Currently Loaded Modulefiles:
  2) sra-tools/2.11.0   4) star/2.7.10b    6) cufflinks/2.2.1    
 ```
 
-```{admonition} Remarque
-:class: note
-
+```{note}
 Le module `jupyterlab/3.5.0` est chargé par défaut lorsque vous utilisez JupyterLab. Ne vous en occupez pas. 
 ```
 
