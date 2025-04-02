@@ -26,7 +26,7 @@ Partant de ces informations, nous allons essayer de reproduire les différentes 
 - Number of CPUs: `6` ⚠️
 - Amount of memory: `6G` ⚠️
 - GPUs: `No GPU`
-- Number of hours: `3` ⚠️
+- Number of hours: `8` ⚠️
 
 ```{warning}
 La configuration demandée pour cette session est différente de celle demandée pour l'introduction à Unix. Soyez particulièrement attentif aux paramètres *Number of CPUs* et *Amount of memory* .
