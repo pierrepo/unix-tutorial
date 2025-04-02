@@ -4,31 +4,33 @@
 ```
 
 Dans cette partie, nous allons analyser manuellement, étape par étape, les données RNA-seq de *S. cerevisiae*.
+
 ## Vérifier l'environnement logiciel
 
 Si cela n'est pas déjà fait, chargez les outils nécessaires à l'analyse des données RNA-seq :
 
 ```bash
-$ module load sra-tools fastqc star htseq cufflinks samtools
+$ module load sra-tools/2.11.0 fastqc/0.11.9 star/2.7.10b htseq/0.13.5 cufflinks/2.2.1 samtools/1.15.1
 ```
 
 ## Vérifier les données
 
-Déplacez-vous ensuite dans le répertoire : `/shared/projects/202304_duo/$USER/rnaseq`. 
+Déplacez-vous ensuite dans le répertoire : `/shared/projects/2501_duo/$USER/rnaseq`. 
 
 Vous devriez obtenir l'arborescence suivante :
 
 ```bash
 $ tree
-.
 ├── genome
 │   ├── genes.gtf
 │   └── genome.fa
-└── reads
-    ├── SRR3405783.fastq.gz
-    ├── SRR3405784.fastq.gz
-    └── SRR3405785.fastq.gz
+├── reads
+│   ├── SRR3405801.fastq.gz
+│   ├── SRR3405802.fastq.gz
+│   └── SRR3405804.fastq.gz
+[...]
 ```
+
 ## Contrôler la qualité des reads
 
 Créez le répertoire `reads_qc` qui va contenir les fichiers produits par le contrôle qualité des fichiers *fastq.gz* :
@@ -40,17 +42,17 @@ $ mkdir -p reads_qc
 Lancez FastQC avec la commande :
 
 ```bash
-$ fastqc reads/SRR3405783.fastq.gz --outdir reads_qc
+$ fastqc reads/SRR3405801.fastq.gz --outdir reads_qc
 ```
 
-FastQC va produire deux fichiers (un fichier avec l’extension `.html` et un autre avec l’extension `.zip`) dans le répertoire `reads_qc`. Si par exemple, vous avez analysé le fichier `reads/SRR3405783.fastq.gz`, vous obtiendrez les fichiers `reads_qc/SRR3405783_fastqc.html` et `reads_qc/SRR3405783_fastqc.zip`.
+FastQC va produire deux fichiers (un fichier avec l’extension `.html` et un autre avec l’extension `.zip`) dans le répertoire `reads_qc`. Si par exemple, vous avez analysé le fichier `reads/SRR3405801.fastq.gz`, vous obtiendrez les fichiers `reads_qc/SRR3405801_fastqc.html` et `reads_qc/SRR3405801_fastqc.zip`.
 
 Depuis l'explorateur de fichiers de JupyterLab, déplacez-vous dans le répertoire `reads_qc`, puis double-cliquez sur le fichier `.html` ainsi créé. Le rapport d'analyse créé par FastQC va alors s'ouvrir dans un nouvel onglet de JupyterLab.
 
 
 ## Indexer le génome de référence
 
-L’indexation du génome de référence est une étape indispensable pour accélérer l’alignement des reads sur le génome. Elle consiste à créer une sorte d'annuaire du génome de référence.
+L’indexation du génome de référence est une étape indispensable pour accélérer l’alignement des *reads* sur le génome. Elle consiste à créer une sorte « d'annuaire » du génome de référence.
 
 Dans un terminal, créez le répertoire `genome_index` qui contiendra les index du génome de référence :
 
@@ -71,6 +73,8 @@ $ STAR --runMode genomeGenerate \
 
 ```{hint}
 En Bash, le symbole `\` à la fin d'une ligne permet de poursuivre l'instruction sur la ligne suivante. Cela rend la commande plus lisible.
+
+Pensez à copier la commande entière (sans le `$` au début) puis à la coller dans le terminal.
 ```
 
 L'aide de STAR pour l'option `--sjdbOverhang` indique :
@@ -84,23 +88,23 @@ Cela signifie que cette option doit être égale à la longueur maximale des *re
 
 > S. cerevisiae total mRNA was prepared in libraries of stranded 50 base-pair single-end reads and multiplexed at 10 time point samples per sequencing lane.
 
-Les *reads* obtenus devraient donc a priori être constitué de 50 bases. On peut le vérifier en affichant les premières lignes d'un fichier *.fastq.gz*, par exemple `reads/SRR3405783.fastq.gz` :
+Les *reads* obtenus devraient donc a priori être constitué de 50 bases. On peut le vérifier en affichant les premières lignes d'un fichier *.fastq.gz*, par exemple `reads/SRR3405801.fastq.gz` :
 
 ```bash
-$ zcat reads/SRR3405783.fastq.gz | head
-@SRR3405783.1 3NH4HQ1:254:C5A48ACXX:1:1101:1135:2105/1
-GGTTGAANGGCGTCGCGTCGTAACCCAGCTTGGTAAGTTGGATTAAGCACT
+$ zcat reads/SRR3405801.fastq.gz | head
+@SRR3405801.1 3NH4HQ1:254:C5A48ACXX:3:1101:1115:2179/1
+CTTGGGTCTTTTGAGAACCACGTAGTAAACCGGTTCTTCTGGCAGCAATCA
 +
-?8?D;DD#2<C?CFE6CGGIFFFIE@DFF<FFB===C7=F37@C)=DE>EA
-@SRR3405783.2 3NH4HQ1:254:C5A48ACXX:1:1101:1210:2111/1
-GTTTCTGTACTTACCCTTACCGGCTCTCAATTTCTTGGACTTCAAGACCTT
+CCCFFFBDHHHHHIIIIJIIJJJJIIGIJJJJI@HIIIJJJJJJJJIJJJG
+@SRR3405801.2 3NH4HQ1:254:C5A48ACXX:3:1101:1349:2220/1
+CCCCTTGCTTCTTCTCCTTGTGTCCGACTAATGGTGGGTCTCGTAGCTGCT
 +
-;?@DDD>BFF?F>GE:CFFFFBFFIFFFIIIEIFFI9BFDCFFC<FFF>FF
-@SRR3405783.3 3NH4HQ1:254:C5A48ACXX:1:1101:1408:2208/1
-CTGCAGACAAGGCATCTCCTCTCAAGGCCAAATGACGTTGGTCCAACAGTA
+@;?DDDDFHHFHFDHHIIIIIGHHHGBHGGGGIICFGA8BDHGHHGEGHB@
+@SRR3405801.3 3NH4HQ1:254:C5A48ACXX:3:1101:1529:2186/1
+GTTTAGTTTTGTCTTGGACAAACTCAGGTAAGAGAGGATATTTTATGGCAG
 ```
 
-En réalité, les *reads* ont une longueur de 51 bases et non pas 50 comme supposé.
+En réalité, les *reads* ont une longueur de *51 bases* et non pas 50 comme supposé.
 
 Le paramètre `--sjdbOverhang` vaut donc 50 (51 - 1).
 
@@ -108,7 +112,7 @@ Le paramètre `--sjdbOverhang` vaut donc 50 (51 - 1).
 La commande `zcat` est particulière car elle affiche le contenu d'un fichier compressé (ici un fichier .gz) en le décompressant à la volée. La commande `cat` (sans le `z`) n'aurait pas permis une telle manipulation.
 ```
 
-Vérifiez également que la longueur des *reads* est bien 51 en consultant les résultats du contrôle qualité fournis par FastQC (première page, *Basic Statistics*).
+Vérifiez également que la longueur des *reads* est bien de 51 bases en consultant les résultats du contrôle qualité fournis par FastQC (première page, *Basic Statistics*).
 
 Enfin, le paramètre `--genomeSAindexNbases 10` est conseillé par STAR. Si on utilise STAR sans ce paramètre, on obtient le message :
 
@@ -143,11 +147,11 @@ $ STAR --runThreadN 1 \
 --genomeDir genome_index \
 --sjdbGTFfile genome/genes.gtf \
 --readFilesCommand zcat \
---readFilesIn reads/SRR3405783.fastq.gz \
+--readFilesIn reads/SRR3405801.fastq.gz \
 --outFilterType BySJout \
 --alignIntronMin 10 \
 --alignIntronMax 3000 \
---outFileNamePrefix reads_map/SRR3405783_ \
+--outFileNamePrefix reads_map/SRR3405801_ \
 --outFilterIntronMotifs RemoveNoncanonical \
 --outSAMtype BAM Unsorted
 ```
