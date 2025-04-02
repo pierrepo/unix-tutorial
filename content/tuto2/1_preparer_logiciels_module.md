@@ -23,6 +23,9 @@ Vous devriez obtenir `6`, ce qui correspond au paramètre `Number of CPUs` deman
 
 Le cluster de calcul de l'IFB propose de nombreux logiciels pré-installés. Pour utiliser ces logiciels, il suffit de les charger dans l'environnement de travail avec la commande `module load`.
 
+```{note}
+La commande `module` n'est souvent disponible que sur des clusters de calcul. C'est une manière simple et pratique d'utiliser des logiciels sans devoir les installer vous-même. `module` n'est en général pas disponible sur une station de travail individuelle.
+```
 
 Nous allons utiliser [SRA Toolkit](https://github.com/ncbi/sra-tools) pour télécharger les données brutes de séquençage.
 
