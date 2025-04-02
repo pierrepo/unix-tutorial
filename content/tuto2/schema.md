@@ -16,7 +16,8 @@ flowchart TB
     cuffquant(["Compter les transcrits"])
     cuffnorm(["Normaliser les transcrits"])
 
-    table[["Table de comptage"]]
+    table_reads[["Table de comptage <br/> des reads"]]
+    table_transcrits[["Table de comptage <br/> des transcrits"]]
 
     genome -->|"STAR"| star_index
     annotation -->|"STAR"| star_index
@@ -34,10 +35,13 @@ flowchart TB
     samtools_index -->|"cuffquant"| cuffquant
     annotation -->|"cuffquant"| cuffquant
     cuffquant -->|"cuffnom"| cuffnorm
-    cuffnorm -->|"Aggréger les résultats"| table 
+    cuffnorm -->|"Aggréger les résultats"| table_transcrits 
+    htseq -->|"Aggréger les résultats"| table_reads
     
     linkStyle default stroke-width:2px,fill:none,color:red;
     style read fill:#E1F8DC,stroke:#40A8C4;
     style genome fill:#E1F8DC,stroke:#40A8C4;
     style annotation fill:#E1F8DC,stroke:#40A8C4;
+    style table_reads fill:#9bedff,stroke:#00d2ff;
+    style table_transcrits fill:#83aff0,stroke:#3c649f;
 ````
