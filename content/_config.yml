@@ -41,3 +41,5 @@ html:
 sphinx:
   config:
     html_show_copyright: false
+  extra_extensions:
+  - sphinxcontrib.mermaid

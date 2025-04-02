@@ -6,4 +6,5 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "jupyter-book>=1.0.3",
+    "sphinxcontrib-mermaid>=1.0.0",
 ]
