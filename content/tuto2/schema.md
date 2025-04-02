@@ -1,3 +1,5 @@
+# Schéma de l'analyse RNA-seq
+
 ````{mermaid}
 ---
 title: "Analyse RNA-seq"
