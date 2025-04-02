@@ -16,7 +16,7 @@ $ echo "${SLURM_CPUS_PER_TASK}"
 Ne tapez pas le caractère `$` en début de ligne et faites bien attention aux majuscules et au minuscules.
 ```
 
-Vous devriez obtenir `6`, ce qui correspond au paramètre `Number of CPUs` demandé lors de [configuration](0_intro.md) de JupyterLab. Si ce n'est pas le cas, sollicitez-moi, car vous serez bloqué par la suite.
+Vous devriez obtenir `6`, ce qui correspond au paramètre `Number of CPUs` demandé lors de la [configuration](0_intro.md) de JupyterLab. Si ce n'est pas le cas, sollicitez-moi, car vous serez bloqué par la suite.
 
 
 ## Lister les logiciels nécessaires
@@ -87,7 +87,7 @@ $ module load sra-tools/2.11.0
 
 C'est maintenant la version `2.11.0` de `sra-tools` qui sera chargée.
 
-Complétez le tableau suivant en indiquant, pour chaque logiciel, la version la plus ancienne (plus petit numéro) et la version la plus récente (plus grand numéro) disponibles sur le cluster de l'IFB :
+En utilisant la commande `module avail`, complétez le tableau suivant en indiquant, pour chaque logiciel, la version la plus ancienne (plus petit numéro) et la version la plus récente (plus grand numéro) disponibles sur le cluster de l'IFB :
 
 | Logiciel  | Version la plus ancienne | Version la plus récente |
 |-----------|--------------------------|-------------------------|
@@ -120,9 +120,16 @@ Affichez maintenant la liste des modules chargés dans votre espace de travail :
 ```bash
 $ module list
 Currently Loaded Modulefiles:
- 1) sra-tools/2.11.0   3) star/2.7.10b   5) cufflinks/2.2.1  
- 2) fastqc/0.11.9      4) htseq/0.13.5   6) samtools/1.15.1  
+ 1) jupyterlab/3.5.0   3) fastqc/0.11.9   5) htseq/0.13.5      7) samtools/1.15.1  
+ 2) sra-tools/2.11.0   4) star/2.7.10b    6) cufflinks/2.2.1    
 ```
+
+```{admonition} Remarque
+:class: note
+
+Le module `jupyterlab/3.5.0` est chargé par défaut lorsque vous utilisez JupyterLab. Ne vous en occupez pas. 
+```
+
 
 Vérifiez enfin les versions des logiciels en appelant chaque logiciel individuellement. Cette étape est utile pour vérifier que les versions des logiciels chargés avec `module load` sont bien les versions attendues.
 
@@ -175,6 +182,8 @@ $ htseq-count --version
 $ cufflinks 2>&1 | head -n 1
 cufflinks v2.2.1
 ```
+
+Normalement, la version de chaque logiciel doit correspondre à la version que vous avez chargée avec `module load`.
 
 
 ```{important}
