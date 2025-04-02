@@ -194,18 +194,20 @@ cuffnorm --library-type=fr-firststrand path_to_yeast_transcriptome_gtf
 
 Nous allons réaliser nous-mêmes ces étapes avec quelques adaptations.
 
-Créez tout d'abord le répertoire `counts/SRR3405783` dans lequel seront stockés les fichiers de comptage.
+Créez tout d'abord le répertoire `counts/SRR3405801` dans lequel seront stockés les fichiers de comptage.
 
 ```bash
-$ mkdir -p counts/SRR3405783
+$ mkdir -p counts/SRR3405801
 ```
 
-Les étapes de tri et d'indexation des *reads* alignés ne sont pas explicitement mentionnées dans les *Supporting Informations* mais elles sont cependant nécessaires pour HTSeq et Cufflinks.
+Les étapes de tri et d'indexation des *reads* alignés ne sont pas explicitement mentionnées dans les *Supporting Informations*, mais elles sont cependant nécessaires pour HTSeq et Cufflinks.
 
 ```bash
-$ samtools sort reads_map/SRR3405783_Aligned.out.bam -o reads_map/SRR3405783_Aligned.sorted.out.bam
-$ samtools index reads_map/SRR3405783_Aligned.sorted.out.bam
+$ samtools sort reads_map/SRR3405801_Aligned.out.bam -o reads_map/SRR3405801_Aligned.sorted.out.bam
+$ samtools index reads_map/SRR3405801_Aligned.sorted.out.bam
 ```
+
+Cette étape prend quelques minutes.
 
 ```{note}
 Le tri des *reads* peut, a priori, se faire directement avec STAR en utilisant l'option `--outSAMtype BAM SortedByCoordinate`. Cependant, les tests réalisés sur le cluster ont montré qu'il y avait parfois des soucis avec cette option. Nous préférons donc utiliser explicitement `samtools` pour le tri des *reads*.
@@ -216,21 +218,21 @@ La commande pour compter les *reads* devient alors :
 ```bash
 $ htseq-count --order=pos --stranded=reverse \
 --mode=intersection-nonempty \
-reads_map/SRR3405783_Aligned.sorted.out.bam \
-genome/genes.gtf > counts/SRR3405783/count_SRR3405783.txt
+reads_map/SRR3405801_Aligned.sorted.out.bam \
+genome/genes.gtf > counts/SRR3405801/count_SRR3405801.txt
 ```
 
 Puis celle pour compter les transcrits :
 
 ```bash
 $ cuffquant --library-type=fr-firststrand genome/genes.gtf \
-reads_map/SRR3405783_Aligned.sorted.out.bam \
---output-dir counts/SRR3405783
+reads_map/SRR3405801_Aligned.sorted.out.bam \
+--output-dir counts/SRR3405801
 ```
 
 ```{note}
 - Par défaut, `cuffquant` écrit un fichier `abundances.cxb`.
-- Nous ajoutons l'option `--output-dir counts/SRR3405783` pour indiquer où stocker les résultats produits par `cuffquant` (voir la [documentation](http://cole-trapnell-lab.github.io/cufflinks/cuffquant/) à ce propos). Cela nous permet de distinguer les résultats obtenus à partir de différents fichiers *.fastq.gz*.
+- Nous ajoutons l'option `--output-dir counts/SRR3405801` pour indiquer où stocker les résultats produits par `cuffquant` (voir la [documentation](http://cole-trapnell-lab.github.io/cufflinks/cuffquant/) à ce propos). Cela nous permet de distinguer les résultats obtenus à partir de différents fichiers *.fastq.gz*.
 ```
 
 Enfin, on normalise les comptages des transcrits :
@@ -248,7 +250,7 @@ counts/*/*.cxb --output-dir counts
 ## Conclusion
 
 Pour analyser les données RNA-seq de *S. cerevisiae*, vous avez lancé à la main plus d'une dizaine de commandes dans un terminal Unix.
-C'était fastidieux car ces commandes étaient parfois complexes avec de nombreuses options. Dans ce cas, le copier-coller était votre meilleur ami !
+C'était fastidieux, car ces commandes étaient parfois complexes avec de nombreuses options. Dans ce cas, le copier-coller était votre meilleur ami !
 
 **Mais**, vous avez été capable de reproduire toutes ces étapes en suivant les instructions de ce tutoriel. C'est là la grande force d'Unix et de la ligne commande : la capacité à décrire une analyse complexe en une suite d'instructions *écrites* et donc *facilement* répétables.
 
