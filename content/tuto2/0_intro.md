@@ -32,11 +32,15 @@ Partant de ces informations, nous allons essayer de reproduire les différentes 
 La configuration demandée pour cette session est différente de celle demandée pour l'introduction à Unix. Soyez particulièrement attentif aux paramètres *Number of CPUs* et *Amount of memory* .
 ```
 
-
 ## Analyse des données RNA-seq
+
+Voici un schéma récapitulatif des différentes étapes de l'analyse RNA-seq.
+
+Pour réaliser cette analyse, voici la procédure que nous allons suivre :
 
 1. [Préparer l'environnement logiciel](1_preparer_logiciels_module.md)
 1. [Préparer les données](2_preparer_donnees.md)
 1. [Analyser les données RNA-seq](3_analyser.md)
 1. [Automatiser l'analyse RNA-seq](4_automatiser.md)
+
 
