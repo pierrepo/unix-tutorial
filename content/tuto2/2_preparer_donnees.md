@@ -178,7 +178,7 @@ curl -L ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR340/004/SRR3405784/SRR3405784.fast
 curl -L ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR340/003/SRR3405783/SRR3405783.fastq.gz -o SRR3405783_GSM2128020_Scerevisiae_YEPD_aF_0min_Saccharomyces_cerevisiae_RNA-Seq.fastq.gz
 ```
 
-Il s'agit d'un script Bash car la première ligne est `#!/usr/bin/env bash`. Ensuite, chaque ligne qui débute par `curl` télécharge un fichier .fastq.gz. La syntaxe de la commande `curl` est la suivante :
+Il s'agit d'un script Bash car la première ligne est `#!/usr/bin/env bash`. Ensuite, chaque ligne qui débute par `curl` télécharge un fichier *.fastq.gz*. La syntaxe de la commande `curl` est la suivante :
 
 ```bash
 curl -L ADRESSE-DU-FICHIER-À-TÉLÉCHARGER -o NOM-DU-FICHIER-SUR-LE-DISQUE-LOCAL
