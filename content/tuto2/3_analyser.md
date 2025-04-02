@@ -230,6 +230,8 @@ reads_map/SRR3405801_Aligned.sorted.out.bam \
 --output-dir counts/SRR3405801
 ```
 
+Cette étape assez longue. Patientez quelques minutes.
+
 ```{note}
 - Par défaut, `cuffquant` écrit un fichier `abundances.cxb`.
 - Nous ajoutons l'option `--output-dir counts/SRR3405801` pour indiquer où stocker les résultats produits par `cuffquant` (voir la [documentation](http://cole-trapnell-lab.github.io/cufflinks/cuffquant/) à ce propos). Cela nous permet de distinguer les résultats obtenus à partir de différents fichiers *.fastq.gz*.
