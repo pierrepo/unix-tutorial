@@ -221,6 +221,11 @@ Ouvrez ce script avec l'éditeur de texte de JupyterLab. Essayer de trouver les 
 
 - Lors de l'utilisation de `STAR` pour l'indexation du génome de référence et l'alignement des *reads* sur le génome, l'option `--runThreadN 4` a été ajoutée pour utiliser 4 coeurs.
 - Lors de l'utilisation de `cuffquant` pour le comptage des transcrits, l'option `--num-threads 4` a été ajoutée pour utiliser 4 coeurs.
+
+```{note}
+Vous comprenez maintenant pourquoi nous avons fixé le paramètre `Number of CPUs` à 6 lors de l'initialisation de l'application JupyterLab. Nous allons utiliser 4 coeurs (ou CPUs) pour l'analyse et 2 coeurs seront réservés à l'application JupyterLab.
+```
+
 ````
 
 Supprimez les répertoires qui contiennent les résultats de l'analyse précédente :
