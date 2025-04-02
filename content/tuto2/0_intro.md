@@ -34,7 +34,7 @@ La configuration demandée pour cette session est différente de celle demandée
 
 ## Analyse des données RNA-seq
 
-Voici un schéma récapitulatif des différentes étapes de l'analyse RNA-seq.
+Voici un [schéma récapitulatif](schema.md) des différentes étapes de l'analyse RNA-seq.
 
 Pour réaliser cette analyse, voici la procédure que nous allons suivre :
 
