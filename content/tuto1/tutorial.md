@@ -559,7 +559,6 @@ Bien sûr, afficher le contenu d'un fichier dans un terminal n'a de sens ici que
 
 ```bash
 $ cat paper.pdf
-�{����e˿\�><?�S�;gg��>��ݻ���7��h�G�.�}{�������W[��5��͓����d�=8��f.���屌J�Y��b�ꂭ貾l���/ٙ�
 xrefbjfalse/SM 0.02/Type/ExtGState>>
 0 1
 0000000000 65535 f
