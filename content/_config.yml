@@ -41,5 +41,10 @@ html:
 sphinx:
   config:
     html_show_copyright: false
+    latex_show_urls: 'footnote'
   extra_extensions:
   - sphinxcontrib.mermaid
+
+latex:
+  latex_documents:
+     targetname: book.tex
