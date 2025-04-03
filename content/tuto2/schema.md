@@ -18,8 +18,8 @@ flowchart TB
     cuffquant(["Compter les transcrits"])
     cuffnorm(["Normaliser les transcrits"])
 
-    table_reads[["Table de comptage <br/> des reads"]]
-    table_transcrits[["Table de comptage <br/> des transcrits"]]
+    table_reads[["Table de comptage <br/> des reads <br /> sur les gènes (CDS)"]]
+    table_transcrits[["Table de comptage <br/> des transcrits des reads <br/> sur les annotations des transcrits"]]
 
     genome -->|"STAR"| star_index
     annotation -->|"STAR"| star_index
