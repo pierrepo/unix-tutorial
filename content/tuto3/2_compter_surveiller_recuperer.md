@@ -71,7 +71,7 @@ Ainsi, un total de 4982 heures de calcul a déjà été consommé sur le projet 
 
 ## Surveiller les jobs
 
-L'analyse RNA-seq présentée ici tourne en 20-25', c'est relativement rapide car le génome de *S. cerevisiae* est petit (environ 12 Mb). Les temps d'analyse seront plus longs avec des génomes plus gros.
+L'analyse RNA-seq présentée ici tourne en 20-25', c'est relativement rapide, car le génome de *S. cerevisiae* est petit (environ 12 Mb). Les temps d'analyse seront plus longs avec des génomes plus gros.
 
 Procédez toujours par itérations successives. Testez votre script d'analyse RNA-seq pour 1 échantillon, puis 3, puis la totalité.
 
@@ -96,6 +96,7 @@ Prenez le temps d'explorer la [documentation très complète](https://ifb-elixir
 
 Pour récupérer vos résultats et les transférer depuis le cluster de calcul vers votre machine locale, il y a 3 possibilités.
 
+
 ### Avec l'explorateur de fichiers de JupyterLab
 
 Si les fichiers que vous souhaitez récupérer sont peu nombreux et peu volumineux (quelques Mo maximum), alors vous pouvez directement utiliser l'explorateur de fichiers de JupyterLab (panneau de gauche). Cliquez-droit sur un fichier puis sélectionnez *Download*.
@@ -117,8 +118,8 @@ Cliquez ensuite sur le bouton *Connexion rapide*. Cliquez sur *OK* dans la fenê
 
 Une fois connecté :
 
-- Dans le champ texte à côté de *Site local* (à gauche de la fenêtre), choississez le répertoire local (sur votre machine) dans lequel vous souhaitez copier les fichiers.
-- Dans le champ texte à coté de *Site distant* (à droite de la fenêtre), entrez le chemin `/shared/projects/202304_duo/LOGIN/rnaseq` (avec `LOGIN` votre identifiant sur le cluster).
+- Dans le champ texte à côté de *Site local* (à gauche de la fenêtre), choisissez le répertoire local (sur votre machine) dans lequel vous souhaitez copier les fichiers.
+- Dans le champ texte à côté de *Site distant* (à droite de la fenêtre), entrez le chemin `/shared/projects/202304_duo/LOGIN/rnaseq` (avec `LOGIN` votre identifiant sur le cluster).
 
 Essayez de transférer des fichiers dans un sens puis dans l'autre. Double-cliquez sur les fichiers pour lancer les transferts.
 
@@ -128,7 +129,7 @@ Essayez de transférer des fichiers dans un sens puis dans l'autre. Double-cliqu
 Uniquement si vous avez un Mac ou un Linux ou une machine sous Windows avec WSL.
 ```
 
-Depuis un shell Unix sur une machine locale, déplacez vous dans un répertoire dans lequel vous souhaitez copier les fichiers.
+Depuis un shell Unix sur une machine locale, déplacez-vous dans un répertoire dans lequel vous souhaitez copier les fichiers.
 
 Lancez ensuite la commande suivante pour récupérer les fichiers de comptage :
 

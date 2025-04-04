@@ -5,7 +5,7 @@
 
 ## Découvrir le cluster
 
-Un cluster de calcul met à disposition de ses utilisateurs des processeurs et de la mémoire vive pour réaliser des calculs. Ces ressouces sont réparties sur plusieurs machines, appelées *nœuds de calcul*. Chaque nœud de calcul contient plusieurs dizaines de processeurs (ou coeurs) et plusieurs centaines de Go de mémoire vive.
+Un cluster de calcul met à disposition de ses utilisateurs des processeurs et de la mémoire vive pour réaliser des calculs. Ces ressources sont réparties sur plusieurs machines, appelées *nœuds de calcul*. Chaque nœud de calcul contient plusieurs dizaines de processeurs (ou coeurs) et plusieurs centaines de Go de mémoire vive.
 
 Plusieurs utilisateurs utilisent simultanément un cluster de calcul. Pour vous en rendre compte, dans JupyterLab, ouvrez un terminal puis entrez la commande suivante qui va lister tous les calculs (appelés *job*) en cours sur le cluster :
 
@@ -15,7 +15,7 @@ $ squeue -t RUNNING
 
 ```{admonition} Rappel
 :class: tip
-Ne tapez pas le caractère `$` en début de ligne et faites bien attention aux majuscules et au minuscules.
+Ne tapez pas le caractère `$` en début de ligne et faites attention aux majuscules et au minuscules.
 ```
 
 Vous voyez que vous n'êtes pas seul ! Comptez maintenant le nombre de jobs en cours d'exécution en chaînant la commande précédente avec `wc -l` :
@@ -45,9 +45,10 @@ La colonne `ST` indique le statut de votre job :
 
 Bizarre ! Vous avez un job avec le statut *running* en cours d'exécution alors que vous n'avez a priori rien lancé 🤔
 
-En fait, le JupyterLab dans lequel vous êtes est lui-même un job lancé sur le cluster. C'est d'ailleurs pour cela qu'avant de lancer JupyterLab, vous avez dû préciser le compte à utiliser (`202304_duo`) et choisir le nombre de processeurs et la quantité de mémoire vive dont vous aviez besoin. Finalement, vous étiez dans la matrice sans même le savoir 😱
+En fait, le JupyterLab dans lequel vous êtes est lui-même un job lancé sur le cluster. C'est d'ailleurs pour cela qu'avant de lancer JupyterLab, vous avez dû préciser le compte à utiliser (`202304_duo`) et choisir le nombre de processeurs et la quantité de mémoire vive dont vous aviez besoin. Finalement, vous étiez dans la matrice sans même le savoir 😱.
 
 Comme plusieurs utilisateurs peuvent lancer des jobs sur un cluster, un gestionnaire de jobs (ou ordonnanceur) s'occupe de répartir les ressources entre les différents utilisateurs. Sur le cluster de l'IFB, le gestionnaire de jobs est [Slurm](https://slurm.schedmd.com/). Désormais le lancement de vos analyses se fera via Slurm.
+
 
 ## Analyser un échantillon
 
@@ -186,7 +187,7 @@ Maintenant que nous savons comment analyser un échantillon avec un cluster de c
 
 ### Préparer les données
 
-Nous avons téléchargé pour vous les 50 échantillons (fichiers .fastq.gz) ainsi que le génome de référence et ses annotations dans le répertoire `/shared/projects/202304_duo/data/rnaseq_scere`. Vérifiez son contenu avec la commande :
+Nous avons téléchargé pour vous les 50 échantillons (fichiers *.fastq.gz*) ainsi que le génome de référence et ses annotations dans le répertoire `/shared/projects/202304_duo/data/rnaseq_scere`. Vérifiez son contenu avec la commande :
 
 ```bash
 $ tree /shared/projects/202304_duo/data/rnaseq_scere
@@ -246,7 +247,7 @@ fastq_files=(${fastq_dir}/*fastq.gz)
 sample=$(basename -s .fastq.gz "${fastq_files[$SLURM_ARRAY_TASK_ID]}")
 ```
 
-Cette étape est importante car elle permet de savoir quel échantillon traiter pour chaque job. Par exemple, le job 0 va être associé à l'échantillon `SRR3405783` (le premier par ordre alphabétique).
+Cette étape est importante, car elle permet de savoir quel échantillon traiter pour chaque job. Par exemple, le job 0 va être associé à l'échantillon `SRR3405783` (le premier par ordre alphabétique).
 
 Pour ne pas emboliser le cluster et pour que tout le monde puisse obtenir des résultats rapidement, modifiez la ligne 
 
@@ -302,7 +303,7 @@ Every 2.0s: sacct --format=JobID,JobName,State,Start,Elapsed,CPUTime,NodeList -j
 
 On apprend ici que 3 jobs sont en cours d'exécution (`RUNNING`) et qu'ils sont appelés `33361021_0`, `33361021_1` et `33361021_2`. Chacun de ces jobs a été lancé sur un noeud de calcul différent (`cpu-node-20`, `cpu-node-23` et `cpu-node-25`) mais cela aurait pu être le même. Chaque job est décomposé en sous-jobs, pour le moment à l'étape `fastqc`.
 
-Le temps que les 3 jobs se terminent, profitez-en pour faire une pause café ☕️ bien méritée.
+Le temps que les 3 jobs se terminent, profitez-en pour faire une pause café ☕️ bien méritée et réaliser à quel point la bioinformatique est cool.
 
 ```{hint}
 Utilisez la combinaison de touches <kbd>Ctrl</kbd> + <kbd>C</kbd> pour arrêter la commande `watch`.
@@ -352,12 +353,12 @@ Le fichier qui contient le comptage normalisé des transcrits est `counts/genes.
 
 Vous avez lancé une analyse RNA-seq complète en utilisant le gestionnaire de ressources (Slurm) d'un cluster de calcul. Bravo ✨
 
-Un peu plus tard, nous vous inviterons à reprendre cette analyse mais cette fois sur les 50 échantillons. Pour cela, il vous faudra modifier le script `script_cluster_2.sh` en remplaçant la ligne `#SBATCH --array=0-2` (pour 3 échantillons) par `#SBATCH --array=0-49` (pour 50 échantillons). Pensez aussi à relancer le script  `script_cluster_3.sh` pour normaliser les résultats de comptage.
+Un peu plus tard, nous vous inviterons à reprendre cette analyse, mais cette fois sur les 50 échantillons. Pour cela, il vous faudra modifier le script `script_cluster_2.sh` en remplaçant la ligne `#SBATCH --array=0-2` (pour 3 échantillons) par `#SBATCH --array=0-49` (pour 50 échantillons). Pensez aussi à relancer le script `script_cluster_3.sh` pour normaliser les résultats de comptage.
 
 
 ## Aller plus loin : connecter les jobs
 
-Pour cette analyse, il faut lancer 3 scripts :  `script_cluster_1.sh`,  `script_cluster_2.sh` et  `script_cluster_3.sh`. À chaque fois, il faut attendre que le précédent soit terminé, ce qui peut être pénible. Slurm offre la possibilité de chaîner les jobs les uns avec les autres avec l'option `--dependency`. Voici un exemple d'utilisation.
+Pour cette analyse, il faut lancer 3 scripts à la suite : `script_cluster_1.sh`, `script_cluster_2.sh` et `script_cluster_3.sh`. À chaque fois, il faut attendre que le précédent soit terminé, ce qui peut être pénible. Slurm offre la possibilité de chaîner les jobs les uns avec les autres avec l'option `--dependency`. Voici un exemple d'utilisation.
 
 Tout d'abord on lance le script `script_cluster_1.sh` :
 
@@ -395,7 +396,7 @@ $ squeue -u ppoulain
 
 Dans cet exemple le premier job (`33390286`) est déjà terminé. Le job `33390299` est en cours d'exécution (pour 3 échantillons seulement) et le job `33390315` est en attente que le job `33390299` se termine.
 
-Cette méthode évite d'attendre que le job précédent se termine pour lancer le suivant, mais il faut quand même les lancer manuellement pour récupére les différents job ids. On peut automatiser cela avec les commandes suivantes :
+Cette méthode évite d'attendre que le job précédent se termine pour lancer le suivant, mais il faut quand même les lancer manuellement pour récupérer les différents job ids. On peut automatiser cela avec les commandes suivantes :
 
 
 ```bash
