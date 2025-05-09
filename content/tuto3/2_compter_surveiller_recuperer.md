@@ -8,10 +8,10 @@
 Expérimentez la commande `sreport` pour avoir une idée du temps de calcul consommé par tous vos jobs :
 
 ```bash
-$ sreport -t hour Cluster UserUtilizationByAccount Start=2023-01-01 End=$(date --iso-8601)T23:59:59 Users=$USER
+$ sreport -t hour Cluster UserUtilizationByAccount Start=2025-01-01 End=$(date --iso-8601)T23:59:59 Users=$USER
 ```
 
-La colonne `Used` indique le nombre d'heures de temps CPU consommées. Cette valeur est utile pour estimer le « coût CPU » d'un projet.
+La colonne `Used` indique le nombre d'heures CPU consommées. Cette valeur est utile pour estimer le « coût CPU » d'un projet.
 
 Voici un exemple de rapport produit par `sreport` :
 
@@ -29,7 +29,7 @@ Usage reported in CPU Hours
      core  ppoulain  Pierre Poulain           mdner       14        0 
 ```
 
-Ainsi, l'utilisateur `ppoulain` a déjà consommé 510 heures de temps CPU sur le projet `202304_duo`.
+Ainsi, l'utilisateur `ppoulain` a déjà consommé 510 heures CPU sur le projet `2501_duo`.
 
 ```{warning}
 `sreport` ne prend pas en compte les heures immédiatement consommées. Il lui faut quelques minutes pour consolider les données.
@@ -38,7 +38,7 @@ Ainsi, l'utilisateur `ppoulain` a déjà consommé 510 heures de temps CPU sur l
 Il est également possible de connaître la consommation CPU pour un projet en particulier et par utilisateur :
 
 ```bash
-$ sreport -t hour Cluster AccountUtilizationByUser Start=2023-01-01 End=$(date --iso-8601)T23:59:59 Accounts=202304_duo
+$ sreport -t hour Cluster AccountUtilizationByUser Start=2023-01-01 End=$(date --iso-8601)T23:59:59 Accounts=2501_duo
 --------------------------------------------------------------------------------
 Cluster/Account/User Utilization 2023-01-01T00:00:00 - 2023-05-10T22:59:59 (11224800 secs)
 Usage reported in CPU Hours
