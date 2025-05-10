@@ -11,7 +11,7 @@ Lancer ces trois scripts les uns après les autres est fastidieux. On peut autom
 
 ## Mise en oeuvre
 
-Depuis un terminal de JupyterLab, vérifiez que vous êtes toujours dans le répertoire `/shared/projects/202304_duo/$USER/rnaseq`.
+Depuis un terminal de JupyterLab, vérifiez que vous êtes toujours dans le répertoire `/shared/projects/2501_duo/$USER/rnaseq`.
 
 Supprimez les répertoires qui contiennent les résultats d'une éventuelle précédente analyse :
 
@@ -42,7 +42,7 @@ Avec l'éditeur de fichier de JupyterLab, ouvrez les fichiers `run_snakemake.sh`
 Lancez l'analyse avec Snakemake :
 
 ```bash
-$ sbatch -A 202304_duo run_snakemake.sh
+$ sbatch -A 2501_duo run_snakemake.sh
 ```
 
 La commande `sacct` ne sera ici pas très utile, car tous les jobs seront lancés **indépendamment** les uns des autres (donc avec des numéros de jobs différents).

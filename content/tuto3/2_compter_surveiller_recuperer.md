@@ -16,20 +16,19 @@ La colonne `Used` indique le nombre d'heures CPU consommées. Cette valeur est u
 Voici un exemple de rapport produit par `sreport` :
 
 ```bash
-$ sreport -t hour Cluster UserUtilizationByAccount Start=2023-01-01 End=$(date --iso-8601)T23:59:59 Users=$USER
+$ sreport -t hour Cluster UserUtilizationByAccount Start=2025-01-01 End=$(date --iso-8601)T23:59:59 Users=$USER
 --------------------------------------------------------------------------------
-Cluster/User/Account Utilization 2023-01-01T00:00:00 - 2023-05-10T22:59:59 (11224800 secs)
+Cluster/User/Account Utilization 2025-01-01T00:00:00 - 2025-05-10T16:59:59 (11203200 secs)
 Usage reported in CPU Hours
 --------------------------------------------------------------------------------
   Cluster     Login     Proper Name         Account     Used   Energy 
 --------- --------- --------------- --------------- -------- -------- 
-     core  ppoulain  Pierre Poulain      202304_duo      510        0 
-     core  ppoulain  Pierre Poulain        minomics      192        0 
-     core  ppoulain  Pierre Poulain          gonseq       48        0 
-     core  ppoulain  Pierre Poulain           mdner       14        0 
+     core  ppoulain  Pierre Poulain        2501_duo      110        0 
+     core  ppoulain  Pierre Poulain      202304_duo       16        0 
+     core  ppoulain  Pierre Poulain          gonseq        8        0
 ```
 
-Ainsi, l'utilisateur `ppoulain` a déjà consommé 510 heures CPU sur le projet `2501_duo`.
+Ainsi, l'utilisateur `ppoulain` a déjà consommé 110 heures CPU sur le projet `2501_duo`.
 
 ```{warning}
 `sreport` ne prend pas en compte les heures immédiatement consommées. Il lui faut quelques minutes pour consolider les données.
@@ -38,7 +37,7 @@ Ainsi, l'utilisateur `ppoulain` a déjà consommé 510 heures CPU sur le projet 
 Il est également possible de connaître la consommation CPU pour un projet en particulier et par utilisateur :
 
 ```bash
-$ sreport -t hour Cluster AccountUtilizationByUser Start=2023-01-01 End=$(date --iso-8601)T23:59:59 Accounts=2501_duo
+$ sreport -t hour Cluster AccountUtilizationByUser Start=2025-01-01 End=$(date --iso-8601)T23:59:59 Accounts=2501_duo
 --------------------------------------------------------------------------------
 Cluster/Account/User Utilization 2023-01-01T00:00:00 - 2023-05-10T22:59:59 (11224800 secs)
 Usage reported in CPU Hours
@@ -66,7 +65,7 @@ Usage reported in CPU Hours
      core      202304_duo xvuillem+ Xavier Vuillem+      384        0 
 ```
 
-Ainsi, un total de 4982 heures de calcul a déjà été consommé sur le projet `202304_duo` ⏱️.
+Ainsi, un total de 4982 heures de calcul a déjà été consommé sur le projet `2501_duo` ⏱️.
 
 
 ## Surveiller les jobs
@@ -119,7 +118,7 @@ Cliquez ensuite sur le bouton *Connexion rapide*. Cliquez sur *OK* dans la fenê
 Une fois connecté :
 
 - Dans le champ texte à côté de *Site local* (à gauche de la fenêtre), choisissez le répertoire local (sur votre machine) dans lequel vous souhaitez copier les fichiers.
-- Dans le champ texte à côté de *Site distant* (à droite de la fenêtre), entrez le chemin `/shared/projects/202304_duo/LOGIN/rnaseq` (avec `LOGIN` votre identifiant sur le cluster).
+- Dans le champ texte à côté de *Site distant* (à droite de la fenêtre), entrez le chemin `/shared/projects/2501_duo/LOGIN/rnaseq` (avec `LOGIN` votre identifiant sur le cluster).
 
 Essayez de transférer des fichiers dans un sens puis dans l'autre. Double-cliquez sur les fichiers pour lancer les transferts.
 
@@ -134,7 +133,7 @@ Depuis un shell Unix sur une machine locale, déplacez-vous dans un répertoire 
 Lancez ensuite la commande suivante pour récupérer les fichiers de comptage :
 
 ```bash
-$ scp LOGIN@core.cluster.france-bioinformatique.fr:/shared/projects/202304_duo/LOGIN/rnaseq/counts/genes.count_table .
+$ scp LOGIN@core.cluster.france-bioinformatique.fr:/shared/projects/2501_duo/LOGIN/rnaseq/counts/genes.count_table .
 ```
 
 où `LOGIN` est votre identifiant sur le cluster (qui apparait deux fois dans la ligne de commande ci-dessus). Faites bien attention à garder le `.` à la fin de la ligne de commande.
@@ -144,7 +143,7 @@ Entrez votre mot de passe du cluster en aveugle.
 Pour récupérer directement le répertoire `counts` sur le cluster, vous auriez pu utiliser la commande :
 
 ```bash
-$ scp -r LOGIN@core.cluster.france-bioinformatique.fr:/shared/projects/202304_duo/LOGIN/rnaseq/counts .
+$ scp -r LOGIN@core.cluster.france-bioinformatique.fr:/shared/projects/2501_duo/LOGIN/rnaseq/counts .
 ```
 
 Notez l'option `-r` qui indique qu'on transfère un répertoire.

@@ -43,7 +43,7 @@ La colonne `ST` indique le statut de votre job :
 - `PD` (*pending*) : le job est en attente que des ressources soient disponibles
 - `R` (*running*) : le job est en cours d'exécution
 
-Bizarre ! Vous avez un job avec le statut *running* en cours d'exécution alors que vous n'avez a priori rien lancé 🤔
+Bizarre ! Vous avez un job (appelé *sys/dash*) avec le statut *running* en cours d'exécution alors que vous n'avez a priori rien lancé 🤔
 
 En fait, le JupyterLab dans lequel vous êtes est lui-même un job lancé sur le cluster. C'est d'ailleurs pour cela qu'avant de lancer JupyterLab, vous avez dû préciser le compte à utiliser (`2501_duo`) et choisir le nombre de processeurs et la quantité de mémoire vive dont vous aviez besoin. Finalement, vous étiez dans la matrice sans même le savoir 😱.
 
@@ -402,7 +402,7 @@ Voici le résultat obtenu avec `squeue` :
 $ squeue -u ppoulain
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
           33390315      fast script_c ppoulain PD       0:00      1 (Dependency)
-          33389748      fast  jupyter ppoulain  R      28:36      1 cpu-node-15
+          33389748      fast sys/dash ppoulain  R      28:36      1 cpu-node-15
         33390299_0      fast script_c ppoulain  R       1:44      1 cpu-node-2
         33390299_1      fast script_c ppoulain  R       1:44      1 cpu-node-30
         33390299_2      fast script_c ppoulain  R       1:44      1 cpu-node-35
