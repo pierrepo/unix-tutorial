@@ -7,7 +7,30 @@
 
 Un cluster de calcul met à disposition de ses utilisateurs des processeurs et de la mémoire vive pour réaliser des calculs. Ces ressources sont réparties sur plusieurs machines, appelées *nœuds de calcul*. Chaque nœud de calcul contient plusieurs dizaines de processeurs (ou cœurs) et plusieurs centaines de Go de mémoire vive.
 
-Plusieurs utilisateurs utilisent simultanément un cluster de calcul. Pour vous en rendre compte, dans JupyterLab, ouvrez un terminal puis entrez la commande suivante qui va lister tous les calculs (appelés *job*) en cours sur le cluster :
+Pour connaître le nombre de cœurs disponibles sur le cluster de calcul, ouvrez un terminal dans JupyterLab et entrez la commande suivante :
+
+```bash
+$ sinfo -O cpusstate -p fast
+```
+
+```{admonition} Rappel
+:class: tip
+Ne tapez pas le caractère `$` en début de ligne et faites attention aux majuscules et au minuscules.
+```
+
+Vous obtenez 4 nombres qui correspondent, dans l'ordre, au nombre de cœurs utilisés pour le calcul (*Allocated*), disponibles pour le calcul (*Idle*), utilisés pour autre chose (*Other*) et le nombre total de cœurs (*Total*). Normalement, vous devriez avoir suffisamment de cœurs disponibles (*Idle*) pour réaliser vos calculs.
+
+Voici un exemple de sortie :
+
+```bash
+ sinfo -O cpusstate -p fast
+CPUS(A/I/O/T)       
+3018/2687/2523/8228
+```
+
+Sur les 8228 cœurs du cluster, 3018 sont utilisés pour le calcul et 2687 sont disponibles.
+
+Plusieurs utilisateurs utilisent simultanément un cluster de calcul. Pour vous en rendre compte, entrez la commande suivante qui liste tous les calculs (appelés *job*) en cours sur le cluster :
 
 ```bash
 $ squeue -t RUNNING
@@ -43,7 +66,7 @@ La colonne `ST` indique le statut de votre job :
 - `PD` (*pending*) : le job est en attente que des ressources soient disponibles
 - `R` (*running*) : le job est en cours d'exécution
 
-Bizarre ! Vous avez un job (appelé *sys/dash*) avec le statut *running* en cours d'exécution alors que vous n'avez a priori rien lancé 🤔
+Bizarre ! Vous avez un job (appelé *sys/dash*) avec le statut *running* en cours d'exécution alors que vous n'avez, a priori, rien lancé 🤔
 
 En fait, le JupyterLab dans lequel vous êtes est lui-même un job lancé sur le cluster. C'est d'ailleurs pour cela qu'avant de lancer JupyterLab, vous avez dû préciser le compte à utiliser (`2501_duo`) et choisir le nombre de processeurs et la quantité de mémoire vive dont vous aviez besoin. Finalement, vous étiez dans la matrice sans même le savoir 😱.
 
