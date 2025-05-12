@@ -22,7 +22,7 @@ $ rm -rf genome_index reads_qc reads_map counts slurm*.out
 Téléchargez le fichier ([`snakemake.zip`](snakemake.zip)) avec la commande `wget` :
 
 ```bash
-$ wget https://raw.githubusercontent.com/pierrepo/unix-tutorial/master/tuto3/snakemake.zip
+$ wget https://raw.githubusercontent.com/pierrepo/unix-tutorial/master/content/tuto3/snakemake.zip
 ```
 
 Désarchivez cette archive :
