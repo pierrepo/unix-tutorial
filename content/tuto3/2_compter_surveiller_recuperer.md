@@ -18,17 +18,17 @@ Voici un exemple de rapport produit par `sreport` :
 ```bash
 $ sreport -t hour Cluster UserUtilizationByAccount Start=2025-01-01 End=$(date --iso-8601)T23:59:59 Users=$USER
 --------------------------------------------------------------------------------
-Cluster/User/Account Utilization 2025-01-01T00:00:00 - 2025-05-10T16:59:59 (11203200 secs)
+Cluster/User/Account Utilization 2025-01-01T00:00:00 - 2025-05-12T09:59:59 (11350800 secs)
 Usage reported in CPU Hours
 --------------------------------------------------------------------------------
   Cluster     Login     Proper Name         Account     Used   Energy 
 --------- --------- --------------- --------------- -------- -------- 
-     core  ppoulain  Pierre Poulain        2501_duo      110        0 
+     core  ppoulain  Pierre Poulain        2501_duo      252        0 
      core  ppoulain  Pierre Poulain      202304_duo       16        0 
      core  ppoulain  Pierre Poulain          gonseq        8        0
 ```
 
-Ainsi, l'utilisateur `ppoulain` a déjà consommé 110 heures CPU sur le projet `2501_duo`.
+Ainsi, l'utilisateur `ppoulain` a déjà consommé 252 heures CPU sur le projet `2501_duo`.
 
 ```{warning}
 `sreport` ne prend pas en compte les heures immédiatement consommées. Il lui faut quelques minutes pour consolider les données.
@@ -39,33 +39,31 @@ Il est également possible de connaître la consommation CPU pour un projet en p
 ```bash
 $ sreport -t hour Cluster AccountUtilizationByUser Start=2025-01-01 End=$(date --iso-8601)T23:59:59 Accounts=2501_duo
 --------------------------------------------------------------------------------
-Cluster/Account/User Utilization 2023-01-01T00:00:00 - 2023-05-10T22:59:59 (11224800 secs)
+Cluster/Account/User Utilization 2025-01-01T00:00:00 - 2025-05-12T09:59:59 (11350800 secs)
 Usage reported in CPU Hours
 --------------------------------------------------------------------------------
   Cluster         Account     Login     Proper Name     Used   Energy 
 --------- --------------- --------- --------------- -------- -------- 
-     core      202304_duo                               4982        0 
-     core      202304_duo amailleux Arnaud MAILLEUX      268        0 
-     core      202304_duo   amasson Aurélie Masson      513        0 
-     core      202304_duo   bcosson Bertrand Cosson       72        0 
-     core      202304_duo    bmadec   Benoît Madec      196        0 
-     core      202304_duo    cdub76 Christophe Dub+      342        0 
-     core      202304_duo   dbonnin Delphine Bonnin      203        0 
-     core      202304_duo dlatrasse  David Latrasse      122        0 
-     core      202304_duo  fdedeine  Franck Dedeine      220        0 
-     core      202304_duo   fdelort Florence Delort      244        0 
-     core      202304_duo fmalagnac Fabienne Malag+      255        0 
-     core      202304_duo glelanda+ Gaëlle Leland+       60        0 
-     core      202304_duo    lferry     laure ferry      280        0 
-     core      202304_duo  melzaiat  Maëva Elzaiat      279        0 
-     core      202304_duo  ppoulain  Pierre Poulain      510        0 
-     core      202304_duo   rshamsi    Roula SHAMSI      539        0 
-     core      202304_duo   sletuve Séverine Lét+      289        0 
-     core      202304_duo spiquerez Sophie Piquerez      207        0 
-     core      202304_duo xvuillem+ Xavier Vuillem+      384        0 
+     core        2501_duo                               3549        0 
+     core        2501_duo  acoudert  Amelie Coudert      245        0 
+     core        2501_duo    alebre AnneSophie Leb+       85        0 
+     core        2501_duo cdoncarli Caroline Donca+      395        0 
+     core        2501_duo cdroilla+ Clement Droill+       88        0 
+     core        2501_duo   dlesage    Denis Lesage      158        0 
+     core        2501_duo flevavas+ Francoise Leva+      351        0 
+     core        2501_duo glelanda+ Gaëlle Leland+      369        0 
+     core        2501_duo gruprich+ Gwenael Rupric+      262        0 
+     core        2501_duo jcouturi+ Jeanne Couturi+      250        0 
+     core        2501_duo   labjean  Laurene Abjean      194        0 
+     core        2501_duo    mehmig    Muriel Ehmig      201        0 
+     core        2501_duo mnascime+ Megane Nascime+      249        0 
+     core        2501_duo  ppoulain  Pierre Poulain      252        0 
+     core        2501_duo   rsantos   Renata Santos       82        0 
+     core        2501_duo salawabdh  Sana Al Awabdh      179        0 
+     core        2501_duo tpetersen  Tania Petersen      190        0
 ```
 
-Ainsi, un total de 4982 heures de calcul a déjà été consommé sur le projet `2501_duo` ⏱️.
+Au 12/05/2025, un total de 3549 heures de calcul a déjà été consommé sur le projet `2501_duo` ⏱️.
 
 
 ## Surveiller les jobs
@@ -104,7 +102,7 @@ Si les fichiers que vous souhaitez récupérer sont peu nombreux et peu volumine
 ### Avec FileZilla
 
 ```{admonition} Rappel
-L'utilisation de FileZilla avait déjà été abordée dans le tutoriel sur les [formats et échange de données en biologie](https://cupnet.net/formats-echanges-donnees-biologie/tutoriel/)
+L'utilisation de FileZilla avait déjà été abordée dans le tutoriel sur les [formats et échange de données en biologie](https://cupnet.net/formats-echanges-donnees-biologie/)
 ```
 
 Lancez le logiciel FileZilla. Puis entrez les informations suivantes :
