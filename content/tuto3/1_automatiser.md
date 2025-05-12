@@ -98,7 +98,7 @@ Ce script correspond au script `script_local_2.sh` adapté pour une utilisation 
     #SBATCH --cpus-per-task=8
     ```
 
-    Ces lignes commencent par le caractère `#` qui indique qu'il s'agit de commentaires pour Bash, elles seront donc ignorées par le *shell*. Par contre, elles ont un sens très particulier pour le gestionnaire de jobs du cluster Slurm. Ici, ces lignes indiquent à Slurm que le job a besoin de 2 Go de mémoire vive et de 8 processeurs pour s'exécuter.
+    Ces lignes commencent par le caractère `#` et indiquent qu'il s'agit de commentaires pour Bash, elles seront donc ignorées par le *shell*. Par contre, elles ont un sens très particulier pour le gestionnaire de jobs du cluster Slurm. Ici, ces lignes indiquent à Slurm que le job a besoin de 2 Go de mémoire vive et de 8 processeurs pour s'exécuter. Remarquez ensuite qu'on demande ici 8 cœurs / processeurs alors notre session JupyterLab n'en a que 2. C'est tout à fait normal, car **le script va être lancé comme un nouveau job, indépendant de celui de JupyterLab**.
 
 1. Un peu plus loin, on indique explicitement les modules (les logiciels) à charger avec leurs versions :
 
@@ -110,7 +110,7 @@ Ce script correspond au script `script_local_2.sh` adapté pour une utilisation 
     module load cufflinks/2.2.1
     ```
 
-1. L'appel aux différents programmes (`STAR`, `fastqc`, `samtools`...) est préfixé par l'instruction `srun` qui va explicitement indiquer à Slurm qu'il s'agit d'un sous-job. Nous en verrons l'utilité plus tard.
+1. L'appel aux différents programmes (`STAR`, `fastqc`, `samtools`...) est préfixé par l'instruction `srun` qui va explicitement indiquer à Slurm qu'il s'agit d'un sous-job. Nous en verrons son utilité plus tard.
 
 1. Pour STAR, l'indication du nombre de cœurs à utiliser est défini sous la forme :
 
@@ -130,7 +130,7 @@ $ sbatch -A 2501_duo script_cluster_0.sh
 Vous devriez obtenir un message du type `Submitted batch job 33389786`. Ici, `33389786` correspond au numéro du job. Notez bien le numéro de votre job.
 
 
-- L'instruction `sbatch` est la manière de demander à Slurm de lancer un script.
+- L'instruction `sbatch` est la manière de demander à Slurm de lancer un script et créer un job indépendant de celui de JupyterLab.
 - L'option `-A 2501_duo` spécifie quel projet utiliser (facturer) pour cette commande. Un même utilisateur peut appartenir à plusieurs projets. Le nombre d'heures de calcul attribuées à un projet étant limité, il est important de savoir quel projet imputer pour telle ou telle commande. Pensez-y pour vos futurs projets.
 
 Vérifiez que votre script est en train de tourner avec la commande :
