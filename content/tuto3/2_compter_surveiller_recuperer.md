@@ -83,8 +83,8 @@ Vous recevrez alors automatiquement un e-mail lorsque le job se termine ou si ce
 
 Sur le cluster IFB :
 
-- Un utilisateur ne peut utiliser plus de 300 coeurs en même temps.
-- Un job dure, par défaut, au maximum 12 h. Une queue plus longue (appelée `long`) est disponible pour des jobs qui durent jusqu'à 30 jours et est utilisable via la directive `#SBATCH --partition=long` en début de script. D'autres queues plus spécifiques (plus de temps, beaucoup de mémoire vive, GPU) sont disponibles sur demande.
+- Un utilisateur ne peut utiliser plus de 300 cœurs en même temps.
+- Un job dure au maximum 24 h. Une queue plus longue (appelée `long`) est disponible pour des jobs qui durent jusqu'à 30 jours et est utilisable via la directive `#SBATCH --partition=long` en début de script. D'autres queues plus spécifiques (plus de temps, beaucoup de mémoire vive, GPU) sont disponibles sur demande.
 
 Prenez le temps d'explorer la [documentation très complète](https://ifb-elixirfr.gitlab.io/cluster/doc/) sur le cluster. Vous y trouverez notamment un [tutoriel](https://ifb-elixirfr.gitlab.io/cluster/doc/tutorials/analysis_slurm/) sur une autre analyse RNA-seq.
 
