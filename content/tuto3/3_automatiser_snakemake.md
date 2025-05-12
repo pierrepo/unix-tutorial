@@ -35,9 +35,9 @@ Deux nouveaux fichiers vont être créés ainsi qu'un répertoire :
 
 - `run_snakemake.sh` : script Bash pour lancer Snakemake via Slurm.
 - `Snakefile` : fichier de configuration de Snakemake qui contient la définition des différentes étapes de l'analyse.
-- `snakemake_profiles/` : répertoire qui contient des fichiers de configuration de Snakemake.
+- `snakemake_profiles/cluster/config.yaml` : fichiers de configuration de Snakemake
 
-Avec l'éditeur de fichier de JupyterLab, ouvrez les fichiers `run_snakemake.sh` et `Snakefile`. Le fichier `run_snakemake.sh` est relativement court. Le fichier `Snakefile` est plus complexe, mais vous devriez y retrouver les différentes étapes de l'analyse. Pour chaque étape d'analyse, on définit en *input* les fichiers nécessaire pour cette étape et en *output* les fichiers qui seront produits.
+Avec l'éditeur de fichier de JupyterLab, ouvrez les fichiers `run_snakemake.sh` et `Snakefile`. Le fichier `run_snakemake.sh` est relativement court. Le fichier `Snakefile` est plus complexe, mais vous devriez y retrouver les différentes étapes de l'analyse. Pour chaque étape d'analyse, on définit en *input* les fichiers nécessaire pour cette étape et en *output* les fichiers qui seront produits. Notez que le fichier `Snakefile` est paramétré pour n'analyser que 3 échantillons. Vous pourrez aisément le modifier pour analyser les 50 échantillons.
 
 Lancez l'analyse avec Snakemake :
 
@@ -50,7 +50,7 @@ La commande `sacct` ne sera ici pas très utile, car tous les jobs seront lancé
 La commande `squeue` avec quelques options d'affichage sera plus pertinente pour suivre la progression du calcul : 
 
 ```bash
-$ squeue --format="%.10i %.40j %.8T %.8M %.9P %.10u %R" -u $USER
+$ squeue --format="%.10i %.10j %.40k %.8T %.8M %.9P %.10u %R" -u $USER
 ```
 
 N'hésitez pas à préfixer cette commande par `watch -x` pour afficher automatiquement l'avancement du calcul.

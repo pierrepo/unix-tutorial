@@ -20,6 +20,14 @@ uv run jupyter-book build content
 Le site compilé se trouve dans le dossier `content/_build/html`.
 
 
+## Préparation des fichiers Snakemake
+
+```bash
+cd content/tuto3
+make snakemake
+```
+
+
 ## Licence
 
 ![](content/img/CC-BY-SA.png)

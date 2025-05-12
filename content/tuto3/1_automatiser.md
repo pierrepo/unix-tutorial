@@ -202,6 +202,7 @@ Le fichier `slurm-JOBID.out` (avec `JOBID` le numéro de votre job) contient le 
 Ouvrez ce fichier avec l'éditeur de texte de JupyterLab pour vous en rendre compte.
 ```
 
+
 ## Analyser 50 échantillons (ou pas loin)
 
 Maintenant que nous savons comment analyser un échantillon avec un cluster de calcul, nous allons automatiser l'analyse de 50 échantillons. Mais pour cela nous allons prendre plusieurs précautions :
@@ -211,6 +212,7 @@ Maintenant que nous savons comment analyser un échantillon avec un cluster de c
     2. Contrôler la qualité, aligner et quantifier les *reads* -- doit être fait pour chaque échantillon, donc 50 fois.
     3. Normaliser les comptages de tous les échantillons ensemble -- ne doit être fait qu'une seule fois.
 - L'étape 2 ne doit pas se faire successivement pour chaque échantillon, mais en parallèle. C'est-à-dire qu'on souhaite idéalement lancer l'analyse des 50 échantillons **en même temps**.
+
 
 ### Préparer les données
 
