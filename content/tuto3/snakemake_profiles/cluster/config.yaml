@@ -1,16 +1,25 @@
 ---
 snakefile: Snakefile
-use-conda: True
 latency-wait: 30
 keep-going: True
 rerun-incomplete: True
+max-status-checks-per-second: 1
+executor: "slurm"
+jobs: 30
 # Job ressources
 default-resources:
-  - mem_mb=1000
+  slurm_partition: "fast"
+  # slurm_account: "2501_duo" # does not work
+  mem_mb: 1000
 set-resources:
-  - map_reads:mem_mb=3000
-  - sort_index_bam:mem_mb=2000
-  - count_transcrits:mem_mb=3000
+  map_reads:
+    mem_mb: 3000
+  sort_index_bam:
+    mem_mb: 2000
+  count_transcrits:
+    mem_mb: 3000
 set-threads:
-- index_genome=4
-- map_reads=8
+  index_genome: 4
+  map_reads: 8
+  count_transcrits: 4
+  normalize_transcrits: 4

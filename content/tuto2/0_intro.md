@@ -29,7 +29,7 @@ Partant de ces informations, nous allons essayer de reproduire les différentes 
 - Number of hours: `8` ⚠️
 
 ```{warning}
-La configuration demandée pour cette session est différente de celle demandée pour l'introduction à Unix. Soyez particulièrement attentif aux paramètres *Number of CPUs* et *Amount of memory* .
+La configuration demandée pour cette session est différente de celle demandée pour l'introduction à Unix. Soyez particulièrement attentif aux paramètres *Number of CPUs* et *Amount of memory*.
 ```
 
 ## Analyse des données RNA-seq

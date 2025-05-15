@@ -1,23 +1,23 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #SBATCH --mem=2G
 #SBATCH --cpus-per-task=8
 
-# le script va s'arrêter
+# Le script va s'arrêter
 # - à la première erreur
 # - si une variable n'est pas définie
 # - si une erreur est recontrée dans un pipe
 set -euo pipefail
 
 
-# chargement des modules nécessaires
-module load star/2.7.9a
+# Chargement des modules nécessaires :
+module load star/2.7.10b
 
 
 # répertoire de base (le répertoire depuis lequel vous lancez le script)
 base_dir="$PWD"
 # répertoire contenant les données
-data_dir="/shared/projects/202304_duo/data/rnaseq_scere"
+data_dir="/shared/projects/2501_duo/data/rnaseq_scere"
 # répertoire contenant les fichiers du génome de référence
 # (séquence et annotations)
 genome_dir="${data_dir}/genome"
@@ -32,6 +32,7 @@ fastq_dir="${data_dir}/reads"
 # On indexe le génome qu'une seule fois.
 echo "=============================================================="
 echo "Indexer le génome de référence"
+echo "Date et heure : $(date --iso-8601=seconds)"
 echo "=============================================================="
 mkdir -p "${base_dir}/genome_index"
 srun STAR --runThreadN "${SLURM_CPUS_PER_TASK}" \
@@ -41,3 +42,8 @@ srun STAR --runThreadN "${SLURM_CPUS_PER_TASK}" \
 --sjdbGTFfile "${annotation_file}" \
 --sjdbOverhang 50 \
 --genomeSAindexNbases 10
+
+echo "=============================================================="
+echo "Fin"
+echo "Date et heure : $(date --iso-8601=seconds)"
+echo "=============================================================="

@@ -2,7 +2,7 @@ import os
 
 DATA_DIR = os.environ.get("DATA_DIR", os.getcwd())
 
-SAMPLES = ["SRR3405783", "SRR3405784", "SRR3405785"]
+SAMPLES = ["SRR3405801", "SRR3405802", "SRR3405804"]
 # For testing purposes, we're running the workflow on 3 samples only
 # Uncomment the following line to run the workflow on all samples
 #SAMPLES, = glob_wildcards(DATA_DIR + "/reads/{sample}.fastq.gz")

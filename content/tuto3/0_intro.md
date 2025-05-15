@@ -2,7 +2,7 @@
 
 Dans le tutoriel précédent :
 
-- Vous avez reproduit la méthodologie publié dans l'article [*Investigating Conservation of the Cell-Cycle-Regulated Transcriptional Program in the Fungal Pathogen, Cryptococcus neoformans*](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1006453) (Kelliher *et al.*, PLOS Genetics, 2016) pour analyser des données RNA-seq de *Saccharomyces cerevisiae*.
+- Vous avez reproduit la méthodologie publiée dans l'article [*Investigating Conservation of the Cell-Cycle-Regulated Transcriptional Program in the Fungal Pathogen, Cryptococcus neoformans*](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1006453) (Kelliher *et al.*, PLOS Genetics, 2016) pour analyser des données RNA-seq de *Saccharomyces cerevisiae*.
 - Vous avez utilisé un script (`script_local_2.sh`) pour accélérer le fonctionnement des logiciels `star` et `cuffquant` en utilisant plusieurs processeurs.
 - Enfin vous avez utilisé un autre script (`script_local_3.sh`) pour automatiser l'analyse **successive** de plusieurs fichiers de données RNA-seq *.fastq.gz*.
 
@@ -16,22 +16,23 @@ Dans ce tutoriel, les termes « processeur » (ou *Central Processing Unit*, CPU
 
 - Posséder un compte sur le cluster de calcul de l'IFB.
 - Avoir réalisé le tutoriel [Introduction à Unix](../tuto1/tutorial.md).
-- Avoir réalisé le tutoriel [Analyse RNA-seq avec Unix](../tuto2/0_intro.md).
+- Avoir réalisé le t
+
 
 ## Configuration du JupyterLab
 
-Connectez-vous au serveur JupyterHub de l'IFB.
-
-Dans la page *Server Options*, choisissez les paramètres suivants :
+ Depuis le <a href="https://ondemand.cluster.france-bioinformatique.fr/" target="_blank">portail Open OnDemand</a> de l'IFB, lancez l'application JupyterLab avec les paramètres suivants :
+ 
 - Reservation: `No reservation` 
-- Account: `202304_duo`  ⚠️
+- Account: `2501_duo` ⚠️
 - Partition: `fast`
-- CPU(s): `2`  ⚠️
-- Memory (in GB): `2`  ⚠️
-- GPU(s): `0` `No GRES`
+- Number of CPUs: `2` ⚠️
+- Amount of memory: `2G` ⚠️
+- GPUs: `No GPU`
+- Number of hours: `8` ⚠️
 
 ```{warning}
-La configuration demandée pour cette session est différente de celle demandée la dernière fois. Soyez particulièrement attentif aux paramètres `Account`, `CPU(s)` et `Memory (in GB)`.
+La configuration demandée pour cette session est différente de celle demandée la dernière fois. Soyez particulièrement attentif aux paramètres *Number of CPUs* et *Amount of memory*.
 
 Vous remarquerez que nous utilisons cette fois apparemment peu de processeurs et de mémoire vive.
 ```
