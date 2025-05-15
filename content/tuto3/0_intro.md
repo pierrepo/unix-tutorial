@@ -16,7 +16,7 @@ Dans ce tutoriel, les termes « processeur » (ou *Central Processing Unit*, CPU
 
 - Posséder un compte sur le cluster de calcul de l'IFB.
 - Avoir réalisé le tutoriel [Introduction à Unix](../tuto1/tutorial.md).
-- Avoir réalisé le t
+- Avoir réalisé le tutoriel [Analyse RNA-seq avec Unix](../tuto2/0_intro.md).
 
 
 ## Configuration du JupyterLab
