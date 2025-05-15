@@ -23,7 +23,7 @@ Vous obtenez 4 nombres qui correspondent, dans l'ordre, au nombre de cœurs util
 Voici un exemple de sortie :
 
 ```bash
- sinfo -O cpusstate -p fast
+$ sinfo -O cpusstate -p fast
 CPUS(A/I/O/T)       
 3018/2687/2523/8228
 ```
@@ -34,11 +34,6 @@ Plusieurs utilisateurs utilisent simultanément un cluster de calcul. Pour vous 
 
 ```bash
 $ squeue -t RUNNING
-```
-
-```{admonition} Rappel
-:class: tip
-Ne tapez pas le caractère `$` en début de ligne et faites attention aux majuscules et au minuscules.
 ```
 
 Vous voyez que vous n'êtes pas seul ! Comptez maintenant le nombre de jobs en cours d'exécution en chaînant la commande précédente avec `wc -l` :
@@ -216,7 +211,7 @@ Maintenant que nous savons comment analyser un échantillon avec un cluster de c
 
 ### Préparer les données
 
-Nous avons téléchargé pour vous les 50 échantillons (fichiers *.fastq.gz*) ainsi que le génome de référence et ses annotations dans le répertoire `/shared/projects/202304_duo/data/rnaseq_scere`. Vérifiez son contenu avec la commande :
+Nous avons téléchargé pour vous les 50 échantillons (fichiers *.fastq.gz*) ainsi que le génome de référence et ses annotations dans le répertoire `/shared/projects/2501_duo/data/rnaseq_scere`. Vérifiez son contenu avec la commande :
 
 ```bash
 $ tree /shared/projects/2501_duo/data/rnaseq_scere
@@ -237,7 +232,7 @@ $ wget https://raw.githubusercontent.com/pierrepo/unix-tutorial/master/content/t
 ```
 Ouvrez ce script avec l'éditeur de texte de JupyterLab et essayez d'identifier comment sont définies les variables `base_dir` et `data_dir`.
 
-Puis lancez le script en n'oubliant pas d'indiquer explicitement le compte à utiliser (`202304_duo`) :
+Puis lancez le script en n'oubliant pas d'indiquer explicitement le compte à utiliser (`2501_duo`) :
 
 ```bash
 $ sbatch -A 2501_duo script_cluster_1.sh
