@@ -28,7 +28,7 @@ CPUS(A/I/O/T)
 3018/2687/2523/8228
 ```
 
-Sur les 8228 cœurs du cluster, 3018 sont utilisés pour le calcul et 2687 sont disponibles.
+Sur les 8228 cœurs du cluster, 3018 sont utilisés actuellement pour le calcul et 2687 sont disponibles.
 
 Plusieurs utilisateurs utilisent simultanément un cluster de calcul. Pour vous en rendre compte, entrez la commande suivante qui liste tous les calculs (appelés *job*) en cours sur le cluster :
 
@@ -70,7 +70,7 @@ Comme plusieurs utilisateurs peuvent lancer des jobs sur un cluster, un gestionn
 
 ## Analyser un échantillon
 
-Déplacez-vous le répertoire `/shared/projects/2501_duo/$USER/rnaseq` puis vérifiez que vous êtes dans le bon répertoire avec la commande `pwd`.
+Déplacez-vous dans le répertoire `/shared/projects/2501_duo/$USER/rnaseq` puis vérifiez que vous êtes dans le bon répertoire avec la commande `pwd`.
 
 Supprimez les répertoires qui contiennent les résultats d'une éventuelle précédente analyse :
 
