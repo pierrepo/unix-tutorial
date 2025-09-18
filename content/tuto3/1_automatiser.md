@@ -15,7 +15,7 @@ $ sinfo -O cpusstate -p fast
 
 ```{admonition} Rappel
 :class: tip
-Ne tapez pas le caractère `$` en début de ligne et faites attention aux majuscules et au minuscules.
+Ne tapez pas le caractère `$` en début de ligne et faites attention aux majuscules et aux minuscules.
 ```
 
 Vous obtenez 4 nombres qui correspondent, dans l'ordre, au nombre de cœurs utilisés pour le calcul (*Allocated*), disponibles pour le calcul (*Idle*), utilisés pour autre chose (*Other*) et le nombre total de cœurs (*Total*). Normalement, vous devriez avoir suffisamment de cœurs disponibles (*Idle*) pour réaliser vos calculs.

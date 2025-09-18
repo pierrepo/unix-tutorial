@@ -56,7 +56,7 @@ $ cd
 ```
 
 ```{note}
-Ne tapez pas le caractère `$` en début de ligne et faites attention aux majuscules et au minuscules.
+Ne tapez pas le caractère `$` en début de ligne et faites attention aux majuscules et aux minuscules.
 ```
 
 puis exécutez les commandes suivant :

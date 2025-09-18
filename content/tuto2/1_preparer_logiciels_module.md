@@ -13,7 +13,7 @@ $ echo "${SLURM_CPUS_PER_TASK}"
 
 ```{admonition} Rappel
 :class: tip
-Ne tapez pas le caractère `$` en début de ligne et faites bien attention aux majuscules et au minuscules.
+Ne tapez pas le caractère `$` en début de ligne et faites bien attention aux majuscules et aux minuscules.
 ```
 
 Vous devriez obtenir `6`, ce qui correspond au paramètre `Number of CPUs` demandé lors de la [configuration](0_intro.md) de JupyterLab. Si ce n'est pas le cas, sollicitez-moi, car vous serez bloqué par la suite.
